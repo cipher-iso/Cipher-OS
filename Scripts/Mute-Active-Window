@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Get the PID of the active window
+PID=$(hyprctl activewindow -j | jq -r '.pid')
+
+# Function: walk child processes until one matches a PipeWire stream
+find_stream_pid() {
+    local pid=$1
+    while [ -n "$pid" ]; do
+        # Does this PID own a stream?
+        if wpctl status | grep -q "pid = $pid"; then
+            echo "$pid"
+            return 0
+        fi
+        # Otherwise, try the first child PID
+        pid=$(pgrep -P "$pid" | head -n1)
+    done
+    return 1
+}
+
+TARGET_PID=$(find_stream_pid "$PID")
+
+if [ -n "$TARGET_PID" ]; then
+    wpctl set-mute -p "$TARGET_PID" toggle
+else
+    notify-send "Mute Active Window" "No Source Found."
+fi
+
