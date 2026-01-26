@@ -2,11 +2,14 @@
 
 # INTERACTIVE DOTFILES INSTALLER
 # -------------------------------
+# Uses Scripts/Dotfiles.conf
+# No backups are created
+# Package failures will NOT stop the script
 
 DOTFILES_DIR="$(pwd)"
 CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
 
-# COLOR/BOLD
+# COLORS
 BOLD="\033[1m"
 GREEN="\033[38;2;0;255;64m"
 RESET="\033[0m"
@@ -25,57 +28,82 @@ nmgui-bin waypaper qimgv-git kew xwaylandvideobridge-git qt6ct-kde
 
 # PROMPT FUNCTION
 prompt_confirm() {
-	read -rp "$(echo -e "${BOLD}${GREEN}$1 [Y/n] ${RESET}")" response
-	[[ -z "$response" || "$response" =~ ^[Yy]$ ]]
+	read -rp "$(echo -e "${BOLD}${GREEN}$1 [Y/n] ${RESET}")" reply
+	[[ -z "$reply" || "$reply" =~ ^[Yy]$ ]]
 }
 
 # CONFIG CHECK
 if [ ! -f "$CONFIG_FILE" ]; then
-	echo -e "${BOLD}${GREEN}Error: Dotfiles.conf not found${RESET}"
+	echo -e "${BOLD}${GREEN}Error: Scripts/Dotfiles.conf not found${RESET}"
 	exit 1
 fi
 
-# PACKAGE INSTALL (NO set -e HERE)
+# -------------------------------
+# PACKAGE INSTALL (FAIL-SAFE)
+# -------------------------------
 if prompt_confirm "Install packages"; then
-	sudo pacman -S --needed "${PACMAN_PKGS[@]}" || true
-	command -v yay &>/dev/null && yay -S --needed "${YAY_PKGS[@]}" || true
+	echo -e "${BOLD}${GREEN}Installing pacman packages...${RESET}"
+	sudo pacman -S --needed "${PACMAN_PKGS[@]}" || \
+		echo -e "${BOLD}${GREEN}Warning: pacman package install failed${RESET}"
+
+	if command -v yay &>/dev/null; then
+		echo -e "${BOLD}${GREEN}Installing AUR packages...${RESET}"
+		yay -S --needed "${YAY_PKGS[@]}" || \
+			echo -e "${BOLD}${GREEN}Warning: AUR package install failed${RESET}"
+	else
+		echo -e "${BOLD}${GREEN}yay not found, skipping AUR packages${RESET}"
+	fi
 fi
 
-# READ DOTFILES
+# -------------------------------
+# READ DOTFILES LIST
+# -------------------------------
 mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
 
 # INSTALL EVERYTHING?
-if prompt_confirm "Install everything"; then
+if prompt_confirm "Install Everything"; then
 	INSTALL_ALL=true
 else
 	INSTALL_ALL=false
 fi
 
+# -------------------------------
+# INSTALL FUNCTION (FIXED)
+# -------------------------------
 install_item() {
-	local target="$1"
-	local expanded="${target/\$HOME/$HOME}"
-	local source="$DOTFILES_DIR${expanded#$HOME}"
+	local entry="$1"
+
+	# Expand $HOME safely
+	local target="${entry/\$HOME/$HOME}"
+	local source="$DOTFILES_DIR${target#$HOME}"
 
 	if [ ! -e "$source" ]; then
 		echo -e "${BOLD}${GREEN}Skipping missing: $source${RESET}"
 		return
 	fi
 
-	echo -e "${BOLD}${GREEN}Installing $expanded${RESET}"
-	mkdir -p "$(dirname "$expanded")"
-	cp -r "$source" "$expanded"
+	echo -e "${BOLD}${GREEN}Installing $target${RESET}"
+	mkdir -p "$target"
+
+	# Copy CONTENTS, not the directory itself
+	rsync -a "$source"/ "$target"/
 }
 
-# INSTALL DOTFILES
+# -------------------------------
+# DOTFILES INSTALL
+# -------------------------------
 for item in "${DOTFILES[@]}"; do
 	if $INSTALL_ALL || prompt_confirm "Install $item"; then
 		install_item "$item"
 	fi
 done
 
-# REBOOT
+# -------------------------------
+# REBOOT PROMPT
+# -------------------------------
 if prompt_confirm "Done - Reboot now"; then
+	echo -e "${BOLD}${GREEN}Rebooting...${RESET}"
 	sudo reboot
 else
-	echo -e "${BOLD}${GREEN}Done. Reboot later.${RESET}"
+	echo -e "${BOLD}${GREEN}Done. Reboot later to apply all changes.${RESET}"
 fi
