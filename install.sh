@@ -73,7 +73,6 @@ fi
 install_item() {
 	local entry="$1"
 
-	# Expand $HOME safely
 	local target="${entry/\$HOME/$HOME}"
 	local source="$DOTFILES_DIR${target#$HOME}"
 
@@ -82,11 +81,10 @@ install_item() {
 		return
 	fi
 
-	echo -e "${BOLD}${GREEN}Installing $target${RESET}"
+	echo -e "${BOLD}${GREEN}Installing $target (overwriting)${RESET}"
 	mkdir -p "$target"
 
-	# Copy CONTENTS, not the directory itself
-	rsync -a "$source"/ "$target"/
+	rsync -a --inplace --no-whole-file "$source"/ "$target"/
 }
 
 # -------------------------------
