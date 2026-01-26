@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Script: clean_arch_caches.sh
+# Description: Clean pacman, flatpak, yay caches, and remove unused dependencies (with confirmation).
+
+set -e
+
+echo "=== Arch Linux Cache and Orphan Cleanup ==="
+
+# 1. Pacman cache (keep 3 versions of each package)
+echo "--> Cleaning Pacman cache..."
+sudo paccache -r -k3
+sudo paccache -ruk3
+
+# 2. Remove orphan packages (unused dependencies) with Pacman
+echo "--> Checking for Pacman orphan packages..."
+orphans=$(pacman -Qdtq)
+if [[ -n "$orphans" ]]; then
+  echo "Pacman orphans found:"
+  echo "$orphans"
+  read -rp "Remove these with pacman -Rns? (y/N): " confirm
+  if [[ "$confirm" == [yY] ]]; then
+    sudo pacman -Rns $orphans
+  else
+    echo "Skipped Pacman orphan removal."
+  fi
+else
+  echo "No Pacman orphans found."
+fi
+
+# 3. Clean Flatpak cache and remove unused runtimes
+echo "--> Cleaning Flatpak cache and unused runtimes..."
+flatpak uninstall --unused -y
+flatpak repair
+
+# 4. Clean Yay cache
+echo "--> Cleaning Yay cache..."
+yay -Sc --noconfirm
+
+# 5. Remove orphan packages with Yay
+echo "--> Checking for Yay orphan packages..."
+yay_orphans=$(yay -Qdtq)
+if [[ -n "$yay_orphans" ]]; then
+  echo "Yay orphans found:"
+  echo "$yay_orphans"
+  read -rp "Remove these with yay -Rns? (y/N): " confirm_yay
+  if [[ "$confirm_yay" == [yY] ]]; then
+    yay -Rns --noconfirm $yay_orphans
+  else
+    echo "Skipped Yay orphan removal."
+  fi
+else
+  echo "No Yay orphans found."
+fi
+
+echo "✅ All caches and unused dependencies cleanup complete!"
+

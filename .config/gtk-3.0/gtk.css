@@ -1,0 +1,61 @@
+*{
+	transition:0s ease;
+	font-weight:700;
+	font-family:JetBrainsMonoNL Nerd Font Propo;
+	border-radius:0px;
+	border-color: transparent;
+}
+entry{
+	background:#000;
+	color:#00ff40;
+	border-width:2;
+	border-color:#00ff40;
+	caret-color:#00ff40;
+	box-shadow:0 0;
+}
+box>label{
+	color:#323449;
+}
+box>box>box>box>widget>widget>*{
+	color:#00ff40;
+}
+box>box>box>label:first-child{
+	color:#ebfafa;
+}
+box>box>buttonbox>button>widget>box>label{
+	color:#212337;
+}
+box>box>buttonbox>*:hover{
+	background:#00ff40;
+}
+box>expander>title>label{
+	color:#00ff40;
+}
+box>expander>title>label:hover{
+	color:#ebfafa;
+}
+expander*{
+	border-radius:10px;
+	padding:2px;
+}
+button{
+	border-radius:10px;
+}
+cellview,button,arrow,label,*box,*widget{
+	background:transparent;
+	color:#323449;
+}
+*:hover{
+	background:#212337;
+	border-color: transparent;
+	color:#00ff40;
+}
+*arrow{
+	background:transparent;
+	color:#ebfafa;
+}
+dialog>box>expander>box>widget>widget>label>link{
+	background:#00ff40;
+	color: #00ff40;
+}
+

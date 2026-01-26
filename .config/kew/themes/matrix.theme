@@ -1,0 +1,59 @@
+# ============================================
+# 1. THE MATRIX (Neon Lime)
+# ============================================
+[theme]
+name=Matrix
+author=BASHIIE
+
+# Core colors
+accent=#00ff40
+text=#00ff40
+textDim=#00aa40
+textMuted=#242424
+
+# General Colors
+logo=#00ff40
+header=#00ff40
+footer=#242424
+help=#242424
+link=#ff00ff
+nowplaying=#00ff40
+
+# Playlist View
+playlist.rownum=#00aa40
+playlist.title=#eaff00
+playlist.playing=#00ff40
+
+# Track View
+trackview.title=#00ff80
+trackview.artist=#00ff40
+trackview.album=#00ff00
+trackview.year=#00aa40
+trackview.time=#00ff40
+trackview.visualizer=#00ff40
+trackview.lyrics=#eaff00
+
+# Library View
+library.artist=#008922
+library.album=#00ff40
+library.track=#00ff00
+library.enqueued=#00ff40
+library.playing=#008922
+
+# Search
+search.label=#00ff40
+search.query=#00ff80
+search.result=#00aa80
+search.enqueued=#008922
+search.playing=#00ff40
+
+# Progress
+progress.filled=#008922
+progress.empty=#242424
+progress.elapsed=#00ff40
+
+# Status
+status.info=-1      	# Default foreground
+status.warning=#787878  # The old school gray, this works on most terminals
+status.error=#787878  	# The old school gray, this works on most terminals
+status.success=#787878  # The old school gray, this works on most terminals

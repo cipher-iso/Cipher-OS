@@ -1,0 +1,9 @@
+[sie][Gate#0]
+attack=3
+curveThreshold=-38
+curveZone=-37
+hysteresisThreshold=-39
+hysteresisZone=-60
+reduction=-50
+release=500
+sidechainMode=1

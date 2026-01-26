@@ -1,0 +1,9 @@
+[Graph]
+backgroundColor=0,0,0
+borderColors=0,255,64
+colorTheme=userDefined
+labelBackgroundColor=17,17,17
+labelTextColor=235,250,250
+lineWidth=50
+plotAreaBackgroundColor=0,0,0
+seriesColors=0,255,64

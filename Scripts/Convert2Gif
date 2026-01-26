@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+set -e
+
+MODE="gif"
+FPS=30
+INPUT=""
+
+for arg in "$@"; do
+    case "$arg" in
+        -webp)
+            MODE="webp"
+            ;;
+        *)
+            if [[ -z "$INPUT" ]]; then
+                INPUT="$arg"
+            elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+                FPS="$arg"
+            fi
+            ;;
+    esac
+done
+
+if [ -z "$INPUT" ]; then
+    echo "Usage:"
+    echo "  gif <input> [fps]"
+    echo "  gif <input> [fps] -webp"
+    exit 1
+fi
+
+BASENAME="$(basename "$INPUT")"
+NAME="${BASENAME%.*}"
+OUTDIR="$HOME/Pictures/Converted GIFS"
+mkdir -p "$OUTDIR"
+
+COMMON_OPTS="-hwaccel auto -threads 0"
+SCALE="scale=min(iw\\,1920):min(ih\\,1080):force_original_aspect_ratio=decrease:flags=bicubic"
+
+if [ "$MODE" = "webp" ]; then
+    OUTPUT="$OUTDIR/$NAME.webp"
+
+    ffmpeg $COMMON_OPTS -y -i "$INPUT" \
+        -vf "fps=$FPS,$SCALE" \
+        -c:v libwebp \
+        -lossless 0 \
+        -compression_level 4 \
+        -q:v 80 \
+        -loop 0 \
+        "$OUTPUT"
+
+    echo "Created WEBP: $OUTPUT ($FPS fps)"
+    exit 0
+fi
+
+# -------- GIF MODE (single decode) --------
+
+OUTPUT="$OUTDIR/$NAME.gif"
+
+ffmpeg $COMMON_OPTS -y -i "$INPUT" \
+    -filter_complex "\
+        fps=$FPS,$SCALE,split[a][b]; \
+        [a]palettegen=stats_mode=single[p]; \
+        [b][p]paletteuse=dither=sierra2_4a" \
+    "$OUTPUT"
+
+echo "Created GIF: $OUTPUT ($FPS fps)"
+

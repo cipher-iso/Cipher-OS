@@ -1,0 +1,17 @@
+[StreamInputs]
+inputDevice=alsa_input.usb-Focusrite_Scarlett_2i2_USB-00.Direct__Direct__source
+mostUsedPresets=Main Preset
+plugins=stereo_tools#0,equalizer#0,gate#0,compressor#1,equalizer#1,expander#0,compressor#0,equalizer#2,limiter#0,rnnoise#0
+usedPresets=Main Preset:13,EasyEffects Microphone Preset: Masc NPR Voice + Noise Reduction:1
+visiblePage=pluginsPage
+visiblePlugin=stereo_tools#0
+
+[StreamOutputs]
+outputDevice=alsa_output.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.analog-stereo
+
+[Window]
+autostartOnLogin=true
+height=826
+lastLoadedInputPreset=Main Preset
+visiblePage=inputPage
+width=1340

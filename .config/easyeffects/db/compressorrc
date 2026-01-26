@@ -1,0 +1,17 @@
+[sie][Compressor#0]
+attack=3
+ratio=3
+release=200
+releaseThreshold=-40
+sidechainMode=1
+threshold=-15
+
+[sie][Compressor#1]
+attack=1
+boostThreshold=-60
+knee=-20
+mode=1
+ratio=1.5
+release=200
+sidechainMode=1
+threshold=-22.5

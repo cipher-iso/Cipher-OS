@@ -1,0 +1,236 @@
+{
+    "setting-groups": {
+        "deband-default": {
+            "settings": [
+                ["deband", true],
+                ["deband_grain", 0],
+                ["deband_range", 12],
+                ["deband_threshold", 32]
+            ]
+        },
+        "hwdec-default": {
+            "settings": [
+                ["hwdec", "auto-copy"],
+                ["profile", "gpu-hq"],
+                ["gpu_api", "opengl"],
+                ["fbo_format", "rgba16f"]
+            ]
+        },
+        "static-grain-default": {
+            "shaders": [
+                "noise_static_luma.hook",
+                "noise_static_chroma.hook"
+            ]
+        },
+        "static-grain-strong": {
+            "shaders": [
+                "noise_static_luma_strong.hook",
+                "noise_static_chroma_strong.hook"
+            ]
+        },
+        "fsrcnnx-high": {
+            "shaders": [
+                "FSRCNNX_x2_16-0-4-1.glsl"
+            ],
+            "settings": [
+                ["scale", "ewa_lanczos"]
+            ]
+        },
+        "fsrcnnx": {
+            "shaders": [
+                "FSRCNNX_x2_8-0-4-1.glsl"
+            ],
+            "settings": [
+                ["scale", "ewa_lanczos"]
+            ]
+        },
+        "ssim-downscaler": {
+            "shaders": [
+                "SSimDownscaler.glsl"
+            ],
+            "settings": [
+                ["dscale", "mitchell"],
+                ["linear_downscaling", "no"]
+            ]
+        },
+        "krig-bilateral": {
+            "shaders": [
+                "KrigBilateral.glsl"
+            ],
+            "settings": [
+                ["cscale", "mitchell"]
+            ]
+        },
+        "dither-fruit-default": {
+            "settings": [
+                ["dither_depth", "auto"],
+                ["dither", "fruit"]
+            ]
+        },
+        "tscale-box": {
+            "settings": [
+                ["interpolation", true],
+                ["video_sync", "display-resample"],
+                ["tscale", "box"],
+                ["tscale_window", "quadric"],
+                ["tscale_clamp", 0.0],
+                ["tscale_radius", 1.025]
+            ]
+        },
+        "nnedi-low": {
+            "shaders": [
+                "nnedi3-nns16-win8x6.hook"
+            ]
+        },
+        "nnedi-medium": {
+            "shaders": [
+                "nnedi3-nns32-win8x6.hook"
+            ]
+        },
+        "nnedi-high": {
+            "shaders": [
+                "nnedi3-nns64-win8x6.hook"
+            ]
+        },
+        "nnedi-very-high": {
+            "shaders": [
+                "nnedi3-nns128-win8x6.hook"
+            ]
+        },
+        "nnedi-placebo": {
+            "shaders": [
+                "nnedi3-nns256-win8x6.hook"
+            ]
+        }
+    },
+    "default-setting-groups": [
+        "deband-default",
+        "hwdec-default",
+        "static-grain-default",
+        "dither-fruit-default"
+    ],
+    "setting-revert-ignore": [
+        "profile",
+        "dscale",
+        "gpu_api"
+    ],
+    "profiles": {
+        "nvscaler": {
+            "displayname": "Nvidia Image Scaler",
+            "shaders": [
+                "NVScaler.glsl"
+            ]
+        },
+        "AMD FidelityFX Super Resolution": {
+            "displayname": "AMD FidelityFX Super Resolution",
+            "shaders": [
+                "FSR.glsl"
+            ]
+        },
+        "AMD FidelityFX Contrast Adaptive Sharpening": {
+            "displayname": "AMD FidelityFX Contrast Adaptive Sharpening",
+            "shaders": [
+                "CAS-scaled.glsl"
+            ]
+        },
+        "anime4k-high-a": {
+            "displayname": "Anime4K A (HQ) - For Very Blurry/Compressed",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Restore_CNN_VL.glsl",
+                "Anime4K_Upscale_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "anime4k-high-b": {
+            "displayname": "Anime4K B (HQ) - For Blurry/Ringing",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Restore_CNN_Soft_VL.glsl",
+                "Anime4K_Upscale_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "anime4k-high-c": {
+            "displayname": "Anime4K C (HQ) - For Crisp/Sharp",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Upscale_Denoise_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "anime4k-high-aa": {
+            "displayname": "Anime4K AA (HQ) - For Very Blurry/Compressed",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Restore_CNN_VL.glsl",
+                "Anime4K_Upscale_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Restore_CNN_M.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "anime4k-high-bb": {
+            "displayname": "Anime4K BB (HQ) - For Blurry/Ringing",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Restore_CNN_Soft_VL.glsl",
+                "Anime4K_Upscale_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Restore_CNN_Soft_M.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "anime4k-high-ca": {
+            "displayname": "Anime4K CA (HQ) - For Crisp/Sharp",
+            "shaders": [
+                "Anime4K_Clamp_Highlights.glsl",
+                "Anime4K_Upscale_Denoise_CNN_x2_VL.glsl",
+                "Anime4K_AutoDownscalePre_x2.glsl",
+                "Anime4K_AutoDownscalePre_x4.glsl",
+                "Anime4K_Restore_CNN_M.glsl",
+                "Anime4K_Upscale_CNN_x2_M.glsl"
+            ]
+        },
+        "generic": {
+            "displayname": "FSRCNNX",
+            "setting-groups": [
+                "fsrcnnx",
+                "ssim-downscaler",
+                "krig-bilateral"
+            ]
+        },
+        "generic-high": {
+            "displayname": "FSRCNNX x16",
+            "setting-groups": [
+                "fsrcnnx-high",
+                "ssim-downscaler",
+                "krig-bilateral"
+            ]
+        },
+        "nnedi-high": {
+            "displayname": "NNEDI3 (64 Neurons)",
+            "setting-groups": [
+                "nnedi-high",
+                "ssim-downscaler",
+                "krig-bilateral"
+            ]
+        },
+        "nnedi-very-high": {
+            "displayname": "NNEDI3 High (128 Neurons)",
+            "setting-groups": [
+                "nnedi-very-high",
+                "ssim-downscaler",
+                "krig-bilateral"
+            ]
+        }
+    }
+}

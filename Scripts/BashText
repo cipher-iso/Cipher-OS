@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# VERTICAL NEON GREEN GRADIENT ASCII ART CENTERED (INVERSE)
+
+art=$(cat <<'EOF'
+  ▄▄▄▄▄▄▄   ▄▄▄▄▄   ▄▄▄▄▄▄▄     ▄▄▄   ▄▄▄    ▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄         ▄▄▄▄▄      ▄▄▄▄▄▄▄
+ ███▀▀▀▀▀    ███    ███▀▀███▄   ███   ███   ███▀▀▀▀▀   ███▀▀███▄     ▄███████▄   █████▀▀▀
+ ███         ███    ███▄▄███▀   █████████   ███▄▄      ███▄▄███▀     ███   ███    ▀████▄ 
+ ███         ███    ███▀▀▀▀     ███▀▀▀███   ███        ███▀▀██▄      ███▄▄▄███      ▀████
+ ▀███████   ▄███▄   ███         ███   ███   ▀███████   ███  ▀███      ▀█████▀    ███████▀
+EOF
+)
+
+cols=$(tput cols)
+lines=()
+while IFS= read -r line; do
+  lines+=("$line")
+done <<< "$art"
+
+total=${#lines[@]}
+
+# Print each line with vertical gradient (#00FF99 → #00FF40)
+for ((i=0; i<total; i++)); do
+  line="${lines[i]}"
+  padding=$(( (cols - ${#line}) / 2 ))
+  (( padding < 0 )) && padding=0
+  printf "%*s" "$padding" ""
+
+  # Vertical gradient: red=0, green=255, blue=153 → 64 (inverse)
+  b_start=153
+  b_end=64
+  b=$(( b_start - ( (b_start - b_end) * i / (total - 1) ) ))
+
+  # Print line in this neon green
+  printf "\e[38;2;0;255;%dm%s\e[0m\n" "$b" "$line"
+done
