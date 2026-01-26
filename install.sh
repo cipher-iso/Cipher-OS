@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# INTERACTIVE DOTFILES INSTALLER
-# -------------------------------
-# Installs dotfiles from this repo using Scripts/Dotfiles.conf
+# INTERACTIVE DOTFILES INSTALLER WITH PACKAGE INSTALL
+# ---------------------------------------------------
+# Installs packages and dotfiles from this repo using Scripts/Dotfiles.conf
 # Does NOT backup; user is responsible for backups
 
 set -e
@@ -15,6 +15,18 @@ BOLD="\033[1m"
 GREEN="\033[38;2;0;255;64m"
 RESET="\033[0m"
 
+# PACMAN & YAY PACKAGES
+PACMAN_PKGS=(
+hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset
+pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist
+hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire
+wireplumber xdg-desktop-portal cava
+)
+
+YAY_PKGS=(
+nmgui-bin waypaper qimgv-git kew xwaylandvideobridge-git qt6ct-kde
+)
+
 # PROMPT FUNCTION
 prompt_confirm() {
     local message="$1"
@@ -25,11 +37,27 @@ prompt_confirm() {
     [[ "$response" =~ ^[Yy]$ ]]
 }
 
+# FUNCTION TO INSTALL PACKAGES
+install_packages() {
+    if prompt_confirm "Install PACMAN packages" Y; then
+        echo -e "${BOLD}${GREEN}Installing official packages...${RESET}"
+        sudo pacman -S --needed "${PACMAN_PKGS[@]}"
+    fi
+
+    if prompt_confirm "Install AUR packages (YAY)" Y; then
+        echo -e "${BOLD}${GREEN}Installing AUR packages...${RESET}"
+        yay -S --needed "${YAY_PKGS[@]}"
+    fi
+}
+
 # CHECK CONFIG FILE
 if [ ! -f "$CONFIG_FILE" ]; then
     echo -e "${BOLD}${GREEN}Error: $CONFIG_FILE not found!${RESET}"
     exit 1
 fi
+
+# ASK ABOUT PACKAGE INSTALLATION
+install_packages
 
 # READ CONFIG INTO ARRAY
 mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
