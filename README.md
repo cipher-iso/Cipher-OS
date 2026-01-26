@@ -1,6 +1,9 @@
 # ⚠️ UNDER CONSTRUCTION!
 > [!IMPORTANT]  
 > Dotfiles WIP - Create an Issue if Broken!
+
+> [!CAUTION]  
+> **INSTALL.SH** IS **EXTREMELY EXPERIMENTAL** - USE AT YOUR OWN RISK!
 <br/>
 
 # ✨ Waybar Auto-Hide
