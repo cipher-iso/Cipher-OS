@@ -1,7 +1,7 @@
 {
 	"on-sigusr1": "hide",
 	"on-sigusr2": "show",
-	"start_hidden": true,
+	"start_hidden": false,
 	"reload_style_on_change": true,
 	"layer": "top",
 	"position": "top",
