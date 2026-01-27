@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 # INTERACTIVE DOTFILES INSTALLER
-# -------------------------------
-# Uses Scripts/Dotfiles.conf
-# No backups are created
-# Package failures will NOT stop the script
+# -----------------------------
+# - Run from inside the cloned dotfiles repo
+# - Reads paths from Scripts/Dotfiles.conf
+# - FORCE OVERWRITES existing files/directories
+# - NO BACKUPS
+# - Does NOT delete anything outside listed paths
+
+set -u   # error on undefined vars (NOT -e)
 
 DOTFILES_DIR="$(pwd)"
 CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
@@ -14,66 +18,38 @@ BOLD="\033[1m"
 GREEN="\033[38;2;0;255;64m"
 RESET="\033[0m"
 
-# PACKAGE LISTS
-PACMAN_PKGS=(
-hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset
-pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi
-wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct
-gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava
-)
-
-YAY_PKGS=(
-nmgui-bin waypaper qimgv-git kew xwaylandvideobridge-git qt6ct-kde
-)
-
 # PROMPT FUNCTION
 prompt_confirm() {
-	read -rp "$(echo -e "${BOLD}${GREEN}$1 [Y/n] ${RESET}")" reply
-	[[ -z "$reply" || "$reply" =~ ^[Yy]$ ]]
+	local message="$1"
+	local default="${2:-Y}"
+	read -rp "$(echo -e "${BOLD}${GREEN}${message} [${default}/n] ${RESET}")" reply
+	reply="${reply:-$default}"
+	[[ "$reply" =~ ^[Yy]$ ]]
 }
 
-# CONFIG CHECK
+# CHECK CONFIG FILE
 if [ ! -f "$CONFIG_FILE" ]; then
-	echo -e "${BOLD}${GREEN}Error: Scripts/Dotfiles.conf not found${RESET}"
+	echo -e "${BOLD}${GREEN}ERROR: $CONFIG_FILE not found${RESET}"
 	exit 1
 fi
 
-# -------------------------------
-# PACKAGE INSTALL (FAIL-SAFE)
-# -------------------------------
-if prompt_confirm "Install packages"; then
-	echo -e "${BOLD}${GREEN}Installing pacman packages...${RESET}"
-	sudo pacman -S --needed "${PACMAN_PKGS[@]}" || \
-		echo -e "${BOLD}${GREEN}Warning: pacman package install failed${RESET}"
-
-	if command -v yay &>/dev/null; then
-		echo -e "${BOLD}${GREEN}Installing AUR packages...${RESET}"
-		yay -S --needed "${YAY_PKGS[@]}" || \
-			echo -e "${BOLD}${GREEN}Warning: AUR package install failed${RESET}"
-	else
-		echo -e "${BOLD}${GREEN}yay not found, skipping AUR packages${RESET}"
-	fi
-fi
-
-# -------------------------------
-# READ DOTFILES LIST
-# -------------------------------
+# READ CONFIG
 mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
 
-# INSTALL EVERYTHING?
-if prompt_confirm "Install Everything"; then
+# INSTALL EVERYTHING PROMPT
+if prompt_confirm "Install Everything" Y; then
 	INSTALL_ALL=true
 else
 	INSTALL_ALL=false
 fi
 
-# -------------------------------
-# INSTALL FUNCTION (FIXED)
-# -------------------------------
+# INSTALL FUNCTION (FORCE OVERWRITE)
 install_item() {
 	local entry="$1"
 
-	local target="${entry/\$HOME/$HOME}"
+	local target
+	target="$(eval echo "$entry")"
+
 	local source="$DOTFILES_DIR${target#$HOME}"
 
 	if [ ! -e "$source" ]; then
@@ -81,27 +57,36 @@ install_item() {
 		return
 	fi
 
-	echo -e "${BOLD}${GREEN}Installing $target (overwriting)${RESET}"
-	mkdir -p "$target"
+	echo -e "${BOLD}${GREEN}Installing $target${RESET}"
 
-	rsync -a --inplace --no-whole-file "$source"/ "$target"/
+	# DELETE EXISTING TARGET (FILE OR DIR)
+	if [ -e "$target" ]; then
+		rm -rf "$target"
+	fi
+
+	# ENSURE PARENT EXISTS
+	mkdir -p "$(dirname "$target")"
+
+	# COPY CLEAN VERSION
+	cp -a "$source" "$target"
 }
 
-# -------------------------------
-# DOTFILES INSTALL
-# -------------------------------
-for item in "${DOTFILES[@]}"; do
-	if $INSTALL_ALL || prompt_confirm "Install $item"; then
-		install_item "$item"
+# INSTALL PROCESS
+for entry in "${DOTFILES[@]}"; do
+	if [ "$INSTALL_ALL" = true ]; then
+		install_item "$entry"
+	else
+		expanded="$(eval echo "$entry")"
+		if prompt_confirm "Install $expanded" Y; then
+			install_item "$entry"
+		fi
 	fi
 done
 
-# -------------------------------
 # REBOOT PROMPT
-# -------------------------------
-if prompt_confirm "Done - Reboot now"; then
+if prompt_confirm "Done - Reboot now" Y; then
 	echo -e "${BOLD}${GREEN}Rebooting...${RESET}"
 	sudo reboot
 else
-	echo -e "${BOLD}${GREEN}Done. Reboot later to apply all changes.${RESET}"
+	echo -e "${BOLD}${GREEN}Done! Reboot manually later.${RESET}"
 fi
