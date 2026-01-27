@@ -106,6 +106,20 @@ for item in "${DOTFILES[@]}"; do
 done
 
 # -------------------------------
+# HYPRPM PLUGINS
+# -------------------------------
+if command -v hyprpm &>/dev/null; then
+	echo -e "${BOLD}${GREEN}Configuring Hyprland plugins...${RESET}"
+	hyprpm update || echo -e "${BOLD}${GREEN}Warning: hyprpm update failed${RESET}"
+	hyprpm add https://github.com/hyprwm/hyprland-plugins || \
+		echo -e "${BOLD}${GREEN}Warning: plugin repo add failed${RESET}"
+	hyprpm enable hyprexpo || \
+		echo -e "${BOLD}${GREEN}Warning: hyprexpo enable failed${RESET}"
+else
+	echo -e "${BOLD}${GREEN}hyprpm not found, skipping Hyprland plugins${RESET}"
+fi
+
+# -------------------------------
 # REBOOT PROMPT
 # -------------------------------
 if prompt_confirm "Done - Reboot now"; then
