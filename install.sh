@@ -26,7 +26,7 @@ mousepad timeshift
 )
 
 YAY_PKGS=(
-nmgui-bin waypaper qimgv-git kew xwaylandvideobridge-git qt6ct-kde
+nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde
 vicinae
 )
 
