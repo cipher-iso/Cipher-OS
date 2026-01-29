@@ -1,10 +1,13 @@
 <p align="center">
   <img src="https://github.com/cipher-iso/dotfiles/blob/main/media/CIPHER-OS.png?raw=true" width="500" alt="CIPHER-OS LOGO"/>
-</p>
 
-# <p align="center">⚡️ 2-STEP INSTALL! - [ RECOMMENDED ] ⚡️
+<p align="center">
+  <a href="https://github.com/cipher-iso/dotfiles/tree/main#%EF%B8%8F-manual-installation">INSTALLATION</a> • <a href="https://github.com/cipher-iso/dotfiles/tree/main/Scripts">SCRIPTS</a> • <a href="https://github.com/cipher-iso/Waybar-Autohide">WAYBAR AUTO-HIDE</a> • <a href="https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf">PACKAGE LIST</a>
+</p>
+  
+# <p align="center">⚡️ 2-STEP INSTALL! - [ RECOMMENDED ] ⚡️<br>
 > [!CAUTION]  
-> **[INSTALL.SH](https://github.com/cipher-iso/dotfiles/blob/main/install.sh)** IS **EXPERIMENTAL**<br>**[ USE AT YOUR OWN RISK! ]**<br>
+> **[INSTALL.SH](https://github.com/cipher-iso/dotfiles/blob/main/install.sh)** IS **EXPERIMENTAL** - **[ USE AT YOUR OWN RISK! ]**<br>There is also a [Manual Installation](https://github.com/cipher-iso/dotfiles/tree/main#%EF%B8%8F-manual-installation) below.<br><br>
 >
 > ### **STEP 1:**
 > Download the [Install Script](https://github.com/cipher-iso/dotfiles/blob/main/install.sh) into your `$HOME` Directory<br><br>
