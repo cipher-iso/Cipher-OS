@@ -17,11 +17,13 @@ print_gradient() {
   done
 }
 
-ok()   { echo -e "\033[1m\033[38;2;0;255;64m[  > $1 ]\033[0m"; }
-fail() { echo -e "\033[1m\033[38;2;255;64;64m[  > $1 ]\033[0m"; }
+ok()   { echo -e "\033[1m\033[38;2;0;255;64m[  \033[38;2;255;255;255m> \033[0m$1 ]"; }
+fail() { echo -e "\033[1m\033[38;2;255;64;64m[  \033[38;2;255;255;255m> \033[0m$1 ]"; }
 
 prompt() {
-  read -rp "$(echo -e "\033[1m\033[38;2;0;255;64m[ $1 - [Y/n] > \033[0m")" r
+  local Y="\033[38;2;255;255;255mY\033[0m"
+  local N="\033[38;2;255;0;0mn\033[0m"
+  read -rp "$(echo -e "\033[1m[ $1 - [$Y/$N] ]\033[0m ")" r
   [[ -z $r || $r =~ ^[Yy]$ ]]
 }
 
@@ -46,13 +48,14 @@ AUR_OK=0; AUR_FAIL=()
 DIR_OK=0; DIR_FAIL=()
 
 # ===================== TOP ASCII =====================
+echo
 printf "%s\n" "┏┳━  ┓ ┏┏┓┓ ┏┓┏┓┳┳┓┏┓  ┏┳┓┏┓  ┏┓┳┏┓┓┏┏┓┳┓  ┏┓┏┓  ━┳┓
 ┃┃   ┃┃┃┣ ┃ ┃ ┃┃┃┃┃┣    ┃ ┃┃  ┃ ┃┃┃┣┫┣ ┣┫━━┃┃┗┓   ┃┃
 ┗┻━  ┗┻┛┗┛┗┛┗┛┗┛┛ ┗┗┛   ┻ ┗┛  ┗┛┻┣┛┛┗┗┛┛┗  ┗┛┗┛  ━┻┛" | print_gradient 3
+echo
 
 # ===================== INSTALL PACKAGES =====================
 prompt "INSTALL REPOSITORIES?" && {
-
   for p in "${PACMAN_PKGS[@]}"; do
     if pacman -Qi "$p" &>/dev/null; then
       ((PAC_OK++))
@@ -79,18 +82,18 @@ prompt "INSTALL REPOSITORIES?" && {
 }
 
 # ===================== NVIDIA INSTALL =====================
+echo
 printf "%s\n" "┏┳━  ┳┓╻┓╻┓┳┓┳┏┓  ┓┳┓┏┓┏┳┓┏┓┓ ┓   ━┳┓
 ┃┃   ┃┃┃┃┃┃┃┃┃┣┫  ┃┃┃┗┓ ┃ ┣┫┃ ┃    ┃┃
 ┗┻━  ┛┗┛┗┛┻┻┛┻┛┗  ┻┛┗┗┛ ┻ ┛┗┗┛┗┛  ━┻┛" | print_gradient 3
+echo
 
 prompt "INSTALL NVIDIA PACKAGES?" && NVIDIA_INSTALL=1 || NVIDIA_INSTALL=0
-
 [[ $NVIDIA_INSTALL -eq 1 ]] &&
   sudo pacman -S --needed nvidia-utils lib32-nvidia-utils egl-wayland
 
 # ===================== INSTALL DOTFILES =====================
 prompt "INSTALL ALL DOTFILES?" && {
-
   for d in "${DOTFILES[@]}"; do
     target="${d/\$HOME/$HOME}"
     source="$DOTFILES_DIR${target#$HOME}"
@@ -108,6 +111,7 @@ prompt "INSTALL ALL DOTFILES?" && {
     fi
   done
 
+  # Copy Environment.conf and remove NVIDIA section if declined
   mkdir -p "$(dirname "$ENV_FILE")"
   cp -a "$SOURCE_ENV" "$ENV_FILE"
 
@@ -116,9 +120,11 @@ prompt "INSTALL ALL DOTFILES?" && {
 }
 
 # ===================== END ASCII =====================
+echo
 printf "%s\n" "┏┳━  •┳┓┏┓┏┳┓┏┓┓ ┓  ┏┓┓┏  ┏┓┏┓┳┳┓┏┓┓ ┏┓┏┳┓┏┓  ━┳┓
 ┃┃   ┓┃┃┗┓ ┃ ┣┫┃ ┃  ┗┓┣┫  ┃ ┃┃┃┃┃┃┃┃ ┣  ┃ ┣    ┃┃
 ┗┻━  ┗┛┗┗┛ ┻ ┛┗┗┛┗┛•┗┛┛┗  ┗┛┗┛┛ ┗┣┛┗┛┗┛ ┻ ┗┛  ━┻┛" | print_gradient 3
+echo
 
 # ===================== SUMMARY =====================
 echo
@@ -132,5 +138,5 @@ ok "$DIR_OK DOTFILES INSTALLED"
 for d in "${DIR_FAIL[@]}"; do fail "DOTFILE: $d FAILED"; done
 
 # ===================== REBOOT =====================
-read -rp "$(echo -e "\033[1m\033[38;2;234;255;0m[ INSTALLATION COMPLETE - REBOOT SYSTEM? - <Y/n> ]\033[0m")" r
+read -rp "$(echo -e "\033[1m\033[38;2;234;255;0m[ INSTALLATION COMPLETE - REBOOT SYSTEM? - [\033[38;2;255;255;255mY\033[0m/\033[38;2;255;0;0mn\033[0m] ]\033[0m ")" r
 [[ -z $r || $r =~ ^[Yy]$ ]] && sudo reboot
