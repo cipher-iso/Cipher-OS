@@ -2,7 +2,7 @@
   <img src="https://github.com/cipher-iso/dotfiles/blob/main/media/CIPHER-OS.png?raw=true" width="500" alt="CIPHER-OS LOGO"/>
 
 <p align="center">
-  <a href="https://github.com/cipher-iso/dotfiles/tree/main#%EF%B8%8F-manual-installation">INSTALLATION</a> • <a href="https://github.com/cipher-iso/dotfiles/tree/main/Scripts">SCRIPTS</a> • <a href="https://github.com/cipher-iso/Waybar-Autohide">WAYBAR AUTO-HIDE</a> • <a href="https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf">PACKAGE LIST</a>
+  <a href="https://github.com/cipher-iso/dotfiles?tab=readme-ov-file#%EF%B8%8F-manual-installation-%EF%B8%8F">INSTALLATION</a> • <a href="https://github.com/cipher-iso/dotfiles/tree/main/Scripts">SCRIPTS</a> • <a href="https://github.com/cipher-iso/Waybar-Autohide">WAYBAR AUTO-HIDE</a> • <a href="https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf">PACKAGE LIST</a>
 </p>
   
 # <p align="center">⚡️ 2-STEP INSTALL! - [ RECOMMENDED ] ⚡️<br>
