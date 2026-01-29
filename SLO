@@ -16,12 +16,14 @@ export PROTON_DLSS_UPGRADE=1
 USE_HDR=0
 USE_FG=0
 USE_M=0
+USE_N=0
 
 for arg in "$@"; do
     case "$arg" in
         -hdr) USE_HDR=1 ;;
         -fg)  USE_FG=1 ;;
         -m) USE_M=1 ;;
+	-n) USE_N=1 ;;
         -all)
             USE_HDR=1
             USE_FG=1
@@ -54,12 +56,20 @@ fi
 
 
 #########################################################
-# FRAME GENERATION / FRAMELIMIT
+# MANGOHUD
 #########################################################
 if [[ "$USE_M" == "1" ]]; then
     export MANGOHUD=1
 fi
 
+#########################################################
+# FRAME GENERATION / NVIDIA 
+#########################################################
+
+if [[ "$USE_N" == "1" ]]; then
+    export DXVK_FRAME_RATE=120
+    export NVPRESENT_ENABLE_SMOOTH_MOTION=1
+fi
 
 #########################################################
 # CLEAN ARGUMENTS (remove custom flags)
