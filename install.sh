@@ -37,8 +37,8 @@ fi
 
 # ===================== REPO PATHS =====================
 DOTFILES_DIR="$CIPHER_REPO"
-PKG_CONF="$DOTFILES_DIR/DotfilesPKG.conf"
-CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
+PKG_CONF="$DOTFILES_DIR/DotPKG.conf"
+CONFIG_FILE="$DOTFILES_DIR/DotDIR.conf"
 SOURCE_ENV="$DOTFILES_DIR/.config/hypr/Config/Environment.conf"
 ENV_FILE="$HOME/.config/hypr/Config/Environment.conf"
 
