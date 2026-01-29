@@ -98,7 +98,11 @@ prompt "INSTALL ALL DOTFILES?" && {
     if [[ -e $source ]]; then
       rm -rf "$target"
       mkdir -p "$(dirname "$target")"
-      cp -a "$source" "$target" && ((DIR_OK++)) || DIR_FAIL+=("$target")
+      if cp -a "$source" "$target"; then
+        ((DIR_OK++))
+      else
+        DIR_FAIL+=("$target")
+      fi
     else
       DIR_FAIL+=("$target")
     fi
