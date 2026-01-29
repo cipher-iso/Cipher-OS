@@ -10,8 +10,8 @@ set_on() {
 	hyprctl dispatch setprop class:vivaldi-stable no_screen_share on
 	hyprctl dispatch setprop class:discord no_screen_share on
 sed -i \
-	-e 's/\$SCREENSHARE/\$NOSCREENSHARE/g' \
-	-e 's/decorate = \$SS-BORDERS/decorate = $NSS-BORDERS/' \
+	-e 's/no_screen_share = \off/no_screen_share = on/' \
+	-e 's/decorate = \on/decorate = off/' \
 	"$RULES_FILE"
 
 	hyprctl reload
@@ -26,8 +26,8 @@ set_off() {
 	hyprctl dispatch setprop class:vivaldi-stable no_screen_share off
 	hyprctl dispatch setprop class:discord no_screen_share off
 sed -i \
-	-e 's/\$NOSCREENSHARE/\$SCREENSHARE/g' \
-	-e 's/decorate = \$NSS-BORDERS/decorate = $SS-BORDERS/' \
+	-e 's/no_screen_share = \on/no_screen_share = off/' \
+	-e 's/decorate = \off/decorate = on/' \
 	"$RULES_FILE"
 
 	hyprctl reload

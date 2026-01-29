@@ -6,6 +6,8 @@ PKG_CONF="$DOTFILES_DIR/DotfilesPKG.conf"
 CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
 SOURCE_ENV="$DOTFILES_DIR/.config/hypr/Config/Environment.conf"
 ENV_FILE="$HOME/.config/hypr/Config/Environment.conf"
+CIPHER_DIR="$HOME/cipher.files"
+CIPHER_REPO="$CIPHER_DIR/dotfiles"
 
 # ===================== FUNCTIONS =====================
 print_gradient() {
@@ -37,6 +39,14 @@ sudo -v || exit 1
 
 mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
 
+# ===================== DOTFILES REPO =====================
+mkdir -p "$CIPHER_DIR"
+if [[ -d $CIPHER_REPO/.git ]]; then
+  git -C "$CIPHER_REPO" pull || fail "DOTFILES GIT PULL FAILED"
+else
+  git clone https://github.com/cipher-iso/dotfiles "$CIPHER_REPO" || fail "DOTFILES GIT CLONE FAILED"
+fi
+
 # ===================== PACKAGES =====================
 PACMAN_PKGS=($(awk '/^# PACMAN PKG/{f=1;next}/^#/{f=0} f && NF' "$PKG_CONF"))
 AUR_PKGS=($(awk '/^# AUR PKG/{f=1;next}/^#/{f=0} f && NF' "$PKG_CONF"))
@@ -44,6 +54,7 @@ AUR_PKGS=($(awk '/^# AUR PKG/{f=1;next}/^#/{f=0} f && NF' "$PKG_CONF"))
 PAC_OK=0; PAC_FAIL=()
 AUR_OK=0; AUR_FAIL=()
 DIR_OK=0; DIR_FAIL=()
+HYPREXPO_OK=0
 
 # ===================== TOP ASCII =====================
 echo
@@ -90,8 +101,25 @@ prompt "INSTALL NVIDIA PACKAGES?" && NVIDIA_INSTALL=1 || NVIDIA_INSTALL=0
 [[ $NVIDIA_INSTALL -eq 1 ]] &&
   sudo pacman -S --needed nvidia-utils lib32-nvidia-utils egl-wayland
 
+# ===================== HYPRPM / HYPREXPO =====================
+if command -v hyprpm &>/dev/null; then
+  if hyprpm update &&
+     hyprpm add https://github.com/hyprwm/hyprland-plugins &&
+     hyprpm enable hyprexpo; then
+    HYPREXPO_OK=1
+  fi
+fi
+
 # ===================== INSTALL DOTFILES =====================
 prompt "INSTALL ALL DOTFILES?" && {
+
+  # Force bash shell
+  chsh -s /bin/bash "$USER"
+
+  printf "%s\n" "┏┳━  ┳┳┳┓┏┓┏┓┳┓┏┳┓  ┳┓┏┓┏┳┓┏┓┳┓ ┏┓┏┓  ━┳┓
+┃┃   ┃┃┃┃┃┃┃┃┣┫ ┃   ┃┃┃┃ ┃ ┣ ┃┃ ┣ ┗┓   ┃┃
+┗┻━  ┻┛ ┗┣┛┗┛┛┗ ┻   ┻┛┗┛ ┻ ┻ ┻┗┛┗┛┗┛  ━┻┛" | print_gradient 3
+
   for d in "${DOTFILES[@]}"; do
     target="${d/\$HOME/$HOME}"
     source="$DOTFILES_DIR${target#$HOME}"
@@ -114,14 +142,13 @@ prompt "INSTALL ALL DOTFILES?" && {
 
   [[ $NVIDIA_INSTALL -eq 0 ]] &&
     sed -i '/^# NVIDIA SETTINGS/,/^$/d' "$ENV_FILE"
-}
 
-# ===================== END ASCII =====================
-echo
-printf "%s\n" "┏┳━  •┳┓┏┓┏┳┓┏┓┓ ┓  ┏┓┓┏  ┏┓┏┓┳┳┓┏┓┓ ┏┓┏┳┓┏┓  ━┳┓
-┃┃   ┓┃┃┗┓ ┃ ┣┫┃ ┃  ┗┓┣┫  ┃ ┃┃┃┃┃┃┃┃ ┣  ┃ ┣    ┃┃
-┗┻━  ┗┛┗┗┛ ┻ ┛┗┗┛┗┛•┗┛┛┗  ┗┛┗┛┛ ┗┣┛┗┛┗┛ ┻ ┗┛  ━┻┛" | print_gradient 3
-echo
+  # Remove Minecraft server autostart
+  AUTOSTART_CONF="$HOME/.config/hypr/Config/AutoStart.conf"
+  if [[ -f $AUTOSTART_CONF ]]; then
+    sed -i '\|^exec-once = \[workspace 4 silent\] \$Terminal "MC-Server"[[:space:]]*# Minecraft Server$|d' "$AUTOSTART_CONF"
+  fi
+}
 
 # ===================== SUMMARY =====================
 echo
@@ -133,6 +160,8 @@ for p in "${AUR_FAIL[@]}"; do fail "AUR: $p FAILED"; done
 
 ok "$DIR_OK DOTFILES INSTALLED"
 for d in "${DIR_FAIL[@]}"; do fail "DOTFILE: $d FAILED"; done
+
+[[ $HYPREXPO_OK -eq 1 ]] && ok "HYPREXPO INSTALLED" || fail "HYPREXPO FAILED"
 
 # ===================== REBOOT =====================
 read -rp "$(echo -e "\033[1m\033[38;2;234;255;0m[ DONE! | REBOOT SYSTEM? - <Y/n> ]\033[0m ")" r
