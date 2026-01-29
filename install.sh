@@ -115,19 +115,25 @@ printf "%s\n" "┏┳━  ┳┓╻┓╻┓┳┓┳┏┓  ┓┳┓┏┓┏�
 echo
 
 prompt "INSTALL NVIDIA PACKAGES?" && NVIDIA_INSTALL=1 || NVIDIA_INSTALL=0
+
+NVIDIA_PKGS=(nvidia-utils lib32-nvidia-utils egl-wayland)
+
 if [[ $NVIDIA_INSTALL -eq 1 ]]; then
   echo
-  ok "INSTALLING NVIDIA PACKAGES"
-  sudo pacman -S --needed nvidia-utils lib32-nvidia-utils egl-wayland
-fi
+  ok "STARTING NVIDIA INSTALLS"
 
-# ===================== HYPRPM / HYPREXPO =====================
-if command -v hyprpm &>/dev/null; then
-  if hyprpm update &&
-     hyprpm add https://github.com/hyprwm/hyprland-plugins &&
-     hyprpm enable hyprexpo; then
-    HYPREXPO_OK=1
-  fi
+  for p in "${NVIDIA_PKGS[@]}"; do
+    echo
+    ok "NVIDIA → $p"
+
+    if pacman -Qi "$p" &>/dev/null; then
+      ok "$p ALREADY INSTALLED"
+    elif sudo pacman -S --needed "$p"; then
+      :
+    else
+      fail "NVIDIA PACKAGE FAILED: $p"
+    fi
+  done
 fi
 
 # ===================== INSTALL DOTFILES =====================
