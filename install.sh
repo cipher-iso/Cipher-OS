@@ -135,5 +135,5 @@ ok "$DIR_OK DOTFILES INSTALLED"
 for d in "${DIR_FAIL[@]}"; do fail "DOTFILE: $d FAILED"; done
 
 # ===================== REBOOT =====================
-read -rp "$(echo -e "\033[1m\033[38;2;234;255;0m[ INSTALLATION COMPLETE - <Y/n> ]\033[0m ")" r
+read -rp "$(echo -e "\033[1m\033[38;2;234;255;0m[ DONE! | REBOOT SYSTEM? - <Y/n> ]\033[0m ")" r
 [[ -z $r || $r =~ ^[Yy]$ ]] && sudo reboot
