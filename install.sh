@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-# ===================== PATHS =====================
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PKG_CONF="$DOTFILES_DIR/DotfilesPKG.conf"
-CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
-SOURCE_ENV="$DOTFILES_DIR/.config/hypr/Config/Environment.conf"
-ENV_FILE="$HOME/.config/hypr/Config/Environment.conf"
+# ===================== BASE PATHS =====================
 CIPHER_DIR="$HOME/cipher.files"
 CIPHER_REPO="$CIPHER_DIR/dotfiles"
 
@@ -32,14 +27,7 @@ export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 sudo -v || exit 1
 ( while sudo -n true; do sleep 60; done ) 2>/dev/null &
 
-# ===================== INPUT VALIDATION =====================
-[[ -f $CONFIG_FILE ]] || { fail "DOTFILES.CONF NOT FOUND"; exit 1; }
-[[ -f $PKG_CONF ]] || { fail "DotfilesPKG.conf NOT FOUND"; exit 1; }
-[[ -f $SOURCE_ENV ]] || { fail "SOURCE Environment.conf NOT FOUND"; exit 1; }
-
-mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
-
-# ===================== DOTFILES REPO =====================
+# ===================== CLONE / UPDATE DOTFILES =====================
 mkdir -p "$CIPHER_DIR"
 if [[ -d $CIPHER_REPO/.git ]]; then
   git -C "$CIPHER_REPO" pull || fail "DOTFILES GIT PULL FAILED"
@@ -47,7 +35,21 @@ else
   git clone https://github.com/cipher-iso/dotfiles "$CIPHER_REPO" || fail "DOTFILES GIT CLONE FAILED"
 fi
 
-# ===================== PACKAGES =====================
+# ===================== REPO PATHS =====================
+DOTFILES_DIR="$CIPHER_REPO"
+PKG_CONF="$DOTFILES_DIR/DotfilesPKG.conf"
+CONFIG_FILE="$DOTFILES_DIR/Scripts/Dotfiles.conf"
+SOURCE_ENV="$DOTFILES_DIR/.config/hypr/Config/Environment.conf"
+ENV_FILE="$HOME/.config/hypr/Config/Environment.conf"
+
+# ===================== INPUT VALIDATION =====================
+[[ -f $CONFIG_FILE ]] || { fail "DOTFILES.CONF NOT FOUND"; exit 1; }
+[[ -f $PKG_CONF ]]   || { fail "DotfilesPKG.conf NOT FOUND"; exit 1; }
+[[ -f $SOURCE_ENV ]] || { fail "SOURCE Environment.conf NOT FOUND"; exit 1; }
+
+mapfile -t DOTFILES < <(grep -vE '^\s*#|^\s*$' "$CONFIG_FILE")
+
+# ===================== PACKAGE LISTS =====================
 PACMAN_PKGS=($(awk '/^# PACMAN PKG/{f=1;next}/^#/{f=0} f && NF' "$PKG_CONF"))
 AUR_PKGS=($(awk '/^# AUR PKG/{f=1;next}/^#/{f=0} f && NF' "$PKG_CONF"))
 
@@ -113,7 +115,6 @@ fi
 # ===================== INSTALL DOTFILES =====================
 prompt "INSTALL ALL DOTFILES?" && {
 
-  # Force bash shell
   chsh -s /bin/bash "$USER"
 
   printf "%s\n" "┏┳━  ┳┳┳┓┏┓┏┓┳┓┏┳┓  ┳┓┏┓┏┳┓┏┓┳┓ ┏┓┏┓  ━┳┓
@@ -143,7 +144,6 @@ prompt "INSTALL ALL DOTFILES?" && {
   [[ $NVIDIA_INSTALL -eq 0 ]] &&
     sed -i '/^# NVIDIA SETTINGS/,/^$/d' "$ENV_FILE"
 
-  # Remove Minecraft server autostart
   AUTOSTART_CONF="$HOME/.config/hypr/Config/AutoStart.conf"
   if [[ -f $AUTOSTART_CONF ]]; then
     sed -i '\|^exec-once = \[workspace 4 silent\] \$Terminal "MC-Server"[[:space:]]*# Minecraft Server$|d' "$AUTOSTART_CONF"
