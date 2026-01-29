@@ -1,86 +1,42 @@
-# ⚠️ UNDER CONSTRUCTION!
-> [!IMPORTANT]  
-> Dotfiles WIP - Create an Issue if Broken!
-
+# ⚡️ 2-STEP INSTALL! - [ RECOMMENDED ]
 > [!CAUTION]  
-> **[INSTALL.SH](https://github.com/cipher-iso/dotfiles/blob/main/install.sh)** IS **EXTREMELY EXPERIMENTAL** - USE AT YOUR OWN RISK!<br/>
-> - Tested Within a Virtual-Machine; but Always Updating!
+> **[INSTALL.SH](https://github.com/cipher-iso/dotfiles/blob/main/install.sh)** IS **EXPERIMENTAL**<br>**[ USE AT YOUR OWN RISK! ]**<br>
+>
+> ### **STEP 1:**
+> Download the [Install Script](https://github.com/cipher-iso/dotfiles/blob/main/install.sh) into your `$HOME` Directory<br><br>
+> ### **STEP 2:**
+> In Your Terminal:<br>`chmod +x ~/install.sh && ~/install.sh`<br>
 <br/>
 
 # 📦 NECESSARY PACKAGES
 
 > [!NOTE]  
-> These packages are needed for Dotfiles to function. <br/>
-
-**PACMAN Packages:** <br/>
-`sudo pacman -S --needed hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava cpio cmake pkg-config git gcc discord hyprshot hyprpicker steam mousepad ttf-jetbrains-mono ttf-jetbrains-mono-nerd`
- <br/> <br/>
- **AUR Packages:** <br/>
-`yay -S --needed nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde vicinae`<br/> <br/>
-<details>
-<summary>📋 Full Package List</summary>  
-<br/>
-  
-**(PACMAN)**
-> hyprland <br/>
-> hypridle <br/>
-> waybar <br/>
-> kitty <br/>
-> swayosd <br/>
-> swaync <br/>
-> hyprlock <br/>
-> hyprsunset <br/>
-> pavucontrol-qt <br/>
-> blueman <br/>
-> mpv <br/>
-> easyeffects <br/>
-> dolphin <br/>
-> btop <br/>
-> vivaldi <br/>
-> wl-clip-persist <br/>
-> hyprcursor <br/>
-> mate-polkit <br/>
-> nwg-look <br/>
-> kvantum <br/>
-> qt5ct <br/>
-> gtk3 <br/>
-> gtk4 <br/>
-> neovim <br/>
-> pipewire <br/>
-> wireplumber <br/>
-> xdg-desktop-portal <br/>
-> cava <br/>
-> cpio <br/>
-> cmake <br/>
-> pkg-config <br/>
-> git <br/>
-> gcc <br/>
-> discord <br/>
-> hyprshot <br/>
-> hyprpicker <br/>
-> steam <br/>
-> mousepad <br/>
-> timeshift <br/>
-> ttf-jetbrains-mono <br/>
-> ttf-jetbrains-mono-nerd <br/>
-
-**(AUR)**  
-> nmgui-bin <br/>
-> waypaper <br/>
-> qimgv-git <br/>
-> kew <br/>
-> xwaylandvideobridge <br/>
-> qt6ct-kde <br/>
-> vicinae <br/>
-</details>
-<br/>
-
-
-<br/>
+> **[These Packages](https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf)** are **Required** for Dotfiles to Function. <br>
+> 
+> <details>
+> <summary>📋 <ins>Package List:<ins></summary>  
+> 
+> # 📘 PACMAN PACKAGES:<br>
+> `sudo pacman -S --needed hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava cpio cmake pkg-config git gcc discord hyprshot hyprpicker steam mousepad calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp ttf-jetbrains-mono ttf-jetbrains-mono-nerd cairo hyprgraphics hyprlang hyprutils hyprwayland-scanner mesa pam pango sdbus-cpp xorg-xwayland wayland-protocols archlinux-xdg-menu`<br>
+> # 📙 AUR PACKAGES:<br>
+> `yay -S --needed nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde vicinae swww`
+> </details>
+<br>
 
 # ✨ WAYBAR AUTO-HIDE
-> [!NOTE]
-> Looking for Waybar-Autohide only? [Click Here!](https://github.com/cipher-iso/Waybar-Autohide)<br/>
+> [!TIP]
+> Looking for Waybar-Autohide only? [Click Here!](https://github.com/cipher-iso/Waybar-Autohide)<br>
 > This is a stand-alone script for Waybar [Hyprland] to automatically hide Waybar
 > 
 > ![Preview](https://raw.githubusercontent.com/cipher-xui/Waybar-Autohide/main/Preview.gif)
+<br>
+
+# 🛠️ MANUAL INSTALLATION
+### **STEP 1: [ CLONE THIS REPO ]**
+In Your Terminal:<br>`git clone https://github.com/cipher-iso/dotfiles.git`<br><br>
+### **STEP 2: [ INSTALL PACKAGES ]**
+Install the [Necessary Packages](https://github.com/cipher-iso/dotfiles/tree/main/README.md?plain=11) Listed in [DotPKG.conf](https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf)<br><br>
+### **STEP 3: [ INSTALL PLUGINS ]**
+In Your Terminal:<br>`hyprpm update`<br>`hyprpm add hyprpm add https://github.com/hyprwm/hyprland-plugins`<br>`hyprpm enable hyprexpo` <br><br>
+### **STEP 4: [ IMPORT DOTFILES ]**
+In Your Terminal:<br>`rsync -r --remove-source-files --exclude='{.gitignore,README.md,install.sh,DotPKG.conf,DotDIR.conf}' ~/dotfiles/ ~/`<br><br>This will import Dotfiles, whilst ignoring git files.<br>Otherwise, paste [each Directory](https://github.com/cipher-iso/dotfiles/blob/main/DotDIR.conf) in your `$HOME` - [ `SLO` & `.bashrc` Optional ] <br><br>
