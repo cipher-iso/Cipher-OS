@@ -84,7 +84,6 @@ printf "%s\n" "┏┳━  ┳┓╻┓╻┓┳┓┳┏┓  ┓┳┓┏┓┏�
 ┗┻━  ┛┗┛┗┛┻┻┛┻┛┗  ┻┛┗┗┛ ┻ ┛┗┗┛┗┛  ━┻┛" | print_gradient 3
 
 prompt "INSTALL NVIDIA PACKAGES?" && NVIDIA_INSTALL=1 || NVIDIA_INSTALL=0
-
 [[ $NVIDIA_INSTALL -eq 1 ]] &&
   sudo pacman -S --needed nvidia-utils lib32-nvidia-utils egl-wayland
 
@@ -104,11 +103,18 @@ prompt "INSTALL ALL DOTFILES?" && {
     fi
   done
 
+  # ===================== COPY ENVIRONMENT =====================
   mkdir -p "$(dirname "$ENV_FILE")"
-  cp -a "$SOURCE_ENV" "$ENV_FILE"
 
-  [[ $NVIDIA_INSTALL -eq 0 ]] &&
-    sed -i '/^# >>> NVIDIA SETTINGS >>>/,/^# <<< NVIDIA SETTINGS <<</d' "$ENV_FILE"
+  if [[ $NVIDIA_INSTALL -eq 1 ]]; then
+    # YES → copy full Environment.conf
+    cp -a "$SOURCE_ENV" "$ENV_FILE"
+  else
+    # NO → copy WITHOUT NVIDIA section
+    sed '/^# NVIDIA SETTINGS/,/^$/d' "$SOURCE_ENV" > "$ENV_FILE"
+  fi
+
+  ((DIR_OK++))
 }
 
 # ===================== END ASCII =====================
