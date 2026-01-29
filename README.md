@@ -1,4 +1,8 @@
-# ⚡️ 2-STEP INSTALL! - [ RECOMMENDED ]
+<p align="center">
+  <img src="https://github.com/cipher-iso/dotfiles/blob/main/media/CIPHER-OS.png?raw=true" width="500" alt="CIPHER-OS LOGO"/>
+</p>
+
+# <p align="center">⚡️ 2-STEP INSTALL! - [ RECOMMENDED ] ⚡️
 > [!CAUTION]  
 > **[INSTALL.SH](https://github.com/cipher-iso/dotfiles/blob/main/install.sh)** IS **EXPERIMENTAL**<br>**[ USE AT YOUR OWN RISK! ]**<br>
 >
@@ -8,7 +12,7 @@
 > In Your Terminal:<br>`chmod +x ~/install.sh && ~/install.sh`<br>
 <br/>
 
-# 📦 NECESSARY PACKAGES
+# <p align="center">📦 NECESSARY PACKAGES 📦
 
 > [!IMPORTANT]  
 > ### **[These Packages](https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf)** are **Required** for Dotfiles to Function.<br>
@@ -24,7 +28,7 @@
 > </details>
 <br>
 
-# ✨ WAYBAR AUTO-HIDE
+# <p align="center">✨ WAYBAR AUTO-HIDE ✨
 > [!TIP]
 > ### Looking for Waybar-Autohide only? [Click Here!](https://github.com/cipher-iso/Waybar-Autohide)<br>
 > This is a stand-alone auto-hide script for Waybar!<br>*[Made for Hyprland]*
@@ -32,12 +36,14 @@
 > ![Preview](https://raw.githubusercontent.com/cipher-xui/Waybar-Autohide/main/Preview.gif)
 <br>
 
-# 🛠️ MANUAL INSTALLATION
-### **STEP 1: [ CLONE THIS REPO ]**
+# <p align="center">🛠️ MANUAL INSTALLATION 🛠️
+### **👥 | STEP 1: [ CLONE THIS REPO ]**
 In Your Terminal:<br>`git clone https://github.com/cipher-iso/dotfiles.git`<br><br>
-### **STEP 2: [ INSTALL PACKAGES ]**
+### **📥 | STEP 2: [ INSTALL PACKAGES ]**
 Install the [Necessary Packages](https://github.com/cipher-iso/dotfiles?tab=readme-ov-file#-necessary-packages) Listed in [DotPKG.conf](https://github.com/cipher-iso/dotfiles/blob/main/DotPKG.conf)<br><br>
-### **STEP 3: [ INSTALL PLUGINS ]**
+### **🔌 | STEP 3: [ INSTALL PLUGINS ]**
 In Your Terminal:<br>`hyprpm update`<br>`hyprpm add hyprpm add https://github.com/hyprwm/hyprland-plugins`<br>`hyprpm enable hyprexpo` <br><br>
-### **STEP 4: [ IMPORT DOTFILES ]**
+### **🗃️ | STEP 4: [ IMPORT DOTFILES ]**
 In Your Terminal:<br>`rsync -r --remove-source-files --exclude='{.gitignore,README.md,install.sh,DotPKG.conf,DotDIR.conf}' ~/dotfiles/ ~/`<br><br>This will import Dotfiles, whilst ignoring git files.<br>Otherwise, paste [each Directory](https://github.com/cipher-iso/dotfiles/blob/main/DotDIR.conf) in your `$HOME` - [ `SLO` & `.bashrc` Optional ] <br><br>
+### **✅ | STEP 5: [ COMPLETE INSTALLATION ]**
+Reboot your System for all Functions & Themeing to take Effect.<br>
