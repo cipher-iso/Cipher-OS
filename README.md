@@ -2,7 +2,7 @@
   <img src="https://github.com/cipher-iso/Cipher-OS/blob/main/media/CIPHER-OS.png?raw=true" width="500" alt="CIPHER-OS LOGO"/>
 
 <p align="center">
-  <a href="https://github.com/cipher-iso/Cipher-OS/tree/main?tab=readme-ov-file#%EF%B8%8F-manual-install-%EF%B8%8F">INSTALLATION</a> • <a href="https://github.com/cipher-iso/Cipher-OS/tree/main/Scripts">SCRIPTS</a> • <a href="https://github.com/cipher-iso/Waybar-Autohide">WAYBAR AUTO-HIDE</a> • <a href="https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf">PACKAGE LIST</a>
+  <a href="https://github.com/cipher-iso/Cipher-OS/tree/main?tab=readme-ov-file#%EF%B8%8F-manual-install-%EF%B8%8F">INSTALL</a> • <a href="https://github.com/cipher-iso/Cipher-OS/tree/main/Scripts">SCRIPTS</a> • <a href="https://github.com/cipher-iso/Waybar-Autohide">WAYBAR</a> • <a href="https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf">DEPENDS</a>
 </p>
   
 ## <p align="center">⚡️ 2-STEP INSTALL! ⚡<br>[ RECOMMENDED ]<br>
@@ -15,7 +15,7 @@
 > In Your Terminal:<br>`chmod +x ~/install.sh && ~/install.sh`<br>
 <br/>
 
-## <p align="center">📦 REQUIRED PACKAGES 📦
+## <p align="center">📦 DEPENDENCIES 📦
 
 > [!IMPORTANT]  
 > ### **[These Packages](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)** are **Necessary** for Themeing & Functionality.<br>
@@ -43,7 +43,7 @@
 ### **👥 | STEP 1: [ CLONING REPO ]**
 In Your Terminal:<br>`git clone https://github.com/cipher-iso/Cipher-OS.git`<br><br>
 ### **📥 | STEP 2: [ DEPENDENCIES ]**
-Install the [Required Packages](https://github.com/cipher-iso/Cipher-OS?tab=readme-ov-file#-required-packages-) Listed in [DotPKG.conf](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)<br><br>
+Install the [Required Packages](https://github.com/cipher-iso/Cipher-OS?tab=readme-ov-file#-dependencies-) Listed in [DotPKG.conf](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)<br><br>
 ### **🔌 | STEP 3: [ HYPR PLUGINS ]**
 In Your Terminal:<br>`hyprpm update`<br>`hyprpm add hyprpm add https://github.com/hyprwm/hyprland-plugins`<br>`hyprpm enable hyprexpo` <br><br>
 ### **🗃️ | STEP 4: [ SYNC DOTFILES ]**
