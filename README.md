@@ -33,7 +33,7 @@
 
 ## <p align="center">✨ WAYBAR AUTO-HIDE ✨
 > [!TIP]
-> ### Looking for Waybar-Autohide only? [Click Here!](https://github.com/cipher-iso/Waybar-Autohide)<br>
+> ### Looking for Waybar-AutoHide only? [Click Here!](https://github.com/cipher-iso/Waybar-Autohide)<br>
 > This is a stand-alone auto-hide script for Waybar!<br>*[Made for Hyprland]*
 > 
 > ![Preview](https://raw.githubusercontent.com/cipher-xui/Waybar-Autohide/main/Preview.gif)
