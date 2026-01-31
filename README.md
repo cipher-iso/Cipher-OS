@@ -18,9 +18,6 @@
 >
     chmod +x ~/install.sh && ~/install.sh
 
-<br>
-<br/>
-
 ---
 
 ## <p align="center">📦 DEPENDENCIES 📦
