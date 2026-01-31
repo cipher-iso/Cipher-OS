@@ -24,8 +24,7 @@
 
 > [!IMPORTANT]  
 > ### **[These Packages](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)** are **Necessary** for Themeing & Functionality.<br>
-> Ignoring these will result in a broken config or a dysfunctional system.
-<br><br>
+> Ignoring these will result in a broken config or a dysfunctional system.<br>
 <details>
 <summary>📋 <ins>Package List:<ins></summary>  
 
@@ -62,7 +61,9 @@ In Your Terminal:
 
 ### **📥 | STEP 2: [ DEPENDENCIES ]**
 
-Install the [Required Packages](https://github.com/cipher-iso/Cipher-OS?tab=readme-ov-file#-dependencies-) Listed in [DotPKG.conf](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)<br><br>
+Install the [Required Packages](https://github.com/cipher-iso/Cipher-OS?tab=readme-ov-file#-dependencies-) Listed in [DotPKG.conf](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)
+
+<br>
 
 ### **🔌 | STEP 3: [ HYPR PLUGINS ]**
 In Your Terminal:
@@ -78,7 +79,9 @@ In Your Terminal:
 
     rsync -r --remove-source-files --exclude='{.gitignore,README.md,install.sh,DotPKG.conf,DotDIR.conf}' ~/Cipher-OS/ ~/
 
-This will import Dotfiles, whilst ignoring git files.<br>Otherwise, paste [each Directory](https://github.com/cipher-iso/Cipher-OS/blob/main/DotDIR.conf) in your `$HOME` - [ `SLO` & `.bashrc` Optional ] <br><br>
+This will import Dotfiles, whilst ignoring git files.<br>Otherwise, paste [each Directory](https://github.com/cipher-iso/Cipher-OS/blob/main/DotDIR.conf) in your `$HOME` - [ `SLO` & `.bashrc` Optional ]
+
+<br>
 
 ### **✅ | STEP 5: [ COMPLETE ]**
 Reboot your System for all Functions & Themeing to take Effect.<br>
