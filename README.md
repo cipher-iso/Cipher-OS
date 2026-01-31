@@ -28,15 +28,19 @@
 > [!IMPORTANT]  
 > ### **[These Packages](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)** are **Necessary** for Themeing & Functionality.<br>
 > Ignoring these will result in a broken config or a dysfunctional system.
-> <br><br>
-> <details>
-> <summary>📋 <ins>Package List:<ins></summary>  
-> 
-> ### 📘 PACMAN PACKAGES:<br>
-> `sudo pacman -S --needed hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava cpio cmake pkg-config git gcc discord hyprshot hyprpicker steam mousepad calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp ttf-jetbrains-mono ttf-jetbrains-mono-nerd cairo hyprgraphics hyprlang hyprutils hyprwayland-scanner mesa pam pango sdbus-cpp xorg-xwayland wayland-protocols archlinux-xdg-menu`<br>
-> ### 📙 AUR PACKAGES:<br>
-> `yay -S --needed nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde vicinae swww`
-> </details>
+<br><br>
+<details>
+<summary>📋 <ins>Package List:<ins></summary>  
+
+### 📘 PACMAN PACKAGES:<br>
+
+    sudo pacman -S --needed hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava cpio cmake pkg-config git gcc discord hyprshot hyprpicker steam mousepad calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp ttf-jetbrains-mono ttf-jetbrains-mono-nerd cairo hyprgraphics hyprlang hyprutils hyprwayland-scanner mesa pam pango sdbus-cpp xorg-xwayland wayland-protocols archlinux-xdg-menu
+
+### 📙 AUR PACKAGES:<br>
+
+    yay -S --needed nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde vicinae swww
+
+</details>
 <br>
 
 ---
