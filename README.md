@@ -59,7 +59,7 @@ In Your Terminal:
     git clone https://github.com/cipher-iso/Cipher-OS.git
 
 <br>
-### **📥 | STEP 2: [ DEPENDENCIES ]**
+### **📥 | STEP 2: [ DEPENDENCIES ]**<br>
 Install the [Required Packages](https://github.com/cipher-iso/Cipher-OS?tab=readme-ov-file#-dependencies-) Listed in [DotPKG.conf](https://github.com/cipher-iso/Cipher-OS/blob/main/DotPKG.conf)<br><br>
 ### **🔌 | STEP 3: [ HYPR PLUGINS ]**
 In Your Terminal:
