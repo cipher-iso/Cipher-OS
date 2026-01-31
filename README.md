@@ -16,7 +16,7 @@
 > ### **STEP 2:**
 > In Your Terminal:<br>
 >
->    chmod +x ~/install.sh && ~/install.sh
+    chmod +x ~/install.sh && ~/install.sh
 
 <br>
 <br/>
