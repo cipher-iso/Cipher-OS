@@ -28,13 +28,13 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
     	padding: 0 10px;
 	border-radius: 30px;
 	margin: 3px 3px; 	}
+#workspaces button.empty	{ color: @accent3; }
 #workspaces button.focused,
 #workspaces button.active {
 	background: @bg;
     	color: @fg;
     	padding: 0 15px;
     	min-width: 50px;	}
-#workspaces button.empty	{ color: @accent3; }
 #workspaces button:hover	{ color: @fg2; background-color: @bg; min-width: 50px; }
 
 /* PRIMARY COLOR & INTERACTIVE HOVER */
@@ -43,6 +43,7 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
 #custom-updates:hover,
 #network:hover,
 #bluetooth:hover,
+#idle_inhibitor:hover,
 #custom-screenshare:hover,
 #custom-barlock:hover,
 #pulseaudio:hover,
@@ -72,6 +73,7 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
 #custom-updates,
 #network,
 #bluetooth,
+#idle_inhibitor,
 #custom-screenshare,
 #custom-barlock,
 #pulseaudio,

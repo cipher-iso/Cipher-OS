@@ -5,11 +5,13 @@ CURRENT=$(hyprctl activeworkspace -j | jq -r '.id')
 
 case "$1" in
     up)
-        if [ "$CURRENT" -lt 9 ]; then
+# MAXIMUM WORKSPACES - NO SCROLL-OVER
+	    if [ "$CURRENT" -lt 9 ]; then
             hyprctl dispatch workspace $((CURRENT + 1))
         fi
         ;;
     down)
+# MINIMUM WORKSPACES - NO SCROLL-UNDER
         if [ "$CURRENT" -gt 1 ]; then
             hyprctl dispatch workspace $((CURRENT - 1))
         fi
@@ -19,4 +21,3 @@ case "$1" in
         exit 1
         ;;
 esac
-

@@ -1,57 +1,66 @@
 #!/bin/bash
 
-# Script: clean_arch_caches.sh
-# Description: Clean pacman, flatpak, yay caches, and remove unused dependencies (with confirmation).
+export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 
 set -e
 
-echo "=== Arch Linux Cache and Orphan Cleanup ==="
-
 # 1. Pacman cache (keep 3 versions of each package)
-echo "--> Cleaning Pacman cache..."
+printf "\e[1;38;2;0;255;64m┏━  ┏┓┏┓┏┓┳┳┓┏┓┳┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+┃   ┃┃┣┫┃ ┃┃┃┣┫┃┃  ┃ ┣┫┃ ┣┫┣    ┃
+┗━  ┣┛┛┗┗┛┛ ┗┛┗┛┗  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n"
+
 sudo paccache -r -k3
 sudo paccache -ruk3
 
 # 2. Remove orphan packages (unused dependencies) with Pacman
-echo "--> Checking for Pacman orphan packages..."
-orphans=$(pacman -Qdtq)
+orphans=$(pacman -Qdtq || true)
+
 if [[ -n "$orphans" ]]; then
-  echo "Pacman orphans found:"
-  echo "$orphans"
-  read -rp "Remove these with pacman -Rns? (y/N): " confirm
+  printf "\e[38;2;235;250;250m[ ORPHAN PACKAGES: %s ]\e[0m\n" "$orphans"
+  printf "\e[1;38;2;0;255;64m[ REMOVE ORPHANS? <y/N> ] \e[0m"
+  read -r confirm
+  echo
   if [[ "$confirm" == [yY] ]]; then
-    sudo pacman -Rns $orphans
+    sudo pacman -Rns -- $orphans
   else
-    echo "Skipped Pacman orphan removal."
+    :
   fi
 else
-  echo "No Pacman orphans found."
+  printf "\e[38;2;235;250;250m[ NO ORPHAN PKGS FOUND ]\e[0m\n"
 fi
 
 # 3. Clean Flatpak cache and remove unused runtimes
-echo "--> Cleaning Flatpak cache and unused runtimes..."
+printf "\e[1;38;2;0;255;64m┏━  ┏┓┓ ┏┓┏┳┓┏┓┏┓┓┏┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+┃   ┣ ┃ ┣┫ ┃ ┃┃┣┫┃┫   ┃ ┣┫┃ ┣┫┣    ┃
+┗━  ┻ ┗┛┛┗ ┻ ┣┛┛┗┛┗┛  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n"
+
 flatpak uninstall --unused -y
 flatpak repair
 
 # 4. Clean Yay cache
-echo "--> Cleaning Yay cache..."
 yay -Sc --noconfirm
 
 # 5. Remove orphan packages with Yay
-echo "--> Checking for Yay orphan packages..."
-yay_orphans=$(yay -Qdtq)
+printf "\e[1;38;2;0;255;64m┏━  ┳┳┏┓┏┓┳┓  ┳┓┏┓┏┓┏┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+┃   ┃┃┗┓┣ ┣┫━━┣┫┣ ┃┃┃┃  ┃ ┣┫┃ ┣┫┣    ┃
+┗━  ┗┛┗┛┗┛┛┗  ┛┗┗┛┣┛┗┛  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n"
+
+yay_orphans=$(yay -Qdtq || true)
+
 if [[ -n "$yay_orphans" ]]; then
-  echo "Yay orphans found:"
-  echo "$yay_orphans"
-  read -rp "Remove these with yay -Rns? (y/N): " confirm_yay
+  printf "\e[38;2;235;250;250m[ ORPHAN PACKAGES: %s ]\e[0m\n" "$yay_orphans"
+  printf "\e[1;38;2;0;255;64m[ REMOVE ORPHANS? <y/N> ] \e[0m"
+  read -r confirm_yay
+  echo
   if [[ "$confirm_yay" == [yY] ]]; then
-    yay -Rns --noconfirm $yay_orphans
+    yay -Rns --noconfirm -- $yay_orphans
   else
-    echo "Skipped Yay orphan removal."
+    :
   fi
 else
-  echo "No Yay orphans found."
+  printf "\e[38;2;235;250;250m[ NO ORPHAN PKGS FOUND ]\e[0m\n"
 fi
 
-echo "✅ All caches and unused dependencies cleanup complete!"
-
+printf "\e[1;38;2;0;255;64m┏━  ┏┓┏┓┏┓┓┏┏┓  ┏┓┓ ┏┓┏┓┳┓╻  ━┓
+┃   ┃ ┣┫┃ ┣┫┣   ┃ ┃ ┣ ┣┫┃┃┃   ┃
+┗━  ┗┛┛┗┗┛┛┗┗┛  ┗┛┗┛┗┛┛┗┛┗•  ━┛\e[0m\n"

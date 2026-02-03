@@ -54,14 +54,14 @@ check_arch_updates() {
 
     if has_param "-tooltip" "$@"; then
         if [ "$official_updates" ];then
-            echo "pacman:"
+            echo "[ OFFICIAL REPOS ] "
             echo "$official_updates"
         fi
         if [ "$official_updates" ] && [ "$aur_updates" ];then
             echo ""
         fi
         if [ "$aur_updates" ];then
-            echo "AUR:"
+            echo "[ USER REPOSITORIES ] "
             echo "$aur_updates"
         fi
     else

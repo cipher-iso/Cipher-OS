@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# VERTICAL NEON GREEN GRADIENT ASCII ART CENTERED (INVERSE)
+# Simple Gradient-Art ASCII - Bash Text
 
 art=$(cat <<'EOF'
               ┏┳━  ┓ ┏┏┓┓ ┏┓┏┓┳┳┓┏┓  ┏┳┓┏┓  ┏┓┳┏┓┓┏┏┓┳┓  ┏┓┏┓  ━┳┓              
-━━━━━━━━━━━━━━┫┃   ┃┃┃┣ ┃ ┃ ┃┃┃┃┃┣    ┃ ┃┃  ┃ ┃┃┃┣┫┣ ┣┫━━┃┃┗┓   ┃┣━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━┫┃   ┃┃┃┣ ┃ ┃ ┃┃┃┃┃┣    ┃ ┃┃  ┃ ┃┃┃┣┫┣ ┣┫━━┃┃┗┓   ┃┣━━━━━━━━━━━━━━━━━
               ┗┻━  ┗┻┛┗┛┗┛┗┛┗┛┛ ┗┗┛   ┻ ┗┛  ┗┛┻┣┛┛┗┗┛┛┗  ┗┛┗┛  ━┻┛              
 EOF
 )
@@ -12,7 +12,7 @@ EOF
 cols=$(tput cols)
 lines=()
 while IFS= read -r line; do
-  lines+=("$line")
+lines+=("$line")
 done <<< "$art"
 
 total=${#lines[@]}
@@ -24,7 +24,7 @@ for ((i=0; i<total; i++)); do
   (( padding < 0 )) && padding=0
   printf "%*s" "$padding" ""
 
-  # Vertical gradient: red=0, green=255, blue=153 → 64 (inverse)
+  # Vertical gradient: red=0, green=255, blue=153 > 64
   b_start=153
   b_end=64
   b=$(( b_start - ( (b_start - b_end) * i / (total - 1) ) ))

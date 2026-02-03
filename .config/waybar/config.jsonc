@@ -13,7 +13,7 @@
 	"margin-top": 0,
 	"modules-left": ["group/expand","cpu","temperature","memory","custom/barlock","custom/updates"],
 	"modules-center": ["wireplumber","hyprland/workspaces","pulseaudio"],
-	"modules-right": ["custom/screenshare","bluetooth","network","clock","custom/lock"],
+	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
 /* POWER MENU - EXPANDER */
         "custom/expand": {
             	"format": "<span font='20'> </span>",
@@ -54,7 +54,7 @@
 		"on-scroll-up": "",
 		"on-scroll-down": ""	
 	},
-/* POWER MODULES */
+/* STAT MODULES */
         "cpu": {
 		"interval": 3,
 		"format": "[  {usage}% ]",
@@ -119,6 +119,17 @@
     		"format-source": "",
     		"format-source-muted": "",
 		"tooltip-format": "[ VOLUME {volume}% ]"
+	},
+/* IDLE INHIBITOR */
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "[  ]",
+			"deactivated": "[  ]",
+		},
+		"timeout": 30.5,
+		"tooltip-format-activated": "[ IDLE-INHIBITOR ACTIVE ]",
+		"tooltip-format-deactivated": "[ IDLE-INHIBITOR INACTIVE ]"
 	},
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
