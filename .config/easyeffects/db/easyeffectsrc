@@ -8,6 +8,7 @@ visiblePlugin=stereo_tools#0
 
 [StreamOutputs]
 outputDevice=alsa_output.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.analog-stereo
+visiblePage=pluginsPage
 
 [Window]
 autostartOnLogin=true

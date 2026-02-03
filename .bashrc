@@ -24,6 +24,7 @@ alias aurr='yay -Rns'
 alias pak='flatpak install'
 alias pakr='flatpak remove'
 alias unlock='faillock --reset'
+alias exec='hyprctl dispatch exec'
 alias dotfiles='git --git-dir=$DOTFILES/ --work-tree=$HOME'	
 
 

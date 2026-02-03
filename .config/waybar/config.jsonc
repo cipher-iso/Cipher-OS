@@ -16,7 +16,7 @@
 	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
 /* POWER MENU - EXPANDER */
         "custom/expand": {
-            	"format": "<span font='20'> </span>",
+            	"format": " ",
 		"exec": "Gamma",
 		"interval": 1,
 		"return-type": "json",
@@ -104,17 +104,18 @@
 	},
 /* HYPRLAND WORKSPACES */
 	"hyprland/workspaces": {
-	"ignore-workspaces": ["(special:)?media"],
+	/*"ignore-workspaces": ["(special:)?media"],*/
 		"show-special": true,
+		"special-visible-only": true,
 		"on-scroll-up": "hyprctl dispatch workspace e+1",
 		"on-scroll-down": "hyprctl dispatch workspace e-1",
 		"format":"{icon}",
-		"format-icons": {"1": "᮰","2": "᮱","3": "᮲","4": "᮳","5": "᮴","6": "᮵","7": "᮶","8": "᮷","9": "᮸","desktop": "","magic": ""}
+		"format-icons": {"1": "᮰","2": "᮱","3": "᮲","4": "᮳","5": "᮴","6": "᮵","7": "᮶","8": "᮷","9": "᮸","desktop": "","magic": "","media": ""}
 	},
 /* MICROPHONE MODULE */
 	"pulseaudio": {
-		"on-click": "swayosd-client --input-volume mute-toggle",
-		"on-click-middle": "pavucontrol-qt",
+		"on-click": "hyprctl dispatch togglespecialworkspace media",
+		"on-click-right": "swayosd-client --input-volume mute-toggle",
     		"format": "{format_source}",
     		"format-source": "",
     		"format-source-muted": "",

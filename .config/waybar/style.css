@@ -34,8 +34,8 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
 	background: @bg;
     	color: @fg;
     	padding: 0 15px;
-    	min-width: 50px;	}
-#workspaces button:hover	{ color: @fg2; background-color: @bg; min-width: 50px; }
+    	min-width: 40px;	}
+#workspaces button:hover	{ color: @fg2; background-color: @bg; min-width: 60px; }
 
 /* PRIMARY COLOR & INTERACTIVE HOVER */
 #custom-expand,
@@ -77,4 +77,34 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
 #custom-screenshare,
 #custom-barlock,
 #pulseaudio,
-#wireplumber		{ color: @accent1; padding: 5px; }
+#wireplumber		{ color: @accent1; padding: 5px; transition: color 0.2s ease}
+
+#custom-updates,
+#network,
+#bluetooth,
+#idle_inhibitor,
+#custom-screenshare,
+#custom-barlock,
+#pulseaudio,
+#wireplumber,
+#custom-power,
+#custom-reboot,
+#custom-logout,
+#custom-expand,
+#custom-lock
+{ transition: color 0.1s ease, font-size 0.05s cubic-bezier(0.4, 0, 0.2, 1); font-size: 100% }
+
+#custom-updates:hover,
+#network:hover,
+#bluetooth:hover,
+#idle_inhibitor:hover,
+#custom-screenshare:hover,
+#custom-barlock:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-power:hover,
+#custom-reboot:hover,
+#custom-logout:hover,
+#custom-expand:hover,
+#custom-lock:hover
+{ font-size: 120% }
