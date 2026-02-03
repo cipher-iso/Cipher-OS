@@ -44,10 +44,10 @@ case "$1" in
 esac
 
 if [ "$CLASS" = "on" ]; then
-	ICON=""
+	ICON=""
 	TOOLTIP="[ SCREEN - INCOGNITO ]"
 else
-	ICON=""
+	ICON=""
 	TOOLTIP="[ SCREEN - VISIBLE ]"
 fi
 

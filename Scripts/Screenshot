@@ -18,3 +18,4 @@ wait "$HYPRSHOT_PID" 2>/dev/null
 
 # Restore Screenshare State [if disabled]
 if [ "$DID_ENABLE" = true ]; then "$TOGGLE" toggle; fi
+

@@ -8,6 +8,7 @@ export PULSE_LATENCY_MSEC=60
 #export PROTON_ENABLE_WAYLAND=1
 export PROTON_USE_NTSYNC=1
 export PROTON_DLSS_UPGRADE=1
+export DXVK_FRAME_RATE=240
 
 #########################################################
 # FLAGS

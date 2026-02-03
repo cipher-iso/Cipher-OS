@@ -20,20 +20,26 @@ while true; do
 	Y=$(get_cursor_y)
 	tiled=$(get_tiled_on_active_ws)
 
-# 1 Tiled Window = Hide Waybar > Mouse-Hover = Show Waybar
-if [ "$bar_visible" = false ] && [ "$Y" -le 20 ]; then
-	pkill -SIGUSR2 waybar
-		bar_visible=true; touch "$AUTO_FILE"; elif
-		[ "$bar_visible" = true ] && [ "$Y" -gt 130 ]; then
-	pkill -SIGUSR1 waybar
-		bar_visible=false
-		[ -f "$AUTO_FILE" ] && rm "$AUTO_FILE"; fi
-	sleep "$POLL_DELAY"; done
-
 # 0 or 2+ Tiled Windows = Show Waybar
-if [ "$tiled" -eq 0 ] || [ "$tiled" -ge 2 ]; then
+	if [ "$tiled" -eq 0 ] || [ "$tiled" -ge 2 ]; then
 		if [ "$bar_visible" = false ]; then
-	pkill -SIGUSR2 waybar
+			pkill -SIGUSR2 waybar
+			bar_visible=true
+			touch "$AUTO_FILE"
+		fi
+		sleep "$POLL_DELAY"
+		continue
+	fi
+
+# 1 Tiled Window = Hide Waybar > Mouse-Hover = Show Waybar
+	if [ "$bar_visible" = false ] && [ "$Y" -le 20 ]; then
+		pkill -SIGUSR2 waybar
 		bar_visible=true
-	touch "$AUTO_FILE"; fi
-	sleep "$POLL_DELAY"; continue; fi
+		touch "$AUTO_FILE"
+	elif [ "$bar_visible" = true ] && [ "$Y" -gt 130 ]; then
+		pkill -SIGUSR1 waybar
+		bar_visible=false
+		[ -f "$AUTO_FILE" ] && rm "$AUTO_FILE"
+	fi
+	sleep "$POLL_DELAY"
+done

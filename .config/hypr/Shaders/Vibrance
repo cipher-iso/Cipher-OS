@@ -1,0 +1,32 @@
+// vim: set ft=glsl:
+
+precision highp float;
+varying highp vec2 v_texcoord;
+uniform highp sampler2D tex;
+
+/*
+ * Vibrancy strength
+ * 0.0  = no change
+ * 0.2–0.4 = subtle/nice
+ * 0.6+ = aggressive
+ */
+#define VIBRANCE 0.35
+
+void main() {
+    vec4 color = texture2D(tex, v_texcoord);
+
+    // Luminance (perceptual)
+    float luma = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
+
+    // Distance from gray
+    float saturation = length(color.rgb - vec3(luma));
+
+    // Vibrancy scales with existing saturation
+    float vibrance = VIBRANCE * (1.0 - saturation);
+
+    // Push color away from gray, preserve luma
+    vec3 result = mix(vec3(luma), color.rgb, 1.0 + vibrance);
+
+    gl_FragColor = vec4(result, color.a);
+}
+
