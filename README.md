@@ -7,7 +7,7 @@
   
 ---
 
-## <p align="center">⚡️ 2-STEP INSTALL! ⚡<br>[ EXPERIMENTAL ]<br>
+## <p align="center">⚡️ 2-STEP INSTALL! ⚡️<br>[ EXPERIMENTAL ]<br>
 > [!CAUTION]  
 > **[INSTALL.SH](https://github.com/cipher-iso/Cipher-OS/blob/main/install.sh)** IS **EXPERIMENTAL** - **[ USE AT YOUR OWN RISK! ]**<br>There is also a [Manual Installation](https://github.com/cipher-iso/Cipher-OS/tree/main?tab=readme-ov-file#%EF%B8%8F-manual-install-%EF%B8%8F) below.<br><br>
 >
