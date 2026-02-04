@@ -41,14 +41,14 @@
 		"on-scroll-down": ""
 	},
 	"custom/reboot": {
-		"format": "  ",
+		"format": "  ",
 		"on-click": "systemctl reboot",
 		"tooltip-format": "[ REBOOT SYSTEM ]",
 		"on-scroll-up": "",
 		"on-scroll-down": ""
 	},
 	"custom/logout": {
-		"format": "   ",
+		"format": "   ",
 		"on-click": "hyprctl dispatch exit",
 		"tooltip-format": "[ END SESSION ]",
 		"on-scroll-up": "",
