@@ -36,7 +36,5 @@ alias exec='hyprctl dispatch exec'
 alias nvims='cd ~/Scripts && nvim'
 
 # Custom Bash functions
-if [ -f "$HOME/BashFunctions/SearchPKG.sh" ]; then
-    source "$HOME/BashFunctions/SearchPKG.sh"
-fi
-
+source "$HOME/BashFunctions/SearchPKG.sh"
+source ~/BashFunctions/RecentPKG.sh
