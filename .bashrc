@@ -9,7 +9,6 @@ export TERMINAL=kitty
 export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 export PATH="$HOME/Scripts:$PATH"
 export PATH="$HOME/Scripts/ColorGen:$PATH"
-BashText
 
 # QoL SHORTCUT ALIAS'
 alias :q='exit'
@@ -25,15 +24,9 @@ alias pak='flatpak install'
 alias pakr='flatpak remove'
 alias unlock='faillock --reset'
 alias exec='hyprctl dispatch exec'
-alias dotfiles='git --git-dir=$DOTFILES/ --work-tree=$HOME'	
-
-
-# BASH SCRIPT ALIAS''
 alias cc='ClearSystemCache'
 alias update='RunUpdates -arch'
-alias runserver='run-server'
 alias gif='Convert2Gif'
-alias colorgen='~/.config/cipher/GenerateColors.sh'
 
 # ALIAS 'NVIMS' = "nvim ~/Scripts/'xyz'"
 nvims() {
