@@ -145,8 +145,8 @@
 		"interval": 3,
 		"on-click": "ToggleBluetooth",
 		"on-click-right": "blueman-manager",
-		"format": "[ 󱜠 ]",
-		"format-off": "[ 󱜡 ]",
+		"format": "[  ]",
+		"format-off": "[ 󰂲 ]",
 		"tooltip-format": "[ {controller_alias} ]\t[ {controller_address} ]\n\n[ {num_connections} CONNECTED ]",
 		"tooltip-format-connected": "[ {controller_alias} ]\t[ {controller_address} ]\n\n[ {num_connections} CONNECTED\n\n{device_enumerate} ]",
 		"tooltip-format-enumerate-connected": "[ {device_alias}\t{device_address} ]",
@@ -172,7 +172,7 @@
 /* CLOCK & CALENDER MODULE */
 	"clock": {
 		"interval": 1,
-		"format": "[ {:%m|%d  %I:%M:%S %p} ]",
+		"format": "[ {:%m.%d  %I:%M:%S %p} ]",
 		"tooltip-format": "<tt><big>{calendar}</big></tt>",
 		"calendar": {
 		"mode"          : "month",
