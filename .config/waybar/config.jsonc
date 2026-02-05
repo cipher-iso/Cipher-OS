@@ -16,7 +16,7 @@
 	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
 /* POWER MENU - EXPANDER */
         "custom/expand": {
-            	"format": " ",
+            	"format": "  ",
 		"exec": "Gamma",
 		"interval": 1,
 		"return-type": "json",
@@ -190,7 +190,7 @@
 /* LOCKSCREEN MODULE */
 	"custom/lock": {
 		"on-click": "LockScreen",
-		"format": " ",
+		"format": "  ",
 		"tooltip-format": "[ LOCK SESSION ]"
 	}
 }

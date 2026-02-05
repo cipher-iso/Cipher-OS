@@ -11,4 +11,3 @@ hyprlock
 
 # Resume Discord [if running]
 if [ -n "$pid" ]; then kill -s SIGCONT "$pid" 2>/dev/null; fi
-

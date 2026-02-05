@@ -11,4 +11,3 @@ pkill -x waybar
 # Relaunch Waybar
 sleep 0.2
 nohup waybar >/dev/null 2>&1 &
-
