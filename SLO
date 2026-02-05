@@ -4,11 +4,12 @@
 # BASE ENVIRONMENT VARIABLES (always enabled)
 #########################################################
 
-export PULSE_LATENCY_MSEC=60
-#export PROTON_ENABLE_WAYLAND=1
+FPS_CAP=0
+FPS_OVERRIDE=0
 export PROTON_USE_NTSYNC=1
 export PROTON_DLSS_UPGRADE=1
-export DXVK_FRAME_RATE=240
+export PULSE_LATENCY_MSEC=60
+#export PROTON_ENABLE_WAYLAND=1
 
 #########################################################
 # FLAGS
@@ -17,14 +18,18 @@ export DXVK_FRAME_RATE=240
 USE_HDR=0
 USE_FG=0
 USE_M=0
-USE_N=0
+USE_NV=0
 
 for arg in "$@"; do
     case "$arg" in
         -hdr) USE_HDR=1 ;;
         -fg)  USE_FG=1 ;;
-        -m) USE_M=1 ;;
-	-n) USE_N=1 ;;
+        -m)   USE_M=1 ;;
+        -nv)  USE_NV=1 ;;
+        -f*)
+            FPS_CAP="${arg#-f}"
+            FPS_OVERRIDE=1
+            ;;
         -all)
             USE_HDR=1
             USE_FG=1
@@ -32,7 +37,6 @@ for arg in "$@"; do
             ;;
     esac
 done
-
 
 #########################################################
 # APPLY HDR VARIABLES (Proton HDR mode)
@@ -44,12 +48,11 @@ if [[ "$USE_HDR" == "1" ]]; then
     export DXVK_HDR=1
 fi
 
-
 #########################################################
 # FRAME GENERATION / FRAMELIMIT
 #########################################################
-if [[ "$USE_FG" == "1" ]]; then
-    export DXVK_FRAME_RATE=120
+if [[ "$USE_FG" == "1" && "$FPS_OVERRIDE" == "0" ]]; then
+    FPS_CAP=120
     export ENABLE_LSFG=1
     export LSFG_PROCESS="FRAMEGEN"
     export LSFG_PERF_MODE=1
@@ -64,13 +67,17 @@ if [[ "$USE_M" == "1" ]]; then
 fi
 
 #########################################################
-# FRAME GENERATION / NVIDIA 
+# NVIDIA FRAME GENERATION / SMOOTH MOTION
 #########################################################
-
-if [[ "$USE_N" == "1" ]]; then
-    export DXVK_FRAME_RATE=120
+if [[ "$USE_NV" == "1" && "$FPS_OVERRIDE" == "0" ]]; then
+    FPS_CAP=120
     export NVPRESENT_ENABLE_SMOOTH_MOTION=1
 fi
+
+#########################################################
+# APPLY FINAL FPS CAP
+#########################################################
+export DXVK_FRAME_RATE="$FPS_CAP"
 
 #########################################################
 # CLEAN ARGUMENTS (remove custom flags)
@@ -78,23 +85,20 @@ fi
 CLEAN_ARGS=()
 for arg in "$@"; do
     case "$arg" in
-        -hdr|-fg|-m|-all)
-            ;; # remove custom flags
+        -hdr|-fg|-m|-nv|-all|-f*)
+            ;;
         *)
             CLEAN_ARGS+=("$arg")
             ;;
     esac
 done
 
-
 #########################################################
-# BASE LAUNCH COMMAND (simple + clean)
+# BASE LAUNCH COMMAND
 #########################################################
 BASE_CMD=("gamemoderun")
-
 
 #########################################################
 # LAUNCH GAME
 #########################################################
 exec "${BASE_CMD[@]}" "${CLEAN_ARGS[@]}"
-

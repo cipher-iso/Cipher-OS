@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# recentpkg - show last N installed packages from pacman.log
+
+paclog="/var/log/pacman.log"
+
+bold="\033[1m"
+reset="\033[0m"
+
+color_date="\033[38;2;235;250;250m"   # #EBFAFA
+color_pkg="\033[38;2;255;1;59m"       # #FF013B
+color_ver="\033[38;2;49;52;79m"       # #31344F
+color_all="\033[38;2;0;255;64m"       # #00FF40
+
+echo
+
+# Track already-listed packages
+declare -A seen
+count=0
+max=10
+
+# Read paclog in reverse safely
+while IFS= read -r line; do
+    (( count >= max )) && break
+
+    # Only process lines with " installed "
+    [[ "$line" != *" installed "* ]] && continue
+
+    # Extract date
+    date="$(
+        awk '{print $1}' <<<"$line" \
+        | tr -d '[]' \
+        | cut -dT -f1 \
+        | awk -F- '{printf "%s.%s.%s", $3,$2,$1}'
+    )"
+
+    # Extract package + version
+    pkg="$(sed -n 's/.*installed \([^ ]*\).*/\1/p' <<<"$line")"
+    ver="$(sed -n 's/.*installed [^ ]* (\([^)]*\)).*/\1/p' <<<"$line")"
+
+    # Skip duplicates
+    [[ -n "${seen[$pkg]}" ]] && continue
+    seen["$pkg"]=1
+    ((count++))
+
+    # Output
+    echo -e "${bold}${color_all}[ ${color_date}${date}${bold}${color_all} ] > \
+${bold}${color_pkg}${pkg}${reset} ${color_ver}${ver}${reset}"
+
+done < <(tac "$paclog")

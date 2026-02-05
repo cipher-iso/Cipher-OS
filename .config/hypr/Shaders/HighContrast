@@ -1,0 +1,26 @@
+precision highp float;
+
+varying vec2 v_texcoord;
+uniform sampler2D tex;
+
+// ---- Controls ----
+const float CONTRAST = 1.55;     // Strong but safe
+const float BLACK_POINT = 0.06;  // Prevents crush
+const float WHITE_POINT = 0.94;  // Prevents blowout
+
+float contrastCurve(float x) {
+    // Soft-clamped contrast curve
+    x = (x - BLACK_POINT) / (WHITE_POINT - BLACK_POINT);
+    x = clamp(x, 0.0, 1.0);
+    return pow(x, 1.0 / CONTRAST);
+}
+
+void main() {
+    vec3 c = texture2D(tex, v_texcoord).rgb;
+
+    c.r = contrastCurve(c.r);
+    c.g = contrastCurve(c.g);
+    c.b = contrastCurve(c.b);
+
+    gl_FragColor = vec4(c, 1.0);
+}
