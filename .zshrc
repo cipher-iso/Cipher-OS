@@ -17,7 +17,7 @@ export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 alias :q='exit'
 alias :wq='exit'
 alias ls='ls --color=auto'
-alias ff='fastfetch -l none'
+alias ff='fastfetch'
 alias grep='grep --color=auto'
 
 # [ INSTALL PACKAGES ]
