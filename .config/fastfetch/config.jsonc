@@ -1,0 +1,60 @@
+{
+"logo": {
+        "type": "auto",
+        "source": "~/.config/fastfetch/ascii.html",
+        "width": 1,
+        "height": 5,
+	"color": {
+"1": "38;2;0;255;64",
+"2": "38;2;59;255;48",
+"3": "38;2;118;255;32",
+"4": "38;2;177;255;16",
+"5": "38;2;234;255;0",
+"6": "38;2;255;1;59",
+"7": "38;2;255;255;255",
+"8": "38;2;0;255;153"
+		},
+	"padding": {
+    		"top": 0,
+    		"left": 0,
+    		"right": 0 
+  	}
+},
+"display": {
+        "separator": "  ",
+        "key": {
+            "type": "icon",
+            "paddingLeft": 2,
+	    "width": 13
+        },
+	"color": {
+        "keys": "1;38;2;0;255;64",
+	"output": "38;2;235;250;250"
+        }
+    },
+    "modules": [
+	    "break",
+        {
+            "type": "shell",
+            "keyIcon": "  [ SH ]",
+	},
+        {
+            "type": "os",
+            "keyIcon": "  [ OS ]",
+	    "keyColor": "38;2;0;255;153"
+	},
+        {
+            "type": "wm",
+            "keyIcon": "  [ WM ]"
+	},
+        {
+            "type": "packages",
+            "keyIcon": "  [ PK ]",
+	    "keyColor": "38;2;0;255;153"
+	},
+        {
+            "type": "uptime",
+            "keyIcon": "  [ UP ]"
+        }
+    ]
+}
