@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-
+setopt globdots
 # [ BASH PROMPT ]
 
 PROMPT=$'\n%{\e[1;40m%}  %{\e[1;38;2;0;255;64m%}%{\e[0;40m%}  %{\e[1;38;2;0;255;64m%}[ %{\e[1;38;2;50;52;73m%}%*%{\e[1;38;2;33;35;55m%} %{\e[1;38;2;0;255;64m%}-%{\e[1;38;2;50;52;73m%} CIPHER%{\e[1;38;2;0;255;64m%} ] %{\e[1;38;2;50;52;73m%}> %{\e[1;38;2;0;255;64m%}%~%{\e[0m%} '
@@ -16,7 +16,7 @@ export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 # [ SHORTCUTS ]
 alias :q='exit'
 alias :wq='exit'
-alias ls='ls --color=auto'
+alias ls='ls -a --color=auto'
 alias ff='fastfetch'
 alias grep='grep --color=auto'
 
