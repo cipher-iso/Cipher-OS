@@ -1,5 +1,5 @@
-.config/hypr/hyprland
-.config/hypr/Config/AutoStart
+.config/hypr/hyprland.conf
+.config/hypr/Config/AutoStart.conf
 .config/waybar/Autohide_Visible
 Scripts/MC-Server
 Scripts/MCA-Selector
