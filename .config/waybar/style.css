@@ -17,6 +17,7 @@ tooltip label 	{ color: @fg; margin: 10; font-size: 16px; font-weight: 700; }
 
 /* WORKSPACES */
 #workspaces {
+	box-shadow: 0px 0px 4px rgba(0, 255, 64, 0.5);
 	background: linear-gradient(135deg, @grad1, @grad2);
 	border-radius: 30px;
 	margin: 8px;

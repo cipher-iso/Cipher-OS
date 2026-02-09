@@ -130,7 +130,6 @@
 			"activated": "[ 󰚭 ]",
 			"deactivated": "[ 󰞌 ]",
 		},
-		"timeout": 30.5,
 		"tooltip-format-activated": "[ IDLE-INHIBITOR ACTIVE ]",
 		"tooltip-format-deactivated": "[ IDLE-INHIBITOR INACTIVE ]"
 	},
