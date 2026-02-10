@@ -2,7 +2,7 @@
 
 STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
 
-if [ -f "$STATE_FILE" ]; then
+if [ ! -f "$STATE_FILE" ]; then
 	touch "$STATE_FILE"
 	hyprctl keyword monitorv2:cm hdr
 	hyprctl keyword debug:damage_tracking 0
