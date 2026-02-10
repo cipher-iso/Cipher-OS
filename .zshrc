@@ -31,6 +31,7 @@ alias remove='sudo pacman -Rns'
 # [ QUALITY-OF-LIFE ]
 alias unlock='faillock --reset'
 alias hypr='hyprctl dispatch exec'
+alias nvims='sudo -E nvim'
 
 # [ QUICK SCRIPTS ]
 alias gif='Convert2Gif'

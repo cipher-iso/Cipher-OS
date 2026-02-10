@@ -3,12 +3,12 @@
 STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
 
 if [ -f "$STATE_FILE" ]; then
-	rm "$STATE_FILE"
+	touch "$STATE_FILE"
 	hyprctl keyword monitorv2:cm hdr
 	hyprctl keyword debug:damage_tracking 0
 	hyprctl keyword decoration:screen_shader ~/.config/hypr/Shaders/CRT
 else
-	touch "$STATE_FILE"
+	rm "$STATE_FILE"	
 	hyprctl keyword monitorv2:cm auto
 	hyprctl keyword debug:damage_tracking 2
 	hyprctl keyword decoration:screen_shader ""
