@@ -1,101 +1,31 @@
---[[
+-- [ Mouse support ]
+vim.opt.mouse = 'a'
 
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-========                                    .-----.          ========
-========         .-----------------local function open_nvim_tree(data)
-  -- Check if the current buffer is a directory
-  local directory = vim.fn.isdirectory(data.file) == 1
-  if not directory then return end
+-- [ Copy / Cut ]
+vim.keymap.set('v', '<C-c>', '"+y', { silent = true })
+vim.keymap.set('v', '<C-x>', '"+d', { silent = true })
 
-  -- Change to the directory
-  vim.cmd.cd(data.file)
+-- [ Paste without overwriting clipboard ]
+vim.keymap.set('n', '<C-v>', '"+p', { silent = true })
+vim.keymap.set('i', '<C-v>', '<C-r>+', { silent = true })
+vim.keymap.set('x', 'p', '"_dP', { silent = true })
 
-  -- Open the tree
-  require("nvim-tree.api").tree.open()
-end
+-- [ Select all ]
+vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
+vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
+vim.keymap.set('v', '<C-a>', 'ggVG', { silent = true })
 
--- Autocmd to open nvim-tree on VimEnter
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })-----.   | === |          ========
-========         |.-""""""""""""""""""-.|   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||   KICKSTART.NVIM   ||   |-----|          ========
-========         ||                    ||   | === |          ========
-========         ||                    ||   |-----|          ========
-========         ||:Tutor              ||   |:::::|          ========
-========         |'-..................-'|   |____o|          ========
-========         `"")----------------(""`   ___________      ========
-========        /::::::::::|  |::::::::::\  \ no mouse \     ========
-========       /:::========|  |==hjkl==:::\  \ required \    ========
-========      '""""""""""""'  '""""""""""""'  '""""""""""'   ========
-========                                                     ========
-=====================================================================
-=====================================================================
+-- [ Undo only ]
+vim.keymap.set('n', '<C-z>', 'u', { silent = true })
+vim.keymap.set('i', '<C-z>', '<Esc>u', { silent = true })
 
-What is Kickstart?
+-- [ Save file ]
+vim.keymap.set('n', '<C-s>', ':w<CR>', { silent = true })
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { silent = true })
 
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
-
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
-
-    (If you already know the Neovim basics, you can skip this step.)
-
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
-
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
-
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
-
-   NOTE: Look for lines like this
-
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
-
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now! :)
---]]
+-- [ Quit ]
+vim.keymap.set('n', '<C-q>', ':q<CR>', { silent = true })
+vim.keymap.set('i', '<C-q>', '<Esc>:q<CR>', { silent = true })
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -1095,30 +1025,29 @@ vim.api.nvim_create_autocmd('BufWinLeave', {
 
 -- Custom color overrides
 local function set_custom_colors()
-  -- Base backgrounds
-  vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#222222', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'LineNr', { bg = '#000000', fg = '#888888' })
-  vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = '#000000', fg = '#ffffff', bold = true })
+  vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000', fg = '#EBFAFA' })
+  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#212337', fg = '#EBFAFA' })
+  vim.api.nvim_set_hl(0, 'LineNr', { bg = '#000000', fg = '#323449' })
+  vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = '#000000', fg = '#EBFAFA', bold = true })
   vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#000000' })
 
   -- UI elements
-  vim.api.nvim_set_hl(0, 'StatusLine', { bg = '#222222', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#222222', fg = '#888888' })
-  vim.api.nvim_set_hl(0, 'VertSplit', { bg = '#000000', fg = '#222222' })
-  vim.api.nvim_set_hl(0, 'WinSeparator', { bg = '#000000', fg = '#222222' })
-  vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#222222', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#00ff40', fg = '#000000', bold = true })
+  vim.api.nvim_set_hl(0, 'StatusLine', { bg = '#111111', fg = '#EBFAFA' })
+  vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#111111', fg = '#222222' })
+  vim.api.nvim_set_hl(0, 'VertSplit', { bg = '#000000', fg = '#00FF40' })
+  vim.api.nvim_set_hl(0, 'WinSeparator', { bg = '#000000', fg = '#00FF40' })
+  vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#111111', fg = '#EBFAFA' })
+  vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#00FF40', fg = '#000000', bold = true })
 
   -- Vibrant syntax colors
-  vim.api.nvim_set_hl(0, 'String', { fg = '#00ff40' }) -- bright green
-  vim.api.nvim_set_hl(0, 'Number', { fg = '#ff004c' }) -- neon pink
-  vim.api.nvim_set_hl(0, 'Boolean', { fg = '#ff7700' }) -- orange
-  vim.api.nvim_set_hl(0, 'Keyword', { fg = '#004cff', bold = true }) -- cyan
-  vim.api.nvim_set_hl(0, 'Function', { fg = '#ffea00' }) -- bright yellow
-  vim.api.nvim_set_hl(0, 'Identifier', { fg = '#ffffff' }) -- white
-  vim.api.nvim_set_hl(0, 'Type', { fg = '#8000ff' }) -- purple
-  vim.api.nvim_set_hl(0, 'Comment', { fg = '#555555', italic = true })
+  vim.api.nvim_set_hl(0, 'String', { fg = '#00FF40' }) -- bright green
+  vim.api.nvim_set_hl(0, 'Number', { fg = '#FF013B' }) -- punchy neon red
+  vim.api.nvim_set_hl(0, 'Boolean', { fg = '#FF8800' }) -- neon orange
+  vim.api.nvim_set_hl(0, 'Keyword', { fg = '#00BBFF', bold = true }) -- neon cyan
+  vim.api.nvim_set_hl(0, 'Function', { fg = '#FFDD00' }) -- neon yellow
+  vim.api.nvim_set_hl(0, 'Identifier', { fg = '#EBFAFA' }) -- off-white
+  vim.api.nvim_set_hl(0, 'Type', { fg = '#9900FF' }) -- neon purple
+  vim.api.nvim_set_hl(0, 'Comment', { fg = '#585B73', italic = true }) -- muted
 end
 
 -- Apply immediately

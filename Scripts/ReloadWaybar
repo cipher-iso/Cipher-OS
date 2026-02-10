@@ -1,13 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 STATE_FILE="$HOME/.config/waybar/Bar_Visible"
+WAYBAR_AUTOHIDE_SCRIPT="$HOME/Scripts/WaybarAutoHide"
 
-# Remove STATE_FILE [if existent]
-if [ -f "$STATE_FILE" ]; then rm "$STATE_FILE"; fi
+# Remove STATE_FILE if it exists
+[ -f "$STATE_FILE" ] && rm "$STATE_FILE"
 
-# Kill Waybar
-pkill -x waybar
+# Kill Waybar & AutoHide Script
+pkill -9 -x waybar
+pkill -f "$WAYBAR_AUTOHIDE_SCRIPT"
 
-# Relaunch Waybar
+# Wait a moment
 sleep 0.2
-nohup waybar >/dev/null 2>&1 &
+
+# Relaunch
+nohup "$WAYBAR_AUTOHIDE_SCRIPT" >/dev/null 2>&1 &
+waybar >/dev/null 2>&1 &

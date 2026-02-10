@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source "$HOME/Scripts/ColorGen/Colors" 2>/dev/null
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"

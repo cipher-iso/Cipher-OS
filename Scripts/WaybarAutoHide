@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # VARIABLES
 STATE_FILE="$HOME/.config/waybar/Bar_Visible"
@@ -7,12 +7,11 @@ POLL_DELAY=0.05
 bar_visible=false
 
 # Obtain Cursor Position [Y Axis]
-get_cursor_y(){ hyprctl cursorpos -j | sed -n '4p' | cut -d":" -f2; }
+get_cursor_y(){ hyprctl cursorpos -j | jq '.y'; }
 
 # Obtain # of Tiled Windows
 get_tiled_on_active_ws(){ local ws=$(hyprctl activeworkspace | awk '/workspace ID/ {print $3}')
-hyprctl clients | awk -v ws="$ws" '/^Window /{cur_ws="";floating=""}/^\s*workspace:/{cur_ws=$2}
-/^\s*floating:/{floating=$2}cur_ws==ws&&floating==0{count++;cur_ws=""}END{print count+0}'; }
+hyprctl clients | awk -v ws="$ws" '/^Window /{cur_ws="";floating=""}/^\s*workspace:/{cur_ws=$2}/^\s*floating:/{floating=$2}cur_ws==ws&&floating==0{count++;cur_ws=""}END{print count+0}'; }
 
 # Check if focused monitor has a special workspace
 focused_special_ws(){

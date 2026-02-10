@@ -11,13 +11,13 @@
 	"margin-left": 0,
 	"margin-right": 0,
 	"margin-top": 0,
-	"modules-left": ["group/expand","cpu","temperature","memory","custom/barlock","custom/updates"],
+	"modules-left": ["group/expand","cpu","temperature","memory","custom/togglewaybar","custom/updates"],
 	"modules-center": ["wireplumber","hyprland/workspaces","pulseaudio#input"],
 	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
 /* POWER MENU - EXPANDER */
         "custom/expand": {
             	"format": "  ",
-		"exec": "Gamma",
+		"exec": "~/.config/waybar/Modules/Gamma",
 		"interval": 1,
 		"return-type": "json",
             	"tooltip": true,
@@ -74,8 +74,8 @@
 		"tooltip": false
         },
 /* WAYBAR LOCK */
-	"custom/barlock": {
-   		"exec": "~/.config/waybar/WaybarLockModule",
+	"custom/togglewaybar": {
+   		"exec": "~/.config/waybar/Modules/ToggleWaybar",
     		"interval": 1,
     		"format": "[ {} ]",
     		"return-type": "json",
@@ -83,7 +83,7 @@
 	},
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {
-    		"exec": "WaybarUpdates",
+    		"exec": "~/.config/waybar/Modules/Updates",
     		"format": "{}",
     		"return-type": "json",
     		"interval": 300,
@@ -135,7 +135,7 @@
 	},
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
- 		"exec": "ToggleScreenShare",
+ 		"exec": "~/.config/waybar/Modules/Screenshare",
   		"on-click": "ToggleScreenShare toggle",
   		"interval": 1,
    		"format": "[ {} ]",

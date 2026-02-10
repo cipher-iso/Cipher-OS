@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # VARIABLES
 STATE_FILE="$HOME/.config/waybar/Bar_Visible"
