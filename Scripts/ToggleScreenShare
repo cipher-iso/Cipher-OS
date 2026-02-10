@@ -4,9 +4,6 @@ STATE_FILE="$HOME/Scripts/.Screenshare-ON"
 WINDOWRULES="$HOME/.config/hypr/Config/WindowRules.conf"
 source "$HOME/Scripts/ColorGen/Colors" 2>/dev/null
 
-    # [ OBTAIN CLASSES | WINDOWRULES.CONF > NAME = SCREENSHARE ]
-CLASSES=$(grep SCREENSHARE "$WINDOWRULES" -A2|grep match:class|sed 's/^.*=//;s/^[ \t]*//;s/[ \t]*$//')
-
 if [ -f "$STATE_FILE" ]; then
     # [ ENABLE SCREENSHARING ]
 sed -i -e 's/decorate = on/decorate = off/' \
