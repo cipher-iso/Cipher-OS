@@ -16,8 +16,8 @@ export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
 # [ SHORTCUTS ]
 alias :q='exit'
 alias :wq='exit'
-alias ls='ls -a --color=auto'
 alias ff='fastfetch'
+alias ls='ls -a --color=auto'
 alias grep='grep --color=auto'
 
 # [ INSTALL PACKAGES ]
@@ -29,16 +29,16 @@ alias install='sudo pacman -S'
 alias remove='sudo pacman -Rns'
 
 # [ QUALITY-OF-LIFE ]
+alias nvims='sudo -E nvim'
 alias unlock='faillock --reset'
 alias hypr='hyprctl dispatch exec'
-alias nvims='sudo -E nvim'
 
 # [ QUICK SCRIPTS ]
-alias gif='Convert2Gif'
-alias cc='ClearSystemCache'
-alias update='RunUpdates -arch'
 alias s='SearchPKG'
 alias r='RecentPKG'
+alias update='Update'
+alias gif='Convert2Gif'
+alias cc='ClearCache'
 
 # [ SHELL PLUGINS ]
 

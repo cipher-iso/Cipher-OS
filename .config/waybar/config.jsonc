@@ -11,20 +11,25 @@
 	"margin-left": 0,
 	"margin-right": 0,
 	"margin-top": 0,
-	"modules-left": ["group/expand","cpu","temperature","memory","custom/togglewaybar","custom/updates"],
+	"modules-left": ["custom/autohide","group/expand","cpu","temperature","memory","custom/togglewaybar","custom/updates"],
 	"modules-center": ["wireplumber","hyprland/workspaces","pulseaudio#input"],
 	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
+/* AUTOHIDE - STARTUP */
+	"custom/autohide": {
+		"exec": "WaybarAutoHide",
+		"interval": "once",
+	},
 /* POWER MENU - EXPANDER */
         "custom/expand": {
             	"format": "  ",
-		"exec": "~/.config/waybar/Modules/Gamma",
+		"exec": "Gamma",
 		"interval": 1,
 		"return-type": "json",
             	"tooltip": true,
 		"on-click-right": "hyprctl hyprsunset gamma 100",
 		"on-click-middle": "",
-		"on-scroll-up": "~/.config/waybar/Modules/Gamma up",
-		"on-scroll-down": "~/.config/waybar/Modules/Gamma down"
+		"on-scroll-up": "Gamma up",
+		"on-scroll-down": "Gamma down"
         },
         "group/expand": {
             	"orientation": "horizontal",
@@ -83,12 +88,13 @@
 	},
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {
-    		"exec": "~/.config/waybar/Modules/Updates",
+    		"exec": "Update module",
     		"format": "{}",
     		"return-type": "json",
     		"interval": 300,
     		"tooltip": true,
-    		"on-click": "kitty --class updates -e RunUpdates -arch -tooltip"
+    		"on-click": "kitty --class Update Update",
+		"on-click-right": "kitty --class Update ClearCache"
 	},
 /* AUDIO MODULE */
 	"wireplumber": {
@@ -134,8 +140,8 @@
 	},
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
- 		"exec": "~/.config/waybar/Modules/Screenshare",
-  		"on-click": "ToggleScreenShare toggle",
+ 		"exec": "ToggleScreenShare module",
+  		"on-click": "ToggleScreenShare",
   		"interval": 1,
    		"format": "[ {} ]",
 		"return-type": "json"
