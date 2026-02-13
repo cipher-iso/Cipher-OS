@@ -75,11 +75,11 @@
         },
 /* WAYBAR LOCK */
 	"custom/togglewaybar": {
-   		"exec": "~/.config/waybar/Modules/ToggleWaybar",
+   		"exec": "WaybarAutoHide module",
     		"interval": 1,
     		"format": "[ {} ]",
     		"return-type": "json",
-    		"on-click": "ToggleWaybar"
+    		"on-click": "WaybarAutoHide toggle"
 	},
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {
