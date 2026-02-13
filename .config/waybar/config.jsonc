@@ -23,8 +23,8 @@
             	"tooltip": true,
 		"on-click-right": "hyprctl hyprsunset gamma 100",
 		"on-click-middle": "",
-		"on-scroll-up": "Gamma up",
-		"on-scroll-down": "Gamma down"
+		"on-scroll-up": "~/.config/waybar/Modules/Gamma up",
+		"on-scroll-down": "~/.config/waybar/Modules/Gamma down"
         },
         "group/expand": {
             	"orientation": "horizontal",
@@ -104,13 +104,12 @@
 	},
 /* HYPRLAND WORKSPACES */
 	"hyprland/workspaces": {
-	/*"ignore-workspaces": ["(special:)?media"],*/
 		"show-special": true,
 		"special-visible-only": true,
 		"on-scroll-up": "hyprctl dispatch workspace e+1",
 		"on-scroll-down": "hyprctl dispatch workspace e-1",
 		"format":"{icon}",
-		"format-icons": {"1": "᮰","2": "᮱","3": "᮲","4": "᮳","5": "᮴","6": "᮵","7": "᮶","8": "᮷","9": "᮸","desktop": "","magic": "","media": ""}
+		"format-icons": {"1": "᮰","2": "᮱","3": "᮲","4": "᮳","5": "᮴","6": "᮵","7": "᮶","8": "᮷","9": "᮸","magic": "","media": ""}
 	},
 /* MICROPHONE MODULE */
 	"pulseaudio#input": {

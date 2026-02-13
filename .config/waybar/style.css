@@ -5,15 +5,14 @@
 * {   	all:unset;
 	font-family: JetBrainsMono Nerd Font Propo;
     	font-weight: 700;
-    	font-size: 22px;
-    	background-color: transparent; }
+    	font-size: 22px; }
 
 /* THE ACTUAL BAR */
 window#waybar>box { background-color: @bg; padding-left: 10px; padding-right: 10px; }
 
 /* TOOLTIPS */
-tooltip 	{ background-color: rgba(0, 0, 0, 0.85); border-radius: 10px; }
-tooltip label 	{ color: @fg; margin: 10px; font-size: 16px; font-weight: 700; }
+tooltip 	{ background-color: @bg; border-radius: 0px 0px 10px 10px; }
+tooltip label 	{ color: @fg; margin: 10px; font-size: 20px; font-weight: 700; }
 
 /* WORKSPACES */
 #workspaces {

@@ -31,14 +31,13 @@ inactive_tab_foreground	#000
 include ENCOM.conf
 
 # NERD FONT
-	font_family      family='JetBrainsMono Nerd Font' style=Regular
-	bold_font        JetBrainsMono ExtraBold
-	italic_font      auto
-	bold_italic_font auto
+font_family      family='JetBrainsMono Nerd Font' style=Light
+bold_font        family='JetBrainsMono Nerd Font' style=ExtraBold
+italic_font      family='JetBrainsMono Nerd Font' style='Light Italic'
+bold_italic_font family='JetBrainsMono Nerd Font' style='ExtraBold Italic'
 
 # TERMINAL FONT
-#	font_family      family='Bitcount Grid Single' style=Regular variable_name=BitcountGridSingle features='+zero +ss07'
-#	bold_font        Bitcount Grid Double Regular 
-#	italic_font      family='Bitcount Grid Single' style=Italic variable_name=BitcountGridSingle features='+zero +ss07'
-#	bold_italic_font auto
-
+#font_family      family='Bitcount Grid Single' style=Regular variable_name=BitcountGridSingle features='+zero +ss07'
+#bold_font        Bitcount Grid Double Regular 
+#italic_font      family='Bitcount Grid Single' style=Italic variable_name=BitcountGridSingle features='+zero +ss07'
+#bold_italic_font auto
