@@ -23,7 +23,7 @@
         "custom/expand": {
             	"format": "  ",
 		"exec": "Gamma",
-		"interval": 1,
+		"interval": "once",
 		"return-type": "json",
             	"tooltip": true,
 		"on-click-right": "hyprctl hyprsunset gamma 100",
@@ -61,12 +61,12 @@
 	},
 /* STAT MODULES */
         "cpu": {
-		"interval": 3,
+		"interval": 5,
 		"format": "[  {usage}% ]",
         	"tooltip": false 
         },
         "temperature": {
-		"interval": 3,
+		"interval": 5,
 		"critical-threshold": 80,
 		"format": "[  {temperatureC}°C ]",
 		"tooltip": false,
@@ -74,14 +74,14 @@
 		"hwmon-path": ["/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"]
         },
         "memory": {
-	    	"interval": 3,
+	    	"interval": 5,
             	"format": "[  {used:1.0f}GiB ]",
 		"tooltip": false
         },
 /* WAYBAR LOCK */
 	"custom/togglewaybar": {
    		"exec": "WaybarAutoHide module",
-    		"interval": 1,
+		"interval": "once",
     		"format": "[ {} ]",
     		"return-type": "json",
     		"on-click": "WaybarAutoHide toggle"
@@ -142,13 +142,13 @@
 	"custom/screenshare": {
  		"exec": "ToggleScreenShare module",
   		"on-click": "ToggleScreenShare",
-  		"interval": 1,
+    		"interval": "once",
    		"format": "[ {} ]",
 		"return-type": "json"
 	},
 /* BLUETOOTH & NETWORK MODULES */
 	"bluetooth": {
-		"interval": 3,
+		"interval": 300,
 		"on-click": "blueman-manager",
 		"on-click-right": "ToggleBluetooth",
 		"format": "[  ]",

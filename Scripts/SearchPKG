@@ -6,6 +6,8 @@ s() {
     local WHITE="\033[38;2;235;250;250m"
     local ORANGE="\033[38;2;255;165;0m"
     local GREEN="\033[38;2;0;255;64m"
+    local IDX="\033[38;2;50;52;73m"    # #323449 for [ i ]
+    local DESC="\033[38;2;33;35;55m"   # #212337 for descriptions
     local BOLD="\033[1m"
     local RESET="\033[0m"
 
@@ -15,7 +17,7 @@ s() {
     fi
 
     local pac_max=5 aur_max=5
-    local -a pac_results aur_results all_results
+    local -a pac_results pac_desc aur_results aur_desc all_results
     local i=0
 
     # ---- Pacman search ----
@@ -27,12 +29,19 @@ s() {
         | head -n "$pac_max"
     )
 
+    # Get Pacman package descriptions
+    for pkg in "${pac_results[@]}"; do
+        desc=$(pacman -Si "$pkg" 2>/dev/null | awk -F': ' '/Description/ {print $2}')
+        pac_desc+=( "$desc" )
+    done
+
     echo -e "\n${GREEN}${BOLD}[ TOP ${pac_max} PAC RESULTS ]${RESET}"
     if (( ${#pac_results[@]} == 0 )); then
         echo -e "  ${BOLD}ERR:${RESET} ZER0 RESULTS"
     else
-        for pkg in "${pac_results[@]}"; do
-            echo -e "${ORANGE}${BOLD}[ $i ]${RESET} > $pkg"
+        for idx in "${!pac_results[@]}"; do
+            echo -e "${ORANGE}${BOLD}[ $i ]${RESET} > ${pac_results[$idx]}"
+            echo -e "${BOLD}${IDX}[ i ]${RESET} ${DESC}${pac_desc[$idx]}${RESET}"
             ((i++))
         done
     fi
@@ -49,14 +58,20 @@ s() {
             | grep -i "$term" \
             | head -n "$aur_max"
         )
+        # Get AUR package descriptions
+        for pkg in "${aur_results[@]}"; do
+            desc=$("$helper" -Si "$pkg" 2>/dev/null | awk -F': ' '/Description/ {print $2}')
+            aur_desc+=( "$desc" )
+        done
     fi
 
     echo -e "\n${GREEN}${BOLD}[ TOP ${aur_max} AUR RESULTS ]${RESET}"
     if (( ${#aur_results[@]} == 0 )); then
         echo -e "  ${BOLD}ERR:${RESET} ZER0 RESULTS"
     else
-        for pkg in "${aur_results[@]}"; do
-            echo -e "${ORANGE}${BOLD}[ $i ]${RESET} > $pkg"
+        for idx in "${!aur_results[@]}"; do
+            echo -e "${ORANGE}${BOLD}[ $i ]${RESET} > ${aur_results[$idx]}"
+            echo -e "${BOLD}${IDX}[ i ]${RESET} ${DESC}${aur_desc[$idx]}${RESET}"
             ((i++))
         done
     fi

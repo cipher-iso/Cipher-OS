@@ -38,3 +38,6 @@ libjxl
 libpng
 m4
 nvtop
+bluez-*
+fastfetch
+libplacebo
