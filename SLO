@@ -1,24 +1,30 @@
 #!/bin/bash
 
-#########################################################
-# BASE ENVIRONMENT VARIABLES (always enabled)
-#########################################################
+# [ PERMA-VARIABLES ]
 
-FPS_CAP=0
-FPS_OVERRIDE=0
+BASE_CMD=("gamemoderun")
+
+#export PROTON_ENABLE_WAYLAND=1
 export PROTON_USE_NTSYNC=1
 export PROTON_DLSS_UPGRADE=1
 export PULSE_LATENCY_MSEC=60
-#export PROTON_ENABLE_WAYLAND=1
+export GBM_BACKEND=nvidia-drm
+export __GL_YIELD=USLEEP
+export __GL_VRR_ALLOWED=1
+export __GL_GSYNC_ALLOWED=1
+export __GL_SYNC_TO_VBLANK=0
+export __GL_MaxFramesAllowed=1
+export __GL_SHADER_DISK_CACHE=1
+export __GL_THREADED_OPTIMIZATIONS=1
 
-#########################################################
-# FLAGS
-#########################################################
+# [ DYNAMIC-FLAGS ]
 
 USE_HDR=0
 USE_FG=0
 USE_M=0
 USE_NV=0
+USE_CRT=0
+CAP_VALUE=""
 
 for arg in "$@"; do
     case "$arg" in
@@ -26,21 +32,24 @@ for arg in "$@"; do
         -fg)  USE_FG=1 ;;
         -m)   USE_M=1 ;;
         -nv)  USE_NV=1 ;;
-        -f*)
-            FPS_CAP="${arg#-f}"
-            FPS_OVERRIDE=1
-            ;;
+        -crt) USE_CRT=1 ;;
+        -cap) SHIFT_CAP=1 ;;
         -all)
             USE_HDR=1
             USE_FG=1
             USE_M=1
             ;;
+        *)
+            if [[ "$SHIFT_CAP" == "1" ]]; then
+                CAP_VALUE="$arg"
+                SHIFT_CAP=0
+            fi
+            ;;
     esac
 done
 
-#########################################################
-# APPLY HDR VARIABLES (Proton HDR mode)
-#########################################################
+# [ HDR ]
+
 if [[ "$USE_HDR" == "1" ]]; then
     export PROTON_ENABLE_WAYLAND=1
     export PROTON_ENABLE_HDR=1
@@ -48,44 +57,68 @@ if [[ "$USE_HDR" == "1" ]]; then
     export DXVK_HDR=1
 fi
 
-#########################################################
-# FRAME GENERATION / FRAMELIMIT
-#########################################################
-if [[ "$USE_FG" == "1" && "$FPS_OVERRIDE" == "0" ]]; then
-    FPS_CAP=120
+# [ FRAMEGEN | LSFG-VK ]
+
+if [[ "$USE_FG" == "1" ]]; then
     export ENABLE_LSFG=1
     export LSFG_PROCESS="FRAMEGEN"
     export LSFG_PERF_MODE=1
 fi
 
+# [ FRAMEGEN | NVIDIA SMOOTH-MOTION ]
 
-#########################################################
-# MANGOHUD
-#########################################################
+if [[ "$USE_NV" == "1" ]]; then
+    export NVPRESENT_ENABLE_SMOOTH_MOTION=1
+fi
+
+# [ MANGOHUD ]
+
 if [[ "$USE_M" == "1" ]]; then
     export MANGOHUD=1
 fi
 
-#########################################################
-# NVIDIA FRAME GENERATION / SMOOTH MOTION
-#########################################################
-if [[ "$USE_NV" == "1" && "$FPS_OVERRIDE" == "0" ]]; then
-    FPS_CAP=120
-    export NVPRESENT_ENABLE_SMOOTH_MOTION=1
+# [ DXVK FRAME CAP ]
+
+if [[ -n "$CAP_VALUE" ]]; then
+    export DXVK_FRAME_LIMIT="$CAP_VALUE"
 fi
 
-#########################################################
-# APPLY FINAL FPS CAP
-#########################################################
-export DXVK_FRAME_RATE="$FPS_CAP"
+# [ CRT-SHADERS ]
 
-#########################################################
-# CLEAN ARGUMENTS (remove custom flags)
-#########################################################
+if [[ "$USE_CRT" == "1" ]]; then 
+STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+HYPRLAND="$HOME/.config/hypr/hyprland.conf"
+MISC="$HOME/.config/hypr/Config/Miscellaneous.conf"
+DECORATIONS="$HOME/.config/hypr/Config/Decorations.conf"
+
+	if [ ! -f "$STATE_FILE" ]; then
+    	cleanup() {
+	sed -i 's|cm = hdr|cm = auto|' "$HYPRLAND"
+	sed -i 's|damage_tracking = 0|damage_tracking = 2|' "$MISC"
+	sed -i 's|screen_shader = $HOME/.config/hypr/Shaders/CRT|screen_shader =|' "$DECORATIONS"
+	hyprctl reload ;}
+    	trap cleanup EXIT
+	sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
+	sed -i 's|damage_tracking = 2|damage_tracking = 0|' "$MISC"
+	sed -i 's|screen_shader =|screen_shader = $HOME/.config/hypr/Shaders/CRT|' "$DECORATIONS"
+	hyprctl reload
+	fi
+fi
+
+# [ GET ARGUMENTS ]
+
 CLEAN_ARGS=()
+SKIP_NEXT=0
 for arg in "$@"; do
+    if [[ "$SKIP_NEXT" == "1" ]]; then
+        SKIP_NEXT=0
+        continue
+    fi
     case "$arg" in
-        -hdr|-fg|-m|-nv|-all|-f*)
+        -hdr|-fg|-m|-nv|-all|-crt)
+            ;;
+        -cap)
+            SKIP_NEXT=1
             ;;
         *)
             CLEAN_ARGS+=("$arg")
@@ -93,12 +126,8 @@ for arg in "$@"; do
     esac
 done
 
-#########################################################
-# BASE LAUNCH COMMAND
-#########################################################
-BASE_CMD=("gamemoderun")
+# [ LAUNCH WITH VARIABLES ]
 
-#########################################################
-# LAUNCH GAME
-#########################################################
-exec "${BASE_CMD[@]}" "${CLEAN_ARGS[@]}"
+"${BASE_CMD[@]}" "${CLEAN_ARGS[@]}" &
+GAME_PID=$!
+wait $GAME_PID

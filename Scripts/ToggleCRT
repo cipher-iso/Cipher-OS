@@ -2,14 +2,21 @@
 
 STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
 
+HYPRLAND="$HOME/.config/hypr/hyprland.conf"
+MISC="$HOME/.config/hypr/Config/Miscellaneous.conf"
+DECORATIONS="$HOME/.config/hypr/Config/Decorations.conf"
+
+
 if [ ! -f "$STATE_FILE" ]; then
 	touch "$STATE_FILE"
-	hyprctl keyword monitorv2:cm hdr
-	hyprctl keyword debug:damage_tracking 0
-	hyprctl keyword decoration:screen_shader ~/.config/hypr/Shaders/CRT
+	sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
+	sed -i 's|damage_tracking = 2|damage_tracking = 0|' "$MISC"
+	sed -i 's|screen_shader =|screen_shader = $HOME/.config/hypr/Shaders/CRT|' "$DECORATIONS"
+	hyprctl reload
 else
 	rm "$STATE_FILE"	
-	hyprctl keyword monitorv2:cm auto
-	hyprctl keyword debug:damage_tracking 2
-	hyprctl keyword decoration:screen_shader ""
+	sed -i 's|cm = hdr|cm = auto|' "$HYPRLAND"
+	sed -i 's|damage_tracking = 0|damage_tracking = 2|' "$MISC"
+	sed -i 's|screen_shader = $HOME/.config/hypr/Shaders/CRT|screen_shader =|' "$DECORATIONS"
+	hyprctl reload
 	fi
