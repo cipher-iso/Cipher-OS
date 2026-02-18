@@ -7,6 +7,7 @@ STATE_FILE="$HOME/.config/waybar/Bar_Visible"
 
 # Kill Waybar & AutoHide Script
 pkill -9 -x waybar
+pkill -f WaybarAutoHide
 
 # Wait a moment
 sleep 0.2
