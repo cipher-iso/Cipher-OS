@@ -1,24 +1,22 @@
 #!/usr/bin/env bash
-# Generates Waybar CSS from colors.sh
 
-command_not_found_handle() {
-    return 0
-}
-
-COLOR_SH="$HOME/Scripts/ColorGen/Colors"
+COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
 CSS_FILE="$HOME/Scripts/ColorGen/Colors.css"
+IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 
-if [ ! -f "$COLOR_SH" ]; then
-    echo "ERROR: colors.sh not found at $COLOR_SH"
-    exit 1
-fi
+# --- Validate ---
+[ -f "$COLOR_FILE" ] || { echo "Missing Colors file."; exit 1; }
+[ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
 
-source "$COLOR_SH"
+# --- Load master colors ---
+source "$COLOR_FILE"
 
+# --- Generate Waybar CSS ---
 cat > "$CSS_FILE" <<EOF
 @define-color bg #$BACKGROUND;
 @define-color fg #$PRIMARY;
 @define-color fg2 #$SECONDARY;
+
 @define-color accent1 #$ACCENT1;
 @define-color accent2 #$ACCENT2;
 @define-color accent3 #$ACCENT3;
@@ -27,8 +25,33 @@ cat > "$CSS_FILE" <<EOF
 @define-color grad2 #$GRADIENT2;
 EOF
 
-printf "\e[38;2;0;255;64m┏━  ┏┓┏┓┓ ┏┓┳┓┏┓  ┏┓┏┓┳┓┏┓┳┓┏┓┏┳┓┏┓┳┓╻  ━┓
-┃   ┃ ┃┃┃ ┃┃┣┫┗┓  ┃┓┣ ┃┃┣ ┣┫┣┫ ┃ ┣ ┃┃┃   ┃
-┗━  ┗┛┗┛┗┛┗┛┛┗┗┛  ┗┛┗┛┛┗┗┛┛┗┛┗ ┻ ┗┛┻┛•  ━┛\e[0m"
+# --- Function to update a variable inside Identifiers.conf ---
+update_var() {
+    local name="$1"
+    local value="$2"
+    sed -i "s|^\$$name=.*|\$$name=$value|" "$IDENTIFIERS"
+}
 
+# --- Update only color variables ---
+update_var BACKGROUND "$BACKGROUND"
+update_var DISABLED "$DISABLED"
+update_var PRIMARY "$PRIMARY"
+update_var SECONDARY "$SECONDARY"
+update_var TERTIARY "$TERTIARY"
+update_var ACCENT1 "$ACCENT1"
+update_var ACCENT2 "$ACCENT2"
+update_var ACCENT3 "$ACCENT3"
+update_var GRADIENT1 "$GRADIENT1"
+update_var GRADIENT2 "$GRADIENT2"
 
+# --- Reload Waybar ---
+if pgrep -x waybar >/dev/null; then
+    pkill -USR2 waybar
+else
+    waybar >/dev/null 2>&1 &
+fi
+
+# --- Reload Hyprland ---
+hyprctl reload >/dev/null 2>&1
+
+echo "Colors updated in Identifiers.conf and Waybar."
