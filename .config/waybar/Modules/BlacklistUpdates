@@ -1,3 +1,15 @@
+deno
+gettext
+groff
+gtest
+libplist
+libusbmuxd
+muparser
+ninja
+python
+ripgrep
+snappy
+spdlog
 accountsservice
 semver
 binutils
