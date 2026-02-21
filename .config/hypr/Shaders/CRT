@@ -25,7 +25,7 @@ uniform int ASPECT_RATIO_MODE; // 4:3 mode
 #define BLUR_STRENGTH        0.0006
 #define BEAM_WIDTH           0.3
 #define VERTICAL_JITTER      3.5
-#define HORIZONTAL_JITTER    0.00014
+//#define HORIZONTAL_JITTER    0.00014
 #define HPHASE_NOISE         0.00015
 #define VDRIFT_STRENGTH      0.0
 #define SHIMMER_STRENGTH     0.00035

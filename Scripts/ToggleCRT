@@ -10,12 +10,14 @@ DECORATIONS="$HOME/.config/hypr/Config/Decorations.conf"
 if [ ! -f "$STATE_FILE" ]; then
 	touch "$STATE_FILE"
 	sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
+	sed -i 's|vfr = true|vfr = false|' "$MISC"
 	sed -i 's|damage_tracking = 2|damage_tracking = 0|' "$MISC"
 	sed -i 's|screen_shader =|screen_shader = $HOME/.config/hypr/Shaders/CRT|' "$DECORATIONS"
 	hyprctl reload
 else
 	rm "$STATE_FILE"	
 	sed -i 's|cm = hdr|cm = auto|' "$HYPRLAND"
+	sed -i 's|vfr = false|vfr = true|' "$MISC"
 	sed -i 's|damage_tracking = 0|damage_tracking = 2|' "$MISC"
 	sed -i 's|screen_shader = $HOME/.config/hypr/Shaders/CRT|screen_shader =|' "$DECORATIONS"
 	hyprctl reload
