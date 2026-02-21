@@ -25,7 +25,7 @@ tooltip label 	{ color: @fg; margin: 10px; font-size: 20px; font-weight: 700; }
 
 #workspaces button {
     	color: @bg;
-    	padding: 0 10px;
+    	padding: 4px 10px;
 	margin: 4px 4px;
 	border-radius: 12px;
 	transition: 0.2s cubic-bezier(0.8, 1, 0.2, 2),
@@ -35,17 +35,19 @@ tooltip label 	{ color: @fg; margin: 10px; font-size: 20px; font-weight: 700; }
 #workspaces button.focused,
 #workspaces button.active {
 	color: @fg2;
-    	padding: 0 10px;
+    	padding: 0px 10px;
     	min-width: 50px;
 	background: @bg;
-	box-shadow: 0px 2px 4px alpha(@bg, 0.8);
+	box-shadow: 0px 2px 4px alpha(@bg, 0.8),
+	      inset 0px -2px 4px alpha(@fg2, 0.2);
 	text-shadow: 0px 0px 4px alpha(@fg2, 0.5); }
 
 #workspaces button:hover {
 	color: @fg2;
 	min-width: 60px;
 	background-color: @bg;
-	box-shadow: 0px 2px 4px alpha(@bg, 0.8);
+	box-shadow: 0px 2px 4px alpha(@bg, 0.8),
+	      inset 0px -2px 4px alpha(@fg2, 0.2);
 	text-shadow: 0px 0px 4px alpha(@fg2, 0.5); }
 
 /* PRIMARY COLOR & INTERACTIVE HOVER */

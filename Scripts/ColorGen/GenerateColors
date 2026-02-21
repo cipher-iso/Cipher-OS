@@ -1,19 +1,126 @@
 #!/usr/bin/env bash
 
+# [ FILE PATHS ]
 COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
 CSS_FILE="$HOME/Scripts/ColorGen/Colors.css"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 
-# --- Validate ---
+# [ VALIDATE REQUIRED FILES ]
 [ -f "$COLOR_FILE" ] || { echo "Missing Colors file."; exit 1; }
 [ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
-
-# --- Load master colors ---
 source "$COLOR_FILE"
 
-# --- Generate Waybar CSS ---
+# [ HEX TO RGB CONVERSION ]
+hex_to_rgb() {
+    local hex="$1"
+    printf "%d %d %d" "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
+}
+
+# [ RGB TO HEX CONVERSION ]
+rgb_to_hex() {
+    printf "%02X%02X%02X" "$1" "$2" "$3"
+}
+
+# [ HSL TRANSFORM (HUE SHIFT + SATURATION SCALE + LIGHTNESS SCALE) ]
+hsl_transform() {
+    local hex="$1"
+    local shift="$2"
+    local s_scale="$3"
+    local l_scale="$4"
+
+    read r g b <<< "$(hex_to_rgb "$hex")"
+
+    awk -v r="$r" -v g="$g" -v b="$b" \
+        -v shift="$shift" -v s_scale="$s_scale" -v l_scale="$l_scale" '
+    function max(a,b){return a>b?a:b}
+    function min(a,b){return a<b?a:b}
+    BEGIN{
+        r/=255; g/=255; b/=255
+        maxc=max(r,max(g,b))
+        minc=min(r,min(g,b))
+        delta=maxc-minc
+
+        l=(maxc+minc)/2
+
+        if(delta==0){
+            h=0; s=0
+        } else {
+            if(l<0.5) s=delta/(maxc+minc)
+            else s=delta/(2-maxc-minc)
+
+            if(maxc==r) h=(g-b)/delta
+            else if(maxc==g) h=2+(b-r)/delta
+            else h=4+(r-g)/delta
+
+            h*=60
+            if(h<0) h+=360
+        }
+
+        h=(h+shift)%360
+        if(h<0) h+=360
+
+        s*=s_scale
+        if(s>1) s=1
+        if(s<0) s=0
+
+        l*=l_scale
+        if(l>1) l=1
+        if(l<0) l=0
+
+        if(s==0){
+            r=g=b=l
+        } else {
+            q = l < 0.5 ? l*(1+s) : l+s-l*s
+            p = 2*l - q
+            hk = h/360
+
+            t[0]=hk+1.0/3
+            t[1]=hk
+            t[2]=hk-1.0/3
+
+            for(i=0;i<3;i++){
+                if(t[i]<0) t[i]+=1
+                if(t[i]>1) t[i]-=1
+
+                if(t[i]<1.0/6) c=p+(q-p)*6*t[i]
+                else if(t[i]<0.5) c=q
+                else if(t[i]<2.0/3) c=p+(q-p)*(2.0/3-t[i])*6
+                else c=p
+
+                rgb[i]=c
+            }
+
+            r=rgb[0]; g=rgb[1]; b=rgb[2]
+        }
+
+        printf "%d %d %d", int(r*255+0.5), int(g*255+0.5), int(b*255+0.5)
+    }'
+}
+
+# [ GENERATE GRADIENT COLORS FROM PRIMARY ]
+read g1r g1g g1b <<< "$(hsl_transform "$PRIMARY" -15 1.0 1.0)"
+read g2r g2g g2b <<< "$(hsl_transform "$PRIMARY" 21 1.0 1.0)"
+GRADIENT1=$(rgb_to_hex "$g1r" "$g1g" "$g1b")
+GRADIENT2=$(rgb_to_hex "$g2r" "$g2g" "$g2b")
+
+# [ AUTO-DERIVE ACCENT COLORS FROM PRIMARY ]
+read da1r da1g da1b <<< "$(hsl_transform "$PRIMARY" 100 0.187 0.482)"
+AUTO_ACCENT1=$(rgb_to_hex "$da1r" "$da1g" "$da1b")
+
+read da2r da2g da2b <<< "$(hsl_transform "$PRIMARY" 100 0.252 0.345)"
+AUTO_ACCENT2=$(rgb_to_hex "$da2r" "$da2g" "$da2b")
+
+read da3r da3g da3b <<< "$(hsl_transform "$PRIMARY" 0 1.0 0.529)"
+AUTO_ACCENT3=$(rgb_to_hex "$da3r" "$da3g" "$da3b")
+
+# [ APPLY MANUAL ACCENT OVERRIDES IF DEFINED ]
+ACCENT1="${ACCENT1:-$AUTO_ACCENT1}"
+ACCENT2="${ACCENT2:-$AUTO_ACCENT2}"
+ACCENT3="${ACCENT3:-$AUTO_ACCENT3}"
+
+# [ GENERATE CSS FILE ]
 cat > "$CSS_FILE" <<EOF
-@define-color bg #$BACKGROUND;
+@define-color bg #$BLACK;
 @define-color fg #$PRIMARY;
 @define-color fg2 #$SECONDARY;
 
@@ -25,33 +132,28 @@ cat > "$CSS_FILE" <<EOF
 @define-color grad2 #$GRADIENT2;
 EOF
 
-# --- Function to update a variable inside Identifiers.conf ---
+# [ UPDATE VARIABLES INSIDE IDENTIFIERS.CONF ]
 update_var() {
     local name="$1"
     local value="$2"
     sed -i "s|^\$$name=.*|\$$name=$value|" "$IDENTIFIERS"
 }
 
-# --- Update only color variables ---
-update_var BACKGROUND "$BACKGROUND"
-update_var DISABLED "$DISABLED"
+update_var BLACK "$BLACK"
 update_var PRIMARY "$PRIMARY"
 update_var SECONDARY "$SECONDARY"
-update_var TERTIARY "$TERTIARY"
 update_var ACCENT1 "$ACCENT1"
 update_var ACCENT2 "$ACCENT2"
 update_var ACCENT3 "$ACCENT3"
 update_var GRADIENT1 "$GRADIENT1"
 update_var GRADIENT2 "$GRADIENT2"
 
-# --- Reload Waybar ---
+# [ RELOAD WAYBAR ]
 if pgrep -x waybar >/dev/null; then
     pkill -USR2 waybar
 else
     waybar >/dev/null 2>&1 &
 fi
 
-# --- Reload Hyprland ---
+# [ RELOAD HYPRLAND ]
 hyprctl reload >/dev/null 2>&1
-
-echo "Colors updated in Identifiers.conf and Waybar."

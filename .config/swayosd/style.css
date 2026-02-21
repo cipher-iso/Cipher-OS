@@ -1,5 +1,5 @@
 window#osd {
-  border-radius: 999px;
+  border-radius: 0px;
   border: none;
   background: alpha(#000000,0.85);
   padding: 0px; }
@@ -10,7 +10,7 @@ window#osd {
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 999px; }
+    border-radius: 0px; }
   window#osd image {
 	color: #00ff40; }
   window#osd label {
@@ -25,7 +25,7 @@ window#osd {
     color: #323449; }
   window#osd progressbar {
     min-height: 10px;
-    border-radius: 6px;
+    border-radius: 0px;
     background: transparent;
     border: none; }
   window#osd trough {

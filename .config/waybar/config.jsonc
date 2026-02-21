@@ -115,7 +115,11 @@
 		"on-scroll-up": "hyprctl dispatch workspace e+1",
 		"on-scroll-down": "hyprctl dispatch workspace e-1",
 		"format":"{icon}",
-		"format-icons": {"1": "᮰","2": "᮱","3": "᮲","4": "᮳","5": "᮴","6": "᮵","7": "᮶","8": "᮷","9": "᮸","magic": "","media": ""}
+		"format-icons": {
+			"1": "᮰", "2": "᮱", "3": "᮲",
+			"4": "᮳", "5": "᮴", "6": "᮵",
+			"7": "᮶", "8": "᮷", "9": "᮸",
+			"active": "", "magic": "","media": ""}
 	},
 /* MICROPHONE MODULE */
 	"pulseaudio#input": {
