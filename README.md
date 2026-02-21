@@ -30,11 +30,11 @@
 
 ### 📘 PACMAN PACKAGES:<br>
 
-    sudo pacman -S --needed hyprland hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman mpv easyeffects dolphin btop vivaldi wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pipewire wireplumber xdg-desktop-portal cava cpio cmake pkg-config git gcc discord hyprshot hyprpicker steam mousepad calf lsp-plugins-lv2 zam-plugins-lv2 mda.lv2 yelp ttf-jetbrains-mono ttf-jetbrains-mono-nerd cairo hyprgraphics hyprlang hyprutils hyprwayland-scanner mesa pam pango sdbus-cpp xorg-xwayland wayland-protocols archlinux-xdg-menu
+    sudo pacman -S --needed hypridle waybar kitty swayosd swaync hyprlock hyprsunset pavucontrol-qt blueman dolphin wl-clip-persist hyprcursor mate-polkit nwg-look kvantum qt5ct gtk3 gtk4 neovim pkg-config hyprshot hyprpicker yelp ttf-jetbrains-mono ttf-jetbrains-mono-nerd cairo hyprwayland-scanner archlinux-xdg-menus qt6-wayland
 
 ### 📙 AUR PACKAGES:<br>
 
-    yay -S --needed nmgui-bin waypaper qimgv-git kew xwaylandvideobridge qt6ct-kde vicinae swww
+    yay -S --needed nmgui-bin waypaper qimgv-git qt6ct-kde vicinae swww
 
 </details>
 <br>
