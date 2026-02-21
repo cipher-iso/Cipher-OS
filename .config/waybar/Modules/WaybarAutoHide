@@ -144,8 +144,8 @@ fi
 
 module_mode() {
 if [ -f "$STATE_FILE" ]
-    then printf '{"text":"","tooltip":"[ WAYBAR - LOCKED ]"}\n'
-    else printf '{"text":"","tooltip":"[ WAYBAR - UNLOCKED ]"}\n'
+    then printf '{"text":"","tooltip":"[ TASKBAR LOCKED ]"}\n'
+    else printf '{"text":"","tooltip":"[ TASKBAR UNLOCKED ]"}\n'
 fi
 }
 

@@ -27,10 +27,10 @@ fi
 module() {
 if [ ! -f "$STATE_FILE" ]; then
 	ICON=""
-	TOOLTIP="[ SCREEN - INCOGNITO ]"
+	TOOLTIP="[ SESSION INCOGNITO ]"
 else
 	ICON=""
-	TOOLTIP="[ SCREEN - VISIBLE ]"
+	TOOLTIP="[ SESSION VISIBLE ]"
 fi
 
 printf '{"text":"%s","tooltip":"%s"}\n' "$ICON" "$TOOLTIP"

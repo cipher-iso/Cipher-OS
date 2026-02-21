@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-state=$(bluetoothctl show | grep "Powered" | awk '{print $2}')
-if [ "$state" = "yes" ]; then bluetoothctl power off; else bluetoothctl power on; fi
+STATE_FILE=~/.config/waybar/Modules/.BluetoothDisabled
+
+if [ -f $STATE_FILE ]; then
+    bluetoothctl power on
+    rm $STATE_FILE
+else
+    bluetoothctl power off
+    touch $STATE_FILE
+fi
