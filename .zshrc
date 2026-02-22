@@ -1,8 +1,9 @@
+source "$HOME/Scripts/ColorGen/Colors.zsh"
 export ZSH="$HOME/.oh-my-zsh"
 setopt globdots
 # [ BASH PROMPT ]
 
-PROMPT=$'\n%{\e[1;40m%}  %{\e[1;38;2;0;255;64m%}%{\e[0;40m%}  %{\e[1;38;2;0;255;64m%}[ %{\e[1;38;2;50;52;73m%}%D{%L:%M}%{\e[1;38;2;33;35;55m%} %{\e[1;38;2;0;255;64m%}-%{\e[1;38;2;50;52;73m%} CIPHER%{\e[1;38;2;0;255;64m%} ] %{\e[1;38;2;50;52;73m%}> %{\e[1;38;2;0;255;64m%}%~%{\e[0m%} '
+PROMPT="%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}%{$(echo -ne '\033[0;40m')%}  %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}-%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}> %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}%~%{$(echo -ne '\033[0m')%} "
 
 # [ SHELL SETTINGS ]
 
@@ -11,7 +12,7 @@ export PATH="$HOME/Scripts:$PATH"
 export PATH="$HOME/Scripts/ColorGen:$PATH"
 
 # Zsh respects this the same way as Bash
-export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
+export SUDO_PROMPT="$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m  > ENTER PASSPHRASE: \033[0m')"
 
 # [ SHORTCUTS ]
 alias :q='exit'

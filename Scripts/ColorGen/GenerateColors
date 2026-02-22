@@ -154,6 +154,32 @@ M.GRADIENT2  = "#$GRADIENT2"
 return M
 EOF
 
+# [ GENERATE ZSH COLORS FILE ]
+ZSH_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
+
+hex_to_rgb_string() {
+    local hex=$1
+    printf "%d;%d;%d" "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
+}
+
+cat > "$ZSH_FILE" <<EOF
+# Auto-generated Zsh Colors
+
+BG=$BLACK
+PRIMARY=$PRIMARY
+SECONDARY=$SECONDARY
+ACCENT1=$ACCENT1
+ACCENT2=$ACCENT2
+ACCENT3=$ACCENT3
+GRADIENT1=$GRADIENT1
+GRADIENT2=$GRADIENT2
+
+# Prompt-ready RGB strings
+FG_HIGHLIGHT="$(hex_to_rgb_string $PRIMARY)"
+FG_SECONDARY="$(hex_to_rgb_string $SECONDARY)"
+FG_ACCENT="$(hex_to_rgb_string $ACCENT1)"
+EOF
+
 # [ UPDATE VARIABLES INSIDE IDENTIFIERS.CONF ]
 update_var() {
     local name="$1"
@@ -171,11 +197,7 @@ update_var GRADIENT1 "$GRADIENT1"
 update_var GRADIENT2 "$GRADIENT2"
 
 # [ RELOAD WAYBAR ]
-if pgrep -x waybar >/dev/null; then
-    pkill -USR2 waybar
-else
-    waybar >/dev/null 2>&1 &
-fi
+ReloadWaybar
 
 # [ RELOAD HYPRLAND ]
 hyprctl reload >/dev/null 2>&1
