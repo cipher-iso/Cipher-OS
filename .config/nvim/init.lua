@@ -1,3 +1,5 @@
+vim.opt.splitbelow = false
+vim.opt.splitright = true
 -- [ Mouse support ]
 vim.opt.mouse = 'a'
 
@@ -835,7 +837,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'default'
     end,
   },
 
@@ -879,31 +881,13 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
+
+  -- There are additional nvim-treesitter modules that you can use to interact
+  -- with nvim-treesitter. You should go explore a few and see what interests you:
+  --
+  --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+  --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+  --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1023,31 +1007,131 @@ vim.api.nvim_create_autocmd('BufWinLeave', {
   end,
 })
 
--- Custom color overrides
+-- Load Colors.lua
+local colors = dofile(vim.fn.expand '~/.config/nvim/lua/Colors.lua')
+
+local function hl(group, opts)
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
 local function set_custom_colors()
-  vim.api.nvim_set_hl(0, 'Normal', { bg = '#000000', fg = '#EBFAFA' })
-  vim.api.nvim_set_hl(0, 'NormalFloat', { bg = '#212337', fg = '#EBFAFA' })
-  vim.api.nvim_set_hl(0, 'LineNr', { bg = '#000000', fg = '#323449' })
-  vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = '#000000', fg = '#EBFAFA', bold = true })
-  vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#000000' })
+  ----------------------------------------------------------------
+  -- Base
+  ----------------------------------------------------------------
+  hl('Normal', { bg = colors.BLACK, fg = colors.ACCENT1 })
+  hl('NormalFloat', { bg = colors.BLACK, fg = colors.ACCENT2 })
+  hl('LineNr', { bg = colors.BLACK, fg = colors.ACCENT2 })
+  hl('CursorLineNr', { bg = colors.BLACK, fg = colors.SECONDARY, bold = true })
+  hl('CursorLine', { bg = colors.ACCENT3 })
+  hl('SignColumn', { bg = colors.BLACK })
+  hl('NormalNC', { bg = colors.BLACK, fg = colors.ACCENT2 })
 
-  -- UI elements
-  vim.api.nvim_set_hl(0, 'StatusLine', { bg = '#111111', fg = '#EBFAFA' })
-  vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = '#111111', fg = '#222222' })
-  vim.api.nvim_set_hl(0, 'VertSplit', { bg = '#000000', fg = '#00FF40' })
-  vim.api.nvim_set_hl(0, 'WinSeparator', { bg = '#000000', fg = '#00FF40' })
-  vim.api.nvim_set_hl(0, 'Pmenu', { bg = '#111111', fg = '#EBFAFA' })
-  vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#00FF40', fg = '#000000', bold = true })
+  ----------------------------------------------------------------
+  -- UI
+  ----------------------------------------------------------------
+  hl('StatusLine', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('StatusLineNC', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('StatusLineTerm', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('StatusLineTermNC', { bg = colors.BLACK, fg = colors.ACCENT3 })
 
-  -- Vibrant syntax colors
-  vim.api.nvim_set_hl(0, 'String', { fg = '#00FF40' }) -- bright green
-  vim.api.nvim_set_hl(0, 'Number', { fg = '#FF013B' }) -- punchy neon red
-  vim.api.nvim_set_hl(0, 'Boolean', { fg = '#FF8800' }) -- neon orange
-  vim.api.nvim_set_hl(0, 'Keyword', { fg = '#00BBFF', bold = true }) -- neon cyan
-  vim.api.nvim_set_hl(0, 'Function', { fg = '#FFDD00' }) -- neon yellow
-  vim.api.nvim_set_hl(0, 'Identifier', { fg = '#EBFAFA' }) -- off-white
-  vim.api.nvim_set_hl(0, 'Type', { fg = '#9900FF' }) -- neon purple
-  vim.api.nvim_set_hl(0, 'Comment', { fg = '#585B73', italic = true }) -- muted
+  hl('VertSplit', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('WinSeparator', { bg = colors.BLACK, fg = colors.ACCENT3 })
+
+  hl('Pmenu', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('PmenuSel', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
+  hl('PmenuThumb', { bg = colors.ACCENT3 })
+  hl('PmenuSbar', { bg = colors.BLACK })
+
+  hl('TabLine', { bg = colors.BLACK, fg = colors.ACCENT2 })
+  hl('TabLineSel', { bg = colors.BLACK, fg = colors.PRIMARY, bold = true })
+  hl('TabLineFill', { bg = colors.BLACK })
+
+  ----------------------------------------------------------------
+  -- Selection / Search
+  ----------------------------------------------------------------
+  hl('Visual', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
+  hl('VisualNOS', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
+  hl('Search', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
+  hl('IncSearch', { bg = colors.ACCENT1, fg = colors.BLACK, bold = true })
+  hl('MatchParen', { bg = colors.ACCENT2, fg = colors.BLACK, bold = true })
+  hl('WildMenu', { bg = colors.ACCENT2, fg = colors.BLACK, bold = true })
+
+  hl('ColorColumn', { bg = colors.BLACK })
+  hl('Cursor', { bg = colors.ACCENT1, fg = colors.BLACK })
+  hl('CursorColumn', { bg = colors.ACCENT3 })
+
+  ----------------------------------------------------------------
+  -- Syntax
+  ----------------------------------------------------------------
+  hl('String', { fg = colors.PRIMARY, bold = true })
+  hl('Number', { fg = '#edf500' })
+  hl('Boolean', { fg = colors.GRADIENT2 })
+  hl('Keyword', { fg = colors.PRIMARY })
+  hl('Statement', { fg = colors.PRIMARY, bold = true })
+  hl('Repeat', { fg = colors.PRIMARY, bold = true })
+  hl('Exception', { fg = '#f50025' })
+  hl('Function', { fg = '#00ff51' })
+  hl('PreProc', { fg = '#cb00f5' })
+  hl('Include', { fg = colors.PRIMARY, bold = true })
+  hl('Identifier', { fg = '#FF013B' })
+  hl('Type', { fg = '#ffbb01' })
+  hl('Constant', { fg = '#ff6b01' })
+  hl('Comment', { fg = colors.ACCENT2, italic = true })
+  hl('Special', { fg = colors.GRADIENT2 })
+  hl('Operator', { fg = '#00ffdd' })
+  hl('Macro', { fg = '#0048ff' })
+  hl('Underlined', { fg = '#FF013B', underline = true })
+  hl('Label', { fg = '#00f7ff' })
+  hl('Title', { fg = colors.PRIMARY, bold = true })
+
+  ----------------------------------------------------------------
+  -- Diagnostics
+  ----------------------------------------------------------------
+  hl('Error', { fg = colors.ACCENT3, bold = true })
+  hl('WarningMsg', { fg = colors.ACCENT1, bold = true })
+  hl('MoreMsg', { fg = colors.PRIMARY, bold = true })
+  hl('Todo', { fg = colors.ACCENT2, bold = true })
+
+  hl('DiffAdd', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('DiffChange', { bg = colors.BLACK, fg = colors.ACCENT1 })
+  hl('DiffDelete', { bg = colors.BLACK, fg = colors.ACCENT2 })
+  hl('DiffText', { bg = colors.BLACK, fg = colors.PRIMARY })
+
+  hl('LspDiagnosticsError', { fg = colors.ACCENT3, bold = true })
+  hl('LspDiagnosticsWarning', { fg = colors.ACCENT1, bold = true })
+  hl('LspDiagnosticsInformation', { fg = colors.PRIMARY, bold = true })
+  hl('LspDiagnosticsHint', { fg = colors.ACCENT2, bold = true })
+
+  ----------------------------------------------------------------
+  -- Treesitter
+  ----------------------------------------------------------------
+  hl('TSKeywordFunction', { fg = colors.PRIMARY, bold = true })
+  hl('TSVariable', { fg = colors.SECONDARY })
+  hl('TSString', { fg = colors.PRIMARY, bold = true })
+  hl('TSComment', { fg = colors.ACCENT2, italic = true })
+  hl('TSConstant', { fg = colors.ACCENT3 })
+  hl('TSParameter', { fg = colors.ACCENT1 })
+
+  ----------------------------------------------------------------
+  -- nvim-tree
+  ----------------------------------------------------------------
+  hl('NvimTreeFolderName', { fg = colors.SECONDARY })
+  hl('NvimTreeNormal', { fg = colors.ACCENT1 })
+  hl('NvimTreeOpenedFolderName', { fg = colors.PRIMARY, bold = true })
+  hl('NvimTreeEmptyFolderName', { fg = colors.ACCENT1 })
+  hl('NvimTreeFolderIcon', { fg = colors.PRIMARY, bold = true })
+  hl('NvimTreeFileName', { fg = colors.PRIMARY, bold = true })
+  hl('NvimTreeExecFile', { fg = colors.SECONDARY })
+  hl('NvimTreeSymlink', { fg = colors.PRIMARY, bold = true })
+
+  ----------------------------------------------------------------
+  -- Misc
+  ----------------------------------------------------------------
+  hl('Folded', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('FoldColumn', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('Conceal', { fg = colors.ACCENT2 })
+  hl('SpecialKey', { fg = colors.ACCENT2 })
+  hl('NonText', { fg = colors.ACCENT2 })
 end
 
 -- Apply immediately

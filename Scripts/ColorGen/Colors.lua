@@ -1,0 +1,17 @@
+-- [ AUTO-GENERATED FILE ]
+-- [ DO NOT EDIT MANUALLY ]
+
+local M = {}
+
+M.BLACK      = "#000000"
+M.PRIMARY    = "#00FF40"
+M.SECONDARY  = "#EBFAFA"
+
+M.ACCENT1    = "#323449"
+M.ACCENT2    = "#212337"
+M.ACCENT3    = "#10111C"
+
+M.GRADIENT1  = "#00FF00"
+M.GRADIENT2  = "#00FF99"
+
+return M

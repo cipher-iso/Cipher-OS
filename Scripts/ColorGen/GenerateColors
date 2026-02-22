@@ -3,6 +3,7 @@
 # [ FILE PATHS ]
 COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
 CSS_FILE="$HOME/Scripts/ColorGen/Colors.css"
+LUA_FILE="$HOME/Scripts/ColorGen/Colors.lua"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 
 # [ VALIDATE REQUIRED FILES ]
@@ -130,6 +131,27 @@ cat > "$CSS_FILE" <<EOF
 
 @define-color grad1 #$GRADIENT1;
 @define-color grad2 #$GRADIENT2;
+EOF
+
+# [ GENERATE LUA FILE ]
+cat > "$LUA_FILE" <<EOF
+-- [ AUTO-GENERATED FILE ]
+-- [ DO NOT EDIT MANUALLY ]
+
+local M = {}
+
+M.BLACK      = "#$BLACK"
+M.PRIMARY    = "#$PRIMARY"
+M.SECONDARY  = "#$SECONDARY"
+
+M.ACCENT1    = "#$ACCENT1"
+M.ACCENT2    = "#$ACCENT2"
+M.ACCENT3    = "#$ACCENT3"
+
+M.GRADIENT1  = "#$GRADIENT1"
+M.GRADIENT2  = "#$GRADIENT2"
+
+return M
 EOF
 
 # [ UPDATE VARIABLES INSIDE IDENTIFIERS.CONF ]

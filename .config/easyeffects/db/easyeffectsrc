@@ -7,7 +7,7 @@ visiblePage=pluginsPage
 visiblePlugin=stereo_tools#0
 
 [StreamOutputs]
-outputDevice=sink-sunshine-stereo
+outputDevice=alsa_output.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.analog-stereo
 
 [Window]
 autostartOnLogin=true
