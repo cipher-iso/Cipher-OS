@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 
 STATE_FILE="$HOME/.config/waybar/Bar_Visible"
-
-# Remove STATE_FILE if it exists
 [ -f "$STATE_FILE" ] && rm "$STATE_FILE"
 
-# Kill Waybar & AutoHide Script
 pkill -9 -x waybar
 pkill -f WaybarAutoHide
-
-# Wait a moment
-sleep 0.2
-
-# Relaunch
-nohup waybar >/dev/null 2>&1 &
+pkill -9 swayosd-server
+pkill -9 swaync
+sleep 0.1
+~/Scripts/ColorGen/GenerateColors
+sleep 0.1
+waybar >/dev/null 2>&1 &
+swayosd-server >/dev/null 2>&1 &

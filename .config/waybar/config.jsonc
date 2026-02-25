@@ -11,9 +11,10 @@
 	"margin-left": 0,
 	"margin-right": 0,
 	"margin-top": 0,
-	"modules-left": ["custom/autohide","group/expand","cpu","temperature","memory","custom/togglewaybar","custom/updates"],
-	"modules-center": ["wireplumber","hyprland/workspaces","pulseaudio#input"],
-	"modules-right": ["idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock"],
+	"modules-left": [ "custom/autohide","group/expand","cpu",
+			"temperature","memory","custom/togglewaybar","custom/updates" ],
+	"modules-center": [ "wireplumber","hyprland/workspaces","pulseaudio#input" ],
+	"modules-right": [ "idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock" ],
 /* AUTOHIDE - STARTUP */
 	"custom/autohide": {
 		"exec": "WaybarAutoHide",
@@ -110,6 +111,7 @@
 	},
 /* HYPRLAND WORKSPACES */
 	"hyprland/workspaces": {
+		"cursor": true,
 		"show-special": true,
 		"special-visible-only": true,
 		"on-scroll-up": "hyprctl dispatch workspace e+1",

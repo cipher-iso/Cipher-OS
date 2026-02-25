@@ -953,7 +953,7 @@ require('nvim-tree').setup {
     sorter = 'case_sensitive',
   },
   view = {
-    width = 30,
+    width = 20,
   },
   renderer = {
     group_empty = true,
@@ -1087,20 +1087,20 @@ local function set_custom_colors()
   ----------------------------------------------------------------
   -- Diagnostics
   ----------------------------------------------------------------
-  hl('Error', { fg = colors.ACCENT3, bold = true })
-  hl('WarningMsg', { fg = colors.ACCENT1, bold = true })
+  hl('Error', { fg = colors.PRIMARY, bold = true })
+  hl('WarningMsg', { fg = colors.PRIMARY, bold = true })
   hl('MoreMsg', { fg = colors.PRIMARY, bold = true })
-  hl('Todo', { fg = colors.ACCENT2, bold = true })
+  hl('Todo', { fg = colors.PRIMARY, bold = true })
 
-  hl('DiffAdd', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('DiffChange', { bg = colors.BLACK, fg = colors.ACCENT1 })
-  hl('DiffDelete', { bg = colors.BLACK, fg = colors.ACCENT2 })
+  hl('DiffAdd', { bg = colors.BLACK, fg = colors.PRIMARY })
+  hl('DiffChange', { bg = colors.BLACK, fg = colors.PRIMARY })
+  hl('DiffDelete', { bg = colors.BLACK, fg = colors.PRIMARY })
   hl('DiffText', { bg = colors.BLACK, fg = colors.PRIMARY })
 
-  hl('LspDiagnosticsError', { fg = colors.ACCENT3, bold = true })
-  hl('LspDiagnosticsWarning', { fg = colors.ACCENT1, bold = true })
+  hl('LspDiagnosticsError', { fg = colors.PRIMARY, bold = true })
+  hl('LspDiagnosticsWarning', { fg = colors.PRIMARY, bold = true })
   hl('LspDiagnosticsInformation', { fg = colors.PRIMARY, bold = true })
-  hl('LspDiagnosticsHint', { fg = colors.ACCENT2, bold = true })
+  hl('LspDiagnosticsHint', { fg = colors.PRIMARY, bold = true })
 
   ----------------------------------------------------------------
   -- Treesitter

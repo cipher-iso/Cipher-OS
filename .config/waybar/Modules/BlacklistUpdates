@@ -1,3 +1,16 @@
+linux-f*
+gawk
+glslang
+gpgme
+libinih
+poppler*
+shaderc
+spirv-tools
+vulkan-tools
+wl-clip*
+libcgif
+libgcrypt
+openexr
 yt-dlp-ejs
 xapp*
 fzf
