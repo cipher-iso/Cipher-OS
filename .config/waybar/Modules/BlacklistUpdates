@@ -1,3 +1,15 @@
+kirigami*
+iana-etc
+systemd-*
+adwaita-fonts
+bubblewrap
+libfyaml
+libksba
+libldac
+libngtcp2
+mdadm
+spandsp
+xkeyboard*
 linux-f*
 gawk
 glslang
