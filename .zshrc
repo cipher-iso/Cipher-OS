@@ -1,18 +1,17 @@
+# [ COLOR GENERATION ]
 source "$HOME/Scripts/ColorGen/Colors.zsh"
-export ZSH="$HOME/.oh-my-zsh"
-setopt globdots
-# [ BASH PROMPT ]
 
-PROMPT="%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}%{$(echo -ne '\033[0;40m')%}  %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}-%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}> %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}%~%{$(echo -ne '\033[0m')%} "
+# [ BASH PROMPT ]
+PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}   %{$(echo -ne '\033[0;40m')%}   %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}-%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}>%{$(echo -ne '\033[0m')%} "
 
 # [ SHELL SETTINGS ]
-
 export TERMINAL=kitty
 export PATH="$HOME/Scripts:$PATH"
 export PATH="$HOME/Scripts/ColorGen:$PATH"
-
-# Zsh respects this the same way as Bash
 export SUDO_PROMPT="$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m  > ENTER PASSPHRASE: \033[0m')"
+export ZSH="$HOME/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+setopt globdots
 
 # [ SHORTCUTS ]
 alias :q='exit'
@@ -42,11 +41,8 @@ alias gif='Convert2Gif'
 alias cc='ClearCache'
 
 # [ SHELL PLUGINS ]
-
 plugins=( 
 	git
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 )
-
-source $ZSH/oh-my-zsh.sh

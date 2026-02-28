@@ -1,3 +1,4 @@
+vim.o.cmdheight = 0
 vim.opt.splitbelow = false
 vim.opt.splitright = true
 -- [ Mouse support ]

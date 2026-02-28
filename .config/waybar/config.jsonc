@@ -22,7 +22,7 @@
 	},
 /* POWER MENU - EXPANDER */
         "custom/expand": {
-            	"format": "  ",
+            	"format": "  ",
 		"exec": "Gamma",
 		"interval": "once",
 		"return-type": "json",
