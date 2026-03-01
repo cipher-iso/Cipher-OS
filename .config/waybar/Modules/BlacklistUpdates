@@ -1,3 +1,12 @@
+file
+fmt
+ldb
+libva-nvidia*
+libwbclient
+noto-*
+smbclient
+v4l-*
+wxw*
 ostree
 kirigami*
 iana-etc

@@ -31,22 +31,28 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
     	padding: 0.1em 0.5em;
 	margin: 0.25em;
 	border-radius: 0.4em;
-	transition: 0.2s cubic-bezier(0.8, 1, 0.2, 2),
-		    box-shadow 0s ease, background 0s ease }
+	transition:
+        	color 0.2s ease,
+        	box-shadow 0.2s ease,
+        	background 0.2s ease;
+    	transition-duration: 0.25s;
+    	transition-timing-function: cubic-bezier(0.25, 1, 0.25, 2);
+	transition-property: min-width, color, box-shadow, background }
 #workspaces button.focused,
-#workspaces button.active  { min-width: 2.25em }
+#workspaces button.active  { min-width: 2em }
 #workspaces button:hover   { min-width: 2.75em }
 #workspaces button.empty   { color: alpha(@bg, 0.35) }
 #workspaces button.focused,
 #workspaces button.active,
-#workspaces button:hover {
+#workspaces button.special:hover {
     	color: @fg2;
     	padding: 0em 0.5em;
  	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5);
     	text-shadow: 0em 0em 0.25em alpha(@fg2, 0.5);
 	background: @bg, linear-gradient(to bottom,
       		    alpha(@fg2, 0.0), alpha(@fg2, 0.1));}
-#workspaces button.special { 
+#workspaces button.special,
+#workspaces button:hover{ 
 	color: @fg;
 	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5);
 	text-shadow: 0em 0em 0.25em alpha(@fg, 0.5);
@@ -108,7 +114,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #custom-reboot,
 #custom-logout,
 #custom-expand,
-#custom-lock		{ transition: color 0.25s ease, font-size 0.05s ease; font-size: 100% }
+#custom-lock		{ transition: color 0.25s ease; font-size: 100% }
 #custom-updates:hover,
 #network:hover,
 #bluetooth:hover,
@@ -122,5 +128,5 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #custom-logout:hover,
 #custom-expand:hover,
 #custom-lock:hover,
-#custom-expand:hover 	{ font-size: 140%; font-weight: 900 }
+#custom-expand:hover 	{ transition: font-size 0.2s cubic-bezier(0.25, 1, 0.25, 1.75); font-size: 140%; font-weight: 900 }
 #workspaces .workspace-label { font-weight: 900; }

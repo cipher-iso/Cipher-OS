@@ -140,9 +140,23 @@ hex_to_rgb_string() {
 }
 
 cat > "$ZSH_FILE" <<EOF
-FG_HIGHLIGHT="$(hex_to_rgb_string $PRIMARY)"
-FG_SECONDARY="$(hex_to_rgb_string $SECONDARY)"
-FG_ACCENT="$(hex_to_rgb_string $ACCENT1)"
+# RGB (for ANSI truecolor)
+PRIMARY="$(hex_to_rgb_string $PRIMARY)"
+SECONDARY="$(hex_to_rgb_string $SECONDARY)"
+ACCENT1="$(hex_to_rgb_string $ACCENT1)"
+ACCENT2="$(hex_to_rgb_string $ACCENT2)"
+ACCENT3="$(hex_to_rgb_string $ACCENT3)"
+GRADIENT1="$(hex_to_rgb_string $GRADIENT1)"
+GRADIENT2="$(hex_to_rgb_string $GRADIENT2)"
+
+# HEX (normal color codes)
+hPRIMARY="#$PRIMARY"
+hSECONDARY="#$SECONDARY"
+hACCENT1="#$ACCENT1"
+hACCENT2="#$ACCENT2"
+hACCENT3="#$ACCENT3"
+hGRADIENT1="#$GRADIENT1"
+hGRADIENT2="#$GRADIENT2"
 EOF
 
 # ─────────────────────────────────────

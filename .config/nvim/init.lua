@@ -1,26 +1,27 @@
 vim.o.cmdheight = 0
 vim.opt.splitbelow = false
 vim.opt.splitright = true
+vim.opt.clipboard = 'unnamedplus'
+
 -- [ Mouse support ]
 vim.opt.mouse = 'a'
-
--- [ Copy / Cut ]
-vim.keymap.set('v', '<C-c>', '"+y', { silent = true })
-vim.keymap.set('v', '<C-x>', '"+d', { silent = true })
-
--- [ Paste without overwriting clipboard ]
-vim.keymap.set('n', '<C-v>', '"+p', { silent = true })
-vim.keymap.set('i', '<C-v>', '<C-r>+', { silent = true })
-vim.keymap.set('x', 'p', '"_dP', { silent = true })
 
 -- [ Select all ]
 vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
 vim.keymap.set('v', '<C-a>', 'ggVG', { silent = true })
 
--- [ Undo only ]
+-- [ Copy / Paste ]
+vim.keymap.set('v', '<C-c>', '"+y', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-v>', '"+P', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
+
+-- [ Undo / Redo ]
 vim.keymap.set('n', '<C-z>', 'u', { silent = true })
-vim.keymap.set('i', '<C-z>', '<Esc>u', { silent = true })
+vim.keymap.set('i', '<C-z>', '<C-o>u', { silent = true })
+
+vim.keymap.set('n', '<C-S-z>', '<C-r>', { silent = true })
+vim.keymap.set('i', '<C-S-z>', '<C-o><C-r>', { silent = true })
 
 -- [ Save file ]
 vim.keymap.set('n', '<C-s>', ':w<CR>', { silent = true })
@@ -37,7 +38,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

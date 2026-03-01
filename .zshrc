@@ -2,7 +2,7 @@
 source "$HOME/Scripts/ColorGen/Colors.zsh"
 
 # [ BASH PROMPT ]
-PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}   %{$(echo -ne '\033[0;40m')%}   %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}-%{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$FG_ACCENT"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m')%}>%{$(echo -ne '\033[0m')%} "
+PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}  %{$(echo -ne '\033[0;40m')%}   %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}-%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$ACCENT1"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}>%{$(echo -ne '\033[0m')%} "
 
 # [ SHELL SETTINGS ]
 export TERMINAL=kitty
@@ -46,3 +46,26 @@ plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 )
+
+# [ FZF INTEGRATION ]
+source "/usr/share/fzf/key-bindings.zsh"
+
+export FZF_DEFAULT_OPTS="
+--height=100%
+--border=sharp
+--layout=reverse
+--prompt='☰QUERY SIGNAL:'
+--pointer='▋'
+--marker='󰘽'
+--color=\
+bg:#000000,\
+bg+:"$hACCENT2",\
+fg:"$hACCENT2",\
+fg+:"$hPRIMARY",\
+prompt:"$hPRIMARY",\
+pointer:"$hPRIMARY",\
+hl:"$hPRIMARY",\
+hl+:"$hSECONDARY",\
+info:"$hACCENT1",\
+border:"$hPRIMARY"
+"
