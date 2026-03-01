@@ -47,8 +47,8 @@ plugins=(
 )
 
 # [ FZF INTEGRATION & OMZ ]
-source "/usr/share/fzf/key-bindings.zsh"
 source $ZSH/oh-my-zsh.sh
+source "/usr/share/fzf/key-bindings.zsh"
 
 export FZF_DEFAULT_OPTS="
 --height=100%
