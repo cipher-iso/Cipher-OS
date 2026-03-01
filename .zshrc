@@ -5,13 +5,12 @@ source "$HOME/Scripts/ColorGen/Colors.zsh"
 PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}  %{$(echo -ne '\033[0;40m')%}   %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}-%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$ACCENT1"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}>%{$(echo -ne '\033[0m')%} "
 
 # [ SHELL SETTINGS ]
+setopt globdots
 export TERMINAL=kitty
 export PATH="$HOME/Scripts:$PATH"
 export PATH="$HOME/Scripts/ColorGen:$PATH"
-export SUDO_PROMPT="$(echo -ne '\033[1;38;2;'"$FG_HIGHLIGHT"'m  > ENTER PASSPHRASE: \033[0m')"
+export SUDO_PROMPT="$(echo -ne '\033[1;38;2;'"$PRIMARY"'m  > ENTER PASSPHRASE: \033[0m')"
 export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
-setopt globdots
 
 # [ SHORTCUTS ]
 alias :q='exit'
@@ -47,8 +46,9 @@ plugins=(
 	zsh-syntax-highlighting
 )
 
-# [ FZF INTEGRATION ]
+# [ FZF INTEGRATION & OMZ ]
 source "/usr/share/fzf/key-bindings.zsh"
+source $ZSH/oh-my-zsh.sh
 
 export FZF_DEFAULT_OPTS="
 --height=100%
