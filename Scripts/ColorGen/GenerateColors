@@ -7,12 +7,13 @@ LUA_FILE="$HOME/Scripts/ColorGen/Colors.lua"
 ZSH_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 ENCOM="$HOME/.config/kitty/ENCOM.conf"
+KVANTUM_FILE="$HOME/.config/Kvantum/KvGnomeDark#/KvGnomeDark#.kvconfig"
 
 # [ DEFAULT PALETTE FOR -d / --default ]
 DEFAULT_COLORS_CONTENT='#!/usr/bin/env bash
 
 # [ PRIMARY COLORS | USED FOR AUTO-DERIVATIVES ]
-BLACK=000000
+BACKGROUND=000000
 PRIMARY=00FF40
 SECONDARY=EBFAFA
 
@@ -126,7 +127,7 @@ ACCENT3="${ACCENT3:-$AUTO_ACCENT3}"
 
 # [ WRITE CSS FILE ]
 cat > "$CSS_FILE" <<EOF
-@define-color bg #$BLACK;
+@define-color bg #$BACKGROUND;
 @define-color fg #$PRIMARY;
 @define-color fg2 #$SECONDARY;
 @define-color accent1 #$ACCENT1;
@@ -139,7 +140,7 @@ EOF
 # [ WRITE LUA FILE ]
 cat > "$LUA_FILE" <<EOF
 local M = {}
-M.BLACK="#$BLACK"
+M.BACKGROUND="#$BACKGROUND"
 M.PRIMARY="#$PRIMARY"
 M.SECONDARY="#$SECONDARY"
 M.ACCENT1="#$ACCENT1"
@@ -187,7 +188,7 @@ fi
 
 # [ UPDATE IDENTIFIERS ]
 sed -i \
-    -e "s|^\$BLACK=.*|\$BLACK=$BLACK|" \
+    -e "s|^\$BACKGROUND=.*|\$BACKGROUND=$BACKGROUND|" \
     -e "s|^\$PRIMARY=.*|\$PRIMARY=$PRIMARY|" \
     -e "s|^\$SECONDARY=.*|\$SECONDARY=$SECONDARY|" \
     -e "s|^\$ACCENT1=.*|\$ACCENT1=$ACCENT1|" \
@@ -196,3 +197,53 @@ sed -i \
     -e "s|^\$GRADIENT1=.*|\$GRADIENT1=$GRADIENT1|" \
     -e "s|^\$GRADIENT2=.*|\$GRADIENT2=$GRADIENT2|" \
     "$IDENTIFIERS"
+
+# [ UPDATE KVANTUM / QT6 ]
+if [ -f "$KVANTUM_FILE" ]; then
+
+    # --- BACKGROUND ---
+    sed -i \
+        -e "s|^window\.color=.*|window.color=#$BACKGROUND|" \
+        -e "s|^inactive\.window\.color=.*|inactive.window.color=#$BACKGROUND|" \
+        -e "s|^base\.color=.*|base.color=#$BACKGROUND|" \
+        -e "s|^inactive\.base\.color=.*|inactive.base.color=#$BACKGROUND|" \
+        "$KVANTUM_FILE"
+
+    # --- ACCENT3 (dark backgrounds) ---
+    sed -i \
+        -e "s|^dark\.color=.*|dark.color=#$ACCENT3|" \
+        -e "s|^inactive\.highlight\.color=.*|inactive.highlight.color=#$ACCENT3|" \
+        "$KVANTUM_FILE"
+
+    # --- ACCENT2 ---
+    sed -i \
+        -e "s|^mid\.light\.color=.*|mid.light.color=#$ACCENT2|" \
+        -e "s|^mid\.color=.*|mid.color=#$ACCENT2|" \
+        -e "s|^disabled\.text\.color=.*|disabled.text.color=#$ACCENT2|" \
+        "$KVANTUM_FILE"
+
+    # --- ACCENT1 ---
+    sed -i \
+        -e "s|^light\.color=.*|light.color=#$ACCENT1|" \
+        "$KVANTUM_FILE"
+
+    # --- PRIMARY (ALL green text fields globally) ---
+    sed -i \
+        -e "s|^button\.color=.*|button.color=#$PRIMARY|" \
+        -e "s|^highlight\.color=.*|highlight.color=#$PRIMARY|" \
+        -e "s|^text\.color=.*|text.color=#$PRIMARY|" \
+        -e "s|^inactive\.text\.color=.*|inactive.text.color=#$PRIMARY|" \
+        -e "s|\(text\..*\.color=\).*|\1#$PRIMARY|" \
+        "$KVANTUM_FILE"
+
+    # --- SECONDARY ---
+    sed -i \
+        -e "s|^window\.text\.color=.*|window.text.color=#$SECONDARY|" \
+        -e "s|^inactive\.window\.text\.color=.*|inactive.window.text.color=#$SECONDARY|" \
+        -e "s|^button\.text\.color=.*|button.text.color=#$SECONDARY|" \
+        -e "s|^tooltip\.text\.color=.*|tooltip.text.color=#$SECONDARY|" \
+        -e "s|^highlight\.text\.color=.*|highlight.text.color=#$SECONDARY|" \
+        -e "s|^progress\.indicator\.text\.color=.*|progress.indicator.text.color=#$SECONDARY|" \
+        "$KVANTUM_FILE"
+
+fi

@@ -1020,46 +1020,46 @@ local function set_custom_colors()
   ----------------------------------------------------------------
   -- Base
   ----------------------------------------------------------------
-  hl('Normal', { bg = colors.BLACK, fg = '#747796' })
-  hl('NormalFloat', { bg = colors.BLACK, fg = colors.PRIMARY })
-  hl('LineNr', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('CursorLineNr', { bg = colors.BLACK, fg = colors.PRIMARY, bold = true })
+  hl('Normal', { bg = colors.BACKGROUND, fg = '#747796' })
+  hl('NormalFloat', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
+  hl('LineNr', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('CursorLineNr', { bg = colors.BACKGROUND, fg = colors.PRIMARY, bold = true })
   hl('CursorLine', { bg = colors.ACCENT3 })
-  hl('SignColumn', { bg = colors.BLACK })
-  hl('NormalNC', { bg = colors.BLACK, fg = colors.PRIMARY })
+  hl('SignColumn', { bg = colors.BACKGROUND })
+  hl('NormalNC', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
 
   ----------------------------------------------------------------
   -- UI
   ----------------------------------------------------------------
-  hl('StatusLine', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('StatusLineNC', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('StatusLineTerm', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('StatusLineTermNC', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('StatusLine', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('StatusLineNC', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('StatusLineTerm', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('StatusLineTermNC', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
 
-  hl('VertSplit', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('WinSeparator', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('VertSplit', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('WinSeparator', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
 
-  hl('Pmenu', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('PmenuSel', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
+  hl('Pmenu', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('PmenuSel', { bg = colors.PRIMARY, fg = colors.BACKGROUND, bold = true })
   hl('PmenuThumb', { bg = colors.ACCENT3 })
-  hl('PmenuSbar', { bg = colors.BLACK })
+  hl('PmenuSbar', { bg = colors.BACKGROUND })
 
-  hl('TabLine', { bg = colors.BLACK, fg = colors.ACCENT2 })
-  hl('TabLineSel', { bg = colors.BLACK, fg = colors.PRIMARY, bold = true })
-  hl('TabLineFill', { bg = colors.BLACK })
+  hl('TabLine', { bg = colors.BACKGROUND, fg = colors.ACCENT2 })
+  hl('TabLineSel', { bg = colors.BACKGROUND, fg = colors.PRIMARY, bold = true })
+  hl('TabLineFill', { bg = colors.BACKGROUND })
 
   ----------------------------------------------------------------
   -- Selection / Search
   ----------------------------------------------------------------
-  hl('Visual', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
-  hl('VisualNOS', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
-  hl('Search', { bg = colors.PRIMARY, fg = colors.BLACK, bold = true })
-  hl('IncSearch', { bg = colors.ACCENT1, fg = colors.BLACK, bold = true })
-  hl('MatchParen', { bg = colors.ACCENT2, fg = colors.BLACK, bold = true })
-  hl('WildMenu', { bg = colors.ACCENT2, fg = colors.BLACK, bold = true })
+  hl('Visual', { bg = colors.PRIMARY, fg = colors.BACKGROUND, bold = true })
+  hl('VisualNOS', { bg = colors.PRIMARY, fg = colors.BACKGROUND, bold = true })
+  hl('Search', { bg = colors.PRIMARY, fg = colors.BACKGROUND, bold = true })
+  hl('IncSearch', { bg = colors.ACCENT1, fg = colors.BACKGROUND, bold = true })
+  hl('MatchParen', { bg = colors.ACCENT2, fg = colors.BACKGROUND, bold = true })
+  hl('WildMenu', { bg = colors.ACCENT2, fg = colors.BACKGROUND, bold = true })
 
-  hl('ColorColumn', { bg = colors.BLACK })
-  hl('Cursor', { bg = colors.ACCENT1, fg = colors.BLACK })
+  hl('ColorColumn', { bg = colors.BACKGROUND })
+  hl('Cursor', { bg = colors.ACCENT1, fg = colors.BACKGROUND })
   hl('CursorColumn', { bg = colors.ACCENT3 })
 
   ----------------------------------------------------------------
@@ -1094,10 +1094,10 @@ local function set_custom_colors()
   hl('MoreMsg', { fg = colors.PRIMARY, bold = true })
   hl('Todo', { fg = colors.PRIMARY, bold = true })
 
-  hl('DiffAdd', { bg = colors.BLACK, fg = colors.PRIMARY })
-  hl('DiffChange', { bg = colors.BLACK, fg = colors.PRIMARY })
-  hl('DiffDelete', { bg = colors.BLACK, fg = colors.PRIMARY })
-  hl('DiffText', { bg = colors.BLACK, fg = colors.PRIMARY })
+  hl('DiffAdd', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
+  hl('DiffChange', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
+  hl('DiffDelete', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
+  hl('DiffText', { bg = colors.BACKGROUND, fg = colors.PRIMARY })
 
   hl('LspDiagnosticsError', { fg = colors.PRIMARY, bold = true })
   hl('LspDiagnosticsWarning', { fg = colors.PRIMARY, bold = true })
@@ -1129,8 +1129,8 @@ local function set_custom_colors()
   ----------------------------------------------------------------
   -- Misc
   ----------------------------------------------------------------
-  hl('Folded', { bg = colors.BLACK, fg = colors.ACCENT3 })
-  hl('FoldColumn', { bg = colors.BLACK, fg = colors.ACCENT3 })
+  hl('Folded', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
+  hl('FoldColumn', { bg = colors.BACKGROUND, fg = colors.ACCENT3 })
   hl('Conceal', { fg = colors.ACCENT2 })
   hl('SpecialKey', { fg = colors.ACCENT2 })
   hl('NonText', { fg = colors.ACCENT2 })

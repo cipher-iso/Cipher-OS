@@ -4,7 +4,7 @@
 	"on-sigusr2": "show",
 	"start_hidden": false,
 	"reload_style_on_change": true,
-	"layer": "overlay",
+	"layer": "top",
 	"position": "top",
 	"gtk-layer-shell": true,
 	"exclusive": true,

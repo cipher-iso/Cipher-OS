@@ -2,7 +2,7 @@
 source "$HOME/Scripts/ColorGen/Colors.zsh"
 
 # [ BASH PROMPT ]
-PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}  %{$(echo -ne '\033[0;40m')%}   %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}-%{$(echo -ne '\033[1;38;2;'"$ACCENT2"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%} ] %{$(echo -ne '\033[1;38;2;'"$ACCENT1"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}>%{$(echo -ne '\033[0m')%} "
+PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%} 󰫢%{$(echo -ne '\033[0;40m')%}  %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}[ %{$(echo -ne '\033[1;38;2;'"$SECONDARY"'m')%}%D{%L:%M}%{$(echo -ne '\033[1;38;2;'"$SECONDARY"'m')%} %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}-%{$(echo -ne '\033[1;38;2;'"$SECONDARY"'m')%} ${(U)USER}%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%} ] %{$(echo -ne '\033[0;38;2;'"$ACCENT1"'m')%}%~ %{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}>%{$(echo -ne '\033[0m')%} "
 
 # [ SHELL SETTINGS ]
 setopt globdots
