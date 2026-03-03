@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# ─────────────────────────────────────
-# FILE PATHS
-# ─────────────────────────────────────
+# [ FILE PATHS ]
 COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
 CSS_FILE="$HOME/Scripts/ColorGen/Colors.css"
 LUA_FILE="$HOME/Scripts/ColorGen/Colors.lua"
@@ -10,17 +8,37 @@ ZSH_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 ENCOM="$HOME/.config/kitty/ENCOM.conf"
 
-# ─────────────────────────────────────
-# VALIDATION
-# ─────────────────────────────────────
+# [ DEFAULT PALETTE FOR -d / --default ]
+DEFAULT_COLORS_CONTENT='#!/usr/bin/env bash
+
+# [ PRIMARY COLORS | USED FOR AUTO-DERIVATIVES ]
+BLACK=000000
+PRIMARY=00FF40
+SECONDARY=EBFAFA
+
+# [ ACCENT-OVERRIDES | LEAVE EMPTY FOR AUTO ]
+ACCENT1=323449
+ACCENT2=212337
+ACCENT3=10111C
+'
+
+# [ ARGUMENT PARSING ]
+for arg in "$@"; do
+    case "$arg" in
+        -d|--default)
+            echo "Restoring default colors…"
+            printf "%s\n" "$DEFAULT_COLORS_CONTENT" > "$COLOR_FILE"
+            ;;
+    esac
+done
+
+# [ VALIDATION ]
 [ -f "$COLOR_FILE" ] || { echo "Missing Colors file."; exit 1; }
 [ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
 
 source "$COLOR_FILE"
 
-# ─────────────────────────────────────
-# COLOR CONVERSION
-# ─────────────────────────────────────
+# [ COLOR CONVERSION FUNCTIONS ]
 hex_to_rgb() {
     printf "%d %d %d" "0x${1:0:2}" "0x${1:2:2}" "0x${1:4:2}"
 }
@@ -88,9 +106,7 @@ hsl_transform() {
     }'
 }
 
-# ─────────────────────────────────────
-# DERIVED COLORS
-# ─────────────────────────────────────
+# [ DERIVED COLORS ]
 read g1r g1g g1b <<< "$(hsl_transform "$PRIMARY" -15 1.0 1.0)"
 read g2r g2g g2b <<< "$(hsl_transform "$PRIMARY" 21 1.0 1.0)"
 GRADIENT1=$(rgb_to_hex "$g1r" "$g1g" "$g1b")
@@ -108,9 +124,7 @@ ACCENT1="${ACCENT1:-$AUTO_ACCENT1}"
 ACCENT2="${ACCENT2:-$AUTO_ACCENT2}"
 ACCENT3="${ACCENT3:-$AUTO_ACCENT3}"
 
-# ─────────────────────────────────────
-# WRITE FILES
-# ─────────────────────────────────────
+# [ WRITE CSS FILE ]
 cat > "$CSS_FILE" <<EOF
 @define-color bg #$BLACK;
 @define-color fg #$PRIMARY;
@@ -122,6 +136,7 @@ cat > "$CSS_FILE" <<EOF
 @define-color grad2 #$GRADIENT2;
 EOF
 
+# [ WRITE LUA FILE ]
 cat > "$LUA_FILE" <<EOF
 local M = {}
 M.BLACK="#$BLACK"
@@ -135,12 +150,13 @@ M.GRADIENT2="#$GRADIENT2"
 return M
 EOF
 
+# [ RGB STRING CONVERSION ]
 hex_to_rgb_string() {
     printf "%d;%d;%d" "0x${1:0:2}" "0x${1:2:2}" "0x${1:4:2}"
 }
 
+# [ WRITE ZSH FILE ]
 cat > "$ZSH_FILE" <<EOF
-# RGB (for ANSI truecolor)
 PRIMARY="$(hex_to_rgb_string $PRIMARY)"
 SECONDARY="$(hex_to_rgb_string $SECONDARY)"
 ACCENT1="$(hex_to_rgb_string $ACCENT1)"
@@ -149,7 +165,6 @@ ACCENT3="$(hex_to_rgb_string $ACCENT3)"
 GRADIENT1="$(hex_to_rgb_string $GRADIENT1)"
 GRADIENT2="$(hex_to_rgb_string $GRADIENT2)"
 
-# HEX (normal color codes)
 hPRIMARY="#$PRIMARY"
 hSECONDARY="#$SECONDARY"
 hACCENT1="#$ACCENT1"
@@ -159,9 +174,7 @@ hGRADIENT1="#$GRADIENT1"
 hGRADIENT2="#$GRADIENT2"
 EOF
 
-# ─────────────────────────────────────
-# UPDATE KITTY
-# ─────────────────────────────────────
+# [ UPDATE KITTY ]
 if [ -f "$ENCOM" ]; then
     sed -i \
         -e "s|^active_tab_background.*|active_tab_background   #$PRIMARY|" \
@@ -172,9 +185,7 @@ if [ -f "$ENCOM" ]; then
         kitty @ set-colors --all "$ENCOM" >/dev/null 2>&1 &
 fi
 
-# ─────────────────────────────────────
-# UPDATE IDENTIFIERS (single sed call)
-# ─────────────────────────────────────
+# [ UPDATE IDENTIFIERS ]
 sed -i \
     -e "s|^\$BLACK=.*|\$BLACK=$BLACK|" \
     -e "s|^\$PRIMARY=.*|\$PRIMARY=$PRIMARY|" \

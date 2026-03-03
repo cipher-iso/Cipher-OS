@@ -2,33 +2,44 @@
 set -o pipefail
 shopt -s extglob
 
-export SUDO_PROMPT=$'\e[1;38;2;0;255;64m  > ENTER PASSPHRASE: \e[0m'
+# [ LOAD PRIMARY COLOR FROM COLOR FILE ]
+COLOR_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
+source "$COLOR_FILE"  # assumes PRIMARY is defined in Colors
+
+# [ EXPORT SUDO PROMPT USING PRIMARY COLOR ]
+export SUDO_PROMPT=$'\e[1;38;2;'$PRIMARY'm  > ENTER PASSPHRASE: '
 
 install_arch_updates() {
-    printf "\e[1;38;2;0;255;64m  ┏━  ┏┓┓┏┏┓┏┳┓┏┓┳┳┓  ┳┳┏┓┳┓┏┓┏┳┓┏┓  ━┓
+    # [ HEADER ]
+    printf "\e[1;38;2;%sm  ┏━  ┏┓┓┏┏┓┏┳┓┏┓┳┳┓  ┳┳┏┓┳┓┏┓┏┳┓┏┓  ━┓
   ┃   ┗┓┗┫┗┓ ┃ ┣ ┃┃┃  ┃┃┃┃┃┃┣┫ ┃ ┣    ┃
-  ┗━  ┗┛┗┛┗┛ ┻ ┗┛┛ ┗  ┗┛┣┛┻┛┛┗ ┻ ┗┛  ━┛\e[0m\n"
+  ┗━  ┗┛┗┛┗┛ ┻ ┗┛┛ ┗  ┗┛┣┛┻┛┛┗ ┻ ┗┛  ━┛\e[0m\n" "$PRIMARY"
 
+    # [ SYSTEM UPDATE ]
     sudo -p "$SUDO_PROMPT" pacman -Syu
 
-    printf "\e[38;2;0;255;64m  ┏━  ┳┳┏┓┏┓┳┓  ┳┓┏┓┏┓┏┓┏┓┳┏┳┓┏┓┳┓┳┏┓┏┓  ━┓
+    # [ SUBHEADER ]
+    printf "\e[38;2;%sm  ┏━  ┳┳┏┓┏┓┳┓  ┳┓┏┓┏┓┏┓┏┓┳┏┳┓┏┓┳┓┳┏┓┏┓  ━┓
   ┃   ┃┃┗┓┣ ┣┫  ┣┫┣ ┃┃┃┃┗┓┃ ┃ ┃┃┣┫┃┣ ┗┓   ┃
-  ┗━  ┗┛┗┛┗┛┛┗  ┛┗┗┛┣┛┗┛┗┛┻ ┻ ┗┛┛┗┻┗┛┗┛  ━┛\e[0m\n"
+  ┗━  ┗┛┗┛┗┛┛┗  ┛┗┗┛┣┛┗┛┗┛┻ ┻ ┗┛┛┗┻┗┛┗┛  ━┛\e[0m\n" "$PRIMARY"
 
+    # [ AUR UPDATE IF AVAILABLE ]
     if command -v yay &> /dev/null; then
         yay -Syu
     fi
 
+    # [ FLATPAK UPDATE IF AVAILABLE ]
     if command -v flatpak &> /dev/null; then
-        printf "\e[38;2;0;255;64m  ┏━  ┏┓┓ ┏┓┏┳┓┏┓┏┓┓┏┓  ┏┓┏┓┏┓┏┳┓┓ ┏┏┓┳┓┏┓  ━┓
+        printf "\e[38;2;%sm  ┏━  ┏┓┓ ┏┓┏┳┓┏┓┏┓┓┏┓  ┏┓┏┓┏┓┏┳┓┓ ┏┏┓┳┓┏┓  ━┓
   ┃   ┣ ┃ ┣┫ ┃ ┃┃┣┫┃┫   ┗┓┃┃┣  ┃ ┃┃┃┣┫┣┫┣    ┃
-  ┗━  ┻ ┗┛┛┗ ┻ ┣┛┛┗┛┗┛  ┗┛┗┛┻  ┻ ┗┻┛┛┗┛┗┗┛  ━┛\e[0m\n"
+  ┗━  ┻ ┗┛┛┗ ┻ ┣┛┛┗┛┗┛  ┗┛┗┛┻  ┻ ┗┻┛┛┗┛┗┗┛  ━┛\e[0m\n" "$PRIMARY"
         flatpak update -y
     fi
 
-    printf "\e[38;2;0;255;64m  ┏━  ┳┳┏┓┳┓┏┓┏┳┓┏┓┏┓  ┏┓┏┓┳┳┓┏┓┓ ┏┓┏┳┓┏┓╻  ━┓
+    # [ FOOTER ]
+    printf "\e[38;2;%sm  ┏━  ┳┳┏┓┳┓┏┓┏┳┓┏┓┏┓  ┏┓┏┓┳┳┓┏┓┓ ┏┓┏┳┓┏┓╻  ━┓
   ┃   ┃┃┃┃┃┃┣┫ ┃ ┣ ┗┓  ┃ ┃┃┃┃┃┃┃┃ ┣  ┃ ┣ ┃   ┃
-  ┗━  ┗┛┣┛┻┛┛┗ ┻ ┗┛┗┛  ┗┛┗┛┛ ┗┣┛┗┛┗┛ ┻ ┗┛•  ━┛\e[0m\n"
+  ┗━  ┗┛┣┛┻┛┛┗ ┻ ┗┛┗┛  ┗┛┗┛┛ ┗┣┛┗┛┗┛ ┻ ┗┛•  ━┛\e[0m\n" "$PRIMARY"
 }
 
 list_updates() {

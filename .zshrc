@@ -6,6 +6,7 @@ PROMPT=$'\n'"%{$(echo -ne '\033[1;38;2;'"$PRIMARY"'m')%}  %{$(echo -ne '\033[
 
 # [ SHELL SETTINGS ]
 setopt globdots
+export EDITOR=nvim
 export TERMINAL=kitty
 export PATH="$HOME/Scripts:$PATH"
 export PATH="$HOME/Scripts/ColorGen:$PATH"

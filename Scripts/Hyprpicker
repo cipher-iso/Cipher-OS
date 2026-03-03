@@ -1,20 +1,46 @@
 #!/usr/bin/env bash
 
+# [ FILES AND COMMANDS ]
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
 TOGGLE="ToggleScreenShare"
+COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
+GEN_CMD="ReloadWaybar"
 
-# Get Screenshare State
+# [ SCREENSHARE STATE ]
 DID_ENABLE=false
 
-# Enable Screenshare if Disabled
-if [ ! -f "$STATE_FILE" ]; then "$TOGGLE" toggle; DID_ENABLE=true; fi
+# [ ENABLE SCREENSHARE IF DISABLED ]
+if [ ! -f "$STATE_FILE" ]; then
+    "$TOGGLE" toggle
+    DID_ENABLE=true
+fi
 
-# Activate Hyprpicker
-sleep 0.02; hyprpicker -a & HYPRSHOT_PID=$!
+# [ RUN HYPRPICKER ]
+sleep 0.02
+hyprpicker -a & HYPRPICKER_PID=$!
 
-# Wait until Hyprpicker closes
-while hyprctl clients | grep -qi hyprpicker; do sleep 0.01; done
-wait "$HYPRSHOT_PID" 2>/dev/null
+# [ WAIT FOR HYPRPICKER TO CLOSE ]
+while hyprctl clients | grep -qi hyprpicker; do
+    sleep 0.01
+done
+wait "$HYPRPICKER_PID" 2>/dev/null
 
-# Restore Screenshare State [if disabled]
-if [ "$DID_ENABLE" = true ]; then "$TOGGLE" toggle; fi
+# [ READ PICKED COLOR AND STRIP # ]
+PICKED_COLOR="$(wl-paste | tr -d '#\n')"
+
+# [ VALIDATE COLOR ]
+if [[ ! "$PICKED_COLOR" =~ ^[0-9A-Fa-f]{6}$ ]]; then
+    echo "Invalid color picked: $PICKED_COLOR"
+    exit 1
+fi
+
+# [ UPDATE PRIMARY COLOR ]
+sed -i "s|^PRIMARY=.*|PRIMARY=$PICKED_COLOR|" "$COLOR_FILE"
+
+# [ GENERATE COLORS ]
+"$GEN_CMD"
+
+# [ RESTORE SCREENSHARE STATE ]
+if [ "$DID_ENABLE" = true ]; then
+    "$TOGGLE" toggle
+fi
