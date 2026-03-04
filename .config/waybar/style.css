@@ -47,14 +47,16 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #workspaces button.special:hover {
     	color: @fg2;
     	padding: 0em 0.5em;
- 	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5);
+ 	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5),
+		    0 2 4 alpha(@bg, 0.75);
     	text-shadow: 0em 0em 0.25em alpha(@fg2, 0.5);
 	background: @bg, linear-gradient(to bottom,
       		    alpha(@fg2, 0.0), alpha(@fg2, 0.1));}
 #workspaces button.special,
 #workspaces button:hover{ 
 	color: @fg;
-	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5);
+	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5),
+		    0 2 4 alpha(@bg, 0.75);
 	text-shadow: 0em 0em 0.25em alpha(@fg, 0.5);
     	background: @bg, linear-gradient(to bottom,
 		    alpha(@grad2, 0.0), alpha(@grad1, 0.15)) }
