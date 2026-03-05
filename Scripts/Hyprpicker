@@ -2,9 +2,12 @@
 
 # [ FILES AND COMMANDS ]
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
-TOGGLE="ToggleScreenShare"
-COLOR_FILE="$HOME/Scripts/ColorGen/Colors"
+TOGGLE="ScreenShare"
+IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 GEN_CMD="ReloadWaybar"
+
+# [ VALIDATION ]
+[ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
 
 # [ SCREENSHARE STATE ]
 DID_ENABLE=false
@@ -15,30 +18,19 @@ if [ ! -f "$STATE_FILE" ]; then
     DID_ENABLE=true
 fi
 
-# [ RUN HYPRPICKER ]
+# [ RUN HYPRPICKER AND CAPTURE COLOR ]
 sleep 0.02
-hyprpicker -a & HYPRPICKER_PID=$!
-
-# [ WAIT FOR HYPRPICKER TO CLOSE ]
-while hyprctl clients | grep -qi hyprpicker; do
-    sleep 0.01
-done
-wait "$HYPRPICKER_PID" 2>/dev/null
-
-# [ READ PICKED COLOR AND STRIP # ]
-PICKED_COLOR="$(wl-paste | tr -d '#\n')"
+PICKED_COLOR="$(hyprpicker -a 2>/dev/null | tr -d '#\n')"
 
 # [ VALIDATE COLOR ]
 if [[ ! "$PICKED_COLOR" =~ ^[0-9A-Fa-f]{6}$ ]]; then
     echo "Invalid color picked: $PICKED_COLOR"
+    [ "$DID_ENABLE" = true ] && "$TOGGLE" toggle
     exit 1
 fi
 
-# [ UPDATE PRIMARY COLOR ]
-sed -i "s|^PRIMARY=.*|PRIMARY=$PICKED_COLOR|" "$COLOR_FILE"
-
-# [ GENERATE COLORS ]
-"$GEN_CMD"
+# [ OVERWRITE $PRIMARY IN IDENTIFIERS ]
+sed -i "s|^\$PRIMARY=.*|\$PRIMARY=$PICKED_COLOR|" "$IDENTIFIERS"
 
 # [ RESTORE SCREENSHARE STATE ]
 if [ "$DID_ENABLE" = true ]; then

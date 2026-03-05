@@ -14,8 +14,8 @@
    "favicon_service": "google",
    "font": {
       "normal": {
-         "family": "JetBrainsMono Nerd Font",
-         "size": 16
+         "family": "JetBrainsMono Nerd Font Propo",
+         "size": 20
       }
    },
    "theme": {
@@ -25,9 +25,9 @@
       }
    },
    "launcher_window": {
-      "opacity": 0.85,
+      "opacity": 0.8,
       "client_side_decorations": {
-         "enabled": false
+         "enabled": true
       }
    },
    "providers": {
