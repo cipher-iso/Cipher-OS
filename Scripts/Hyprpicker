@@ -6,9 +6,6 @@ TOGGLE="ScreenShare"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 GEN_CMD="ReloadWaybar"
 
-# [ VALIDATION ]
-[ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
-
 # [ SCREENSHARE STATE ]
 DID_ENABLE=false
 
