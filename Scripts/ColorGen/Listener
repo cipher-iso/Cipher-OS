@@ -3,8 +3,10 @@
 # [ FILES ]
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
 UPDATE_SCRIPT="$HOME/Scripts/ReloadWaybar"
+RESTORE_BORDERS="$HOME/Scripts/RestoreBorders"
 # [ MAIN LOOP ]
 while true; do
     inotifywait -e close_write "$IDENTIFIERS" >/dev/null 2>&1
 "$UPDATE_SCRIPT"
+"$RESTORE_BORDERS"
 done

@@ -2,7 +2,7 @@
 
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
 WINDOWRULES="$HOME/.config/hypr/Config/WindowRules.conf"
-source "$HOME/Scripts/ColorGen/Colors" 2>/dev/null
+eval "$(sed 's/^\$//g' "$HOME/.config/hypr/Config/Identifiers.conf")" 2>/dev/null
 
 toggle_screenshare() {
 if [ -f "$STATE_FILE" ]; then
