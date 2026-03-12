@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# [ RELOAD HYPRLAND ]
+hyprpm reload
+hyprctl reload
+ScreenShare Borders
+
+# [ REGENERATE COLORS ]
+GenerateColors
+
+# [ STOP PROCESSES ]
+killall hyprsunset hypridle solaar vicinae 2>/dev/null
+
+# [ START PROCESSES ]
+{   Waybar Reload
+    hyprsunset -i --gamma_max 200
+    hypridle
+    vicinae server
+    solar -w hide
+} >/dev/null 2>&1 &

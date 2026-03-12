@@ -2,7 +2,7 @@
 /* MAIN SETTINGS */
 	"on-sigusr1": "hide",
 	"on-sigusr2": "show",
-	"start_hidden": false,
+	"start_hidden": true,
 	"reload_style_on_change": true,
 	"layer": "top",
 	"position": "top",
@@ -17,7 +17,7 @@
 	"modules-right": [ "idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock" ],
 /* AUTOHIDE - STARTUP */
 	"custom/autohide": {
-		"exec": "~/.config/waybar/Modules/WaybarAutoHide",
+		"exec": "~/.config/waybar/Modules/Waybar AutoHide",
 		"interval": "once",
 	},
 /* POWER MENU - EXPANDER */
@@ -81,11 +81,11 @@
         },
 /* WAYBAR LOCK */
 	"custom/togglewaybar": {
-   		"exec": "~/.config/waybar/Modules/WaybarAutoHide module",
+   		"exec": "~/.config/waybar/Modules/Waybar Module",
 		"interval": 1,
     		"format": "[ {} ]",
     		"return-type": "json",
-    		"on-click": "~/.config/waybar/Modules/WaybarAutoHide toggle"
+    		"on-click": "~/.config/waybar/Modules/Waybar Lock"
 	},
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {

@@ -116,7 +116,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #custom-reboot,
 #custom-logout,
 #custom-expand,
-#custom-lock		{ transition: color 0.25s ease; font-size: 100% }
+#custom-lock		{ transition: font-size 0.1s ease, color 0.25s ease; font-size: 100% }
 #custom-updates:hover,
 #network:hover,
 #bluetooth:hover,

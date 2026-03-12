@@ -4,7 +4,7 @@
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
 TOGGLE="ScreenShare"
 IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
-GEN_CMD="ReloadWaybar"
+GEN_CMD="ReloadSystem"
 
 # [ SCREENSHARE STATE ]
 DID_ENABLE=false

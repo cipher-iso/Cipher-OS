@@ -25,9 +25,9 @@ uniform int ASPECT_RATIO_MODE; // 4:3 mode
 #define BLUR_STRENGTH        0.0006
 #define BEAM_WIDTH           0.3
 #define VERTICAL_JITTER      3.5
-#define HORIZONTAL_JITTER    0.000//14
+#define HORIZONTAL_JITTER    0.00008
 #define HPHASE_NOISE         0.00015
-#define VDRIFT_STRENGTH      0.0
+#define VDRIFT_STRENGTH      0.00005
 #define SHIMMER_STRENGTH     0.00035
 #define SCANLINE_INTENSITY   0.02   // Subtle CRT scanline brightness
 #define GRILLE_STRENGTH      0.25
@@ -139,7 +139,7 @@ void main() {
 
     // --- Jitter for CRT simulation ---
     vec2 uvSim = uv;
-    uvSim.y += sin(time*1.7)*VDRIFT_STRENGTH;
+    uvSim.y += sin(time*100.0)*VDRIFT_STRENGTH;
     uvSim.x += (hash(vec2(floor(time*120.0),0.0))-0.5)*2.0*HORIZONTAL_JITTER;
 
     vec3 base = texture(tex, uvSim).rgb;
