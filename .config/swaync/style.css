@@ -61,8 +61,10 @@ scrolledwindow {
 .notification-background {
   background: @bg;
   box-shadow: none;
-  margin: 20px;
-}
+  margin-top: 20px;
+  margin-right: 20px;
+  min-width: 395px;
+  }
 
 .notification-row .inline-reply-entry {
   padding: 5px 10px;
@@ -79,7 +81,7 @@ scrolledwindow {
 }
 
 .notification .notification-content {
-  margin: 5px;
+  margin: 0px;
 }
 
 .notification-content .text-box {
@@ -88,20 +90,20 @@ scrolledwindow {
 
 .notification-content .time {
   font-size: 0.95rem;
-  padding: 2px 0;
+  padding: 0 0;
   font-weight: 800;
 }
 
 .notification .summary {
   font-weight: 800;
   margin-bottom: 2px;
-  padding: 2px 0;
-  font-size: 1.2rem;
+  padding: 0 -0;
+  font-size: 1.6rem;
 }
 
 .notification .body {
   color: @fg2;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .notification.critical {

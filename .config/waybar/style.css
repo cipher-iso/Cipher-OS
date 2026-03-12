@@ -11,7 +11,10 @@
 window#waybar>box { background-color: @bg; padding-left: 0.5em; padding-right: 0.5em }
 
 /* TOOLTIPS */
-tooltip label 	{ color: @fg; margin: 0.5em; font-size: 0.9em; font-weight: 700 }
+tooltip label 	{ color: @fg;
+		  margin: 0.5em;
+		  font-size: 0.9em; font-weight: 700;
+		  text-shadow: 0em 0em 0.2em alpha(@fg, 0.5) }
 tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 
 /* WORKSPACES */
@@ -21,7 +24,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 	margin-right: 1em;
 	border-radius: 0.5em;
 	background: linear-gradient(135deg, @grad2, @grad1, @grad2);
-	box-shadow: 0em 0em 0.25em -0.1em @fg,
+	box-shadow: 0em 0em 0.25em -0.1em alpha(@fg, 0.75),
 		inset 0em 1em 1em -0.25em alpha(@grad1, 0.75),
 		inset 0em -0.5em 0.5em -0.5em @grad2,
 		inset -1em 0em 1em -1em @grad2,

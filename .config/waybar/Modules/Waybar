@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
+shopt -s nocasematch
+set -- "${@,,}"
+
 LOCKED="$HOME/.config/waybar/Modules/.Locked"
 VISIBLE="$HOME/.config/waybar/Modules/.Visible"
 CONFIG="$HOME/.config/waybar/config.jsonc"
 POLL=0.10
+
+# [ AUTO-SHOW PERCENTAGE ]
+ENTRY=1
+# [ AUTO-HIDE PERCENTAGE ]
+EXIT=10
 
 # [ GREP FUNCTIONS ]
 cursor(){ hyprctl cursorpos; }
@@ -28,42 +36,36 @@ special(){ hyprctl monitors | awk '
 
 # [ RELOAD WAYBAR ]
 reload(){
-    # [ START/STOP PROCESSES ]
     killall waybar swayosd-server swaync 2>/dev/null
     waybar >/dev/null 2>&1 &
     swayosd-server >/dev/null 2>&1 &
     swaync >/dev/null 2>&1 &
 
-    # [ KILL AUTOSHOW/AUTOHIDE SCRIPT ]
     while ! pgrep -x waybar >/dev/null; do sleep 0.05; done
     sleep 0.3
     pkill -fi "Waybar AutoHide" 2>/dev/null
 
-    # [ RESTORE STATE ]
-    if [[ -f "$LOCKED" ]]
-    then pkill -SIGUSR2 waybar
-    else pkill -SIGUSR1 waybar
-    	 nohup Waybar AutoHide >/dev/null 2>&1 &
+    if [[ -f "$LOCKED" ]]; then
+        pkill -SIGUSR2 waybar
+    else
+        pkill -SIGUSR1 waybar
+        nohup Waybar AutoHide >/dev/null 2>&1 &
     fi
 }
 
 # [ TOGGLE WAYBAR VISIBILITY ]
 toggle(){
     if pgrep -fi "Waybar AutoHide" >/dev/null; then
-        # [ STOP AUTOHIDE AND HIDE BAR ]
         pkill -fi "Waybar AutoHide" 2>/dev/null
         pkill -SIGUSR1 waybar
         rm -f "$VISIBLE"
     else
         if [ -f "$VISIBLE" ]; then
-            # [ HIDE BAR ]
             pkill -SIGUSR1 waybar
             rm -f "$VISIBLE"
         else
-            # [ SHOW BAR ]
             pkill -SIGUSR2 waybar
             touch "$VISIBLE"
-            # [ RESTART AUTOHIDE IF UNLOCKED ]
             if [ ! -f "$LOCKED" ]; then nohup Waybar AutoHide >/dev/null 2>&1 & fi
         fi
     fi
@@ -81,38 +83,40 @@ autohide(){
         POSITION=$(position)
         tiled_count=$(tiled)
         if special; then special_flag=1; else special_flag=0; fi
+
         case "$POSITION" in
             top)
-                EDGE1=$(( HEIGHT / 100 ))
-                EDGE2=$(( HEIGHT * 15 / 100 ))
+                EDGE1=$(( HEIGHT * ENTRY / 100 ))
+                EDGE2=$(( HEIGHT * EXIT / 100 ))
                 SHOW_CONDITION=$(( Y <= EDGE1 ))
                 HIDE_CONDITION=$(( Y > EDGE2 ))
                 ;;
             bottom)
-                EDGE1=$(( HEIGHT * 85 / 100 ))
-                EDGE2=$(( HEIGHT * 99 / 100 ))
-                SHOW_CONDITION=$(( Y >= EDGE2 ))
-                HIDE_CONDITION=$(( Y < EDGE1 ))
+                EDGE1=$(( HEIGHT * (100 - ENTRY) / 100 ))
+                EDGE2=$(( HEIGHT * (100 - EXIT) / 100 ))
+                SHOW_CONDITION=$(( Y >= EDGE1 ))
+                HIDE_CONDITION=$(( Y < EDGE2 ))
                 ;;
             left)
-                EDGE1=$(( WIDTH / 100 ))
-                EDGE2=$(( WIDTH * 15 / 100 ))
+                EDGE1=$(( WIDTH * ENTRY / 100 ))
+                EDGE2=$(( WIDTH * EXIT / 100 ))
                 SHOW_CONDITION=$(( X <= EDGE1 ))
                 HIDE_CONDITION=$(( X > EDGE2 ))
                 ;;
             right)
-                EDGE1=$(( WIDTH * 85 / 100 ))
-                EDGE2=$(( WIDTH * 99 / 100 ))
-                SHOW_CONDITION=$(( X >= EDGE2 ))
-                HIDE_CONDITION=$(( X < EDGE1 ))
+                EDGE1=$(( WIDTH * (100 - ENTRY) / 100 ))
+                EDGE2=$(( WIDTH * (100 - EXIT) / 100 ))
+                SHOW_CONDITION=$(( X >= EDGE1 ))
+                HIDE_CONDITION=$(( X < EDGE2 ))
                 ;;
             *)
-                EDGE1=$(( HEIGHT / 100 ))
-                EDGE2=$(( HEIGHT * 10 / 100 ))
+                EDGE1=$(( HEIGHT * ENTRY / 100 ))
+                EDGE2=$(( HEIGHT * EXIT / 100 ))
                 SHOW_CONDITION=$(( Y <= EDGE1 ))
                 HIDE_CONDITION=$(( Y > EDGE2 ))
                 ;;
         esac
+
         if (( special_flag || tiled_count==0 || tiled_count>=2 || (tiled_count==1 && SHOW_CONDITION) )); then
             if ! $bar_visible; then
                 pkill -SIGUSR2 waybar
@@ -133,18 +137,18 @@ autohide(){
 # [ LOCK/UNLOCK WAYBAR ]
 lock(){
     if [ -f "$LOCKED" ]; then
-        # [ UNLOCK ]
+        # UNLOCK
         rm "$LOCKED"
         pkill -SIGUSR2 waybar
         touch "$VISIBLE"
-        # [ START CONTINUOUS POLLING IN BACKGROUND ]
+
         (
             bar_visible=true
             while true; do
                 tiled_count=$(tiled)
                 special_flag=0
                 if special; then special_flag=1; fi
-                # [ BEING POLLING IF > 1 TILED WINDOW > NOT SPECIAL ]
+
                 if (( tiled_count == 1 && special_flag == 0 )); then
                     CURSOR=$(cursor)
                     IFS=',' read -r X Y <<< "$CURSOR"
@@ -152,14 +156,30 @@ lock(){
                     WIDTH=${RES%x*}
                     HEIGHT=${RES#*x}
                     POSITION=$(position)
+
                     case "$POSITION" in
-                        top) EDGE2=$(( HEIGHT * 15 / 100 )); HIDE_CONDITION=$(( Y > EDGE2 ));;
-                        bottom) EDGE2=$(( HEIGHT * 99 / 100 )); HIDE_CONDITION=$(( Y < EDGE2 ));;
-                        left) EDGE2=$(( WIDTH * 15 / 100 )); HIDE_CONDITION=$(( X > EDGE2 ));;
-                        right) EDGE2=$(( WIDTH * 99 / 100 )); HIDE_CONDITION=$(( X < EDGE2 ));;
-                        *) EDGE2=$(( HEIGHT * 10 / 100 )); HIDE_CONDITION=$(( Y > EDGE2 ));;
+                        top)
+                            EDGE2=$(( HEIGHT * EXIT / 100 ))
+                            HIDE_CONDITION=$(( Y > EDGE2 ))
+                            ;;
+                        bottom)
+                            EDGE2=$(( HEIGHT * (100 - EXIT) / 100 ))
+                            HIDE_CONDITION=$(( Y < EDGE2 ))
+                            ;;
+                        left)
+                            EDGE2=$(( WIDTH * EXIT / 100 ))
+                            HIDE_CONDITION=$(( X > EDGE2 ))
+                            ;;
+                        right)
+                            EDGE2=$(( WIDTH * (100 - EXIT) / 100 ))
+                            HIDE_CONDITION=$(( X < EDGE2 ))
+                            ;;
+                        *)
+                            EDGE2=$(( HEIGHT * EXIT / 100 ))
+                            HIDE_CONDITION=$(( Y > EDGE2 ))
+                            ;;
                     esac
-                    # [ POLL UNTIL HIDE_CONDITION IS MET ]
+
                     if (( HIDE_CONDITION )); then
                         pkill -SIGUSR1 waybar
                         rm -f "$VISIBLE"
@@ -172,7 +192,7 @@ lock(){
             done
         ) &
     else
-        # [ LOCK ]
+        # LOCK
         touch "$LOCKED"
         pkill -fi "Waybar AutoHide" 2>/dev/null
         pkill -SIGUSR2 waybar
@@ -181,7 +201,7 @@ lock(){
 }
 
 # [ WAYBAR MODULE ]
-module() {
+module(){
     if [ -f "$LOCKED" ]; then
         printf '{"text":"","tooltip":"[ TASKBAR LOCKED ]"}\n'
     else

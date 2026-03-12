@@ -12,6 +12,7 @@ GenerateColors
 killall hyprsunset hypridle solaar vicinae 2>/dev/null
 
 # [ START PROCESSES ]
+bash -c 'hyprctl hyprsunset gamma $(cat /tmp/current_gamma)'
 {   Waybar Reload
     hyprsunset -i --gamma_max 200
     hypridle

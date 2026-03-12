@@ -192,10 +192,10 @@
 			"on-scroll-up": "shift_up",
 			"on-scroll-down": "shift_down" },
 		"format": {
-			"months":     "<span color='#F0F0F0'>{}</span>",
-			"days":       "<span color='#444E58'>{}</span>",
-			"weekdays":   "<span color='#2D333A'>{}</span>",
-			"today":      "<span color='#00FF40'><b>{}</b></span>" }},
+			"months":     "<span color='#EBFAFA'>{}</span>",
+			"days":       "{}",
+			"weekdays":   "{}",
+			"today":      "<span color='#EBFAFA'>{}</span>" }},
 	},
 /* LOCKSCREEN MODULE */
 	"custom/lock": {

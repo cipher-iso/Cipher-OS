@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
+# Toggle mute for the active window, including child processes
 
-# Get Active-Window PID
-PID=$(hyprctl activewindow -j | jq -r '.pid')
-TARGET_PID=$(find_stream_pid "$PID")
+ACTIVE_PID=$(hyprctl activewindow -j | jq -r '.pid')
+ACTIVE_TITLE=$(hyprctl activewindow -j | jq -r '.initialTitle')
 
-# Find Pipewire Stream
-find_stream_pid() {
-    local pid=$1
-    while [ -n "$pid" ]; do
-        # Does Active-Window have Stream?
-        if wpctl status | grep -q "pid = $pid"; then
-            echo "$pid"
-            return 0
-        fi
-        # If not, try first PID
-        pid=$(pgrep -P "$pid" | head -n1)
-    done
-    return 1
-}
-
-# Output Notification & Function
-if [ -n "$TARGET_PID" ]; then wpctl set-mute -p "$TARGET_PID" toggle
-else notify-send "[ MUTE ACTIVE WINDOW ]" "[ NO SOURCE FOUND ]"; fi
-
+if [ -n "$ACTIVE_PID" ]; then
+        wpctl set-mute -p "$ACTIVE_PID" toggle
+    notify-send "[ MUTE ACTIVE-WINDOW ]" "[  | $ACTIVE_TITLE ]"
+else
+    notify-send "[ MUTE FAILED! ]" "> NO CLIENT FOUND!"
+fi
