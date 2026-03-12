@@ -41,7 +41,7 @@ if [ ! -f "$STATE_FILE" ]; then
 	TOOLTIP="[ SESSION INCOGNITO ]"
 else
 	ICON=""
-	TOOLTIP="[ SESSION VISIBLE ]"
+	TOOLTIP="[ SESSION EXPOSED ]"
 fi
 
 printf '{"text":"%s","tooltip":"%s"}\n' "$ICON" "$TOOLTIP"

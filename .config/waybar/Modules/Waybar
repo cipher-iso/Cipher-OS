@@ -1,157 +1,199 @@
 #!/usr/bin/env bash
 
-STATE_FILE="$HOME/.config/waybar/Modules/.Locked"
-AUTO_FILE="$HOME/.config/waybar/Modules/.Visible"
-CONFIG_FILE="$HOME/.config/waybar/config.jsonc"
-POLL_DELAY=0.10
+LOCKED="$HOME/.config/waybar/Modules/.Locked"
+VISIBLE="$HOME/.config/waybar/Modules/.Visible"
+CONFIG="$HOME/.config/waybar/config.jsonc"
+POLL=0.10
 
 # [ GREP FUNCTIONS ]
-get_cursor_pos() { hyprctl cursorpos; }
+cursor(){ hyprctl cursorpos; }
+resolution(){ hyprctl -j monitors | jq -r '.[] | select(.focused==true) | "\(.width)x\(.height)"'; }
+position(){ grep -m1 '"position"' "$CONFIG" | sed -E 's/.*"position":[[:space:]]*"([^"]+)".*/\1/'; }
 
-get_resolution() {
-    hyprctl -j monitors | jq -r '.[] | select(.focused==true) | "\(.width)x\(.height)"'
-}
-
-get_bar_position() {
-    grep -m1 '"position"' "$CONFIG_FILE" | sed -E 's/.*"position":[[:space:]]*"([^"]+)".*/\1/'
-}
-
-get_tiled_on_active_ws() {
-    local ws=$(hyprctl activeworkspace | awk '/workspace ID/ {print $3}')
-    hyprctl clients | awk -v ws="$ws" '
+# [ TILED WINDOWS IDENTIFIER ]
+tiled(){ local ws=$(hyprctl activeworkspace | awk '/workspace ID/ {print $3}'); hyprctl clients | awk -v ws="$ws" '
         /^Window /{cur_ws="";floating=""}
         /^\s*workspace:/{cur_ws=$2}
         /^\s*floating:/{floating=$2}
         cur_ws==ws && floating==0 {count++;cur_ws=""}
-        END{print count+0}'
-}
+        END{print count+0}'; }
 
-focused_special_ws() {
-    hyprctl monitors | awk '
+# [ SPECIAL WORKSPACE IDENTIFIER ]
+special(){ hyprctl monitors | awk '
         BEGIN {focused=0; special=-1}
         /^Monitor / {focused=0; special=-1}
         /focused: yes/ {focused=1}
         /special workspace:/ {special=$3}
-        END {exit !(focused==1 && special != -1 && special != 0)}'
-}
+        END {exit !(focused==1 && special != -1 && special != 0)}'; }
 
 # [ RELOAD WAYBAR ]
-reload() {
-    # [ STOP PROCESSES ]
+reload(){
+    # [ START/STOP PROCESSES ]
     killall waybar swayosd-server swaync 2>/dev/null
-    # [ START PROCESSES ]
     waybar >/dev/null 2>&1 &
     swayosd-server >/dev/null 2>&1 &
     swaync >/dev/null 2>&1 &
-    pkill -f Waybar 2>/dev/null
+
+    # [ KILL AUTOSHOW/AUTOHIDE SCRIPT ]
+    while ! pgrep -x waybar >/dev/null; do sleep 0.05; done
+    sleep 0.3
+    pkill -fi "Waybar AutoHide" 2>/dev/null
+
+    # [ RESTORE STATE ]
+    if [[ -f "$LOCKED" ]]
+    then pkill -SIGUSR2 waybar
+    else pkill -SIGUSR1 waybar
+    	 nohup Waybar AutoHide >/dev/null 2>&1 &
+    fi
 }
 
-toggle() {
-if pgrep -x waybar >/dev/null; then
-        killall waybar 2>/dev/null
-        pkill -f Waybar 2>/dev/null
-else
-	waybar >/dev/null 2>&1 &
-fi
+# [ TOGGLE WAYBAR VISIBILITY ]
+toggle(){
+    if pgrep -fi "Waybar AutoHide" >/dev/null; then
+        # [ STOP AUTOHIDE AND HIDE BAR ]
+        pkill -fi "Waybar AutoHide" 2>/dev/null
+        pkill -SIGUSR1 waybar
+        rm -f "$VISIBLE"
+    else
+        if [ -f "$VISIBLE" ]; then
+            # [ HIDE BAR ]
+            pkill -SIGUSR1 waybar
+            rm -f "$VISIBLE"
+        else
+            # [ SHOW BAR ]
+            pkill -SIGUSR2 waybar
+            touch "$VISIBLE"
+            # [ RESTART AUTOHIDE IF UNLOCKED ]
+            if [ ! -f "$LOCKED" ]; then nohup Waybar AutoHide >/dev/null 2>&1 & fi
+        fi
+    fi
 }
 
 # [ AUTO-HIDE WAYBAR ]
-autohide() {
-bar_visible=false
-while true; do
-    CURSOR=$(get_cursor_pos)
-    IFS=',' read -r X Y <<< "$CURSOR"
-    RES=$(get_resolution)
-    WIDTH=${RES%x*}
-    HEIGHT=${RES#*x}
-    POSITION=$(get_bar_position)
-    tiled=$(get_tiled_on_active_ws)
-    if focused_special_ws; then
-        special=1
-    else
-        special=0
-    fi
-    case "$POSITION" in
-
-        top)
-            EDGE1=$(( HEIGHT / 100 ))
-            EDGE2=$(( HEIGHT * 15 / 100 ))
-            SHOW_CONDITION=$(( Y <= EDGE1 ))
-            HIDE_CONDITION=$(( Y > EDGE2 ))
-            ;;
-        bottom)
-            EDGE1=$(( HEIGHT * 85 / 100 ))
-            EDGE2=$(( HEIGHT * 99 / 100 ))
-            SHOW_CONDITION=$(( Y >= EDGE2 ))
-            HIDE_CONDITION=$(( Y < EDGE1 ))
-            ;;
-        left)
-            EDGE1=$(( WIDTH / 100 ))
-            EDGE2=$(( WIDTH * 15 / 100 ))
-            SHOW_CONDITION=$(( X <= EDGE1 ))
-            HIDE_CONDITION=$(( X > EDGE2 ))
-            ;;
-        right)
-            EDGE1=$(( WIDTH * 85 / 100 ))
-            EDGE2=$(( WIDTH * 99 / 100 ))
-            SHOW_CONDITION=$(( X >= EDGE2 ))
-            HIDE_CONDITION=$(( X < EDGE1 ))
-            ;;
-        *)
-            EDGE1=$(( HEIGHT / 100 ))
-            EDGE2=$(( HEIGHT * 10 / 100 ))
-            SHOW_CONDITION=$(( Y <= EDGE1 ))
-            HIDE_CONDITION=$(( Y > EDGE2 ))
-            ;;
-    esac
-    if (( special || tiled==0 || tiled>=2 || (tiled==1 && SHOW_CONDITION) )); then
-        if ! $bar_visible; then
-            pkill -SIGUSR2 waybar
-            touch "$AUTO_FILE"
-            bar_visible=true
+autohide(){
+    bar_visible=false
+    while true; do
+        CURSOR=$(cursor)
+        IFS=',' read -r X Y <<< "$CURSOR"
+        RES=$(resolution)
+        WIDTH=${RES%x*}
+        HEIGHT=${RES#*x}
+        POSITION=$(position)
+        tiled_count=$(tiled)
+        if special; then special_flag=1; else special_flag=0; fi
+        case "$POSITION" in
+            top)
+                EDGE1=$(( HEIGHT / 100 ))
+                EDGE2=$(( HEIGHT * 15 / 100 ))
+                SHOW_CONDITION=$(( Y <= EDGE1 ))
+                HIDE_CONDITION=$(( Y > EDGE2 ))
+                ;;
+            bottom)
+                EDGE1=$(( HEIGHT * 85 / 100 ))
+                EDGE2=$(( HEIGHT * 99 / 100 ))
+                SHOW_CONDITION=$(( Y >= EDGE2 ))
+                HIDE_CONDITION=$(( Y < EDGE1 ))
+                ;;
+            left)
+                EDGE1=$(( WIDTH / 100 ))
+                EDGE2=$(( WIDTH * 15 / 100 ))
+                SHOW_CONDITION=$(( X <= EDGE1 ))
+                HIDE_CONDITION=$(( X > EDGE2 ))
+                ;;
+            right)
+                EDGE1=$(( WIDTH * 85 / 100 ))
+                EDGE2=$(( WIDTH * 99 / 100 ))
+                SHOW_CONDITION=$(( X >= EDGE2 ))
+                HIDE_CONDITION=$(( X < EDGE1 ))
+                ;;
+            *)
+                EDGE1=$(( HEIGHT / 100 ))
+                EDGE2=$(( HEIGHT * 10 / 100 ))
+                SHOW_CONDITION=$(( Y <= EDGE1 ))
+                HIDE_CONDITION=$(( Y > EDGE2 ))
+                ;;
+        esac
+        if (( special_flag || tiled_count==0 || tiled_count>=2 || (tiled_count==1 && SHOW_CONDITION) )); then
+            if ! $bar_visible; then
+                pkill -SIGUSR2 waybar
+                touch "$VISIBLE"
+                bar_visible=true
+            fi
+        elif (( tiled_count==1 && HIDE_CONDITION )); then
+            if $bar_visible; then
+                pkill -SIGUSR1 waybar
+                rm -f "$VISIBLE"
+                bar_visible=false
+            fi
         fi
-    elif (( tiled==1 && HIDE_CONDITION )); then
-        if $bar_visible; then
-            pkill -SIGUSR1 waybar
-            rm -f "$AUTO_FILE"
-            bar_visible=false
-        fi
-    fi
-    sleep "$POLL_DELAY"
-done
+        sleep "$POLL"
+    done
 }
 
-lock() {
-# [ TOGGLE WAYBAR ]
-if [ -f "$STATE_FILE" ]; then
-    rm "$STATE_FILE"
-    tiled=$(get_tiled_on_active_ws)
-    if focused_special_ws || [ "$tiled" -eq 0 ] || [ "$tiled" -ge 2 ]
-    then
+# [ LOCK/UNLOCK WAYBAR ]
+lock(){
+    if [ -f "$LOCKED" ]; then
+        # [ UNLOCK ]
+        rm "$LOCKED"
         pkill -SIGUSR2 waybar
+        touch "$VISIBLE"
+        # [ START CONTINUOUS POLLING IN BACKGROUND ]
+        (
+            bar_visible=true
+            while true; do
+                tiled_count=$(tiled)
+                special_flag=0
+                if special; then special_flag=1; fi
+                # [ BEING POLLING IF > 1 TILED WINDOW > NOT SPECIAL ]
+                if (( tiled_count == 1 && special_flag == 0 )); then
+                    CURSOR=$(cursor)
+                    IFS=',' read -r X Y <<< "$CURSOR"
+                    RES=$(resolution)
+                    WIDTH=${RES%x*}
+                    HEIGHT=${RES#*x}
+                    POSITION=$(position)
+                    case "$POSITION" in
+                        top) EDGE2=$(( HEIGHT * 15 / 100 )); HIDE_CONDITION=$(( Y > EDGE2 ));;
+                        bottom) EDGE2=$(( HEIGHT * 99 / 100 )); HIDE_CONDITION=$(( Y < EDGE2 ));;
+                        left) EDGE2=$(( WIDTH * 15 / 100 )); HIDE_CONDITION=$(( X > EDGE2 ));;
+                        right) EDGE2=$(( WIDTH * 99 / 100 )); HIDE_CONDITION=$(( X < EDGE2 ));;
+                        *) EDGE2=$(( HEIGHT * 10 / 100 )); HIDE_CONDITION=$(( Y > EDGE2 ));;
+                    esac
+                    # [ POLL UNTIL HIDE_CONDITION IS MET ]
+                    if (( HIDE_CONDITION )); then
+                        pkill -SIGUSR1 waybar
+                        rm -f "$VISIBLE"
+                        bar_visible=false
+                        nohup Waybar AutoHide >/dev/null 2>&1 &
+                        break
+                    fi
+                fi
+                sleep "$POLL"
+            done
+        ) &
     else
-        pkill -SIGUSR1 waybar
+        # [ LOCK ]
+        touch "$LOCKED"
+        pkill -fi "Waybar AutoHide" 2>/dev/null
+        pkill -SIGUSR2 waybar
+        pkill -fi "Waybar Lock" 2>/dev/null
     fi
-    nohup Waybar AutoHide >/dev/null 2>&1 &
-else
-    touch "$STATE_FILE"
-    pkill -f "Waybar AutoHide$"
-    pkill -SIGUSR2 waybar
-fi
 }
-# [ WAYBAR MODULE & TOGGLE ]
+
+# [ WAYBAR MODULE ]
 module() {
-if [ -f "$STATE_FILE" ]
-    then printf '{"text":"","tooltip":"[ TASKBAR LOCKED ]"}\n'
-    else printf '{"text":"","tooltip":"[ TASKBAR UNLOCKED ]"}\n'
-fi
+    if [ -f "$LOCKED" ]; then
+        printf '{"text":"","tooltip":"[ TASKBAR LOCKED ]"}\n'
+    else
+        printf '{"text":"","tooltip":"[ TASKBAR UNLOCKED ]"}\n'
+    fi
 }
 
 # [ AVAILABLE INPUTS ]
 case "${1,,}" in
-	toggle) toggle ;;
-	module) module ;;
-	unlock|lock) lock ;;
-	autohide) [ -f "$STATE_FILE" ] || autohide ;;
-	*) reload ;;
+    toggle) toggle ;;
+    module) module ;;
+    unlock|lock) lock ;;
+    autohide) autohide ;;
+    *) reload ;;
 esac
