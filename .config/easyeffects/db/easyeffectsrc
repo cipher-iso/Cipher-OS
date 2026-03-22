@@ -14,7 +14,7 @@ outputDevice=alsa_output.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receive
 
 [Window]
 autostartOnLogin=true
-height=835
+height=836
 lastLoadedInputPreset=Main Preset
 visiblePage=inputPage
 width=1280
