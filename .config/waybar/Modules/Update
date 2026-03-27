@@ -45,7 +45,7 @@ install_arch_updates() {
 list_updates() {
     ICON=""
     MAX=20
-    LINE_MAX=40
+    LINE_MAX=50
     BLACKLIST_FILE="$HOME/.config/waybar/Modules/BlacklistUpdates"
 
     while pid=$(pgrep -x checkupdates); do
@@ -88,9 +88,9 @@ limit_versions() {
                 num=num c
             } else {
                 if(num!=""){
-                    if(length(num)>2){
+                    if(length(num)>3){
                         truncated=1
-                        num=substr(num,1,2)
+                        num=substr(num,1,3)
                     }
                     result=result num
                     num=""
