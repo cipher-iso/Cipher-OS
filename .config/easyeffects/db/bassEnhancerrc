@@ -1,0 +1,7 @@
+[soe][BassEnhancer#0]
+amount=8
+blend=-10
+bypass=true
+floorActive=true
+harmonics=2.5
+scope=125

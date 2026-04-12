@@ -4,14 +4,21 @@
 BASE_CMD=("gamemoderun")
 
 # [ GENERIC SETTINGS ]
-#export PROTON_ENABLE_WAYLAND=1
-export PROTON_USE_NTSYNC=1
 export PULSE_LATENCY_MSEC=30
+export STEAM_DISABLE_GPU_ACCEL=1
+export VKD3D_FRAME_RATE=224
+export DXVK_FRAME_RATE=224
+
+# [ PROTON SETTINGS ]
+export PROTON_VKD3D_HEAP=1
+export PROTON_USE_NTSYNC=1
+export PROTON_ENABLE_NVAPI=1
+#export PROTON_ENABLE_WAYLAND=1
 
 # [ NVIDIA SETTINGS]
-export PROTON_ENABLE_NVAPI=1
 export GBM_BACKEND=nvidia-drm
 export DXVK_NVAPI_VKREFLEX=1
+export DXVK_ENABLE_NVAPI=1
 export __GL_VRR_ALLOWED=1
 export __GL_GSYNC_ALLOWED=1
 export __GL_SYNC_TO_VBLANK=0
@@ -60,8 +67,18 @@ done
 if [[ "$USE_HDR" == "1" ]]; then
     export PROTON_ENABLE_WAYLAND=1
     export PROTON_ENABLE_HDR=1
-    export ENABLE_HDR_WSI=1
-    export DXVK_HDR=1
+
+STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+HYPRLAND="$HOME/.config/hypr/hyprland.conf"
+
+	if [ ! -f "$STATE_FILE" ]; then
+    	cleanup() {
+	sed -i 's|cm = hdr|cm = auto|' "$HYPRLAND"
+	hyprctl reload ;}
+    	trap cleanup EXIT
+	sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
+	hyprctl reload
+	fi
 fi
 
 # [ FRAMEGEN | LSFG-VK ]

@@ -12,6 +12,8 @@ POLL=0.10
 ENTRY=1
 # [ AUTO-HIDE PERCENTAGE ]
 EXIT=10
+# [ SHOW WHEN # TILED WINDOWS ]
+MIN_TILED=99
 
 # [ GREP FUNCTIONS ]
 cursor(){ hyprctl cursorpos; }
@@ -117,13 +119,13 @@ autohide(){
                 ;;
         esac
 
-        if (( special_flag || tiled_count==0 || tiled_count>=2 || (tiled_count==1 && SHOW_CONDITION) )); then
+	if (( special_flag || tiled_count==0 || tiled_count>=MIN_TILED || (tiled_count<MIN_TILED && SHOW_CONDITION) )); then
             if ! $bar_visible; then
                 pkill -SIGUSR2 waybar
                 touch "$VISIBLE"
                 bar_visible=true
             fi
-        elif (( tiled_count==1 && HIDE_CONDITION )); then
+        elif (( tiled_count < MIN_TILED && HIDE_CONDITION )); then
             if $bar_visible; then
                 pkill -SIGUSR1 waybar
                 rm -f "$VISIBLE"

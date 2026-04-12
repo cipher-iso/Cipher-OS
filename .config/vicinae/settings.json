@@ -13,6 +13,7 @@
    "close_on_focus_loss": true,
    "favicon_service": "google",
    "font": {
+      "rendering": "native",
       "normal": {
          "family": "JetBrainsMono Nerd Font Propo",
          "size": 20
@@ -27,7 +28,7 @@
    "launcher_window": {
       "opacity": 0.8,
       "client_side_decorations": {
-         "enabled": true
+         "enabled": false
       }
    },
    "providers": {
