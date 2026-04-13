@@ -10,6 +10,7 @@ uniform highp sampler2D tex;
  * 0.2–0.4 = subtle/nice
  * 0.6+ = aggressive
  */
+
 #define VIBRANCE 0.2
 
 void main() {

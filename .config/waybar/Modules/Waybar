@@ -13,7 +13,7 @@ ENTRY=1
 # [ AUTO-HIDE PERCENTAGE ]
 EXIT=10
 # [ SHOW WHEN # TILED WINDOWS ]
-MIN_TILED=99
+MIN_TILED=2
 
 # [ GREP FUNCTIONS ]
 cursor(){ hyprctl cursorpos; }
