@@ -1,33 +1,32 @@
 #!/bin/bash
 
 # [ GENERIC SETTINGS ]
-export PULSE_LATENCY_MSEC=30
-export STEAM_DISABLE_GPU_ACCEL=1
-export VKD3D_FRAME_RATE=224
 export DXVK_FRAME_RATE=224
+export VKD3D_FRAME_RATE=224
+export STEAM_DISABLE_GPU_ACCEL=0
 
 # [ PROTON SETTINGS ]
-export PROTON_VKD3D_HEAP=1
-export VKD3D_CONFIG=descriptor_heap
-export PROTON_USE_NTSYNC=1
 export PROTON_USE_NVAPI=1
+export PROTON_USE_NTSYNC=1
+export PROTON_VKD3D_HEAP=1
 export PROTON_DLSS_UPGRADE=1
-export PROTON_ENABLE_WAYLAND=1
 export PROTON_ENABLE_NGX_UPDATER=1
 
 # [ NVIDIA SETTINGS]
-export GBM_BACKEND=nvidia-drm
-export DXVK_NVAPI_VKREFLEX=1
 export __GL_VRR_ALLOWED=1
 export __GL_GSYNC_ALLOWED=1
-#export __GL_THREADED_OPTIMIZATIONS=1
+export DXVK_NVAPI_VKREFLEX=1
+export GBM_BACKEND=nvidia-drm
+export VKD3D_CONFIG=descriptor_heap
 
-# [ DLSS SETTINGS]
-export DXVK_NVAPI_DRS_NGX_DLSS_SR_OVERRIDE=on
-export DXVK_NVAPI_DRS_NGX_DLSS_RR_OVERRIDE=on
-export DXVK_NVAPI_DRS_NGX_DLSS_FG_OVERRIDE=on
-export DXVK_NVAPI_DRS_NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=render_preset_latest
-export DXVK_NVAPI_DRS_NGX_DLSS_RR_OVERRIDE_RENDER_PRESET_SELECTION=render_preset_latest
+# [ GAMESCOPE FLAGS ]
+GAMESCOPE_FLAGS=(
+    --adaptive-sync
+    --hdr-enabled
+    --force-grab-cursor
+    --fullscreen
+    --backend wayland
+)
 
 # [ FLAGS ]
 USE_HDR=0
@@ -142,32 +141,40 @@ if [[ "$USE_CRT" == "1" ]]; then
     fi
 fi
 
-# [ GAMEMODE + GAMESCOPE MODE ]
+# [ GET CURRENT MONITOR MODE ]
+read WIDTH HEIGHT REFRESH <<<$(hyprctl monitors | awk '
+/Monitor/ {active=1}
+/^[[:space:]]*[0-9]+x[0-9]+@[0-9.]+/ && active {
+    split($1, a, "[@x]")
+    print a[1], a[2], int(a[3])
+    exit
+}')
+
+# [ ENABLE GAMESCOPE / HDR ]
 if [[ "$USE_G" == "1" ]]; then
     (
-if [[ "$USE_HDR" == "1" ]]; then
-        export PROTON_ENABLE_WAYLAND=1
-        export PROTON_ENABLE_HDR=1
-        STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-        HYPRLAND="$HOME/.config/hypr/hyprland.conf"
-    if [ ! -f "$STATE_FILE" ]; then
-        touch "$STATE_FILE"
-        sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
-        hyprctl reload
-    fi
-fi
+        if [[ "$USE_HDR" == "1" ]]; then
+            export PROTON_ENABLE_WAYLAND=1
+            export PROTON_ENABLE_HDR=1
+            STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+            HYPRLAND="$HOME/.config/hypr/hyprland.conf"
+            if [ ! -f "$STATE_FILE" ]; then
+                touch "$STATE_FILE"
+                sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
+                hyprctl reload
+            fi
+        fi
         gamemoderun gamescope \
-        -W 2560 -H 1440 -r 240 \
-        --adaptive-sync --hdr-enabled --force-grab-cursor --fullscreen --backend wayland \
-        -- "${CLEAN_ARGS[@]}"
+            -W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
+            "${GAMESCOPE_FLAGS[@]}" \
+            -- "${CLEAN_ARGS[@]}"
     )
     if [[ "$USE_HDR" == "1" ]]; then
         STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
         HYPRLAND="$HOME/.config/hypr/hyprland.conf"
-
         sed -i 's|cm = hdr|cm = auto|' "$HYPRLAND"
         rm -f "$STATE_FILE"
-	hyprctl reload
+        hyprctl reload
     fi
     exit
 fi
