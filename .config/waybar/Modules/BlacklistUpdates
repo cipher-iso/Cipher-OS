@@ -1,3 +1,14 @@
+coreutils
+electron39
+hyprwayland*
+lcms2
+mpg123
+sed
+git
+node-*
+neovim
+mesa
+pavucontrol-qt
 kaccounts*
 signon*
 jq

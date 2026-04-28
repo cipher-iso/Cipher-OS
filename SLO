@@ -136,10 +136,10 @@ if [ ! -f "$STATE_FILE" ]; then
 	sed -i 's|cm = auto|cm = hdr|' "$HYPRLAND"
 	hyprctl reload; fi
 fi
-	gamemoderun gamescope \
+	LD_PRELOAD="" gamemoderun gamescope \
 	-W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
 	"${GAMESCOPE_FLAGS[@]}" \
-	-- env "${GAME_ENV[@]}" LD_PRELOAD="$LD_PRELOAD" "${CLEAN_ARGS[@]}"
+	-- env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
 )
 if [[ "$USE_HDR" == "1" ]]; then
 	STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
