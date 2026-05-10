@@ -5,7 +5,7 @@ STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
 if [ ! -f "$STATE_FILE" ]; then
 	touch "$STATE_FILE"
 	hyprctl keyword 'monitorv2[]:cm hdr'
-	hyprctl keyword 'misc:vfr false'
+	hyprctl keyword 'debug:vfr false'
 	hyprctl keyword 'debug:damage_tracking 0'
 	hyprctl keyword 'decoration:screen_shader ~/.config/hypr/Shaders/CRT'
 else

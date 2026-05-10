@@ -2,7 +2,52 @@ vim.o.cmdheight = 0
 vim.opt.splitbelow = false
 vim.opt.splitright = true
 vim.opt.clipboard = 'unnamedplus'
+-- UTF-8 ENCODING
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
 
+-- DISABLE ALL AUTO INDENTING
+vim.opt.autoindent = false
+vim.opt.smartindent = false
+vim.opt.cindent = false
+vim.opt.copyindent = false
+vim.opt.preserveindent = true
+
+-- DISABLE TAB/SPACE AUTO CONVERSION
+vim.opt.expandtab = false
+vim.opt.smarttab = false
+
+-- DISABLE FORMAT OPTIONS THAT ALTER COMMENTS/TEXT
+vim.opt.formatoptions:remove {
+  'c',
+  'r',
+  'o',
+  'q',
+}
+
+-- DISABLE TREESITTER INDENTING
+pcall(function()
+  require('nvim-treesitter.configs').setup {
+    indent = {
+      enable = false,
+    },
+  }
+end)
+
+-- DISABLE LSP FORMATTING
+vim.lsp.buf.format = function() end
+vim.lsp.buf.formatting = function() end
+vim.lsp.buf.formatting_sync = function() end
+
+-- REMOVE ALL FORMAT-ON-SAVE AUTOCOMMANDS
+vim.api.nvim_clear_autocmds { event = 'BufWritePre' }
+
+-- OPTIONAL: TOGGLE RAW PASTE MODE WITH F2
+vim.keymap.set('n', '<F2>', function()
+  vim.opt.paste = not vim.opt.paste:get()
+  print('paste mode:', vim.opt.paste:get())
+end)
+-- Disable automatic indentation
 -- [ Mouse support ]
 vim.opt.mouse = 'a'
 
@@ -695,31 +740,6 @@ require('lazy').setup({
         desc = '[F]ormat buffer',
       },
     },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-      },
-    },
   },
 
   { -- Autocompletion
@@ -1160,3 +1180,27 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+vim.opt.autoindent = false
+vim.opt.smartindent = false
+vim.opt.cindent = false
+-- KILL ALL FORMAT-ON-SAVE EVENTS
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*',
+  callback = function(args)
+    vim.api.nvim_clear_autocmds {
+      event = 'BufWritePre',
+      buffer = args.buf,
+    }
+  end,
+})
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "hl" },
+			},
+		},
+	},
+})
