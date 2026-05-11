@@ -14,16 +14,16 @@ hl.monitor({
     sdr_min_luminance   = 0,
     sdr_max_luminance   = 400,
     supports_wide_color = 1,
-    icc		 	= "$HOME/Downloads/LG 27GR95QE.icm"
 })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
 --    ┗┓┃┃┃┃┣┫┃ ┣ ┃┃  ┃ ┃┃┃┃┣ ┃┃┓
 --    ┗┛┗┛┗┛┛┗┗┛┗┛┻┛  ┗┛┗┛┛┗┻ ┻┗┛
-require("Config/Identifiers")   -- 	┏ IDENTIFIED VARIABLES
-require("Config/Auto-Start")    -- 	┣ AUTOMATIC STARTUPS
-require("Config/Environment")   -- 	┣ ENVIRONMENT VARIABLES
-require("Config/Decorations")   -- 	┣ DECORATIONS & ANIMATIONS
-require("Config/Input")         -- 	┣ INPUT & KEYBINDS
-require("Config/Window-Rules")  -- 	┣ WINDOW & LAYER RULES
-require("Config/Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS
+require("Config.Identifiers")   -- 	┏ IDENTIFIED VARIABLES
+require("Config.Auto-Start")    -- 	┣ AUTOMATIC STARTUPS
+require("Config.Environment")   -- 	┣ ENVIRONMENT VARIABLES
+require("Config.Decorations")   -- 	┣ DECORATIONS & ANIMATIONS
+require("Config.Input")         -- 	┣ INPUT & KEYBINDS
+require("Config.Functions")	-- 	┣ CUSTOM FUNCTIONS
+require("Config.Window-Rules")  -- 	┣ WINDOW & LAYER RULES
+require("Config.Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS

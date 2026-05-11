@@ -7,7 +7,7 @@ hl.window_rule({ workspace = "2 silent",  match = { class = "discord" } })
 hl.window_rule({ workspace = "3 silent",  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" } })
 hl.window_rule({ workspace = "4 silent",  render_unfocused = true, match = { class = "obs" } })
 hl.window_rule({ workspace = "6",         opaque = true, match = { class = "resolve" } })
-hl.window_rule({ workspace = "9 silent",  opaque = true, match = { title = "^.*(PrismLauncher|Minecraft).*$", class = "^()$" } })
+hl.window_rule({ workspace = "9 silent",  opaque = true, match = { title = "^.*(Prism|Minecraft).*$" } })
 
 --    ┏┓┏┓┏┳┓┏┓┏┓┏┓┳┓┳┏┓┏┓
 --    ┃ ┣┫ ┃ ┣ ┃┓┃┃┣┫┃┣ ┗┓
@@ -34,7 +34,7 @@ hl.window_rule({                        -- [ GAMING ]
 	fullscreen       = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
-	match = { class = "^.*(steam_app_%d+|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
+	match = { class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
 })
 hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
 	name     = "FLOAT ONLY",
@@ -68,15 +68,15 @@ hl.window_rule({                        -- [ LARGE FLOATS ]
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓
 --    ┃┃┃┃┃┣┫┃┫ ┗┓┃┃┣┫┃ ┣ ━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┻┛┗┛┛┗┛┗┛┗┛┣┛┛┗┗┛┗┛  ┛┗┗┛┗┛┗┛┗┛
-hl.workspace({ id = 1, persistent = true })
-hl.workspace({ id = 2, persistent = true })
-hl.workspace({ id = 3, persistent = true })
-hl.workspace({ id = 4, persistent = true })
-hl.workspace({ id = 5, persistent = true })
-hl.workspace({ id = 6, persistent = true })
-hl.workspace({ id = 7, persistent = true })
-hl.workspace({ id = 8, persistent = true })
-hl.workspace({ id = 9, persistent = true })
+hl.workspace_rule({ workspace = "1", persistent = true })
+hl.workspace_rule({ workspace = "2", persistent = true })
+hl.workspace_rule({ workspace = "3", persistent = true })
+hl.workspace_rule({ workspace = "4", persistent = true })
+hl.workspace_rule({ workspace = "5", persistent = true })
+hl.workspace_rule({ workspace = "6", persistent = true })
+hl.workspace_rule({ workspace = "7", persistent = true })
+hl.workspace_rule({ workspace = "8", persistent = true })
+hl.workspace_rule({ workspace = "9", persistent = true })
 
 hl.workspace_rule({ workspace = "w[tv1]s[false]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]s[false]",   gaps_out = 0, gaps_in = 0 })
@@ -84,8 +84,6 @@ hl.workspace_rule({ workspace = "f[1]s[false]",   gaps_out = 0, gaps_in = 0 })
 hl.window_rule({ name = "WORKSPACES",
 	opaque      = true,
 	decorate    = false,
-	border_size = 0,
-	rounding    = 0,
 	match = { float = false, workspace = "w[tv1]s[false]" }
 })
 

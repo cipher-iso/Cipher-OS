@@ -1,21 +1,31 @@
 #!/usr/bin/env bash
-
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
-TOGGLE="ScreenShare"
 
-# Screenshare State
-DID_ENABLE=false
+expose() {
+    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = false, match = { class = '^(discord|vivaldi-stable|steam)$' } })"
+    touch "$STATE_FILE"
+}
 
-# Obtain Screenshare State
-if [ ! -f "$STATE_FILE" ]; then "$TOGGLE" toggle; DID_ENABLE=true; fi
+protect() {
+    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = true, match = { class = '^(discord|vivaldi-stable|steam)$' } })"
+    rm -f "$STATE_FILE"
+}
 
-# Execute Hyprshot [Screenshot PKG]
-sleep 0.02; hyprshot -m region --output-folder ~/Pictures/Screenshots/ --silent & HYPRSHOT_PID=$!
+# [ EXPOSE IF CURRENTLY PROTECTED ]
+DID_EXPOSE=false
+if [ ! -f "$STATE_FILE" ]; then
+    expose
+    DID_EXPOSE=true
+    sleep 0.1  # [ GIVE RULE TIME TO APPLY ]
+fi
 
-# Wait for Hyprshot to Exit
-while hyprctl clients | grep -qi screencopy; do sleep 0.01; done
-wait "$HYPRSHOT_PID" 2>/dev/null
+# [ TAKE SCREENSHOT ]
+hyprshot -m region --output-folder ~/Pictures/Screenshots/ --silent
 
-# Restore Screenshare State [if disabled]
-if [ "$DID_ENABLE" = true ]; then "$TOGGLE" toggle; fi
+# [ WAIT FOR SCREENCOPY TO END ]
+while hyprctl clients | grep -qi screencopy; do sleep 0.05; done
 
+# [ RESTORE PROTECTED STATE ]
+if [ "$DID_EXPOSE" = true ]; then
+    protect
+fi

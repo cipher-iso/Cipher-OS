@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --    ┳┓┏┓┏┓┏┓┳┓┏┓┏┳┓┳┏┓┳┓┏┓
 --    ┃┃┣ ┃ ┃┃┣┫┣┫ ┃ ┃┃┃┃┃┗┓
 --    ┻┛┗┛┗┛┗┛┛┗┛┗ ┻ ┻┗┛┛┗┗┛
@@ -52,17 +53,9 @@ hl.config({
             enabled        = true,
             range          = 25,
             render_power   = 2,
-            -- ignore_window removed in 0.55 (now always enabled by default)
-            color          = "rgba(" .. PRIMARY    .. "20)",
-            color_inactive = "rgba(" .. BACKGROUND .. "30)",
+            color          = "rgba(" .. PRIMARY    .. "02)",
+            color_inactive = "rgba(" .. BACKGROUND .. "05)",
         },
-	glow = {
-	    enabled		= true,
-	    range		= 25,
-	    render_power	= 2,
-	    color 		= "rgba(" .. PRIMARY    .. "20)",
-	    color_inactive	= "rgba(" .. BACKGROUND .. "0)",
-    	},
     },
 })
 

@@ -1,8 +1,7 @@
 [sie][Expander#0]
 attack=2
 mode=0
-outputGain=8
 ratio=3
 release=200
 sidechainMode=1
-threshold=-20
+threshold=-36

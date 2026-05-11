@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # [ FILE PATHS ]
-IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
+IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.lua"
 CSS_FILE="$HOME/Scripts/ColorGen/Colors.css"
 LUA_FILE="$HOME/Scripts/ColorGen/Colors.lua"
 ZSH_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
@@ -16,6 +16,16 @@ DEFAULT_ACCENT1="323449"
 DEFAULT_ACCENT2="212337"
 DEFAULT_ACCENT3="10111C"
 
+# [ HELPER: READ LUA VARIABLE ]
+lua_get() {
+    grep -m1 "^$1\s*=" "$IDENTIFIERS" | sed 's/.*=\s*"\(.*\)".*/\1/'
+}
+
+# [ HELPER: SET LUA VARIABLE ]
+lua_set() {
+    sed -i "s|^$1\s*=.*|$1      = \"$2\"|" "$IDENTIFIERS"
+}
+
 # [ ARGUMENT PARSING ]
 for arg in "$@"; do
     case "$arg" in
@@ -28,27 +38,31 @@ for arg in "$@"; do
             ACCENT3="$DEFAULT_ACCENT3"
 
             # [ RESTORE IDENTIFIERS ]
-            sed -i \
-                -e "s|^\$BACKGROUND=.*|\$BACKGROUND=$BACKGROUND|" \
-                -e "s|^\$PRIMARY=.*|\$PRIMARY=$PRIMARY|" \
-                -e "s|^\$SECONDARY=.*|\$SECONDARY=$SECONDARY|" \
-                -e "s|^\$ACCENT1=.*|\$ACCENT1=$ACCENT1|" \
-                -e "s|^\$ACCENT2=.*|\$ACCENT2=$ACCENT2|" \
-                -e "s|^\$ACCENT3=.*|\$ACCENT3=$ACCENT3|" \
-                "$IDENTIFIERS"
+            lua_set "BACKGROUND" "$BACKGROUND"
+            lua_set "PRIMARY"    "$PRIMARY"
+            lua_set "SECONDARY"  "$SECONDARY"
+            lua_set "ACCENT1"    "$ACCENT1"
+            lua_set "ACCENT2"    "$ACCENT2"
+            lua_set "ACCENT3"    "$ACCENT3"
+
+            # [ RELOAD SYSTEM ]
+            ReloadSystem
+            exit 0
             ;;
     esac
 done
 
 # [ VALIDATION ]
-[ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.conf."; exit 1; }
+[ -f "$IDENTIFIERS" ] || { echo "Missing Identifiers.lua."; exit 1; }
 
 # [ SOURCE COLORS FROM IDENTIFIERS IF NOT DEFAULT FLAG ]
 if [ -z "$PRIMARY" ]; then
-    source <(
-        grep -E '^\$(BACKGROUND|PRIMARY|SECONDARY|ACCENT1|ACCENT2|ACCENT3)=' "$IDENTIFIERS" \
-        | sed 's/^\$//'
-    )
+    BACKGROUND=$(lua_get "BACKGROUND")
+    PRIMARY=$(lua_get "PRIMARY")
+    SECONDARY=$(lua_get "SECONDARY")
+    ACCENT1=$(lua_get "ACCENT1")
+    ACCENT2=$(lua_get "ACCENT2")
+    ACCENT3=$(lua_get "ACCENT3")
 fi
 
 # [ COLOR CONVERSION FUNCTIONS ]

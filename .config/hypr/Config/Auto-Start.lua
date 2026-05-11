@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --    ┏┓┳┳┏┳┓┏┓┳┳┓┏┓┏┳┓┳┏┓  ┏┓┏┳┓┏┓┳┓┏┳┓┳┳┏┓
 --    ┣┫┃┃ ┃ ┃┃┃┃┃┣┫ ┃ ┃┃ ━━┗┓ ┃ ┣┫┣┫ ┃ ┃┃┃┃
 --    ┛┗┗┛ ┻ ┗┛┛ ┗┛┗ ┻ ┻┗┛  ┗┛ ┻ ┛┗┛┗ ┻ ┗┛┣┛
@@ -17,6 +18,7 @@ hl.exec_cmd("wl-clip-persist --clipboard regular")              -- Clipboard His
 -- [ HYPRLAND SPECIFIC ]
 hl.exec_cmd(XDPH)			-- Hyprland Portals
 hl.exec_cmd(Polkit)                 	-- Authentication Agent
+hl.exec_cmd("ydotoold")			-- Keybind Caller
 hl.exec_cmd("hypridle")             	-- Auto-Lockscreen & Sleep
 hl.exec_cmd("hyprpm reload")        	-- Reload Hyprland Config
 hl.exec_cmd("hyprsunset -i")        	-- Blue-Light Disable & Gamma
@@ -30,21 +32,6 @@ hl.exec_cmd(Browser)            -- Browser
 hl.exec_cmd(EasyEffects)        -- Mic Equalizer
 
 -- [ TUI STARTUP ]
-hl.exec_cmd(Terminal .. " kew", { workspace = "5", silent = true })	-- Music Player
-hl.exec_cmd(Terminal .. " btop", { workspace = "5", silent = true })    -- System Monitor
--- hl.exec_cmd(Terminal .. " MC-Server", { workspace = "5", silent = true }) -- Minecraft Server
-
--- [ PLUGIN CONFIG ]
--- Applied after a delay to ensure hyprpm has finished loading plugins
-hl.timer(function()
-hl.config({
-    plugin = {
-    	hyprexpo = {
-		gap_size         = 20,
-		bg_col           = "rgb(" .. BACKGROUND .. ")",
-		workspace_method = "first 1",
-    	},
-    },
-})
-    end, { timeout = 2000, type = "oneshot" })
+hl.exec_cmd(Terminal .. " kew", { workspace = "5 silent" })	-- Music Player
+hl.exec_cmd(Terminal .. " btop", { workspace = "5 silent" })    -- System Monitor
 end)

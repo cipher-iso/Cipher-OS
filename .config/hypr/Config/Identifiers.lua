@@ -22,8 +22,8 @@ Listener     = "~/Scripts/ColorGen/Listener"
 
 -- [ PRIMARY COLORS ]
 PRIMARY      = "00FF40"
-SECONDARY    = "EBFAFA"
-BACKGROUND   = "000000"
+SECONDARY      = "EBFAFA"
+BACKGROUND      = "000000"
 
 -- [ SECONDARY COLORS ]
 -- Empty == Auto-Detect

@@ -53,7 +53,7 @@
 	},
 	"custom/logout": {
 		"format": "   ",
-		"on-click": "hyprctl dispatch exit",
+		"on-click": "hyprctl dispatch 'hl.dsp.exit()'",
 		"tooltip-format": "[ END SESSION ]",
 		"on-scroll-up": "",
 		"on-scroll-down": ""	
@@ -112,8 +112,8 @@
 		"cursor": true,
 		"show-special": true,
 		"special-visible-only": true,
-		"on-scroll-up": "hyprctl dispatch workspace e+1",
-		"on-scroll-down": "hyprctl dispatch workspace e-1",
+		"on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
+		"on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
 		"format":"{icon}",
 		"format-icons": {
 			"active": "󰫢", "magic": "","media": ""}
@@ -121,7 +121,7 @@
 /* MICROPHONE MODULE */
 	"pulseaudio#input": {
 		"on-click": "swayosd-client --input-volume mute-toggle",
-		"on-click-right": "hyprctl dispatch togglespecialworkspace media",
+		"on-click-right": "hyprctl dispatch 'hl.dsp.workspace.toggle_special(\"media\")'",
 		"on-scroll-up": "swayosd-client --input-volume 5",
 		"on-scroll-down": "swayosd-client --input-volume -5",
     		"format": "{format_source}",
@@ -142,7 +142,7 @@
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
  		"exec": "~/.config/waybar/Modules/ScreenShare module",
-  		"on-click": "~/.config/waybar/Modules/ScreenShare toggle",
+  		"on-click": "ydotool key 125:1 41:1 125:0 41:0",
     		"interval": 1,
    		"format": "[ {} ]",
 		"return-type": "json"

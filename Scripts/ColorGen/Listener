@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # [ FILES ]
-IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
+IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.lua"
 
 # [ MAIN LOOP ]
 while true; do

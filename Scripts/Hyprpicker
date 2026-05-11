@@ -1,35 +1,42 @@
 #!/usr/bin/env bash
-
-# [ FILES AND COMMANDS ]
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
-TOGGLE="ScreenShare"
-IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.conf"
-GEN_CMD="ReloadSystem"
+IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.lua"
 
-# [ SCREENSHARE STATE ]
-DID_ENABLE=false
+expose() {
+    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = false, match = { class = '^(discord|vivaldi-stable|steam)$' } })"
+    touch "$STATE_FILE"
+}
 
-# [ ENABLE SCREENSHARE IF DISABLED ]
+protect() {
+    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = true, match = { class = '^(discord|vivaldi-stable|steam)$' } })"
+    rm -f "$STATE_FILE"
+}
+
+# [ EXPOSE IF CURRENTLY PROTECTED ]
+DID_EXPOSE=false
 if [ ! -f "$STATE_FILE" ]; then
-    "$TOGGLE" toggle
-    DID_ENABLE=true
+    expose
+    DID_EXPOSE=true
+    sleep 0.1
 fi
 
 # [ RUN HYPRPICKER AND CAPTURE COLOR ]
-sleep 0.02
 PICKED_COLOR="$(hyprpicker -a 2>/dev/null | tr -d '#\n')"
 
 # [ VALIDATE COLOR ]
 if [[ ! "$PICKED_COLOR" =~ ^[0-9A-Fa-f]{6}$ ]]; then
     echo "Invalid color picked: $PICKED_COLOR"
-    [ "$DID_ENABLE" = true ] && "$TOGGLE" toggle
+    [ "$DID_EXPOSE" = true ] && protect
     exit 1
 fi
 
-# [ OVERWRITE $PRIMARY IN IDENTIFIERS ]
-sed -i "s|^\$PRIMARY=.*|\$PRIMARY=$PICKED_COLOR|" "$IDENTIFIERS"
+# [ OVERWRITE PRIMARY IN IDENTIFIERS ]
+sed -i "s|^PRIMARY\s*=.*|PRIMARY      = \"$PICKED_COLOR\"|" "$IDENTIFIERS"
 
-# [ RESTORE SCREENSHARE STATE ]
-if [ "$DID_ENABLE" = true ]; then
-    "$TOGGLE" toggle
+# [ RESTORE PROTECTED STATE ]
+if [ "$DID_EXPOSE" = true ]; then
+    protect
 fi
+
+# [ RELOAD SYSTEM ]
+ReloadSystem
