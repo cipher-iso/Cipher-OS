@@ -142,7 +142,7 @@
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
  		"exec": "~/.config/waybar/Modules/ScreenShare module",
-  		"on-click": "ydotool key 125:1 41:1 125:0 41:0",
+  		"on-click": "~/.config/waybar/Modules/ScreenShare toggle",
     		"interval": 1,
    		"format": "[ {} ]",
 		"return-type": "json"
