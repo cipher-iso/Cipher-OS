@@ -56,13 +56,11 @@ hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    
 hl.bind(MOD .. " + F13",          hl.dsp.exec_cmd("Screenshot"))                      -- Screenshot [1]
 hl.bind(MOD .. " + SHIFT + F13",  hl.dsp.exec_cmd("ScreenshotWindow"))                -- Screenshot [2] Active-Window
 hl.bind(MOD .. " + I",            hl.dsp.exec_cmd("Hyprpicker"))                      -- Color Picker
-hl.bind(MOD .. " + M",            hl.dsp.exec_cmd("Mute-Active-Window"))              -- Mute Active-Window
 hl.bind(MOD .. " + SHIFT + L",    hl.dsp.exec_cmd("LockScreen"))                     -- Lockscreen
 hl.bind(MOD .. " + T",            hl.dsp.exec_cmd("Waybar Toggle"))                   -- Toggle Waybar
 hl.bind(MOD .. " + mouse:276",    hl.dsp.exec_cmd("Waybar Lock"))                     -- Lock Waybar [1] - [TOGGLE]
 hl.bind(MOD .. " + SHIFT + Home", hl.dsp.exec_cmd("waypaper --random"))               -- Randomize Wallpaper
 hl.bind(MOD .. " + R",            hl.dsp.exec_cmd("GenerateColors -d"))               -- Restore Default Colors
-hl.bind(MOD .. " + SHIFT + R",    hl.dsp.exec_cmd("ReloadSystem"))                    -- Reload System
 
 -- [ WORKSPACES ]
 hl.bind(MOD .. " + mouse_down",  hl.dsp.focus({ workspace = "e+1" }))
@@ -125,7 +123,9 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("Gamma down"),                 
 
 -- [ DISCORD PASSTHROUGH ]
 hl.bind("F13", hl.dsp.pass({ window = "class:discord" }))  -- SCREEN-SHARE
+hl.bind("F13", hl.dsp.pass({ window = "class:discord" }), { release = true })
 hl.bind("F14", hl.dsp.pass({ window = "class:discord" }))  -- DEAFEN
+hl.bind("F14", hl.dsp.pass({ window = "class:discord" }), { release = true })
 
 -- [ OBS PASSTHROUGH ]
 hl.bind(MOD .. " + equal",        hl.dsp.pass({ window = "class:obs" }))  -- BEGIN STREAM

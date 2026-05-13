@@ -167,9 +167,10 @@ if [[ "$USE_CRT" == "1" ]]; then
             hyprctl reload
         }
         trap cleanup EXIT
-        #hyprctl eval 'hl.monitor({ output = "", cm = "hdr" })'
-        hyprctl eval 'hl.config({ debug = { damage_tracking = 0 } })'
-        hyprctl eval "hl.config({ decoration = { screen_shader = \"$HOME/.config/hypr/Shaders/CRT\" } })"
+        hyprctl eval 'hl.monitor({ output = "", cm = "hdr", bitdepth = 10 })'
+        hyprctl eval 'hl.config({ debug = { damage_tracking = 0, vfr = false } })'
+        hyprctl eval "hl.config({ decoration = { screen_shader = os.getenv("HOME") .. "/.config/hypr/Shaders/CRT" }"
+	hyprctl eval "hl.config({ render = { use_fp16 = 0 }})"
     fi
 fi
 

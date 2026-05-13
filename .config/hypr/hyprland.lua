@@ -24,6 +24,13 @@ require("Config.Auto-Start")    -- 	┣ AUTOMATIC STARTUPS
 require("Config.Environment")   -- 	┣ ENVIRONMENT VARIABLES
 require("Config.Decorations")   -- 	┣ DECORATIONS & ANIMATIONS
 require("Config.Input")         -- 	┣ INPUT & KEYBINDS
-require("Config.Functions")	-- 	┣ CUSTOM FUNCTIONS
 require("Config.Window-Rules")  -- 	┣ WINDOW & LAYER RULES
 require("Config.Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS
+
+--     ┏┓┳┳┳┓┏┓┏┳┓┳┏┓┳┓┏┓
+--     ┣ ┃┃┃┃┃  ┃ ┃┃┃┃┃┗┓
+--     ┻ ┗┛┛┗┗┛ ┻ ┻┗┛┛┗┗┛
+require("Config.Functions.Screenshare")	--	┏ TOGGLE SCREENSHARING
+require("Config.Functions.CRT-Shader")	--	┣ TOGGLE CRT SHADER
+require("Config.Functions.ReloadSystem")--	┣ RELOAD SYSTEM
+require("Config.Functions.Mute-Window")	--	┗ MUTE ACTIVE-WINDOW

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-if [ ! -f "$STATE_FILE" ]; then
-    touch "$STATE_FILE"
-    hyprctl --batch "eval hl.monitor({ output = '', cm = 'hdr' }) ; eval hl.config({ debug = { damage_tracking = 0 } }) ; eval hl.config({ decoration = { screen_shader = '$HOME/.config/hypr/Shaders/CRT' } })"
-else
-    rm "$STATE_FILE"
-    hyprctl --batch "eval hl.monitor({ output = '', cm = 'auto' }) ; eval hl.config({ debug = { damage_tracking = 2 } }) ; eval hl.config({ decoration = { screen_shader = '' } })"
-fi
