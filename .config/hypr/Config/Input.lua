@@ -130,7 +130,12 @@ hl.bind("F14", hl.dsp.pass({ window = "class:discord" }), { release = true })
 
 -- [ OBS PASSTHROUGH ]
 hl.bind(MOD .. " + equal",        hl.dsp.pass({ window = "class:obs" }))  -- BEGIN STREAM
+hl.bind(MOD .. " + equal",        hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + minus",        hl.dsp.pass({ window = "class:obs" }))  -- END STREAM
+hl.bind(MOD .. " + minus",        hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + bracketleft",  hl.dsp.pass({ window = "class:obs" }))  -- DISABLE PREVIEW
+hl.bind(MOD .. " + bracketleft",  hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + bracketright", hl.dsp.pass({ window = "class:obs" }))  -- ENABLE PREVIEW
+hl.bind(MOD .. " + bracketright", hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }))  -- REPLAY BUFFER
+hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }), { release = true })

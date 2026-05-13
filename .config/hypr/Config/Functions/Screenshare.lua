@@ -1,10 +1,10 @@
 --    ┏┓┏┓┳┓┏┓┏┓┳┓┏┓┓┏┏┓┳┓┏┓
 --    ┗┓┃ ┣┫┣ ┣ ┃┃┗┓┣┫┣┫┣┫┣ 
 --    ┗┛┗┛┛┗┗┛┗┛┛┗┗┛┛┗┛┗┛┗┗┛
---    [ MOD + GRAVE ]
 local screenshare_state  = os.getenv("HOME") .. "/Scripts/.Screenshare-ON"
 local screenshare_active = io.open(screenshare_state, "r") ~= nil
 function Screenshare()
+ ---@diagnostic disable: undefined-global
     screenshare_active = not screenshare_active
     if screenshare_active then
         -- [ SESSION EXPOSED ]

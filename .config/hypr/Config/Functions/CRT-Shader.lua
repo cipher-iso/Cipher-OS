@@ -1,7 +1,6 @@
 --    ┏┓┳┓┏┳┓  ┏┓┓┏┏┓┳┓┏┓┳┓
 --    ┃ ┣┫ ┃ ━━┗┓┣┫┣┫┃┃┣ ┣┫
 --    ┗┛┛┗ ┻   ┗┛┛┗┛┗┻┛┗┛┛┗
---    [ MOD + SHIFT + 0 ]
 shader_state  = os.getenv("HOME") .. "/.config/hypr/Shaders/.Shader-ON"
 shader_active = io.open(shader_state, "r") ~= nil
 

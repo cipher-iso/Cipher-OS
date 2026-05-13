@@ -10,6 +10,7 @@ hl.config({
         resize_on_border         = true,
         extend_border_grab_area  = 15,
         col = {
+	 ---@diagnostic disable: undefined-global
             inactive_border = "rgb(" .. BACKGROUND .. ")",
             active_border   = "rgb(" .. PRIMARY .. ")",
         },

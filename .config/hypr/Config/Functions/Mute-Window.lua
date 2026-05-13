@@ -1,7 +1,6 @@
 --    ┳┳┓┳┳┏┳┓┏┓  ┏┓┏┓┏┳┓┳┓┏┏┓  ┓ ┏┳┳┓┳┓┏┓┓ ┏
 --    ┃┃┃┃┃ ┃ ┣   ┣┫┃  ┃ ┃┃┃┣ ━━┃┃┃┃┃┃┃┃┃┃┃┃┃
 --    ┛ ┗┗┛ ┻ ┗┛  ┛┗┗┛ ┻ ┻┗┛┗┛  ┗┻┛┻┛┗┻┛┗┛┗┻┛
---    [ MOD + M ]
 function MuteActive()
     local w = hl.get_active_window()
     if w ~= nil then

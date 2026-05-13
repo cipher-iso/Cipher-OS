@@ -1,7 +1,6 @@
 --    ┳┓┏┓┓ ┏┓┏┓┳┓  ┏┓┓┏┏┓┏┳┓┏┓┳┳┓
 --    ┣┫┣ ┃ ┃┃┣┫┃┃  ┗┓┗┫┗┓ ┃ ┣ ┃┃┃
 --    ┛┗┗┛┗┛┗┛┛┗┻┛  ┗┛┗┛┗┛ ┻ ┗┛┛ ┗
---    [ MOD + SHIFT + R ]
 function ReloadSystem()
     hl.dispatch(hl.dsp.exec_cmd([[bash -c "
         hyprpm reload

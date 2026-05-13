@@ -2,6 +2,7 @@
 --    ┣┫┃┃ ┃ ┃┃┃┃┃┣┫ ┃ ┃┃ ━━┗┓ ┃ ┣┫┣┫ ┃ ┃┃┃┃
 --    ┛┗┗┛ ┻ ┗┛┛ ┗┛┗ ┻ ┻┗┛  ┗┛ ┻ ┛┗┛┗ ┻ ┗┛┣┛
 hl.on("hyprland.start", function()
+---@diagnostic disable: undefined-global
 
 -- [ HYPRLAND SPECIFIC ]
 hl.exec_cmd(XDPH)	-- Hyprland Portals
