@@ -1,7 +1,7 @@
----@diagnostic disable: undefined-global
 --    ┳┓┏┓┓ ┏┓┏┓┳┓  ┏┓┓┏┏┓┏┳┓┏┓┳┳┓
 --    ┣┫┣ ┃ ┃┃┣┫┃┃  ┗┓┗┫┗┓ ┃ ┣ ┃┃┃
 --    ┛┗┗┛┗┛┗┛┛┗┻┛  ┗┛┗┛┗┛ ┻ ┗┛┛ ┗
+--    [ MOD + SHIFT + R ]
 function ReloadSystem()
     hl.dispatch(hl.dsp.exec_cmd([[bash -c "
         hyprpm reload
@@ -18,4 +18,3 @@ function ReloadSystem()
     "]]))
     hl.notification.create({ text = "  [ SYSTEM RELOADING ]", timeout = 3000, icon = "info", font_size = 16 })
 end
-hl.bind(MOD .. " + SHIFT + R", ReloadSystem)

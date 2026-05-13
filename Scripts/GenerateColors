@@ -45,8 +45,6 @@ for arg in "$@"; do
             lua_set "ACCENT2"    "$ACCENT2"
             lua_set "ACCENT3"    "$ACCENT3"
 
-            # [ RELOAD SYSTEM ]
-            hyprctl eval 'ReloadSystem()'
             exit 0
             ;;
     esac

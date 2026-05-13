@@ -1,7 +1,7 @@
----@diagnostic disable: undefined-global
 --    ┏┓┏┓┳┓┏┓┏┓┳┓┏┓┓┏┏┓┳┓┏┓
 --    ┗┓┃ ┣┫┣ ┣ ┃┃┗┓┣┫┣┫┣┫┣ 
 --    ┗┛┗┛┛┗┗┛┗┛┛┗┗┛┛┗┛┗┛┗┗┛
+--    [ MOD + GRAVE ]
 local screenshare_state  = os.getenv("HOME") .. "/Scripts/.Screenshare-ON"
 local screenshare_active = io.open(screenshare_state, "r") ~= nil
 function Screenshare()
@@ -24,7 +24,6 @@ function Screenshare()
         hl.notification.create({ text = "  [  SESSION INCOGNITO  ]", timeout = 3000, icon = "ok", font_size = 16 })
     end
 end
-hl.bind(MOD .. " + grave", Screenshare)
 
 --    ┏┓┏┓┳┓┏┓┏┓┳┓┏┓┓┏┏┓┳┓┏┓ ┳┓┏┓┏┓┏┳┓┏┓┳┓┏┓
 --    ┗┓┃ ┣┫┣ ┣ ┃┃┗┓┣┫┣┫┣┫┣  ┣┫┣ ┗┓ ┃ ┃┃┣┫┣ 

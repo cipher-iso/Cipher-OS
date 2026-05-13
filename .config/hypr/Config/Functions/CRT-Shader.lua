@@ -1,7 +1,7 @@
----@diagnostic disable: undefined-global
 --    ┏┓┳┓┏┳┓  ┏┓┓┏┏┓┳┓┏┓┳┓
 --    ┃ ┣┫ ┃ ━━┗┓┣┫┣┫┃┃┣ ┣┫
 --    ┗┛┛┗ ┻   ┗┛┛┗┛┗┻┛┗┛┛┗
+--    [ MOD + SHIFT + 0 ]
 shader_state  = os.getenv("HOME") .. "/.config/hypr/Shaders/.Shader-ON"
 shader_active = io.open(shader_state, "r") ~= nil
 
@@ -25,5 +25,3 @@ function ToggleCRT()
         hl.notification.create({ text = "  [  CRT DISABLED  ]", timeout = 3000, icon = "ok",   font_size = 16 })
     end
 end
-
-hl.bind(MOD .. " + SHIFT + 0", ToggleCRT)

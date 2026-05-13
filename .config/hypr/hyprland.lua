@@ -35,4 +35,7 @@ require("Config.Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS
 require("Config.Functions.Screenshare")	--	┏ TOGGLE SCREENSHARING
 require("Config.Functions.CRT-Shader")	--	┣ TOGGLE CRT SHADER
 require("Config.Functions.ReloadSystem")--	┣ RELOAD SYSTEM
+require("Config.Functions.Screenshot")
+require("Config.Functions.Theme-Picker")--	
+require("Config.Functions.Lockscreen")
 require("Config.Functions.Mute-Window")	--	┗ MUTE ACTIVE-WINDOW
