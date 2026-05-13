@@ -141,8 +141,8 @@
 	},
 /* SCREENSHARE MODULE */
 	"custom/screenshare": {
- 		"exec": "~/.config/waybar/Modules/ScreenShare module",
-  		"on-click": "~/.config/waybar/Modules/ScreenShare toggle",
+ 		"exec": "~/.config/waybar/Modules/ScreenShare",
+  		"on-click": "hyprctl eval 'Screenshare()'",
     		"interval": 1,
    		"format": "[ {} ]",
 		"return-type": "json"

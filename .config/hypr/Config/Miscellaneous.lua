@@ -14,7 +14,7 @@ hl.config({
     },
     render = {
         direct_scanout = 2,                    -- [ LOW-LATENCY // NO-VRR ]
-	use_fp16 = 0
+	--use_fp16 = 0
     },
     quirks = {
         -- prefer_hdr = 1,                     -- [ HINT 'HDR' TO APPLICATIONS ]

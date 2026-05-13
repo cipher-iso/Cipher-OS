@@ -39,4 +39,4 @@ if [ "$DID_EXPOSE" = true ]; then
 fi
 
 # [ RELOAD SYSTEM ]
-ReloadSystem
+hyprctl eval 'ReloadSystem()'

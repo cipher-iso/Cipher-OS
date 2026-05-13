@@ -68,16 +68,12 @@ hl.window_rule({                        -- [ LARGE FLOATS ]
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓
 --    ┃┃┃┃┃┣┫┃┫ ┗┓┃┃┣┫┃ ┣ ━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┻┛┗┛┛┗┛┗┛┗┛┣┛┛┗┗┛┗┛  ┛┗┗┛┗┛┗┛┗┛
-hl.workspace_rule({ workspace = "1", persistent = true })
-hl.workspace_rule({ workspace = "2", persistent = true })
-hl.workspace_rule({ workspace = "3", persistent = true })
-hl.workspace_rule({ workspace = "4", persistent = true })
-hl.workspace_rule({ workspace = "5", persistent = true })
-hl.workspace_rule({ workspace = "6", persistent = true })
-hl.workspace_rule({ workspace = "7", persistent = true })
-hl.workspace_rule({ workspace = "8", persistent = true })
-hl.workspace_rule({ workspace = "9", persistent = true })
+-- [ PERSISTENT WORKSPACES 1-9 ]
+for i = 1, 9 do
+    hl.workspace_rule({ workspace = tostring(i), persistent = true })
+end
 
+-- [ FULLSCREEN WINDOWS WHEN ONLY 1 ]
 hl.workspace_rule({ workspace = "w[tv1]s[false]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]s[false]",   gaps_out = 0, gaps_in = 0 })
 
@@ -103,8 +99,7 @@ hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = 
 hl.window_rule({ min_size = "1 1", allows_input = true, pin = true, float = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
 
 -- [ DOLPHIN SUB-WINDOWS ]
-hl.window_rule({ min_size = "1 1", move = "(865) (718)", size = "monitor_w*0.3 monitor_h*0.14", match = { title = "^(.*Copying —.*|.*Folder —.*)$" } })
-hl.window_rule({ min_size = "1 1", move = "(865) (343)", size = "monitor_w*0.3 monitor_h*0.25", match = { title = "^(.*Exists —.*|.*Dialog —.*)$" } })
+hl.window_rule({ min_size = "1 1", match = { title = "^(.*Copying —.*|.*Folder —.*|.*Exists —.*|.*Dialog —.*)$" }, move = "(865) (718)", size = "monitor_w*0.3 monitor_h*0.14" })
 
 -- [ PICTURE-IN-PICTURE ]
 hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1875) (1035)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })

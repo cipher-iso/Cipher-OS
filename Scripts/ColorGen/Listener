@@ -6,5 +6,5 @@ IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.lua"
 # [ MAIN LOOP ]
 while true; do
     inotifywait -e close_write "$IDENTIFIERS" >/dev/null 2>&1
-ReloadSystem
+hyprctl eval 'ReloadSystem()'
 done

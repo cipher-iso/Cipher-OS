@@ -25,42 +25,40 @@ hl.config({
 --    ┣┫ ┣ ┗┫┣┫┃┃┃┃┃┗┓
 --    ┛┗┛┗┛┗┛┻┛┻┛┗┻┛┗┛
 -- [ WINDOW MANAGEMENT ]
-hl.bind(MOD .. " + C",         hl.dsp.window.close())                                  -- Alt F4
-hl.bind("ALT + F4",            hl.dsp.window.kill())                                   -- Alt F4 (force)
-hl.bind(MOD .. " + V",         hl.dsp.window.float({ action = "toggle" }))             -- Toggle Floating [1]
-hl.bind(MOD .. " + mouse:274", hl.dsp.window.float({ action = "toggle" }))             -- Toggle Floating [2]
-hl.bind(MOD .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })               -- Move Window [KEYBOARD + MOUSE]
-hl.bind(MOD .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })               -- Resize Window [KEYBOARD + MOUSE]
-hl.bind("F19",                 hl.dsp.window.drag(),   { mouse = true })               -- Move Window [MOUSE-ONLY]
-hl.bind("F20",                 hl.dsp.window.resize(), { mouse = true })               -- Resize Window [MOUSE-ONLY]
-hl.bind(MOD .. " + Tab", function()                                                    -- Split + Bring to Top + Swap Master
-    hl.dispatch(hl.dsp.layout("swapwithmaster master"))                                -- Swap Master Window
-end)
-hl.bind(MOD .. " + W",   hl.dsp.window.fullscreen({ mode = 1 }))                      -- Maximize Window
-hl.bind(MOD .. " + F11", hl.dsp.window.fullscreen())                                  -- Fullscreen Window
+hl.bind(MOD .. " + C",         hl.dsp.window.close())                           -- Alt F4
+hl.bind("ALT + F4",            hl.dsp.window.kill())                            -- Alt F4 [FORCE-KILL]
+hl.bind(MOD .. " + V",         hl.dsp.window.float({ action = "toggle" }))      -- Toggle Floating [1]
+hl.bind(MOD .. " + mouse:274", hl.dsp.window.float({ action = "toggle" }))      -- Toggle Floating [2]
+hl.bind(MOD .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })        -- Move Window [KEYBOARD + MOUSE]
+hl.bind(MOD .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })        -- Resize Window [KEYBOARD + MOUSE]
+hl.bind("F19",                 hl.dsp.window.drag(),   { mouse = true })        -- Move Window [MOUSE-ONLY]
+hl.bind("F20",                 hl.dsp.window.resize(), { mouse = true })        -- Resize Window [MOUSE-ONLY]
+hl.bind(MOD .. " + Tab", hl.dsp.layout("swapwithmaster master"))  		-- Swap Master Window
+hl.bind(MOD .. " + W",   hl.dsp.window.fullscreen({ mode = 1 }))   		-- Maximize Window
+hl.bind(MOD .. " + F11", hl.dsp.window.fullscreen())               		-- Fullscreen Window
 
 -- [ GENERAL FUNCTIONS ]
-hl.bind(MOD .. " + SHIFT + M", hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.exit()'"))   -- End Session
-hl.bind(MOD .. " + B",         hl.dsp.exec_cmd("hyprctl hyprsunset gamma 100"))       -- Set Brightness to Max
+hl.bind(MOD .. " + SHIFT + M", hl.dsp.exit())   				-- End Session
+hl.bind(MOD .. " + B",         hl.dsp.exec_cmd("hyprctl hyprsunset gamma 100")) -- Set Brightness to 100%
 
 -- [ EXEC APPLICATIONS / TUI & GUI ]
-hl.bind(MOD .. " + F",              hl.dsp.exec_cmd(Browser))                         -- Browser
-hl.bind(MOD .. " + RETURN",         hl.dsp.exec_cmd(Menu))                            -- Application Menu
-hl.bind(MOD .. " + E",              hl.dsp.exec_cmd(FileManager))                     -- File Manager
-hl.bind(MOD .. " + SHIFT + Q",      hl.dsp.exec_cmd(Terminal))                        -- Terminal [TILED]
-hl.bind(MOD .. " + Q",              hl.dsp.exec_cmd("[float; size 1400 800] " .. Terminal)) -- Terminal [FLOAT]
-hl.bind("Control_L + Shift_L + Escape", hl.dsp.exec_cmd(Terminal .. " btop"))        -- Task Manager
-hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                         -- Open Config
+hl.bind(MOD .. " + F",              hl.dsp.exec_cmd(Browser))                   -- Browser
+hl.bind(MOD .. " + RETURN",         hl.dsp.exec_cmd(Menu))                      -- Application Menu
+hl.bind(MOD .. " + E",              hl.dsp.exec_cmd(FileManager))               -- File Manager
+hl.bind(MOD .. " + SHIFT + Q",      hl.dsp.exec_cmd(Terminal))                  -- Terminal [TILED]
+hl.bind(MOD .. " + Q", hl.dsp.exec_cmd("[float; size 1400 800] " .. Terminal))	-- Terminal [FLOAT]
+hl.bind("Control_L + Shift_L + Escape", hl.dsp.exec_cmd(Terminal .. " btop"))   -- Task Manager
+hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    -- Open Config
 
 -- [ CUSTOM SCRIPTS & FUNCTIONS ]
-hl.bind(MOD .. " + F13",          hl.dsp.exec_cmd("Screenshot"))                      -- Screenshot [1]
-hl.bind(MOD .. " + SHIFT + F13",  hl.dsp.exec_cmd("ScreenshotWindow"))                -- Screenshot [2] Active-Window
-hl.bind(MOD .. " + I",            hl.dsp.exec_cmd("Hyprpicker"))                      -- Color Picker
-hl.bind(MOD .. " + SHIFT + L",    hl.dsp.exec_cmd("LockScreen"))                     -- Lockscreen
-hl.bind(MOD .. " + T",            hl.dsp.exec_cmd("Waybar Toggle"))                   -- Toggle Waybar
-hl.bind(MOD .. " + mouse:276",    hl.dsp.exec_cmd("Waybar Lock"))                     -- Lock Waybar [1] - [TOGGLE]
-hl.bind(MOD .. " + SHIFT + Home", hl.dsp.exec_cmd("waypaper --random"))               -- Randomize Wallpaper
-hl.bind(MOD .. " + R",            hl.dsp.exec_cmd("GenerateColors -d"))               -- Restore Default Colors
+hl.bind(MOD .. " + F13",          hl.dsp.exec_cmd("Screenshot"))        -- Screenshot [1]
+hl.bind(MOD .. " + SHIFT + F13",  hl.dsp.exec_cmd("ScreenshotWindow"))  -- Screenshot [2] Active-Window
+hl.bind(MOD .. " + I",            hl.dsp.exec_cmd("Hyprpicker"))        -- Color/Theme Picker
+hl.bind(MOD .. " + SHIFT + L",    hl.dsp.exec_cmd("LockScreen"))	-- Lockscreen
+hl.bind(MOD .. " + T",            hl.dsp.exec_cmd("Waybar Toggle"))     -- Toggle Waybar
+hl.bind(MOD .. " + mouse:276",    hl.dsp.exec_cmd("Waybar Lock"))       -- Lock Waybar [1] - [TOGGLE]
+hl.bind(MOD .. " + SHIFT + Home", hl.dsp.exec_cmd("waypaper --random")) -- Randomize Wallpaper
+hl.bind(MOD .. " + R",            hl.dsp.exec_cmd("GenerateColors -d")) -- Restore Default Colors
 
 -- [ WORKSPACES ]
 hl.bind(MOD .. " + mouse_down",  hl.dsp.focus({ workspace = "e+1" }))
@@ -118,9 +116,6 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("Gamma down"),                 
 --    ┏┓┓ ┏┓┳┓┏┓┓   ┳┓┳┳┓┳┓┏┓
 --    ┃┓┃ ┃┃┣┫┣┫┃   ┣┫┃┃┃┃┃┗┓
 --    ┗┛┗┛┗┛┻┛┛┗┗┛  ┻┛┻┛┗┻┛┗┛
-
--- hl.bind("F15", hl.dsp.pass({ window = "class:discord|class:obs" }))
-
 -- [ DISCORD PASSTHROUGH ]
 hl.bind("F13", hl.dsp.pass({ window = "class:discord" }))  -- SCREEN-SHARE
 hl.bind("F13", hl.dsp.pass({ window = "class:discord" }), { release = true })

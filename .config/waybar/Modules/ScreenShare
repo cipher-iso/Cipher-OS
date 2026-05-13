@@ -1,56 +1,12 @@
 #!/usr/bin/env bash
-
 STATE_FILE="$HOME/Scripts/.Screenshare-ON"
-IDENTIFIERS="$HOME/.config/hypr/Config/Identifiers.lua"
 
-    # [ SOURCE COLORS ]
-eval "$(
-    grep -E '^\s*(PRIMARY|SECONDARY|BACKGROUND|ACCENT1|ACCENT2|ACCENT3)\s*=' "$IDENTIFIERS" \
-    | sed 's/[[:space:]]//g; s/="\(.*\)"/=\1/'
-)" 2>/dev/null
-
-toggle_screenshare() {
 if [ ! -f "$STATE_FILE" ]; then
-    # [ ENABLE SCREENSHARING ]
-    touch "$STATE_FILE"
+    ICON=""
+    TOOLTIP="[ SESSION INCOGNITO ]"
 else
-    # [ DISABLE SCREENSHARING ]
-    rm -f "$STATE_FILE"
-fi
-}
-
-borders() {
-if [ ! -f "$STATE_FILE" ]; then
-    # [ RESTORE DEFAULT BORDERS ]
-    hyprctl eval "hl.window_rule({ name = 'WORKSPACES',  opaque = true, decorate = false, rounding = 0, match = { float = false, workspace = 'w[tv1]s[false]' } })"
-    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = true,  match = { class = '^(discord|vivaldi-stable|steam)\$' } })"
-    hyprctl eval "hl.config({ decoration = { shadow = { color = 'rgba(${PRIMARY}02)' } } })"
-    hyprctl eval "hl.config({ general = { ['col.active_border'] = 'rgb(${PRIMARY})' } })"
-else
-    # [ RESTORE SCREENSHARING BORDERS ]
-    hyprctl eval "hl.window_rule({ name = 'WORKSPACES',  opaque = true, decorate = true,  rounding = 0, match = { float = false, workspace = 'w[tv1]s[false]' } })"
-    hyprctl eval "hl.window_rule({ name = 'SCREENSHARE', no_screen_share = false, match = { class = '^(discord|vivaldi-stable|steam)\$' } })"
-    hyprctl eval "hl.config({ decoration = { shadow = { color = 'rgba(${SECONDARY}01)' } } })"
-    hyprctl eval "hl.config({ general = { ['col.active_border'] = 'rgb(${SECONDARY})' } })"
-    hyprctl eval 'local w = hl.get_active_window(); if w ~= nil then hl.dispatch(hl.dsp.focus({ window = "address:" .. w.address })) end'
-fi
-}
-
-module() {
-if [ ! -f "$STATE_FILE" ]; then
-	ICON=""
-	TOOLTIP="[ SESSION INCOGNITO ]"
-else
-	ICON=""
-	TOOLTIP="[ SESSION EXPOSED ]"
+    ICON=""
+    TOOLTIP="[ SESSION EXPOSED ]"
 fi
 
 printf '{"text":"%s","tooltip":"%s"}\n' "$ICON" "$TOOLTIP"
-}
-
-case "${1,,}" in
-    module) module ;;
-    borders) borders;;
-    *) 	toggle_screenshare
-	borders;;
-esac
