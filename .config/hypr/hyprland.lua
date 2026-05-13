@@ -3,17 +3,19 @@
 --    ┻┛┻┗┛┣┛┗┛┛┗┗┛  ┗┛┗┛ ┻  ┻ ┻┛┗┗┛┗┛
 hl.monitor({
     output              = "",
-    vrr                 = 3,
-    cm                  = "auto",
-    scale               = 1,
     position            = "0x0",
+    cm                  = "auto",
     mode                = "preferred",
+
+    vrr                 = 3,
+    scale               = 1,
     supports_hdr        = 1,
-    min_luminance       = 0,
-    max_luminance       = 1000,
-    sdr_min_luminance   = 0,
-    sdr_max_luminance   = 400,
     supports_wide_color = 1,
+
+    sdr_min_luminance   = 0,
+    min_luminance       = 0,
+    sdr_max_luminance   = 400,
+    max_luminance       = 1000,
 })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
