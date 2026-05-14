@@ -2,18 +2,30 @@
 --    ┣┫┣ ┃ ┃┃┣┫┃┃  ┗┓┗┫┗┓ ┃ ┣ ┃┃┃
 --    ┛┗┗┛┗┛┗┛┛┗┻┛  ┗┛┗┛┗┛ ┻ ┗┛┛ ┗
 function ReloadSystem()
-    hl.dispatch(hl.dsp.exec_cmd([[bash -c "
-        hyprpm reload
-        hyprctl reload
-        hyprctl eval 'Screenshare_Restore()'
-        GenerateColors
-        killall hyprsunset hypridle solaar vicinae 2>/dev/null
-        hyprctl hyprsunset gamma \$(cat /tmp/current_gamma)
-        Waybar Reload &
-        hyprsunset -i --gamma_max 200 &
-        hypridle &
-        vicinae server &
-        solaar -w hide &
-    "]]))
+-- [ PROCESSES TO KILL ]
+    local kill = {
+        "solaar",
+        "vicinae",
+        "hypridle",
+        "hyprsunset",
+    }
+-- [ PROCESSES TO SPAWN ]
+    local spawn = {
+        "hypridle",
+        "Waybar Reload",
+        "vicinae server",
+        "solaar -w hide",
+        "hyprsunset -i --gamma_max 200",
+    }
+-- [ LOCAL PROCESSES ]
+    local lines = {
+        "hyprpm reload",
+        "hyprctl reload",
+        "GenerateColors",
+        "hyprctl eval 'Screenshare_Restore()'",
+        "killall " .. table.concat(kill, " ") .. " 2>/dev/null",
+    }
+    for _, p in ipairs(spawn) do lines[#lines + 1] = p .. " &" end
+    hl.dispatch(hl.dsp.exec_cmd('bash -c "' .. table.concat(lines, "\n") .. '"'))
     hl.notification.create({ text = "  [ SYSTEM RELOADING ]", timeout = 3000, icon = "info", font_size = 16 })
 end

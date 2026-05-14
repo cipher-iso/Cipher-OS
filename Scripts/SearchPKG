@@ -6,8 +6,8 @@ s() {
     local WHITE="\033[38;2;235;250;250m"
     local ORANGE="\033[38;2;255;165;0m"
     local GREEN="\033[38;2;0;255;64m"
-    local IDX="\033[38;2;50;52;73m"    # #323449 for [ i ]
-    local DESC="\033[38;2;33;35;55m"   # #212337 for descriptions
+    local IDX="\033[38;2;50;52;73m"    # for [ i ]
+    local DESC="\033[38;2;33;35;55m"   # for descriptions
     local BOLD="\033[1m"
     local RESET="\033[0m"
 

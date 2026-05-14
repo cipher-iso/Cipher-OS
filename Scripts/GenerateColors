@@ -23,7 +23,7 @@ lua_get() {
 
 # [ HELPER: SET LUA VARIABLE ]
 lua_set() {
-    sed -i "s|^$1\s*=.*|$1      = \"$2\"|" "$IDENTIFIERS"
+    sed -i "s|^\($1\s*=\s*\"\)[^\"]*\"|\1$2\"|" "$IDENTIFIERS"
 }
 
 # [ ARGUMENT PARSING ]

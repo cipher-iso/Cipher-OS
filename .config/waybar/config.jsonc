@@ -196,7 +196,7 @@
 	},
 /* LOCKSCREEN MODULE */
 	"custom/lock": {
-		"on-click": "~/.config/waybar/Modules/LockScreen",
+		"on-click": "hyprctl eval 'Lockscreen()'",
 		"format": "  ",
 		"tooltip-format": "[ LOCK SESSION ]"
 	}
