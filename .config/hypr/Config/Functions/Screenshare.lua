@@ -6,11 +6,13 @@ local screenshare_active = io.open(screenshare_state, "r") ~= nil
 
 local function apply_screenshare(active)
     local color   = active and SECONDARY or PRIMARY
-    local opacity = active and "01)"     or "02)"
-    hl.window_rule({ name = "SCREENSHARE", no_screen_share = not active })
+    local opacity = active and "02)"     or "02)"
     hl.window_rule({ name = "WORKSPACES", decorate = active })
-    hl.config({ decoration = { shadow = { color = "rgba(" .. color .. opacity } } })
-    hl.config({ general    = { ["col.active_border"] = "rgb(" .. color .. ")" } })
+    hl.window_rule({ name = "SCREENSHARE", no_screen_share = not active })
+    hl.config({ general	= { ["col.active_border"] = "rgb(" .. color .. ")" } })
+    hl.config({ decoration = {
+    	    	shadow 	= { color = "rgba(" .. color .. opacity },
+    		glow 	= { enabled = active, color = "rgba(" .. color .. "20)" } } })
 end
 
 function Screenshare()

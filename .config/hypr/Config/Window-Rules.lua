@@ -12,15 +12,17 @@ hl.window_rule({ workspace = "9 silent",  opaque = true, match = { title = "^.*(
 --    ┏┓┏┓┏┳┓┏┓┏┓┏┓┳┓┳┏┓┏┓
 --    ┃ ┣┫ ┃ ┣ ┃┓┃┃┣┫┃┣ ┗┓
 --    ┗┛┛┗ ┻ ┗┛┗┛┗┛┛┗┻┗┛┗┛
-hl.window_rule({ name = "SCREENSHARE",  -- [ SCREENSHARING ]
+hl.window_rule({
+	name = "SCREENSHARE",
 	no_screen_share = true,
 	match = { class = "^(discord|vivaldi-stable|steam)$" }
 })
-hl.window_rule({ name = "MEDIA",        -- [ MEDIA MENU ]
+hl.window_rule({
+	name 	= "MEDIA",
 	workspace = "special:media silent",
-	match = { class = "^(.*easyeffects)$" }
+	match 	= { class = "^(.*easyeffects)$" }
 })
-hl.window_rule({                        -- [ GAMING ]
+hl.window_rule({
 	name             = "GAMES",
 	content          = "game",
 	workspace        = "9 silent",
@@ -34,35 +36,35 @@ hl.window_rule({                        -- [ GAMING ]
 	fullscreen       = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
-	match = { class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
+	match = { class  = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
 })
 hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
-	name     = "FLOAT ONLY",
-	float    = true,
-	center   = true,
-	max_size = "monitor_w*0.75 monitor_h*0.7",
-	match = { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" }
+	name    = "FLOAT ONLY",
+	float   = true,
+	center  = true,
+	match 	= { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" },
+	max_size = "monitor_w*0.75 monitor_h*0.7"
 })
 hl.window_rule({                        -- [ SMALL FLOATS ]
-	name   = "FLOAT SMALL",
-	float  = true,
-	center = true,
-	size   = "monitor_w*0.2 monitor_h*0.35",
-	match = { class = "^(blueman-manager|com.network.manager|.*pupgui2|.*share-picker|solaar)$" }
+	name   	= "FLOAT SMALL",
+	float  	= true,
+	center 	= true,
+	size   	= "monitor_w*0.2 monitor_h*0.35",
+	match 	= { class = "^(blueman-manager|com.network.manager|.*pupgui2|.*share-picker|solaar)$" }
 })
 hl.window_rule({                        -- [ MEDIUM FLOATS ]
-	name   = "FLOAT MEDIUM",
-	float  = true,
-	center = true,
-	size   = "monitor_w*0.45 monitor_h*0.5",
-	match = { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark).*$" }
+	name   	= "FLOAT MEDIUM",
+	float  	= true,
+	center 	= true,
+	size   	= "monitor_w*0.45 monitor_h*0.5",
+	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark).*$" }
 })
 hl.window_rule({                        -- [ LARGE FLOATS ]
-	name   = "FLOAT LARGE",
-	float  = true,
-	center = true,
-	size   = "monitor_w*0.5 monitor_h*0.58",
-	match = { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects)$" }
+	name   	= "FLOAT LARGE",
+	float  	= true,
+	center 	= true,
+	size   	= "monitor_w*0.5 monitor_h*0.58",
+	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects)$" }
 })
 
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓
@@ -77,9 +79,10 @@ end
 hl.workspace_rule({ workspace = "w[tv1]s[false]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]s[false]",   gaps_out = 0, gaps_in = 0 })
 
-hl.window_rule({ name = "WORKSPACES",
-	opaque      = true,
-	decorate    = false,
+hl.window_rule({
+	name 		= "WORKSPACES",
+	opaque  	= true,
+	decorate	= false,
 	match = { float = false, workspace = "w[tv1]s[false]" }
 })
 
@@ -111,6 +114,5 @@ hl.window_rule({ workspace = "9 silent", float = true, center = true, match = { 
 --    ┓ ┏┓┓┏┏┓┳┓  ┳┓┳┳┓ ┏┓┏┓
 --    ┃ ┣┫┗┫┣ ┣┫━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┛┛┗┗┛┗┛┛┗  ┛┗┗┛┗┛┗┛┗┛
--- [ OSD | LAYER | LAUNCHER BLUR ]
 hl.layer_rule({ no_anim = true, match = { namespace = "selection" } })
 hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0, match = { namespace = "^(waybar|swaync-notification-window|swayosd|vicinae)$" } })

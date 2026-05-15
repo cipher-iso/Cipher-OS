@@ -2,16 +2,16 @@
 --    ┃┃┃┗┓┃┃┃ ┣┫┗┫  ┗┓┣  ┃  ┃ ┃┃┃┃┓┗┓
 --    ┻┛┻┗┛┣┛┗┛┛┗┗┛  ┗┛┗┛ ┻  ┻ ┻┛┗┗┛┗┛
 hl.monitor({
-    output              = "",
-    position            = "0x0",
-    cm                  = "auto",
-    mode                = "preferred",
-
-    vrr                 = 3,
-    scale               = 1,
+--  [ GENERAL SETTINGS ]
+    output      	= "",
+    position    	= "0x0",
+    cm          	= "auto",
+    mode        	= "preferred",
+    vrr         	= 3,
+    scale		= 1,
+--  [ HDR SETTINGS ]
     supports_hdr        = 1,
     supports_wide_color = 1,
-
     sdr_min_luminance   = 0,
     min_luminance       = 0,
     sdr_max_luminance   = 400,

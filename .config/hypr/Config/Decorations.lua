@@ -54,6 +54,12 @@ hl.config({
             color          = "rgba(" .. PRIMARY    .. "02)",
             color_inactive = "rgba(" .. BACKGROUND .. "05)",
         },
+	glow = {
+		enabled 	= false,
+		range 		= 25,
+		render_power 	= 2,
+		color		= "rgba(" .. PRIMARY .. "20)",
+	},
     },
 })
 
