@@ -37,11 +37,11 @@ hl.bind(MOD .. " + Tab",       hl.dsp.layout("swapwithmaster master"))  	-- Swap
 hl.bind(MOD .. " + W",         hl.dsp.window.fullscreen({ mode = 1 }))   	-- Maximize Window
 hl.bind(MOD .. " + F11",       hl.dsp.window.fullscreen())               	-- Fullscreen Window
 
--- [ GENERAL FUNCTIONS ]
+-- [ GENERAL KEYBINDINGS ]
 hl.bind(MOD .. " + SHIFT + M", hl.dsp.exit())   			-- End Session
 hl.bind(MOD .. " + B", hl.dsp.exec_cmd("hyprctl hyprsunset gamma 100"))	-- Set Brightness to 100%
 
--- [ EXEC APPLICATIONS ]
+-- [ APP LAUNCHERS ]
 hl.bind(MOD .. " + F",              hl.dsp.exec_cmd(Browser))                   -- Browser
 hl.bind(MOD .. " + RETURN",         hl.dsp.exec_cmd(Menu))                      -- Application Menu
 hl.bind(MOD .. " + E",              hl.dsp.exec_cmd(FileManager))               -- File Manager
@@ -59,6 +59,7 @@ hl.bind(MOD .. " + SHIFT + L", 	function() Lockscreen() end)		-- Lockscreen
 hl.bind(MOD .. " + SHIFT + R", 	function() ReloadSystem() end)		-- Reload System
 hl.bind(MOD .. " + F13",   	function() Screenshot("region") end) 		-- Screenshot Region
 hl.bind(MOD .. " + SHIFT + F13",function() Screenshot("window -m active") end)	-- Screenshot Window
+hl.bind("mouse:273", function() PiP() end, { mouse = true, non_consuming = true })
 
 -- [ CUSTOM SCRIPTS ]
 hl.bind(MOD .. " + T",            hl.dsp.exec_cmd("Waybar Toggle"))     -- Toggle Waybar
@@ -67,11 +68,12 @@ hl.bind(MOD .. " + SHIFT + Home", hl.dsp.exec_cmd("waypaper --random")) -- Rando
 hl.bind(MOD .. " + R",            hl.dsp.exec_cmd("GenerateColors -d")) -- Restore Default Colors
 
 -- [ WORKSPACES ]
-hl.bind(MOD .. " + mouse_down",  hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(MOD .. " + mouse_up",    hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(MOD .. " + mouse_right", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(MOD .. " + mouse_left",  hl.dsp.focus({ workspace = "e-1" }))
-hl.bind("ALT + TAB",             hl.dsp.focus({ workspace = "e+1" }), { repeating = true })
+hl.bind(MOD .. " + mouse_down",  function() Workspace_Up() end)
+hl.bind(MOD .. " + mouse_up",    function() Workspace_Down() end)
+hl.bind(MOD .. " + mouse_right", function() Workspace_Up() end)
+hl.bind(MOD .. " + mouse_left",  function() Workspace_Down() end)
+hl.bind("ALT + TAB", function() AltTab(1)  end, { repeating = true })
+hl.bind("ALT + SHIFT + TAB", function() AltTab(-1)  end, { repeating = true })
 
 -- [ SWITCH TO WORKSPACE 1-9 + SPECIAL ]
 hl.bind(MOD .. " + 1", hl.dsp.focus({ workspace = 1 }))

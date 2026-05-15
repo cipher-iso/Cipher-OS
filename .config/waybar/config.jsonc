@@ -112,8 +112,8 @@
 		"cursor": true,
 		"show-special": true,
 		"special-visible-only": true,
-		"on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e+1\" })'",
-		"on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({ workspace = \"e-1\" })'",
+		"on-scroll-up": "hyprctl eval 'Workspace_Up()'",
+		"on-scroll-down": "hyprctl eval 'Workspace_Down()'",
 		"format":"{icon}",
 		"format-icons": {
 			"active": "󰫢", "magic": "","media": ""}

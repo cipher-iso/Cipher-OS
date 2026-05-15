@@ -22,9 +22,7 @@ hl.config({
     },
 
     -- [ MASTER-WINDOW SIZE ]
-    master = {
-        mfact = 0.6,
-    },
+    master = {  mfact = 0.6,  },
 
     -- [ WINDOW DECORATIONS ]
     decoration = {

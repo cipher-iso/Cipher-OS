@@ -27,4 +27,9 @@ hl.exec_cmd("hyprctl eval 'Screenshare_Restore()'")	-- Restore ScreenShare State
 hl.exec_cmd(Terminal .. " kew", { workspace = "5 silent" })	-- Music Player
 hl.exec_cmd(Terminal .. " btop", { workspace = "5 silent" })    -- System Monitor
 
+-- [ FUNCTIONS ]
+hl.timer(function()
+    hl.exec_cmd("hyprctl eval 'DiscordInhibitor()'")
+end, { timeout = 30000, type = "repeat" })
+
 end)

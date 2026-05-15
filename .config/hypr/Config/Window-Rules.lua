@@ -2,7 +2,7 @@
 --    ┃┃┃┃┃┃┃┃┃┃┃┃┃━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┻┛┻┛┗┻┛┗┛┗┻┛  ┛┗┗┛┗┛┗┛┗┛
 -- [ DEFINED WORKSPACES ]
-hl.window_rule({ workspace = "1",         opaque = true, focus_on_activate = true, no_vrr = true, match = { class = "vivaldi-stable|mpv" } })
+hl.window_rule({ workspace = "1", opaque = true, focus_on_activate = true, no_vrr = true, match = { class = "vivaldi-stable|mpv" } })
 hl.window_rule({ workspace = "2 silent",  match = { class = "discord" } })
 hl.window_rule({ workspace = "3 silent",  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" } })
 hl.window_rule({ workspace = "4 silent",  render_unfocused = true, match = { class = "obs" } })
@@ -41,7 +41,7 @@ hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
 	float    = true,
 	center   = true,
 	max_size = "monitor_w*0.75 monitor_h*0.7",
-	match = { title = "^(.*Vivaldi Settings.*|OBS Studio Crash Detected|.*1659040.*)$" }
+	match = { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" }
 })
 hl.window_rule({                        -- [ SMALL FLOATS ]
 	name   = "FLOAT SMALL",
@@ -55,7 +55,7 @@ hl.window_rule({                        -- [ MEDIUM FLOATS ]
 	float  = true,
 	center = true,
 	size   = "monitor_w*0.45 monitor_h*0.5",
-	match = { class = "^(pavucontrol-qt|.*lsfg|.*xdg-.*|Update|org.kde.ark)$" }
+	match = { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark).*$" }
 })
 hl.window_rule({                        -- [ LARGE FLOATS ]
 	name   = "FLOAT LARGE",
