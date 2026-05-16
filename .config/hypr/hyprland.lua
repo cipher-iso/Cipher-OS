@@ -34,7 +34,7 @@ require("Config.Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS
 --     ┻ ┗┛┛┗┗┛ ┻ ┻┗┛┛┗┗┛
 require("Config.Functions.PiP")			--	┏ PiP DRAGGING
 require("Config.Functions.AltTab")		--	┣ ALT+TAB BEHAVIOUR
-require("Config.Functions.CRT-Shader")		--	┣ TOGGLE CRT SHADER
+require("Config.Functions.ToggleCRT")		--	┣ TOGGLE CRT SHADER
 require("Config.Functions.Screenshot")		--	┣ SCREENSHOT UTILITY
 require("Config.Functions.Lockscreen")		--	┣ SLEEP DISCORD + LOCK
 require("Config.Functions.Mute-Window")		--	┣ MUTE ACTIVE-WINDOW
@@ -43,5 +43,3 @@ require("Config.Functions.ReloadSystem")	--	┣ RELOAD SYSTEM
 require("Config.Functions.Theme-Picker")	--	┣ THEME SWITCHER
 require("Config.Functions.DiscordInhibitor")	--	┣ DISCORD IDLE-INHIBITOR
 require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
-
-

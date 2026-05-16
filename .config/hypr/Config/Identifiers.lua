@@ -26,7 +26,6 @@ SECONDARY    = "EBFAFA"
 BACKGROUND   = "000000"
 
 -- [ SECONDARY COLORS ]
--- Empty == Auto-Detect
 ACCENT1      = "323449"
 ACCENT2      = "212337"
 ACCENT3      = "10111C"

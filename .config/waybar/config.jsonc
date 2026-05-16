@@ -20,7 +20,7 @@
 	},
 /* POWER MENU - EXPANDER */
         "custom/expand": {
-            	"format": "  ",
+            	"format": "  ",
 		"exec": "~/.config/waybar/Modules/Gamma",
 		"interval": "once",
 		"return-type": "json",

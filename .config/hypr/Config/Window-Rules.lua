@@ -64,7 +64,7 @@ hl.window_rule({                        -- [ LARGE FLOATS ]
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.5 monitor_h*0.58",
-	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects)$" }
+	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk)$" }
 })
 
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓
@@ -95,11 +95,11 @@ hl.window_rule({ allows_input = true, no_blur = true, opaque = true, no_focus = 
 hl.window_rule({ no_vrr = true, idle_inhibit = "focus", match = { content = "video" } })
 
 -- [ STEAM SUB-WINDOWS ]
-hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$" } })
-hl.window_rule({ move = "571 166", match = { class = "steam", title = "^(Steam Settings)$" } })
+hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$|^(Steam Settings)$" } })
 hl.window_rule({ opacity = 0, no_focus = true, no_blur = true, match = { title = "^(.*AntiCheat.*)$" } })
+hl.window_rule({ opaque = true, no_blur = true, match = { class = "steam", title = "^$", } })
 hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = { class = "steam", initial_title = "negative:Steam" } })
-hl.window_rule({ min_size = "1 1", allows_input = true, pin = true, float = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
+hl.window_rule({ min_size = "1 1", pin = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
 
 -- [ DOLPHIN SUB-WINDOWS ]
 hl.window_rule({ min_size = "1 1", match = { title = "^(.*Copying —.*|.*Folder —.*|.*Exists —.*|.*Dialog —.*)$" }, move = "(865) (718)", size = "monitor_w*0.3 monitor_h*0.14" })

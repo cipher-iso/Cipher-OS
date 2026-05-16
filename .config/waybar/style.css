@@ -22,7 +22,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 	margin: 0.4em;
 	margin-left: 1em;
 	margin-right: 1em;
-	border-radius: 0.5em;
+	border-radius: 1em;
 	background: linear-gradient(135deg, @grad2, @grad1, @grad2);
 	box-shadow: 0em 0em 0.25em -0.1em alpha(@fg, 0.75),
 		inset 0em 1em 1em -0.25em alpha(@grad1, 0.75),
@@ -33,7 +33,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
     	color: @bg;
     	padding: 0.1em 0.5em;
 	margin: 0.25em;
-	border-radius: 0.4em;
+	border-radius: 0.75em;
 	transition:
         	color 0.2s ease,
         	box-shadow 0.2s ease,

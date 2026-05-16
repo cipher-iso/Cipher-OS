@@ -1,3 +1,6 @@
+--    ┏┓┓ ┏┳┓ ╻ ┏┳┓┏┓┳┓
+--    ┣┫┃  ┃ ━╋━ ┃ ┣┫┣┫
+--    ┛┗┗┛ ┻  ╹  ┻ ┛┗┻┛
 function AltTab(direction)
     local all        = hl.get_workspaces()
     local workspaces = {}

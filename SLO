@@ -4,7 +4,6 @@ GAME_ENV=(
 # [ GENERAL SETTINGS ]
     DXVK_FRAME_RATE=224
     VKD3D_FRAME_RATE=224
-    STEAM_DISABLE_GPU_ACCEL=0
 # [ PROTON SETTINGS ]
     PROTON_USE_NVAPI=1
     PROTON_USE_NTSYNC=1
@@ -18,15 +17,18 @@ GAME_ENV=(
     DXVK_NVAPI_VKREFLEX=1
     GBM_BACKEND=nvidia-drm
     VKD3D_CONFIG=descriptor_heap
+    DXVK_NVAPI_D3D12_NV_SHADER_EXTN=1
 )
+
 # [ GAMESCOPE FLAGS ]
 GAMESCOPE_FLAGS=(
-    --adaptive-sync
-    --hdr-enabled
-    --force-grab-cursor
     --fullscreen
+    --hdr-enabled
+    --adaptive-sync
     --backend wayland
+    --force-grab-cursor
 )
+
 # [ FLAGS ]
 USE_HDR=0
 USE_FG=0
@@ -38,35 +40,35 @@ CAP_VALUE=""
 SHIFT_CAP=0
 
 for arg in "$@"; do
-    case "$arg" in
-        -hdr) USE_HDR=1 ;;
-        -fg)  USE_FG=1 ;;
-        -m)   USE_M=1 ;;
-        -nv)  USE_NV=1 ;;
-        -crt) USE_CRT=1 ;;
-        -g)   USE_G=1 ;;
-        -cap) SHIFT_CAP=1 ;;
-        -all) USE_HDR=1; USE_FG=1; USE_M=1 ;;
-        *)
-            if [[ "$SHIFT_CAP" == "1" ]]; then CAP_VALUE="$arg"; SHIFT_CAP=0; fi ;;
-    esac
+	case "$arg" in
+		-hdr) USE_HDR=1 ;;
+		-fg)  USE_FG=1 ;;
+		-m)   USE_M=1 ;;
+		-nv)  USE_NV=1 ;;
+		-crt) USE_CRT=1 ;;
+		-g)   USE_G=1 ;;
+		-cap) SHIFT_CAP=1 ;;
+		-all) USE_HDR=1; USE_FG=1; USE_M=1 ;;
+		*)
+			if [[ "$SHIFT_CAP" == "1" ]]; then CAP_VALUE="$arg"; SHIFT_CAP=0; fi ;;
+	esac
 done
 
 # [ CLEAN ARGS ]
 CLEAN_ARGS=()
 SKIP_NEXT=0
 for arg in "$@"; do
-    if [[ "$SKIP_NEXT" == "1" ]]; then SKIP_NEXT=0; continue; fi
-    case "$arg" in
-        -hdr|-fg|-m|-nv|-all|-crt|-g) ;;
-        -cap) SKIP_NEXT=1 ;;
-        *) CLEAN_ARGS+=("$arg") ;;
-    esac
+	if [[ "$SKIP_NEXT" == "1" ]]; then SKIP_NEXT=0; continue; fi
+	case "$arg" in
+		-hdr|-fg|-m|-nv|-all|-crt|-g) ;;
+		-cap) SKIP_NEXT=1 ;;
+		*) CLEAN_ARGS+=("$arg") ;;
+	esac
 done
 
 # [ HDR ]
 if [[ "$USE_HDR" == "1" ]]; then
-    GAME_ENV+=( PROTON_ENABLE_WAYLAND=1 PROTON_ENABLE_HDR=1 )
+    GAME_ENV+=( PROTON_ENABLE_WAYLAND=1 DXVK_HDR=1 )
 fi
 
 # [ FRAMEGEN | LSFG-VK ]
@@ -85,17 +87,14 @@ if [[ -n "$CAP_VALUE" ]]; then GAME_ENV+=( DXVK_FRAME_LIMIT="$CAP_VALUE" ); fi
 
 # [ CRT SHADERS ]
 if [[ "$USE_CRT" == "1" ]]; then
-    STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-    if [ ! -f "$STATE_FILE" ]; then
-        cleanup() {
-            hyprctl reload
-        }
-        trap cleanup EXIT
-        hyprctl eval 'hl.monitor({ output = "", cm = "hdr", bitdepth = 10 })'
-        hyprctl eval 'hl.config({ debug = { damage_tracking = 0, vfr = false } })'
-        hyprctl eval "hl.config({ decoration = { screen_shader = os.getenv("HOME") .. "/.config/hypr/Shaders/CRT" }"
-	hyprctl eval "hl.config({ render = { use_fp16 = 0 }})"
-    fi
+	STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+	if [ ! -f "$STATE_FILE" ]; then
+		cleanup() {
+		hyprctl eval "ToggleCRT()"
+		}
+		trap cleanup EXIT
+		hyprctl eval "ToggleCRT()"
+	fi
 fi
 
 # [ GET CURRENT MONITOR MODE ]
@@ -109,25 +108,10 @@ read WIDTH HEIGHT REFRESH <<<$(hyprctl monitors | awk '
 
 # [ ENABLE GAMESCOPE / HDR ]
 if [[ "$USE_G" == "1" ]]; then
-(
-    if [[ "$USE_HDR" == "1" ]]; then
-        STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-        if [ ! -f "$STATE_FILE" ]; then
-            touch "$STATE_FILE"
-            hyprctl eval 'hl.monitor({ output = "", cm = "hdr" })'
-        fi
-    fi
-    LD_PRELOAD="" gamemoderun gamescope \
-        -W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
-        "${GAMESCOPE_FLAGS[@]}" \
-        -- env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
-)
-    if [[ "$USE_HDR" == "1" ]]; then
-        STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-        hyprctl eval 'hl.monitor({ output = "", cm = "auto" })'
-        rm -f "$STATE_FILE"
-    fi
-    exit
+	LD_PRELOAD="" gamemoderun gamescope \
+	-W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
+	"${GAMESCOPE_FLAGS[@]}" \
+	-- env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
 fi
 
 # [ NORMAL EXECUTION ]

@@ -15,7 +15,7 @@ function ReloadSystem()
         "Waybar Reload",
         "vicinae server",
         "solaar -w hide",
-        "hyprsunset -i --gamma_max 200",
+        "hyprsunset -i",
     }
 -- [ LOCAL PROCESSES ]
     local lines = {
