@@ -98,7 +98,7 @@ hl.bind(MOD .. " + SHIFT + 6", hl.dsp.window.move({ workspace = 6 }))
 hl.bind(MOD .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
 hl.bind(MOD .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
 hl.bind(MOD .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
-hl.bind(MOD .. " + SHIFT + S",          hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(MOD .. " + SHIFT + S", function() ToggleSpecial() end)
 hl.bind(MOD .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e+1" }))
 hl.bind(MOD .. " + SHIFT + mouse_up",   hl.dsp.window.move({ workspace = "e-1" }))
 
