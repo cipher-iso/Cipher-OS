@@ -5,7 +5,7 @@
 	"start_hidden": true,
 	"reload_style_on_change": true,
 	"layer": "top",
-	"position": "top",
+	"position": "left",
 	"margin-left": 0,
 	"margin-right": 0,
 	"margin-top": 0,
@@ -88,7 +88,7 @@
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {
     		"exec": "~/.config/waybar/Modules/Update module",
-    		"format": "[ {} ]",
+    		"format": "{}",
     		"return-type": "json",
     		"interval": 300,
     		"tooltip": true,

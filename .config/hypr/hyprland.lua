@@ -34,6 +34,7 @@ require("Config.Miscellaneous") -- 	┗ EXPERIMENTAL SETTINGS
 --     ┻ ┗┛┛┗┗┛ ┻ ┻┗┛┛┗┗┛
 require("Config.Functions.PiP")			--	┏ PiP DRAGGING
 require("Config.Functions.AltTab")		--	┣ ALT+TAB BEHAVIOUR
+require("Config.Functions.ToggleHDR")		--	┣ TOGGLE HDR
 require("Config.Functions.ToggleCRT")		--	┣ TOGGLE CRT SHADER
 require("Config.Functions.Screenshot")		--	┣ SCREENSHOT UTILITY
 require("Config.Functions.Lockscreen")		--	┣ SLEEP DISCORD + LOCK

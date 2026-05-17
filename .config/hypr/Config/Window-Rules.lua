@@ -33,7 +33,6 @@ hl.window_rule({
 	no_blur          = true,
 	decorate         = false,
 	no_shadow        = true,
-	fullscreen       = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
 	match = { class  = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
@@ -57,7 +56,7 @@ hl.window_rule({                        -- [ MEDIUM FLOATS ]
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.45 monitor_h*0.5",
-	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark).*$" }
+	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark|easyeffects).*$" }
 })
 hl.window_rule({                        -- [ LARGE FLOATS ]
 	name   	= "FLOAT LARGE",
@@ -93,6 +92,7 @@ hl.window_rule({
 hl.window_rule({ suppress_event = "maximize", match = { class = ".*" } })
 hl.window_rule({ allows_input = true, no_blur = true, opaque = true, no_focus = true, match = { class = "^$", title = "^$", xwayland = 1, float = 1, fullscreen = 0, pin = 0 } })
 hl.window_rule({ no_vrr = true, idle_inhibit = "focus", match = { content = "video" } })
+hl.window_rule({ min_size = "500 250", match = { class = "kitty" } })
 
 -- [ STEAM SUB-WINDOWS ]
 hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$|^(Steam Settings)$" } })
@@ -102,7 +102,7 @@ hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = 
 hl.window_rule({ min_size = "1 1", pin = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
 
 -- [ DOLPHIN SUB-WINDOWS ]
-hl.window_rule({ min_size = "1 1", match = { title = "^(.*Copying —.*|.*Folder —.*|.*Exists —.*|.*Dialog —.*)$" }, move = "(865) (718)", size = "monitor_w*0.3 monitor_h*0.14" })
+hl.window_rule({ min_size = "1 1", match = { title = "^.*(Copying —|Folder —|Exists —|Dialog —).*$" }, center = true, size = "monitor_w*0.25 monitor_h*0.15" })
 
 -- [ PICTURE-IN-PICTURE ]
 hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1875) (1035)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })

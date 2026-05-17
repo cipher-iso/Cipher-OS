@@ -1,0 +1,137 @@
+/* IMPORT COLORS */
+@import "Colors.css";
+
+/* GLOBAL DEFAULTS */
+* {   	all:unset;
+	font-family: JetBrainsMono Nerd Font Propo;
+    	font-weight: 700;
+    	font-size: 22px }
+
+/* THE ACTUAL BAR */
+window#waybar>box { background-color: @bg; padding-left: 0.5em; padding-right: 0.5em }
+
+/* TOOLTIPS */
+tooltip label 	{ color: @fg;
+		  margin: 0.5em;
+		  font-size: 0.9em; font-weight: 700;
+		  text-shadow: 0em 0em 0.2em alpha(@fg, 0.5) }
+tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
+
+/* WORKSPACES */
+#workspaces {
+	margin: 0.4em;
+	margin-left: 1em;
+	margin-right: 1em;
+	border-radius: 1em;
+	background: linear-gradient(135deg, @grad2, @grad1, @grad2);
+	box-shadow: 0em 0em 0.25em -0.1em alpha(@fg, 0.75),
+		inset 0em 1em 1em -0.25em alpha(@grad1, 0.75),
+		inset 0em -0.5em 0.5em -0.5em @grad2,
+		inset -1em 0em 1em -1em @grad2,
+		inset 1em 0em 1em -1em @grad2 }
+#workspaces button {
+    	color: @bg;
+    	padding: 0.1em 0.5em;
+	margin: 0.25em;
+	border-radius: 0.75em;
+	transition:
+        	color 0.2s ease,
+        	box-shadow 0.2s ease,
+        	background 0.2s ease;
+    	transition-duration: 0.25s;
+    	transition-timing-function: cubic-bezier(0.25, 1, 0.25, 2);
+	transition-property: min-width, color, box-shadow, background }
+#workspaces button.focused,
+#workspaces button.active  { min-width: 2em }
+#workspaces button:hover   { min-width: 2.75em }
+#workspaces button.empty   { color: alpha(@bg, 0.35) }
+#workspaces button.focused,
+#workspaces button.active,
+#workspaces button.special:hover {
+    	color: @fg2;
+    	padding: 0em 0.5em;
+ 	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5),
+		    0 2 4 alpha(@bg, 0.75);
+    	text-shadow: 0em 0em 0.25em alpha(@fg2, 0.5);
+	background: @bg, linear-gradient(to bottom,
+      		    alpha(@fg2, 0.0), alpha(@fg2, 0.1));}
+#workspaces button.special,
+#workspaces button:hover{ 
+	color: @fg;
+	box-shadow: inset 0 0 4 4px alpha(@bg, 0.5),
+		    0 2 4 alpha(@bg, 0.75);
+	text-shadow: 0em 0em 0.25em alpha(@fg, 0.5);
+    	background: @bg, linear-gradient(to bottom,
+		    alpha(@grad2, 0.0), alpha(@grad1, 0.15)) }
+
+/* PRIMARY COLOR & INTERACTIVE HOVER */
+#custom-expand,
+#custom-lock,
+#custom-updates:hover,
+#network:hover,
+#bluetooth:hover,
+#idle_inhibitor:hover,
+#custom-screenshare:hover,
+#custom-togglewaybar:hover,
+#pulseaudio:hover,
+#wireplumber:hover	{ color: @fg; text-shadow: 0em 0em 0.2em alpha(@fg, 0.5) }
+
+/* SECONDARY COLOR & INTERACTIVE HOVER */
+#custom-power:hover,
+#custom-reboot:hover,
+#custom-logout:hover,
+#custom-expand:hover,
+#custom-lock:hover	{ color: @fg2; text-shadow: 0em 0em 0.2em alpha(@fg2, 0.5) }
+
+/* DARK ACCENTS & NON-INTERACTIVE HOVER */
+#custom-power,
+#custom-reboot,
+#custom-logout,
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover	{ color: @accent2 }
+
+/* LIGHT ACCENTS & MODULES */
+#clock,
+#cpu,
+#memory,
+#temperature,
+#custom-updates,
+#network,
+#bluetooth,
+#idle_inhibitor,
+#custom-screenshare,
+#custom-togglewaybar,
+#pulseaudio,
+#wireplumber		{ color: @accent1; padding: 0.2em; transition: color 0.2s ease }
+
+/* ANIMATIONS */
+#custom-updates,
+#network,
+#bluetooth,
+#idle_inhibitor,
+#custom-screenshare,
+#custom-togglewaybar,
+#pulseaudio,
+#wireplumber,
+#custom-power,
+#custom-reboot,
+#custom-logout,
+#custom-expand,
+#custom-lock		{ transition: font-size 0.1s ease, color 0.25s ease; font-size: 100% }
+#custom-updates:hover,
+#network:hover,
+#bluetooth:hover,
+#idle_inhibitor:hover,
+#custom-screenshare:hover,
+#custom-togglewaybar:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-power:hover,
+#custom-reboot:hover,
+#custom-logout:hover,
+#custom-expand:hover,
+#custom-lock:hover,
+#custom-expand:hover 	{ transition: font-size 0.2s cubic-bezier(0.25, 1, 0.25, 1.75); font-size: 140%; font-weight: 900 }
+#workspaces .workspace-label { font-weight: 900; }

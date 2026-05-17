@@ -18,7 +18,7 @@ for arg in "$@"; do
     esac
 done
 
-[[ -z "$INPUT" ]] && { echo "Usage: $0 <input> [fps] [vertical] [-webp]"; exit 1; }
+[[ -z "$INPUT" ]] && { echo "USAGE: [DIRECTORY] [FPS] [VERT-RES] [-webp (OPTIONAL)]"; exit 1; }
 
 BASENAME="${INPUT##*/}"
 NAME="${BASENAME%.*}"

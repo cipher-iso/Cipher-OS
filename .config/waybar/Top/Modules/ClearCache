@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -e
+
+# [ LOAD PRIMARY COLOR FROM COLOR FILE ]
+COLOR_FILE="$HOME/Scripts/ColorGen/Colors.zsh"
+source "$COLOR_FILE"  # assumes PRIMARY is defined in Colors as R;G;B (or convert to R;G;B if hex)
+
+# [ EXPORT SUDO PROMPT USING PRIMARY COLOR ]
+export SUDO_PROMPT=$'\e[1;38;2;'$PRIMARY'm  > ENTER PASSPHRASE: '
+
+# [ 1. PACMAN CACHE CLEANUP (KEEP 3 VERSIONS) ]
+printf "\e[1;38;2;%sm  ┏━  ┏┓┏┓┏┓┳┳┓┏┓┳┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+  ┃   ┃┃┣┫┃ ┃┃┃┣┫┃┃  ┃ ┣┫┃ ┣┫┣    ┃
+  ┗━  ┣┛┛┗┗┛┛ ┗┛┗┛┗  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n" "$PRIMARY"
+
+sudo paccache -r -k3
+sudo paccache -ruk3
+
+# [ 2. REMOVE ORPHAN PACMAN PACKAGES ]
+orphans=$(pacman -Qdtq || true)
+
+if [[ -n "$orphans" ]]; then
+  printf "\e[38;2;235;250;250m[ ORPHAN PACKAGES: %s ]\e[0m\n" "$orphans"
+  printf "\e[1;38;2;%sm[ REMOVE ORPHANS? <y/N> ] \e[0m" "$PRIMARY"
+  read -r confirm
+  echo
+  if [[ "$confirm" == [yY] ]]; then
+    sudo pacman -Rns -- $orphans
+  fi
+else
+  printf "\e[38;2;235;250;250m[ NO PACMAN-ORPHANS FOUND ]\e[0m\n"
+fi
+
+# [ 3. CLEAN FLATPAK CACHE AND UNUSED RUNTIMES ]
+printf "\e[1;38;2;%sm  ┏━  ┏┓┓ ┏┓┏┳┓┏┓┏┓┓┏┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+  ┃   ┣ ┃ ┣┫ ┃ ┃┃┣┫┃┫   ┃ ┣┫┃ ┣┫┣    ┃
+  ┗━  ┻ ┗┛┛┗ ┻ ┣┛┛┗┛┗┛  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n" "$PRIMARY"
+
+flatpak uninstall --unused -y
+flatpak repair
+
+# [ 4. CLEAN YAY CACHE ]
+yay -Sc --noconfirm
+
+# [ 5. REMOVE ORPHAN AUR PACKAGES ]
+printf "\e[1;38;2;%sm  ┏━  ┳┳┏┓┏┓┳┓  ┳┓┏┓┏┓┏┓  ┏┓┏┓┏┓┓┏┏┓  ━┓
+  ┃   ┃┃┗┓┣ ┣┫━━┣┫┣ ┃┃┃┃  ┃ ┣┫┃ ┣┫┣    ┃
+  ┗━  ┗┛┗┛┗┛┛┗  ┛┗┗┛┣┛┗┛  ┗┛┛┗┗┛┛┗┗┛  ━┛\e[0m\n" "$PRIMARY"
+
+yay_orphans=$(yay -Qdtq || true)
+
+if [[ -n "$yay_orphans" ]]; then
+  printf "\e[38;2;235;250;250m[ ORPHAN PACKAGES: %s ]\e[0m\n" "$yay_orphans"
+  printf "\e[1;38;2;%sm[ REMOVE ORPHANS? <y/N> ] \e[0m" "$PRIMARY"
+  read -r confirm_yay
+  echo
+  if [[ "$confirm_yay" == [yY] ]]; then
+    yay -Rns --noconfirm -- $yay_orphans
+  fi
+else
+  printf "\e[38;2;235;250;250m[ NO AUR-ORPHANS FOUND ]\e[0m\n"
+fi
+
+# [ FOOTER ]
+printf "\e[1;38;2;%sm  ┏━  ┏┓┏┓┏┓┓┏┏┓  ┏┓┓ ┏┓┏┓┳┓╻  ━┓
+  ┃   ┃ ┣┫┃ ┣┫┣   ┃ ┃ ┣ ┣┫┃┃┃   ┃
+  ┗━  ┗┛┛┗┗┛┛┗┗┛  ┗┛┗┛┗┛┛┗┛┗•  ━┛\e[0m\n" "$PRIMARY"

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 GAME_ENV=(
 # [ GENERAL SETTINGS ]
     DXVK_FRAME_RATE=224
@@ -19,7 +18,6 @@ GAME_ENV=(
     VKD3D_CONFIG=descriptor_heap
     DXVK_NVAPI_D3D12_NV_SHADER_EXTN=1
 )
-
 # [ GAMESCOPE FLAGS ]
 GAMESCOPE_FLAGS=(
     --fullscreen
@@ -28,7 +26,6 @@ GAMESCOPE_FLAGS=(
     --backend wayland
     --force-grab-cursor
 )
-
 # [ FLAGS ]
 USE_HDR=0
 USE_FG=0
@@ -38,7 +35,6 @@ USE_CRT=0
 USE_G=0
 CAP_VALUE=""
 SHIFT_CAP=0
-
 for arg in "$@"; do
 	case "$arg" in
 		-hdr) USE_HDR=1 ;;
@@ -50,53 +46,58 @@ for arg in "$@"; do
 		-cap) SHIFT_CAP=1 ;;
 		-all) USE_HDR=1; USE_FG=1; USE_M=1 ;;
 		*)
-			if [[ "$SHIFT_CAP" == "1" ]]; then CAP_VALUE="$arg"; SHIFT_CAP=0; fi ;;
+			if (( SHIFT_CAP )); then CAP_VALUE="$arg"; SHIFT_CAP=0; fi ;;
 	esac
 done
-
 # [ CLEAN ARGS ]
 CLEAN_ARGS=()
 SKIP_NEXT=0
 for arg in "$@"; do
-	if [[ "$SKIP_NEXT" == "1" ]]; then SKIP_NEXT=0; continue; fi
+	if (( SKIP_NEXT )); then SKIP_NEXT=0; continue; fi
 	case "$arg" in
 		-hdr|-fg|-m|-nv|-all|-crt|-g) ;;
 		-cap) SKIP_NEXT=1 ;;
 		*) CLEAN_ARGS+=("$arg") ;;
 	esac
 done
-
+# [ TOGGLE HDR/CRT ON EXIT (IF ENABLED) ]
+CLEANUP_HDR=0
+CLEANUP_CRT=0
+cleanup() {
+    (( CLEANUP_HDR )) && hyprctl eval "ToggleHDR()"
+    (( CLEANUP_CRT )) && hyprctl eval "ToggleCRT()"
+}
+trap cleanup EXIT
 # [ HDR ]
-if [[ "$USE_HDR" == "1" ]]; then
+if (( USE_HDR )); then
     GAME_ENV+=( PROTON_ENABLE_WAYLAND=1 DXVK_HDR=1 )
+    HDR_STATE="$HOME/.config/hypr/Shaders/.HDR-ON"
+    if [[ ! -f "$HDR_STATE" ]]; then
+        CLEANUP_HDR=1
+        hyprctl eval "ToggleHDR()"
+        WAIT=0
+        until hyprctl monitors | grep -q "hdr: 1"; do
+            sleep 0.1; (( WAIT++ ))
+            (( WAIT >= 50 )) && break  # 5s timeout
+        done
+    fi
 fi
-
 # [ FRAMEGEN | LSFG-VK ]
-if [[ "$USE_FG" == "1" ]]; then
-	GAME_ENV+=( ENABLE_LSFG=1 LSFG_PROCESS=FRAMEGEN LSFG_PERF_MODE=1 )
-fi
-
+if (( USE_FG )); then GAME_ENV+=( ENABLE_LSFG=1 LSFG_PROCESS=FRAMEGEN LSFG_PERF_MODE=1 ); fi
 # [ NVIDIA SMOOTH MOTION ]
-if [[ "$USE_NV" == "1" ]]; then GAME_ENV+=( NVPRESENT_ENABLE_SMOOTH_MOTION=1 ); fi
-
+if (( USE_NV )); then GAME_ENV+=( NVPRESENT_ENABLE_SMOOTH_MOTION=1 ); fi
 # [ MANGOHUD ]
-if [[ "$USE_M" == "1" ]]; then GAME_ENV+=( MANGOHUD=1 ); fi
-
+if (( USE_M )); then GAME_ENV+=( MANGOHUD=1 ); fi
 # [ FRAME CAP ]
 if [[ -n "$CAP_VALUE" ]]; then GAME_ENV+=( DXVK_FRAME_LIMIT="$CAP_VALUE" ); fi
-
 # [ CRT SHADERS ]
-if [[ "$USE_CRT" == "1" ]]; then
-	STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
-	if [ ! -f "$STATE_FILE" ]; then
-		cleanup() {
-		hyprctl eval "ToggleCRT()"
-		}
-		trap cleanup EXIT
-		hyprctl eval "ToggleCRT()"
-	fi
+if (( USE_CRT )); then
+    STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+    if [[ ! -f "$STATE_FILE" ]]; then
+        CLEANUP_CRT=1
+        hyprctl eval "ToggleCRT()"
+    fi
 fi
-
 # [ GET CURRENT MONITOR MODE ]
 read WIDTH HEIGHT REFRESH <<<$(hyprctl monitors | awk '
 /Monitor/ {active=1}
@@ -105,14 +106,14 @@ read WIDTH HEIGHT REFRESH <<<$(hyprctl monitors | awk '
 	print a[1], a[2], int(a[3])
 	exit
 }')
-
-# [ ENABLE GAMESCOPE / HDR ]
-if [[ "$USE_G" == "1" ]]; then
-	LD_PRELOAD="" gamemoderun gamescope \
-	-W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
-	"${GAMESCOPE_FLAGS[@]}" \
-	-- env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
+# [ ENABLE GAMESCOPE ]
+if (( USE_G )); then
+    LD_PRELOAD="" gamemoderun gamescope \
+    -W "$WIDTH" -H "$HEIGHT" -r "$REFRESH" \
+    "${GAMESCOPE_FLAGS[@]}" \
+    -- env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
+    exit
 fi
-
-# [ NORMAL EXECUTION ]
-exec gamemoderun env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}"
+# [ RUN GAME ]
+gamemoderun env "${GAME_ENV[@]}" "${CLEAN_ARGS[@]}" &
+wait $!

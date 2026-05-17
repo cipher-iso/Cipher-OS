@@ -67,14 +67,18 @@ hl.config({
 --    ┣┫┃┃┃┃┃┃┣┫ ┃ ┃┃┃┃┃┗┓
 --    ┛┗┛┗┻┛ ┗┛┗ ┻ ┻┗┛┛┗┗┛
 -- [ ANIMATION VALUES ]
-hl.curve("linear", { type = "bezier", points = { {0,    0   }, {1,    1    } } })
-hl.curve("bounce", { type = "bezier", points = { {0.2,  1   }, {0.2,  1.05 } } })
-hl.curve("boing",  { type = "bezier", points = { {0.25, 1   }, {0.25, 1.1  } } })
+hl.curve("linear",  { type = "bezier", points = { {0,    0   }, {1,    1    } } })
+hl.curve("bounce",  { type = "bezier", points = { {0.28, 0.61}, {0.58, 1.26 } } })
+hl.curve("boing",   { type = "bezier", points = { {0.48, 0.51}, {0.35, 1.3  } } })
+hl.curve("spring",  { type = "spring", mass = 1.5, stiffness = 100, dampening = 12 })
+hl.curve("wsBounce",{ type = "spring", mass = 2.5, stiffness = 100, dampening = 22 })
 
 -- [ ANIMATION SETTINGS ]
-hl.animation({ leaf = "global",           enabled = true, speed = 3,    bezier = "boing"   })
-hl.animation({ leaf = "border",           enabled = true, speed = 1,    bezier = "linear"  })
-hl.animation({ leaf = "fade",             enabled = true, speed = 1,    bezier = "linear"  })
-hl.animation({ leaf = "workspaces",       enabled = true, speed = 4,    bezier = "bounce",  style = "slide"        })
-hl.animation({ leaf = "windows",          enabled = true, speed = 2,    bezier = "boing",   style = "popin 15%"    })
-hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2.25, bezier = "boing",   style = "slidevert"    })
+hl.animation({ leaf = "global",         enabled = true, speed = 3, bezier = "boing"                           })
+hl.animation({ leaf = "border",         enabled = true, speed = 1, bezier = "linear"                          })
+hl.animation({ leaf = "fade",           enabled = true,	speed = 1, bezier = "bounce"                          })
+hl.animation({ leaf = "fadeOut", 	enabled = true, speed = 1, bezier = "boing" })
+hl.animation({ leaf = "workspaces", 	enabled = true, speed = 1, spring = "wsBounce", style = "slidevert -100%" })
+hl.animation({ leaf = "windows",        enabled = true, speed = 2, spring = "spring",  	style = "popin 15%"    })
+hl.animation({ leaf = "windowsOut",	enabled = true, speed = 1, bezier = "boing",	style = "popin 15%" })
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 2, spring = "spring", style = "slidevert"    })
