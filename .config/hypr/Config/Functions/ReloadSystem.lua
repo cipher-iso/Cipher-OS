@@ -12,10 +12,10 @@ function ReloadSystem()
 -- [ PROCESSES TO SPAWN ]
     local spawn = {
         "hypridle",
-        "Waybar Reload",
-        "vicinae server",
-        "solaar -w hide",
         "hyprsunset -i",
+	"Waybar Reload",
+        "solaar -w hide",
+        "vicinae server",
     }
 -- [ LOCAL PROCESSES ]
     local lines = {

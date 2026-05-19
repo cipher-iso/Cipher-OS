@@ -5,8 +5,31 @@ STEP=10
 # Minimum Gamma % [Do NOT Set to 0]
 MIN=10
 
-# Output Current Gamma % 
-CURRENT=$(hyprctl hyprsunset gamma | awk '{printf "%d\n", $NF}')
+# Output Current Gamma %
+CURRENT=$(
+while true; do
+    VAL=$(hyprctl hyprsunset gamma 2>/dev/null | awk "{printf \"%d\n\", \$NF}")
+
+    if [[ "$VAL" =~ ^[0-9]+$ && "$VAL" -ge 10 ]]; then
+        echo "$VAL"
+        break
+    fi
+
+    sleep 0.1
+    ((attempts++))
+
+    if (( attempts % 5 == 0 )); then
+        pkill hyprsunset 2>/dev/null
+        sleep 0.2
+        hyprsunset -i >/dev/null 2>&1 &
+    fi
+
+    if (( attempts > 50 )); then
+        echo 10
+        break
+    fi
+done
+)
 
 # Function
 [[ -z "$CURRENT" || "$CURRENT" -lt 1 ]] && CURRENT=$MIN

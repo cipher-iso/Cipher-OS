@@ -16,6 +16,7 @@ hl.monitor({
     min_luminance       = 0,
     sdr_max_luminance   = 400,
     max_luminance       = 1000,
+    max_avg_luminance	= 150,
 })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓

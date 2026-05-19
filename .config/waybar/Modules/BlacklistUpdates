@@ -1,4 +1,8 @@
 
+gpgmepp
+fakeroot
+sdbus-cpp
+tailscale
 hyphen
 vulkan-icd-loader
 aria2
