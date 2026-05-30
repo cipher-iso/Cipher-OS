@@ -1,4 +1,16 @@
 
+soundtouch
+mkinitcpio
+selectdefaultapplication-fork-git
+pcsclite
+qt5ct
+gssdp
+gupnp
+krb5
+qcoro
+qt6ct
+sddm
+downgrade
 gpgmepp
 fakeroot
 sdbus-cpp

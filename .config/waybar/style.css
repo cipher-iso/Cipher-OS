@@ -133,5 +133,5 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #custom-logout:hover,
 #custom-expand:hover,
 #custom-lock:hover,
-#custom-expand:hover 	{ transition: font-size 0.2s cubic-bezier(0.25, 1, 0.25, 1.75); font-size: 140%; font-weight: 900 }
+#custom-expand:hover 	{ transition: font-size 0.1s ease-out; font-size: 140%; font-weight: 900 }
 #workspaces .workspace-label { font-weight: 900; }

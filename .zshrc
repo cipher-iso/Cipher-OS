@@ -23,8 +23,11 @@ alias grep='grep --color=auto'
 # [ INSTALL PACKAGES ]
 alias aur='yay -S'
 alias aurr='yay -Rns'
+alias auru='yay -Syu'
 alias pak='flatpak install'
 alias pakr='flatpak remove'
+alias paku='flatpak update'
+alias pacu='sudo pacman -Syu'
 alias install='sudo pacman -S'
 alias remove='sudo pacman -Rns'
 

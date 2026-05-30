@@ -17,3 +17,17 @@ function Workspace_Down()
         hl.dispatch(hl.dsp.focus({ workspace = tostring(ws.id - 1) }))
     end
 end
+
+function Window_Down()
+    local ws = hl.get_active_workspace()
+    if ws ~= nil and ws.id < WORKSPACE_MAX then
+        hl.dispatch(hl.dsp.window.move({ workspace = tostring(ws.id + 1), silent = true }))
+    end
+end
+
+function Window_Up()
+    local ws = hl.get_active_workspace()
+    if ws ~= nil and ws.id > WORKSPACE_MIN then
+        hl.dispatch(hl.dsp.window.move({ workspace = tostring(ws.id - 1), silent = true }))
+    end
+end

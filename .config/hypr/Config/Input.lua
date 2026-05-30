@@ -24,7 +24,6 @@ hl.config({
 --    ┣┫ ┣ ┗┫┣┫┃┃┃┃┃┗┓
 --    ┛┗┛┗┛┗┛┻┛┻┛┗┻┛┗┛
 -- [ WINDOW MANAGEMENT ]
-			    ---@diagnostic disable: undefined-global
 hl.bind(MOD .. " + C",         hl.dsp.window.close())                		-- Alt F4
 hl.bind("ALT + F4",            hl.dsp.window.kill())                            -- Alt F4 [FORCE-KILL]
 hl.bind(MOD .. " + V",         hl.dsp.window.float({ action = "toggle" }))      -- Toggle Floating [1]
@@ -51,14 +50,14 @@ hl.bind("CTRL + SHIFT + Escape",    hl.dsp.exec_cmd(Terminal .. " btop"))   	-- 
 hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    -- Open Config
 
 -- [ CUSTOM FUNCTIONS ]
-hl.bind(MOD .. " + M", 		function() MuteActive() end)		-- Mute Active-Window
-hl.bind(MOD .. " + I", 		function() ThemePicker() end)		-- Theme Switcher
-hl.bind(MOD .. " + grave", 	function() Screenshare() end)		-- Toggle Screensharing
-hl.bind(MOD .. " + SHIFT + 0", 	function() ToggleCRT() end)		-- Toggle CRT Shader
-hl.bind(MOD .. " + SHIFT + L", 	function() Lockscreen() end)		-- Lockscreen
-hl.bind(MOD .. " + SHIFT + R", 	function() ReloadSystem() end)		-- Reload System
-hl.bind(MOD .. " + F13",   	function() Screenshot("region") end) 		-- Screenshot Region
-hl.bind(MOD .. " + SHIFT + F13",function() Screenshot("window -m active") end)	-- Screenshot Window
+hl.bind(MOD .. " + SHIFT + 0", 	function() ToggleCRT() end)	-- Toggle CRT Shader
+hl.bind(MOD .. " + SHIFT + L", 	function() Lockscreen() end)	-- Lockscreen
+hl.bind(MOD .. " + M", 		function() MuteActive() end)	-- Mute Active-Window
+hl.bind(MOD .. " + I", 		function() ThemePicker() end)	-- Theme Switcher
+hl.bind(MOD .. " + grave", 	function() Screenshare() end)	-- Toggle Screensharing
+hl.bind(MOD .. " + SHIFT + R", 	function() ReloadSystem() end)	-- Reload System
+hl.bind(MOD .. " + F13",   	function() CaptureRegion() end)	-- Screenshot Region
+hl.bind(MOD .. " + SHIFT + F13",function() CaptureWindow() end)	-- Screenshot Window
 hl.bind("mouse:273", function() PiP() end, { mouse = true, non_consuming = true })
 
 -- [ CUSTOM SCRIPTS ]
@@ -99,8 +98,8 @@ hl.bind(MOD .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
 hl.bind(MOD .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
 hl.bind(MOD .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 hl.bind(MOD .. " + SHIFT + S", function() ToggleSpecial() end)
-hl.bind(MOD .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e+1" }))
-hl.bind(MOD .. " + SHIFT + mouse_up",   hl.dsp.window.move({ workspace = "e-1" }))
+hl.bind(MOD .. " + SHIFT + mouse_down", function() Window_Down() end)
+hl.bind(MOD .. " + SHIFT + mouse_up",   function() Window_Up() end)
 
 -- [ MULTI-MEDIA KEYS - MOD-KEY ]
 hl.bind(MOD .. " + F2", hl.dsp.exec_cmd("Gamma up"),                              { repeating = true }) -- INCREASE BRIGHTNESS

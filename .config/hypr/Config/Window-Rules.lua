@@ -35,7 +35,8 @@ hl.window_rule({
 	no_shadow        = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
-	match = { class  = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
+	match = { class  = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$",
+		  fullscreen = 2 }
 })
 hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
 	name    = "FLOAT ONLY",

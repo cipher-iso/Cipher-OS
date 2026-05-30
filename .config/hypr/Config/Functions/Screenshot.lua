@@ -1,16 +1,14 @@
 --    ┏┓┏┓┳┓┏┓┏┓┳┓┏┓┓┏┏┓┏┳┓
 --    ┗┓┃ ┣┫┣ ┣ ┃┃┗┓┣┫┃┃ ┃ 
 --    ┗┛┗┛┛┗┗┛┗┛┛┗┗┛┛┗┗┛ ┻ 
-function Screenshot(mode)
+local function Screenshot(mode)
     local state_file = os.getenv("HOME") .. "/Scripts/.Screenshare-ON"
     local done_file  = "/tmp/.hyprshot_done"
-
     local function file_exists(path)
         local f = io.open(path, "r")
         if f then f:close() return true end
         return false
     end
-
     local function expose()
         hl.window_rule({ name = "SCREENSHARE", no_screen_share = false, match = { class = "^(discord|vivaldi-stable|steam)$" } })
         hl.exec_cmd("touch " .. state_file)
@@ -19,17 +17,13 @@ function Screenshot(mode)
         hl.window_rule({ name = "SCREENSHARE", no_screen_share = true, match = { class = "^(discord|vivaldi-stable|steam)$" } })
         hl.exec_cmd("rm -f " .. state_file)
     end
-
     local did_expose = false
     if not file_exists(state_file) then
         expose()
         did_expose = true
     end
-
-    -- [ LAUNCH HYPRSHOT, POLL FOR COMPLETION ]
     hl.exec_cmd("rm -f " .. done_file)
     hl.exec_cmd("bash -c 'hyprshot -z -m " .. mode .. " --output-folder ~/Pictures/Screenshots/ --silent; touch " .. done_file .. "'")
-
     local attempts = 0
     local poll
     poll = hl.timer(function()
@@ -46,3 +40,6 @@ function Screenshot(mode)
         if did_expose then protect() end
     end, { timeout = 100, type = "repeat" })
 end
+
+function CaptureRegion() Screenshot("region")          end
+function CaptureWindow() Screenshot("window -m active") end
