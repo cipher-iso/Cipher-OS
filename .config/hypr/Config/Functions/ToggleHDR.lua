@@ -12,7 +12,7 @@ local function apply_hdr()
         use_fp16 = hl.get_config("render.use_fp16"),
     }
     io.open(hdr_state, "w"):close()
-    hl.monitor({ output = "", cm = "hdr", bitdepth = 10 })
+    hl.monitor({ output = "", cm = "hdr", bitdepth =10 })
     hl.config({ render = { use_shader_blur_blend = true, use_fp16 = true } })
     hl.notification.create({ text = "  [  HDR ENABLED  ]", timeout = 3000, icon = "hint", font_size = 16 })
 end

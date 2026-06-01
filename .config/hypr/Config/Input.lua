@@ -50,7 +50,8 @@ hl.bind("CTRL + SHIFT + Escape",    hl.dsp.exec_cmd(Terminal .. " btop"))   	-- 
 hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    -- Open Config
 
 -- [ CUSTOM FUNCTIONS ]
-hl.bind(MOD .. " + SHIFT + 0", 	function() ToggleCRT() end)	-- Toggle CRT Shader
+hl.bind(MOD .. " + + Prior", 	function() ToggleCRT() end)	-- Toggle CRT Shader
+hl.bind(MOD .. " + + Next", 	function() ToggleHDR() end)	-- Toggle HDR
 hl.bind(MOD .. " + SHIFT + L", 	function() Lockscreen() end)	-- Lockscreen
 hl.bind(MOD .. " + M", 		function() MuteActive() end)	-- Mute Active-Window
 hl.bind(MOD .. " + I", 		function() ThemePicker() end)	-- Theme Switcher

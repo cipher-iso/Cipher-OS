@@ -106,7 +106,8 @@ hl.window_rule({ min_size = "1 1", pin = true, opaque = true, no_dim = true, mat
 hl.window_rule({ min_size = "1 1", match = { title = "^.*(Copying —|Folder —|Exists —|Dialog —).*$" }, center = true, size = "monitor_w*0.25 monitor_h*0.15" })
 
 -- [ PICTURE-IN-PICTURE ]
-hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1875) (1035)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })
+hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1908) (1068)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })
+hl.window_rule({ float = true, size = "900 450", pin = true, move = "(12) (978)", no_dim = true, no_initial_focus = true, match = { class = "Update" } })
 
 -- [ CUSTOM FLOATS ]
 hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 980", min_size = "780 980", match = { class = "waypaper" } })
