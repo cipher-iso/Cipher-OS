@@ -24,7 +24,7 @@ hl.exec_cmd("hyprctl eval 'Screenshare_Restore()'")	-- Restore ScreenShare State
 hl.exec_cmd("sleep 3 && swayosd-client --input-volume mute-toggle")	-- [ Mute Mic on Startup ]
 
 -- [ TUI STARTUP ]
-hl.exec_cmd(Terminal .. " btop", { workspace = "5 silent" })    -- System Monitor
-hl.exec_cmd(Terminal .. " kew", { workspace = "5 silent" })	-- Music Player
+hl.exec_cmd(Terminal .. " btop", { workspace = "4 silent" })    -- System Monitor
+hl.exec_cmd(Terminal .. " kew", { workspace = "4 silent" })	-- Music Player
 
 end)

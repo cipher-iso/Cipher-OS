@@ -5,7 +5,7 @@
 hl.window_rule({ workspace = "1", opaque = true, focus_on_activate = true, no_vrr = true, match = { class = "vivaldi-stable|mpv" } })
 hl.window_rule({ workspace = "2 silent",  match = { class = "discord" } })
 hl.window_rule({ workspace = "3 silent",  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" } })
-hl.window_rule({ workspace = "4 silent",  render_unfocused = true, match = { class = "obs" } })
+hl.window_rule({ workspace = "5 silent",  render_unfocused = true, match = { class = "obs" } })
 hl.window_rule({ workspace = "6",         opaque = true, match = { class = "resolve" } })
 hl.window_rule({ workspace = "9 silent",  opaque = true, match = { title = "^.*(Prism|Minecraft).*$" } })
 
@@ -35,15 +35,14 @@ hl.window_rule({
 	no_shadow        = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
-	match = { class  = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$",
-		  fullscreen = 2 }
+	match = { initial_class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
 })
 hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
 	name    = "FLOAT ONLY",
 	float   = true,
 	center  = true,
-	match 	= { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" },
-	max_size = "monitor_w*0.75 monitor_h*0.7"
+	max_size = "monitor_w*0.75 monitor_h*0.7",
+	match 	= { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" }
 })
 hl.window_rule({                        -- [ SMALL FLOATS ]
 	name   	= "FLOAT SMALL",

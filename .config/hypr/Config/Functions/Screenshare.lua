@@ -12,7 +12,7 @@ local function apply_screenshare(active)
     hl.config({ general	= { ["col.active_border"] = "rgb(" .. color .. ")" } })
     hl.config({ decoration = {
     	    	shadow 	= { color = "rgba(" .. color .. opacity },
-    		glow 	= { enabled = active, color = "rgba(" .. color .. "20)" } } })
+    		glow 	= { enabled = true, color = "rgba(" .. color .. "30)" } } })
 end
 
 function Screenshare()

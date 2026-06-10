@@ -54,11 +54,15 @@ hl.config({
             color_inactive = "rgba(" .. BACKGROUND .. "05)",
         },
 	glow = {
-	    enabled 	 = false,
+	    enabled 	 = true,
 	    range 	 = 25,
 	    render_power = 2,
-	    color	 = "rgba(" .. PRIMARY .. "20)",
+	    color	 = "rgba(" .. PRIMARY .. "30)",
 	},
+	--motion_blur = {
+	--    enabled = true,
+	--    samples = 7,
+	--},
     },
 })
 
@@ -72,7 +76,7 @@ hl.curve("Jello",  { type = "spring", mass   = 2.5, stiffness = 100, dampening =
 hl.curve("Jiggle", { type = "spring", mass   = 2,   stiffness = 100, dampening = 17 })
 
 -- [ ANIMATION SETTINGS ]
-hl.animation({ leaf = "global",           enabled = true, speed = 1, spring = "Jelly"  })
+hl.animation({ leaf = "global",           enabled = true, speed = 1, bezier = "Linear"  })
 hl.animation({ leaf = "border",           enabled = true, speed = 1, bezier = "Linear" })
 hl.animation({ leaf = "fade",             enabled = true, speed = 1, bezier = "Linear" })
 hl.animation({ leaf = "fadeOut", 	  enabled = true, speed = 1, bezier = "Linear" })

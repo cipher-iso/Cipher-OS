@@ -19,7 +19,7 @@ hl.config({
     },
     render = {
     	--cm_sdr_eotf = "gamma22",
-        direct_scanout = 2,		-- [ LOW-LATENCY // NO-VRR ]
+        --direct_scanout = 2,		-- [ LOW-LATENCY // NO-VRR ]
 	--use_fp16 = 0			-- [ COLOR ACCURACY ]
     },
     quirks = {
