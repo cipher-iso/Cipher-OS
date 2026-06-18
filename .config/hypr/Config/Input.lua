@@ -72,8 +72,9 @@ hl.bind(MOD .. " + mouse_down",  function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_up",    function() Workspace_Down() end)
 hl.bind(MOD .. " + mouse_right", function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_left",  function() Workspace_Down() end)
-hl.bind("ALT + TAB", function() AltTab(1)  end, { repeating = true })
-hl.bind("ALT + SHIFT + TAB", function() AltTab(-1)  end, { repeating = true })
+hl.bind("ALT + TAB", function() hl.plugin.hyprexpo.expo("toggle") end)
+--hl.bind("ALT + TAB", function() AltTab(1)  end, { repeating = true })
+--hl.bind("ALT + SHIFT + TAB", function() AltTab(-1)  end, { repeating = true })
 
 -- [ SWITCH TO WORKSPACE 1-9 + SPECIAL ]
 hl.bind(MOD .. " + 1", hl.dsp.focus({ workspace = 1 }))

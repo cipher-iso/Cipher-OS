@@ -2,7 +2,7 @@
 lastLoadedInputPreset=Main Preset
 
 [StreamInputs]
-inputDevice=alsa_input.usb-Focusrite_Scarlett_2i2_USB-00.pro-input-0
+inputDevice=alsa_input.usb-Focusrite_Scarlett_2i2_USB-00.HiFi__Mic1__source
 mostUsedPresets=Main Preset
 plugins=stereo_tools#0,equalizer#0,gate#0,compressor#1,equalizer#1,expander#0,compressor#0,equalizer#2,limiter#0,rnnoise#0
 usedPresets=Main Preset:23

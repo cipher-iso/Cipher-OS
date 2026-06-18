@@ -46,3 +46,5 @@ require("Config.Functions.Theme-Picker")	--	┣ THEME SWITCHER
 require("Config.Functions.ToggleSpecial")	--	┣ TOGGLE SPECIAL WORKSPACES
 require("Config.Functions.DiscordInhibitor")	--	┣ DISCORD IDLE-INHIBITOR
 require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
+
+require("Config.Plugins.Hyprexpo")
