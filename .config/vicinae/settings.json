@@ -29,6 +29,9 @@
       "opacity": 0.8,
       "client_side_decorations": {
          "enabled": false
+      },
+      "compact_mode": {
+         "enabled": true
       }
    },
    "favorites": [],

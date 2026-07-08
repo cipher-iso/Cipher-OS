@@ -2,12 +2,12 @@
 --    ┃┃┃┃┃┃┃┃┃┃┃┃┃━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┻┛┻┛┗┻┛┗┛┗┻┛  ┛┗┗┛┗┛┗┛┗┛
 -- [ DEFINED WORKSPACES ]
-hl.window_rule({ workspace = "1", opaque = true, focus_on_activate = true, no_vrr = true, match = { class = "vivaldi-stable|mpv" } })
-hl.window_rule({ workspace = "2 silent",  match = { class = "discord" } })
-hl.window_rule({ workspace = "3 silent",  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" } })
-hl.window_rule({ workspace = "5 silent",  render_unfocused = true, match = { class = "obs" } })
-hl.window_rule({ workspace = "6",         opaque = true, match = { class = "resolve" } })
-hl.window_rule({ workspace = "9 silent",  opaque = true, match = { title = "^.*(Prism|Minecraft).*$" } })
+hl.window_rule({ workspace = "1", focus_on_activate = true, 	  match = { class = "vivaldi-stable|mpv" }})
+hl.window_rule({ workspace = "2 silent",  			  match = { class = "discord" }})
+hl.window_rule({ workspace = "3 silent",  			  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" }})
+hl.window_rule({ workspace = "5 silent", render_unfocused = true, match = { class = "obs" }})
+hl.window_rule({ workspace = "6", opaque = true, 	  	  match = { class = "resolve" }})
+hl.window_rule({ workspace = "9", opaque = true, 	  	  match = { title = "^.*(Prism|Minecraft).*$" }})
 
 --    ┏┓┏┓┏┳┓┏┓┏┓┏┓┳┓┳┏┓┏┓
 --    ┃ ┣┫ ┃ ┣ ┃┓┃┃┣┫┃┣ ┗┓
@@ -25,7 +25,7 @@ hl.window_rule({
 hl.window_rule({
 	name             = "GAMES",
 	content          = "game",
-	workspace        = "9 silent",
+	workspace        = "3",
 	idle_inhibit     = "always",
 	opaque           = true,
 	no_dim           = true,
@@ -89,28 +89,35 @@ hl.window_rule({
 --    ┃┃┃┃┣┫┃ ┃ ┃ ┗┫━━┃┃┣ ━━┃ ┃┣ ┣ 
 --    ┗┻┗┛┛┗┗┛┻ ┻ ┗┛  ┗┛┻   ┗┛┻┻ ┗┛
 -- [ HYPRLAND 'FIXES' ]
-hl.window_rule({ suppress_event = "maximize", match = { class = ".*" } })
-hl.window_rule({ allows_input = true, no_blur = true, opaque = true, no_focus = true, match = { class = "^$", title = "^$", xwayland = 1, float = 1, fullscreen = 0, pin = 0 } })
-hl.window_rule({ no_vrr = true, idle_inhibit = "focus", match = { content = "video" } })
 hl.window_rule({ min_size = "500 250", match = { class = "kitty" } })
+hl.window_rule({ suppress_event = "maximize", match = { class = ".*" } })
+hl.window_rule({ no_vrr = true, idle_inhibit = "focus", match = { content = "video" } })
+hl.window_rule({ allows_input = true, no_blur = true, opaque = true, no_focus = true, match = { class = "^$", title = "^$", xwayland = 1, float = 1, fullscreen = 0, pin = 0 } })
 
 -- [ STEAM SUB-WINDOWS ]
-hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$|^(Steam Settings)$" } })
-hl.window_rule({ opacity = 0, no_focus = true, no_blur = true, match = { title = "^(.*AntiCheat.*)$" } })
 hl.window_rule({ opaque = true, no_blur = true, match = { class = "steam", title = "^$", } })
-hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = { class = "steam", initial_title = "negative:Steam" } })
+hl.window_rule({ opacity = 0, no_focus = true, no_blur = true, match = { title = "^(.*AntiCheat.*)$" } })
+hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$|^(Steam Settings)$" } })
 hl.window_rule({ min_size = "1 1", pin = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
+hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = { class = "steam", initial_title = "negative:Steam" } })
+
+-- [ FIX STEAM 'BIG-PICTURE' MODE ]
+hl.on("window.active", function(w)
+  if w.class == "steam" and w.title == "Steam Big Picture Mode" then
+    hl.dispatch(hl.dsp.window.fullscreen({ action = "set", mode = "fullscreen" }))
+  end
+end)
 
 -- [ DOLPHIN SUB-WINDOWS ]
 hl.window_rule({ min_size = "1 1", match = { title = "^.*(Copying —|Folder —|Exists —|Dialog —).*$" }, center = true, size = "monitor_w*0.25 monitor_h*0.15" })
 
 -- [ PICTURE-IN-PICTURE ]
+hl.window_rule({ float = true, size = "900 450", pin = true, move = "(12) (978)", no_dim = true, match = { class = "Update" } })
 hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1908) (1068)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })
-hl.window_rule({ float = true, size = "900 450", pin = true, move = "(12) (978)", no_dim = true, no_initial_focus = true, match = { class = "Update" } })
 
 -- [ CUSTOM FLOATS ]
-hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 980", min_size = "780 980", match = { class = "waypaper" } })
 hl.window_rule({ workspace = "9 silent", float = true, center = true, match = { class = ".*exe" } })
+hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 980", min_size = "780 980", match = { class = "waypaper" } })
 
 --    ┓ ┏┓┓┏┏┓┳┓  ┳┓┳┳┓ ┏┓┏┓
 --    ┃ ┣┫┗┫┣ ┣┫━━┣┫┃┃┃ ┣ ┗┓

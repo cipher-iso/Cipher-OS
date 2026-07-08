@@ -15,8 +15,7 @@ hl.monitor({
     sdr_min_luminance   = 0,
     min_luminance       = 0,
     sdr_max_luminance   = 400,
-    max_luminance       = 1000,
-    max_avg_luminance	= 150,
+    max_luminance       = 1000
 })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
@@ -47,4 +46,7 @@ require("Config.Functions.ToggleSpecial")	--	┣ TOGGLE SPECIAL WORKSPACES
 require("Config.Functions.DiscordInhibitor")	--	┣ DISCORD IDLE-INHIBITOR
 require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
 
+--    ┏┓┓ ┳┳┏┓┳┳┓┏┓
+--    ┃┃┃ ┃┃┃┓┃┃┃┗┓
+--    ┣┛┗┛┗┛┗┛┻┛┗┗┛
 require("Config.Plugins.Hyprexpo")

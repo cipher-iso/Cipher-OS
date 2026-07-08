@@ -1,7 +1,7 @@
 --    ┏┳┓┏┓┏┓┏┓┓ ┏┓  ┓┏┳┓┳┓
 --     ┃ ┃┃┃┓┃┓┃ ┣   ┣┫┃┃┣┫
 --     ┻ ┗┛┗┛┗┛┗┛┗┛  ┛┗┻┛┛┗
-hdr_state  = os.getenv("HOME") .. "/.config/hypr/Shaders/.HDR-ON"
+hdr_state  = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/.HDR-ON"
 hdr_active = io.open(hdr_state, "r") ~= nil
 local hdr_prev = {}
 

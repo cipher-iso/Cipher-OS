@@ -1,3 +1,6 @@
+--    ┏┳┓┏┓┏┓┏┓┓ ┏┓  ┏┓┏┓┏┓┏┓┳┏┓┓ 
+--     ┃ ┃┃┃┓┃┓┃ ┣   ┗┓┃┃┣ ┃ ┃┣┫┃ 
+--     ┻ ┗┛┗┛┗┛┗┛┗┛  ┗┛┣┛┗┛┗┛┻┛┗┗┛
 function ToggleSpecial()
     local win = hl.get_active_window()
     if win == nil then return end

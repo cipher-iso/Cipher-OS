@@ -6,3 +6,11 @@ gainBoost=false
 mode=1
 release=20
 threshold=-5
+
+[soe][Limiter#0]
+inputToLink=0
+inputToSidechain=0
+linkToInput=0
+linkToSidechain=0
+sidechainToInput=0
+sidechainToLink=0

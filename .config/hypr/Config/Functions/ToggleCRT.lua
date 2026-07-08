@@ -1,7 +1,7 @@
 --    ┏┓┳┓┏┳┓  ┏┓┓┏┏┓┳┓┏┓┳┓
 --    ┃ ┣┫ ┃   ┗┓┣┫┣┫┃┃┣ ┣┫
 --    ┗┛┛┗ ┻   ┗┛┛┗┛┗┻┛┗┛┛┗
-shader_state  = os.getenv("HOME") .. "/.config/hypr/Shaders/.Shader-ON"
+shader_state  = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/.Shader-ON"
 shader_active = io.open(shader_state, "r") ~= nil
 local crt_prev = {}
 
@@ -14,7 +14,7 @@ local function apply_crt()
     }
     io.open(shader_state, "w"):close()
     hl.config({ debug      = { damage_tracking = 0, vfr = false } })
-    hl.config({ decoration = { screen_shader = os.getenv("HOME") .. "/.config/hypr/Shaders/CRT" } })
+    hl.config({ decoration = { screen_shader = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/CRT" } })
     hl.monitor({ output = "", cm = "hdr", bitdepth = 10 })
     hl.config({ render     = { use_shader_blur_blend = true, use_fp16 = true } })
     hl.notification.create({ text = "  [  CRT ENABLED  ]",  timeout = 3000, icon = "hint", font_size = 16 })

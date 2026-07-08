@@ -1,0 +1,7 @@
+[sie][Convolver#0]
+kernelName=Dolby ATMOS ((128K MP3)) 1.Default
+
+[soe][Convolver#0]
+bypass=true
+irWidth=0
+kernelName=Dolby ATMOS ((128K MP3)) 1.Default

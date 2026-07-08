@@ -11,6 +11,7 @@ hl.config({
         disable_hyprland_logo = true,          	-- [ DISABLE HYPRLAND LOGO ]
 	disable_splash_rendering = true,	-- [ DISABLE HYPRLAND SPLASH ]
         allow_session_lock_restore = true,	-- [ ALLOW LOCKSCREEN RESTORATION ]
+	initial_workspace_tracking = 2,
     },
     debug = {
         -- disable_logs = false,        -- [ ALLOW DEBUGGING LOGS ]

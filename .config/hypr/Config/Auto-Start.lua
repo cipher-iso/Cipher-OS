@@ -9,7 +9,7 @@ hl.exec_cmd(Polkit)	-- Authentication Agent
 
 -- [ GUI STARTUP ]
 --hl.exec_cmd(OBS)		-- OBS
-hl.exec_cmd("steam")            -- Steam
+hl.exec_cmd("LD_PRELOAD=/usr/lib32/libextest.so steam -silent")            -- Steam
 hl.exec_cmd(Discord)            -- Discord
 hl.exec_cmd(Browser)            -- Browser
 hl.exec_cmd(EasyEffects)	-- Mic Equalizer
@@ -21,7 +21,6 @@ hl.exec_cmd("waypaper --random")                       -- Wallpaper Restoration
 hl.exec_cmd("hyprctl eval 'ReloadSystem()'")		-- Reload System Functions
 hl.exec_cmd("wl-clip-persist --clipboard regular")	-- Persist Clipboard History
 hl.exec_cmd("hyprctl eval 'Screenshare_Restore()'")	-- Restore ScreenShare State
-hl.exec_cmd("sleep 3 && swayosd-client --input-volume mute-toggle")	-- [ Mute Mic on Startup ]
 
 -- [ TUI STARTUP ]
 hl.exec_cmd(Terminal .. " btop", { workspace = "4 silent" })    -- System Monitor

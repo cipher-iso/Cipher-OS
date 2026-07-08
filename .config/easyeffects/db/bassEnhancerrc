@@ -1,12 +1,9 @@
 [sie][BassEnhancer#0]
-amount=8
-blend=-10
-harmonics=2.5
-scope=125
+amount=24
+harmonics=10
+scope=250
 
 [soe][BassEnhancer#0]
-amount=8
-blend=-10
-floorActive=true
-harmonics=2.5
-scope=125
+amount=4
+harmonics=2
+scope=150

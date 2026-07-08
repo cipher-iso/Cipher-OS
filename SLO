@@ -4,6 +4,8 @@ GAME_ENV=(
     #DXVK_FRAME_RATE=224
     #VKD3D_FRAME_RATE=224
     PULSE_LATENCY_MSEC=0
+    WINEALSA_CHANNELS=8
+    WINEALSA_SPACIAL=1
 # [ PROTON SETTINGS ]
     PROTON_USE_NVAPI=1
     PROTON_USE_NTSYNC=1
@@ -74,7 +76,7 @@ trap cleanup EXIT
 # [ HDR ]
 if (( USE_HDR )); then
     GAME_ENV+=( PROTON_ENABLE_WAYLAND=1 DXVK_HDR=1 )
-    HDR_STATE="$HOME/.config/hypr/Shaders/.HDR-ON"
+    HDR_STATE="$HOME/.config/hypr/Config/Shaders/.HDR-ON"
     if [[ ! -f "$HDR_STATE" ]]; then
         CLEANUP_HDR=1
         hyprctl eval "ToggleHDR()"
@@ -95,7 +97,7 @@ if (( USE_M )); then GAME_ENV+=( MANGOHUD=1 ); fi
 if [[ -n "$CAP_VALUE" ]]; then GAME_ENV+=( DXVK_FRAME_LIMIT="$CAP_VALUE" ); fi
 # [ CRT SHADERS ]
 if (( USE_CRT )); then
-    STATE_FILE="$HOME/.config/hypr/Shaders/.Shader-ON"
+    STATE_FILE="$HOME/.config/hypr/Config/Shaders/.Shader-ON"
     if [[ ! -f "$STATE_FILE" ]]; then
         CLEANUP_CRT=1
         hyprctl eval "ToggleCRT()"

@@ -1,3 +1,7 @@
 [sie][StereoTools#0]
 inputGain=10
 mode=5
+
+[soe][StereoTools#0]
+delay=2.05
+outputGain=-1
