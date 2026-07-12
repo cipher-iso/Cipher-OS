@@ -4,7 +4,6 @@
 function ReloadSystem()
 -- [ PROCESSES TO KILL ]
     local kill = {
-        "solaar",
         "vicinae",
         "hypridle",
         "hyprsunset",
@@ -14,7 +13,6 @@ function ReloadSystem()
         "hypridle",
         "hyprsunset -i",
 	"Waybar Reload",
-        "solaar -w hide",
         "vicinae server",
     }
 -- [ LOCAL PROCESSES ]

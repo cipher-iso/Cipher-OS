@@ -1,4 +1,8 @@
 
+gnupg
+nvidia-settings
+nvidia-utils
+wine
 c-ares
 pinentry
 netpbm

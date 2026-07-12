@@ -9,7 +9,7 @@ hl.exec_cmd(Polkit)	-- Authentication Agent
 
 -- [ GUI STARTUP ]
 --hl.exec_cmd(OBS)		-- OBS
-hl.exec_cmd("LD_PRELOAD=/usr/lib32/libextest.so steam -silent")            -- Steam
+hl.exec_cmd("LD_PRELOAD=/usr/lib32/libextest.so steam")            -- Steam
 hl.exec_cmd(Discord)            -- Discord
 hl.exec_cmd(Browser)            -- Browser
 hl.exec_cmd(EasyEffects)	-- Mic Equalizer

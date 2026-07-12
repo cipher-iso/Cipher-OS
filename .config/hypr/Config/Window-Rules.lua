@@ -25,7 +25,7 @@ hl.window_rule({
 hl.window_rule({
 	name             = "GAMES",
 	content          = "game",
-	workspace        = "3",
+	workspace        = "9",
 	idle_inhibit     = "always",
 	opaque           = true,
 	no_dim           = true,
@@ -35,6 +35,7 @@ hl.window_rule({
 	no_shadow        = true,
 	sync_fullscreen  = true,
 	render_unfocused = true,
+	center		 = true,
 	match = { initial_class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
 })
 hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]

@@ -3,6 +3,8 @@
 
 allowNotifications=0
 
+alwaysCrossfade=0
+
 repeatState=0
 
 shuffleEnabled=0
@@ -15,7 +17,7 @@ coverAnsi=0
 
 [visualizer]
 
-visualizerEnabled=1
+visualizerColortype=2
 
 [chroma]
 

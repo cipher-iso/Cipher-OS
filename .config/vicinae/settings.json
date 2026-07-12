@@ -11,6 +11,8 @@
 {
    "$schema": "https://vicinae.com/schemas/config.json",
    "close_on_focus_loss": true,
+   "pop_to_root_on_close": true,
+   "escape_key_behavior": "",
    "favicon_service": "google",
    "font": {
       "rendering": "native",
@@ -25,13 +27,16 @@
          "icon_theme": "Reversal"
       }
    },
+   "telemetry": {
+      "system_info": false
+   },
    "launcher_window": {
-      "opacity": 0.8,
+      "opacity": 0.9,
       "client_side_decorations": {
          "enabled": false
       },
       "compact_mode": {
-         "enabled": true
+         "enabled": false
       }
    },
    "favorites": [],
@@ -722,6 +727,25 @@
                "enabled": false
             },
             "xterm": {
+               "enabled": false
+            }
+         }
+      },
+      "power": {
+         "entrypoints": {
+            "hibernate": {
+               "enabled": false
+            },
+            "lock": {
+               "enabled": false
+            },
+            "sleep": {
+               "enabled": false
+            },
+            "soft-reboot": {
+               "enabled": false
+            },
+            "suspend": {
                "enabled": false
             }
          }
