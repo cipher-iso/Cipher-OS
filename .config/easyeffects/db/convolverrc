@@ -2,6 +2,8 @@
 kernelName=Dolby ATMOS ((128K MP3)) 1.Default
 
 [soe][Convolver#0]
+autogain=false
 bypass=true
 irWidth=0
 kernelName=Dolby ATMOS ((128K MP3)) 1.Default
+outputGain=-6.93

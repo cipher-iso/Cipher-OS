@@ -49,4 +49,4 @@ require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
 --    ┏┓┓ ┳┳┏┓┳┳┓┏┓
 --    ┃┃┃ ┃┃┃┓┃┃┃┗┓
 --    ┣┛┗┛┗┛┗┛┻┛┗┗┛
-require("Config.Plugins.Hyprexpo")
+--require("Config.Plugins.Hyprexpo")

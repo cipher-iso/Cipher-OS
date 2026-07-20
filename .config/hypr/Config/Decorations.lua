@@ -54,15 +54,16 @@ hl.config({
             color_inactive = "rgba(" .. BACKGROUND .. "05)",
         },
 	glow = {
-	    enabled 	 = true,
-	    range 	 = 25,
-	    render_power = 2,
-	    color	 = "rgba(" .. PRIMARY .. "30)",
+	    enabled 	   = true,
+	    range 	   = 25,
+	    render_power   = 2,
+	    color	   = "rgba(" .. PRIMARY .. "30)",
+	    color_inactive = "rgba(00000000)",
 	},
-	--motion_blur = {
-	--    enabled = true,
-	--    samples = 7,
-	--},
+	motion_blur = {
+	    enabled = true,
+	    samples = 10,
+	},
     },
 })
 
@@ -71,10 +72,10 @@ hl.config({
 --    ┛┗┛┗┻┛ ┗┛┗ ┻ ┻┗┛┛┗┗┛
 -- [ ANIMATION VALUES ]
 hl.curve("Linear", { type = "bezier", points = {{ 0 , 0 }, { 1 , 1 }}})
-hl.curve("Jimbo",  { type = "spring", mass = 1.25, stiffness = 125, dampening = 16 })
-hl.curve("Jelly",  { type = "spring", mass = 1.5,  stiffness = 100, dampening = 10 })
-hl.curve("Jello",  { type = "spring", mass = 2.25, stiffness = 100, dampening = 20 })
-hl.curve("Jiggle", { type = "spring", mass = 2,    stiffness = 100, dampening = 18 })
+hl.curve("Jimbo",  { type = "spring", mass = 1.25, stiffness = 1250, dampening = 48 })
+hl.curve("Jelly",  { type = "spring", mass = 1.5,  stiffness = 1000, dampening = 30 })
+hl.curve("Jello",  { type = "spring", mass = 2.25, stiffness = 1000, dampening = 60 })
+hl.curve("Jiggle", { type = "spring", mass = 2,    stiffness = 1000, dampening = 54 })
 
 -- [ ANIMATION SETTINGS ]
 hl.animation({ leaf = "global",           enabled = true, speed = 1, bezier = "Linear"  })

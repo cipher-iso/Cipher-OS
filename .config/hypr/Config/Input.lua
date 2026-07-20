@@ -67,8 +67,8 @@ hl.bind(MOD .. " + SHIFT + Home", hl.dsp.exec_cmd("waypaper --random")) -- Rando
 hl.bind(MOD .. " + R",            hl.dsp.exec_cmd("GenerateColors -d")) -- Restore Default Colors
 
 -- [ WORKSPACES ]
-hl.bind(MOD .. " + mouse_down",  function() Workspace_Up() end)
-hl.bind(MOD .. " + mouse_up",    function() Workspace_Down() end)
+hl.bind(MOD .. " + mouse_down",  function() Workspace_Down() end)
+hl.bind(MOD .. " + mouse_up",    function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_right", function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_left",  function() Workspace_Down() end)
 hl.bind("ALT + TAB", function() hl.plugin.hyprexpo.expo("toggle") end)

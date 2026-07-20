@@ -1,4 +1,12 @@
 
+man-db
+pkgconf
+cdparanoia
+cmark-gfm
+dav1d
+findutils
+p11-kit
+zsh
 gnupg
 nvidia-settings
 nvidia-utils

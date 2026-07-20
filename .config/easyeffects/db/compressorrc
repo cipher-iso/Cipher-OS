@@ -15,3 +15,14 @@ ratio=1.5
 release=200
 sidechainMode=1
 threshold=-22.5
+
+[soe][Compressor#0]
+boostAmount=20
+boostThreshold=-60
+knee=-10
+ratio=6
+sidechainInputDevice=Chromium
+sidechainMode=1
+sidechainReactivity=5
+sidechainType=2
+threshold=-40
