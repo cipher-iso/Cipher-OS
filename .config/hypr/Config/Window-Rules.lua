@@ -12,17 +12,17 @@ hl.window_rule({ workspace = "9", opaque = true, 	  	  match = { title = "^.*(Pr
 --    ┏┓┏┓┏┳┓┏┓┏┓┏┓┳┓┳┏┓┏┓
 --    ┃ ┣┫ ┃ ┣ ┃┓┃┃┣┫┃┣ ┗┓
 --    ┗┛┛┗ ┻ ┗┛┗┛┗┛┛┗┻┗┛┗┛
-hl.window_rule({
+hl.window_rule({	-- [ HIDDEN WINDOWS ]
 	name = "SCREENSHARE",
 	no_screen_share = true,
 	match = { class = "^(discord|vivaldi-stable|steam)$" }
 })
-hl.window_rule({
+hl.window_rule({	-- [ AUDIO MANAGEMENT ]
 	name 	= "MEDIA",
 	workspace = "special:media silent",
 	match 	= { class = "^(.*easyeffects)$" }
 })
-hl.window_rule({
+hl.window_rule({	--  [ GAMES & LAUNCHERS ]
 	name             = "GAMES",
 	content          = "game",
 	workspace        = "9",
@@ -33,33 +33,34 @@ hl.window_rule({
 	no_blur          = true,
 	decorate         = false,
 	no_shadow        = true,
-	sync_fullscreen  = true,
+	fullscreen  	 = true,
 	render_unfocused = true,
 	center		 = true,
+	tag = "+hyprglass_disabled",
 	match = { initial_class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
 })
-hl.window_rule({                        -- [ FLOATS - NO FORCED SIZING ]
+hl.window_rule({	-- [ FLOATS - NO FORCED SIZING ]
 	name    = "FLOAT ONLY",
 	float   = true,
 	center  = true,
 	max_size = "monitor_w*0.75 monitor_h*0.7",
 	match 	= { title = "^.*(Vivaldi Settings|OBS Studio Crash Detected|1659040).*$" }
 })
-hl.window_rule({                        -- [ SMALL FLOATS ]
+hl.window_rule({	-- [ SMALL FLOATS ]
 	name   	= "FLOAT SMALL",
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.2 monitor_h*0.35",
 	match 	= { class = "^(blueman-manager|com.network.manager|.*pupgui2|.*share-picker|solaar)$" }
 })
-hl.window_rule({                        -- [ MEDIUM FLOATS ]
+hl.window_rule({	-- [ MEDIUM FLOATS ]
 	name   	= "FLOAT MEDIUM",
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.45 monitor_h*0.5",
 	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark|easyeffects).*$" }
 })
-hl.window_rule({                        -- [ LARGE FLOATS ]
+hl.window_rule({	-- [ LARGE FLOATS ]
 	name   	= "FLOAT LARGE",
 	float  	= true,
 	center 	= true,

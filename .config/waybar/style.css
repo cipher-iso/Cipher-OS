@@ -8,7 +8,7 @@
     	font-size: 22px }
 
 /* THE ACTUAL BAR */
-window#waybar>box { background-color: @bg; padding-left: 0.5em; padding-right: 0.5em }
+window#waybar>box { background-color: alpha(@bg, 0.9); padding-left: 0.5em; padding-right: 0.5em; margin: 0; margin-bottom: 0em; border-radius: 0em; }
 
 /* TOOLTIPS */
 tooltip label 	{ color: @fg;
@@ -19,7 +19,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 
 /* WORKSPACES */
 #workspaces {
-	margin: 0.4em;
+	margin: 0.5em;
 	margin-left: 1em;
 	margin-right: 1em;
 	border-radius: 1em;
@@ -32,7 +32,7 @@ tooltip 	{ background-color: @bg; border-radius: 0em 0em 0em 0em }
 #workspaces button {
     	color: @bg;
     	padding: 0.1em 0.5em;
-	margin: 0.25em;
+	margin: 0.2em;
 	border-radius: 0.75em;
 	transition:
         	color 0.2s ease,

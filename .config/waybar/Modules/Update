@@ -199,7 +199,7 @@ limit_versions() {
     if [[ "$updates_upper" == "0" ]]; then
         jq -nc --arg text "" --arg tooltip "$tooltip_upper" '{text: $text, tooltip: $tooltip}'
     else
-        jq -nc --arg text "[ "$ICON" "$updates_upper" ]" --arg tooltip "$tooltip_upper" '{text: $text, tooltip: $tooltip}'
+        jq -nc --arg text ""$ICON" "$updates_upper"" --arg tooltip "$tooltip_upper" '{text: $text, tooltip: $tooltip}'
     fi
 }
 

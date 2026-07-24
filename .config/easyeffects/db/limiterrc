@@ -13,4 +13,6 @@ bypass=true
 gainBoost=false
 mode=1
 release=20
-threshold=-5
+sidechainInputDevice=alsa_input.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.mono-fallback
+sidechainType=1
+threshold=-10
