@@ -5,7 +5,6 @@ scope=250
 
 [soe][BassEnhancer#0]
 amount=4
-bypass=true
 floorActive=true
 harmonics=2
 outputGain=-4

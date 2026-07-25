@@ -88,7 +88,7 @@
 /* SYSTEM UPDATES MODULE */
 	"custom/updates": {
     		"exec": "~/.config/waybar/Modules/Update module",
-    		"format": "[ {} ]",
+    		"format": "{}",
     		"return-type": "json",
     		"interval": 300,
     		"tooltip": true,

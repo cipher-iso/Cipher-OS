@@ -17,21 +17,20 @@ sidechainMode=1
 threshold=-22.5
 
 [soe][Compressor#0]
-attack=200
+attack=250
 boostAmount=20
 boostThreshold=-60
-dry=5
 hpfFrequency=1000
 knee=-24
 lpfFrequency=2000
+makeup=-20
 mode=1
-outputGain=-10
 ratio=6
-release=400
+release=250
 sidechainInputDevice=discord_sidechain
 sidechainLookahead=5
 sidechainMode=1
 sidechainReactivity=250
-sidechainToInput=0
+sidechainToInput=20
 sidechainType=2
 threshold=-40

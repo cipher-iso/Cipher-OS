@@ -1,18 +1,14 @@
 [sie][Limiter#0]
-alr=true
-attack=1
-dithering=6
 gainBoost=false
 mode=1
+oversampling=22
 release=20
 threshold=-5
 
 [soe][Limiter#0]
-attack=1
-bypass=true
 gainBoost=false
 mode=1
+oversampling=22
 release=20
 sidechainInputDevice=alsa_input.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.mono-fallback
-sidechainType=1
 threshold=-10
