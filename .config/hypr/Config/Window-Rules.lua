@@ -58,14 +58,14 @@ hl.window_rule({	-- [ MEDIUM FLOATS ]
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.45 monitor_h*0.5",
-	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark|easyeffects).*$" }
+	match 	= { class = "^.*(pavucontrol-qt|lsfg-vk|xdg-|Update|org.kde.ark).*$" }
 })
 hl.window_rule({	-- [ LARGE FLOATS ]
 	name   	= "FLOAT LARGE",
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.5 monitor_h*0.58",
-	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk)$" }
+	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|easyeffects)$" }
 })
 
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓

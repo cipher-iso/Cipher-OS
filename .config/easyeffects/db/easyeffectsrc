@@ -5,23 +5,20 @@ copyFilterInputBuffers=true
 excludeMonitorStreams=false
 
 [Presets]
-lastLoadedInputPreset=Main Preset
-lastLoadedOutputPreset=Dolby Atmos
+lastLoadedOutputPreset=[ PRIMARY OUTPUT ]
 
 [StreamInputs]
 inputDevice=alsa_input.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.mono-fallback
-mostUsedPresets=Main Preset
 plugins=pitch#0,stereo_tools#0,rnnoise#0,equalizer#0,gate#0,compressor#1,equalizer#1,expander#0,compressor#0,equalizer#2,limiter#0
-usedPresets=Main Preset:23
 visiblePage=pluginsPage
 visiblePlugin=limiter#0
 
 [StreamOutputs]
-mostUsedPresets=Dolby Atmos,Bass Enhancing + Perfect EQ
+mostUsedPresets=Dolby Atmos,Bass Enhancing + Perfect EQ,[ PRIMARY OUTPUT ]
 outputDevice=alsa_output.usb-Corsair_CORSAIR_VIRTUOSO_XT_Wireless_Gaming_Receiver_16d7faa800030215-00.analog-stereo
 plugins=equalizer#0,compressor#0,bass_enhancer#0,limiter#0
 pluginsListWidth=288
-usedPresets=Dolby Atmos:5,Bass Enhancing + Perfect EQ:2
+usedPresets=Dolby Atmos:5,Bass Enhancing + Perfect EQ:2,[ PRIMARY OUTPUT ]:1
 visiblePage=pluginsPage
 visiblePlugin=compressor#0
 
@@ -29,5 +26,6 @@ visiblePlugin=compressor#0
 autostartOnLogin=true
 height=1061
 lastLoadedInputPreset=Main Preset
+visiblePage=inputPage
 visiblePipeWirePage=clientsPage
 width=1595

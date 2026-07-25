@@ -9,7 +9,7 @@
   font-family: "JetBrainsMono Nerd Font Propo";
   transition: 200ms;
   font-weight: 700;
-  border-radius: 0;
+  border-radius: 14;
 }
 
 
@@ -39,7 +39,7 @@ scrolledwindow {
 /* [ MAIN SURFACES ] */
 .notification-background,
 .control-center {
-  background: @bg !important;
+  background: alpha(@bg, 0.9);
 }
 
 .notification,
@@ -54,13 +54,13 @@ scrolledwindow {
 
 /* [ NOTIFICATION POPUPS ] */
 .notification {
-  border: 2px solid @bg;
   color: @fg;
 }
 
 .notification-background {
-  background: @bg;
+  background: alpha(@bg, 0.9);
   box-shadow: none;
+  border-radius: 14px;
   margin-top: 20px;
   margin-right: 20px;
   min-width: 395px;

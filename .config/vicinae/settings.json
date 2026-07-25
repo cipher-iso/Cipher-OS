@@ -31,9 +31,10 @@
       "system_info": false
    },
    "launcher_window": {
+      "rounding": 14,
       "opacity": 0.9,
       "client_side_decorations": {
-         "enabled": false
+         "enabled": true
       },
       "compact_mode": {
          "enabled": false
