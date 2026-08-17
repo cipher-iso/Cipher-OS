@@ -1,4 +1,24 @@
 
+vala
+mpv
+tar
+plocate
+pcre
+tpm2-tss
+wpa_supp*
+elfutils
+audacious-plu*
+openal
+ripgrep-all
+apr-util
+graphviz
+tevent
+glfw
+papirus-*
+tumbler
+jemalloc
+ocl-icd
+appstream-glib
 wildmidi
 man-db
 pkgconf

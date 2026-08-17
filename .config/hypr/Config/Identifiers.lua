@@ -11,7 +11,7 @@ Menu         = "vicinae toggle"                   -- Application Launcher
 -- [ APPLICATIONS | FLAGS & VARIABLES ]
 Sunshine     = "PULSE_LATENCY_MSEC=0 sunshine"
 OBS          = "com.obsproject.Studio --startreplaybuffer"
-Discord      = "ELECTRON_OZONE_PLATFORM_HINT=x11 discord"
+Discord      = "XDG_SESSION_TYPE=x11 discord"
 EasyEffects  = "QT_QPA_PLATFORMTHEME=gtk3 easyeffects"
 
 -- [ GENERAL ENVIRONMENT ]

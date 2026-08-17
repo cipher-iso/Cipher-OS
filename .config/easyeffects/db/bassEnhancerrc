@@ -5,7 +5,8 @@ scope=250
 
 [soe][BassEnhancer#0]
 amount=4
+blend=2
+floor=35
 floorActive=true
 harmonics=2
-outputGain=-4
-scope=175
+scope=150

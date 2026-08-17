@@ -252,7 +252,6 @@ band8Type=0
 band9Type=0
 
 [soe][Equalizer#0]
-inputGain=-6.93
 numBands=10
 
 [soe][Equalizer#0#left]

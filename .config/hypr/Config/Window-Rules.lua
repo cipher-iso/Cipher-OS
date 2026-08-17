@@ -5,6 +5,8 @@
 hl.window_rule({ workspace = "1", focus_on_activate = true, 	  match = { class = "vivaldi-stable|mpv" }})
 hl.window_rule({ workspace = "2 silent",  			  match = { class = "discord" }})
 hl.window_rule({ workspace = "3 silent",  			  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" }})
+hl.window_rule({ workspace = "4 silent", move = "(1988) (1171)",  match = { class = "Audacious", title = "negative:Audacious" }})
+hl.window_rule({ workspace = "4 silent", move = "(1988) (915)",   match = { class = "Audacious", title = "Playlist Manager" }})
 hl.window_rule({ workspace = "5 silent", render_unfocused = true, match = { class = "obs" }})
 hl.window_rule({ workspace = "6", opaque = true, 	  	  match = { class = "resolve" }})
 hl.window_rule({ workspace = "9", opaque = true, 	  	  match = { title = "^.*(Prism|Minecraft).*$" }})
@@ -65,7 +67,7 @@ hl.window_rule({	-- [ LARGE FLOATS ]
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.5 monitor_h*0.58",
-	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|easyeffects)$" }
+	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects)$" }
 })
 
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓

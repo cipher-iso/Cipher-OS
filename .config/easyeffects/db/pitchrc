@@ -1,6 +1,7 @@
 [sie][Pitch#0]
 bypass=true
+cents=-60
 overlapLength=0
 seekWindow=0
-semitones=8
+semitones=6
 sequenceLength=0

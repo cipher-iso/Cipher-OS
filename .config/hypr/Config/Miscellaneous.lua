@@ -11,7 +11,7 @@ hl.config({
         disable_hyprland_logo = true,          	-- [ DISABLE HYPRLAND LOGO ]
 	disable_splash_rendering = true,	-- [ DISABLE HYPRLAND SPLASH ]
         allow_session_lock_restore = true,	-- [ ALLOW LOCKSCREEN RESTORATION ]
-	initial_workspace_tracking = 2,
+	initial_workspace_tracking = 1,		-- [ OPEN WINDOWS ON CURRENT WORKSPACE ]
     },
     debug = {
         -- disable_logs = false,        -- [ ALLOW DEBUGGING LOGS ]
@@ -21,10 +21,9 @@ hl.config({
     render = {
     	--cm_sdr_eotf = "gamma22",
         --direct_scanout = 2,		-- [ LOW-LATENCY // NO-VRR ]
-	--use_fp16 = 0			-- [ COLOR ACCURACY ]
     },
     quirks = {
-        -- prefer_hdr = 1,              -- [ HINT 'HDR' TO APPLICATIONS ]
+        prefer_hdr = 1,              	-- [ HINT 'HDR' TO APPLICATIONS ]
     },
     xwayland = {
         force_zero_scaling = true,     	-- [ xWAYLAND SCALING ]

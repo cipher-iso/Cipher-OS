@@ -7,9 +7,9 @@ alwaysCrossfade=0
 
 repeatState=0
 
-shuffleEnabled=0
+shuffleEnabled=1
 
-lastVolume=5
+lastVolume=50
 
 [track cover]
 
@@ -29,5 +29,3 @@ colorMode=2
 
 theme=matrix.theme
 
-currentSongId=6626
-currentSongSeconds=55.144716

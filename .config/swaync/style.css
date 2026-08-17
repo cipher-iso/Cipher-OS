@@ -9,7 +9,7 @@
   font-family: "JetBrainsMono Nerd Font Propo";
   transition: 200ms;
   font-weight: 700;
-  border-radius: 14;
+  border-radius: 0;
 }
 
 
@@ -60,7 +60,8 @@ scrolledwindow {
 .notification-background {
   background: alpha(@bg, 0.9);
   box-shadow: none;
-  border-radius: 14px;
+  border-radius: 0px;
+  border: 2px solid alpha(@bg, 1);
   margin-top: 20px;
   margin-right: 20px;
   min-width: 395px;

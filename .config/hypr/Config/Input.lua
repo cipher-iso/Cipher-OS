@@ -48,6 +48,11 @@ hl.bind(MOD .. " + Q", hl.dsp.exec_cmd("[float; size 1400 800] " .. Terminal))	-
 hl.bind("CTRL + SHIFT + Escape",    hl.dsp.exec_cmd(Terminal .. " btop"))   	-- Task Manager
 hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    -- Open Config
 
+-- [ CUSTOM PLUGINS ]
+hl.bind(MOD .. " + F13",	hl.plugin.hyprcapture.open)	-- Screenshot
+hl.bind(MOD .. "+ SHIFT + F13",	hl.plugin.hyprcapture.quick)
+hl.bind("ALT + TAB", 		hl.plugin.hyprexpo.expo)	-- Workspace Switcher
+
 -- [ CUSTOM FUNCTIONS ]
 hl.bind(MOD .. " + + Prior", 	function() ToggleCRT() end)	-- Toggle CRT Shader
 hl.bind(MOD .. " + + Next", 	function() ToggleHDR() end)	-- Toggle HDR
@@ -56,8 +61,6 @@ hl.bind(MOD .. " + M", 		function() MuteActive() end)	-- Mute Active-Window
 hl.bind(MOD .. " + I", 		function() ThemePicker() end)	-- Theme Switcher
 hl.bind(MOD .. " + grave", 	function() Screenshare() end)	-- Toggle Screensharing
 hl.bind(MOD .. " + SHIFT + R", 	function() ReloadSystem() end)	-- Reload System
-hl.bind(MOD .. " + F13",   	function() CaptureRegion() end)	-- Screenshot Region
-hl.bind(MOD .. " + SHIFT + F13",function() CaptureWindow() end)	-- Screenshot Window
 hl.bind("mouse:273", function() PiP() end, { mouse = true, non_consuming = true })
 
 -- [ CUSTOM SCRIPTS ]
@@ -71,7 +74,6 @@ hl.bind(MOD .. " + mouse_down",  function() Workspace_Down() end)
 hl.bind(MOD .. " + mouse_up",    function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_right", function() Workspace_Up() end)
 hl.bind(MOD .. " + mouse_left",  function() Workspace_Down() end)
-hl.bind("ALT + TAB", function() hl.plugin.hyprexpo.expo("toggle") end)
 --hl.bind("ALT + TAB", function() AltTab(1)  end, { repeating = true })
 --hl.bind("ALT + SHIFT + TAB", function() AltTab(-1)  end, { repeating = true })
 
@@ -126,18 +128,11 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("Gamma down"),                 
 --    ┗┛┗┛┗┛┻┛┛┗┗┛  ┻┛┻┛┗┻┛┗┛
 -- [ DISCORD PASSTHROUGH ]
 hl.bind("F13", hl.dsp.pass({ window = "class:discord" }))  -- SCREEN-SHARE
-hl.bind("F13", hl.dsp.pass({ window = "class:discord" }), { release = true })
 hl.bind("F14", hl.dsp.pass({ window = "class:discord" }))  -- DEAFEN
-hl.bind("F14", hl.dsp.pass({ window = "class:discord" }), { release = true })
 
 -- [ OBS PASSTHROUGH ]
 hl.bind(MOD .. " + equal",        hl.dsp.pass({ window = "class:obs" }))  -- BEGIN STREAM
-hl.bind(MOD .. " + equal",        hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + minus",        hl.dsp.pass({ window = "class:obs" }))  -- END STREAM
-hl.bind(MOD .. " + minus",        hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + bracketleft",  hl.dsp.pass({ window = "class:obs" }))  -- DISABLE PREVIEW
-hl.bind(MOD .. " + bracketleft",  hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + bracketright", hl.dsp.pass({ window = "class:obs" }))  -- ENABLE PREVIEW
-hl.bind(MOD .. " + bracketright", hl.dsp.pass({ window = "class:obs" }), { release = true })
 hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }))  -- REPLAY BUFFER
-hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }), { release = true })

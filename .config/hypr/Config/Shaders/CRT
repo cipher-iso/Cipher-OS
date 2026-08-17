@@ -14,7 +14,7 @@ uniform int ASPECT_RATIO_MODE; // 4:3 mode
 // --- Constants / Tweakables ---
 #define FOURBYTHREE          1
 #define VIBRANCE_STRENGTH    1.25   // 0 = off, 1 = normal, >1 = stronger RGB offset
-#define CURVATURE            0.035
+#define CURVATURE            0.015
 #define CONVERGENCE_BASE     0.0025
 #define CRT_GAMMA            1.0
 #define CONTRAST             1.2

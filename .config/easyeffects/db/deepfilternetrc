@@ -1,3 +1,6 @@
 [sie][DeepFilterNet#0]
+attenuationLimit=80
 bypass=true
-postFilterBeta=0.019999999552965164
+maxErbProcessingThreshold=20
+minProcessingThreshold=-15
+postFilterBeta=0.05

@@ -1,3 +1,4 @@
+#version 300 es
 // vim: set ft=glsl:
 
 precision highp float;

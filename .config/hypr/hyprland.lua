@@ -4,8 +4,9 @@
 hl.monitor({
 --  [ GENERAL SETTINGS ]
     output      	= "",
+    bitdepth		= 10,
     position    	= "0x0",
-    cm          	= "auto",
+    cm          	= "hdredid",
     mode        	= "preferred",
     vrr         	= 3,
     scale		= 1,
@@ -13,9 +14,9 @@ hl.monitor({
     supports_hdr        = 1,
     supports_wide_color = 1,
     sdr_min_luminance   = 0,
-    min_luminance       = 0,
     sdr_max_luminance   = 400,
-    max_luminance       = 1000
+    min_luminance	= 0,
+    max_luminance	= 650
 })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
@@ -49,5 +50,6 @@ require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
 --    ┏┓┓ ┳┳┏┓┳┳┓┏┓
 --    ┃┃┃ ┃┃┃┓┃┃┃┗┓
 --    ┣┛┗┛┗┛┗┛┻┛┗┗┛
---require("Config.Plugins.Hyprexpo")
+require("Config.Plugins.Hyprexpo")
 require("Config.Plugins.Hyprglass")
+require("Config.Plugins.HyprCapture")

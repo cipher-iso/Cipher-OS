@@ -32,13 +32,17 @@
    },
    "launcher_window": {
       "rounding": 14,
-      "opacity": 0.9,
+      "opacity": 0.85,
       "client_side_decorations": {
-         "enabled": true
+         "enabled": false
       },
       "compact_mode": {
          "enabled": false
-      }
+      },
+      "layer_shell": {
+         "enabled": false
+      },
+      "material": "none"
    },
    "favorites": [],
    "providers": {
@@ -84,6 +88,9 @@
             },
             "designer": {
                "enabled": false
+            },
+            "discord": {
+               "enabled": true
             },
             "discordx11": {
                "enabled": false
