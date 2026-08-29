@@ -1,25 +1,23 @@
 if hl.plugin.hyprglass then
     local hg = hl.plugin.hyprglass
-    hg.config({ default_preset = "glass", tint_color = 0x00000000, layers = { enabled = 1 } })
+    hg.config({ default_preset = "glass", layers = { enabled = 0 } })
 
     -- [ LAYER SURFACES ]
-    hg.layer("waybar",  { exclude = true })
-    hg.layer("vicinae", { exclude = true })
-    hg.layer("swayosd", { exclude = true })
-    hg.layer("swaync-notification-window", { exclude = true })
-    hg.layer("selection", { exclude = true })
+    hg.layer("waybar",  { mask_threshold = 0.85 })
+    hg.layer("vicinae", { mask_threshold = 0.85 })
+    hg.layer("swayosd", { mask_threshold = 0.85 }) 
+    hg.layer("selection", { mask_threshold = 0.85 })
+    hg.layer("swaync-notification-window", { mask_threshold = 0.85 })
 
     -- [ APPEARANCE SETTINGS ]
     hg.preset("glass", {
-    	vibrancy = 1,
+    	vibrancy = 0.25,
 	contrast = 1.15,
-	adaptive_dim = 1,
-	blur_strength = 2,
+	blur_strength = 1.5,
 	lens_distortion = 1,
-        glass_opacity = 1,
+	tint_color = 0x00000090,
         edge_thickness = 0.075,
-	vibrancy_darkness = 0,
+	vibrancy_darkness = 1,
 	refraction_strength = 5,
-	chromatic_aberration = 0.25,
     })
 end

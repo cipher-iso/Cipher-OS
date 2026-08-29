@@ -24,7 +24,7 @@
    "theme": {
       "dark": {
          "name": "matrix",
-         "icon_theme": "Reversal"
+         "icon_theme": "Papirus-Dark"
       }
    },
    "telemetry": {
@@ -32,7 +32,7 @@
    },
    "launcher_window": {
       "rounding": 14,
-      "opacity": 0.85,
+      "opacity": 0.9,
       "client_side_decorations": {
          "enabled": false
       },
@@ -40,9 +40,9 @@
          "enabled": false
       },
       "layer_shell": {
-         "enabled": false
+         "enabled": true
       },
-      "material": "none"
+      "material": "blur"
    },
    "favorites": [],
    "providers": {

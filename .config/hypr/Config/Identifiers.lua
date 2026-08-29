@@ -2,11 +2,11 @@
 --    ┃┃┃┣ ┃┃ ┃ ┃┣ ┃┣ ┃┃  ┃┃┣┫┣┫┃┣┫┣┫┃ ┣ ┗┓
 --    ┻┻┛┗┛┛┗ ┻ ┻┻ ┻┗┛┻┛  ┗┛┛┗┛┗┻┛┗┻┛┗┛┗┛┗┛
 -- [ APPLICATIONS | MODIFIERS ]
-MOD          = "SUPER"                            -- 'SUPER' key
-Terminal     = "kitty"                            -- Terminal
-Browser      = "vivaldi"                          -- Browser
-FileManager  = "dolphin"                          -- File Manager
-Menu         = "vicinae toggle"                   -- Application Launcher
+MOD          = "SUPER"			-- 'SUPER' key
+Terminal     = "kitty"			-- Terminal
+Browser      = "vivaldi"		-- Browser
+FileManager  = "dolphin"		-- File Manager
+Menu         = "vicinae toggle"		-- Application Launcher
 
 -- [ APPLICATIONS | FLAGS & VARIABLES ]
 Sunshine     = "PULSE_LATENCY_MSEC=0 sunshine"

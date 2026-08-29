@@ -2,7 +2,7 @@
 --    ┃┃┃┃┃┃┃┃┃┃┃┃┃━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┻┛┻┛┗┻┛┗┛┗┻┛  ┛┗┗┛┗┛┗┛┗┛
 -- [ DEFINED WORKSPACES ]
-hl.window_rule({ workspace = "1", focus_on_activate = true, 	  match = { class = "vivaldi-stable|mpv" }})
+hl.window_rule({ workspace = "1", focus_on_activate = true, 	  match = { class = "vivaldi-stable" }})
 hl.window_rule({ workspace = "2 silent",  			  match = { class = "discord" }})
 hl.window_rule({ workspace = "3 silent",  			  match = { class = "steam", title = "^(Steam|Sign in to Steam)$" }})
 hl.window_rule({ workspace = "4 silent", move = "(1988) (1171)",  match = { class = "Audacious", title = "negative:Audacious" }})
@@ -127,4 +127,6 @@ hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 
 --    ┃ ┣┫┗┫┣ ┣┫━━┣┫┃┃┃ ┣ ┗┓
 --    ┗┛┛┗┗┛┗┛┛┗  ┛┗┗┛┗┛┗┛┗┛
 hl.layer_rule({ no_anim = true, match = { namespace = "selection" } })
-hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0, match = { namespace = "^(waybar|swaync-notification-window|swayosd|vicinae)$" } })
+hl.window_rule({ stay_focused = true, match = { class = "vicinae" } })
+hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0.85, match = { namespace = "^(waybar|swayosd|vicinae)$" } })
+hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0, match = { namespace = "^(swaync-notification-window)$" } })

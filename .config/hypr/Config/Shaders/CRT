@@ -15,7 +15,7 @@ uniform int ASPECT_RATIO_MODE; // 4:3 mode
 #define FOURBYTHREE          1
 #define VIBRANCE_STRENGTH    1.25   // 0 = off, 1 = normal, >1 = stronger RGB offset
 #define CURVATURE            0.015
-#define CONVERGENCE_BASE     0.0025
+#define CONVERGENCE_BASE     0.002
 #define CRT_GAMMA            1.0
 #define CONTRAST             1.2
 #define BLOOM_STRENGTH       0.35
@@ -32,6 +32,7 @@ uniform int ASPECT_RATIO_MODE; // 4:3 mode
 #define SCANLINE_INTENSITY   0.02   // Subtle CRT scanline brightness
 #define GRILLE_STRENGTH      0.25
 #define NOISE_STRENGTH       0.015  // Overlay noise intensity
+#define AA_FEATHER           0.0005 // width (in UV space) of the edge anti-aliasing fade
 
 // --- Hash & Noise ---
 float hash(vec2 p) {
@@ -61,6 +62,12 @@ vec2 curve(vec2 uv) {
     uv = uv*2.0 - 1.0;
     uv *= 1.0 + (uv.yx * uv.yx) * CURVATURE;
     return uv*0.5 + 0.5;
+}
+
+// --- Edge anti-aliasing mask ---
+// Smoothly fades a coordinate to 0 as it crosses outside [0,1], instead of a hard cutoff.
+float edge1D(float v, float feather) {
+    return smoothstep(0.0, feather, v) * smoothstep(0.0, feather, 1.0 - v);
 }
 
 // --- Scanlines & Grille (subtle, realistic CRT) ---
@@ -121,18 +128,24 @@ void main() {
     // --- Curvature first ---
     vec2 uv = curve(v_texcoord);
 
+    // Accumulate an edge mask instead of hard-cutting to black.
+    // Anything fully outside [0,1] (beyond the feather) will end up at mask = 0,
+    // same visual result as before, but the boundary itself is now smoothed.
+    float mask = edge1D(uv.x, AA_FEATHER) * edge1D(uv.y, AA_FEATHER);
+
     // --- 4:3 aspect ---
     if(ASPECT_RATIO_MODE == FOURBYTHREE){
         float newX = (uv.x-0.5)*(16.0/12.0)+0.5;
-        if(newX<0.0||newX>1.0){
-            FragColor = vec4(0.0,0.0,0.0,1.0);
-            return;
-        }
+        mask *= edge1D(newX, AA_FEATHER);
         uv.x = newX;
     }
 
-    // --- Out-of-bounds ---
-    if(uv.x<0.0||uv.x>1.0||uv.y<0.0||uv.y>1.0){
+    // Clamp the coordinate used for sampling so we never read/wrap outside the
+    // texture near the border (this is what removes the pixellated stair-stepping).
+    uv = clamp(uv, 0.0, 1.0);
+
+    // If we're fully outside (even the feather), skip the rest of the work and bail black.
+    if(mask <= 0.0){
         FragColor = vec4(0.0,0.0,0.0,1.0);
         return;
     }
@@ -141,6 +154,7 @@ void main() {
     vec2 uvSim = uv;
     uvSim.y += sin(time*100.0)*VDRIFT_STRENGTH;
     uvSim.x += (hash(vec2(floor(time*120.0),0.0))-0.5)*2.0*HORIZONTAL_JITTER;
+    uvSim = clamp(uvSim, 0.0, 1.0);
 
     vec3 base = texture(tex, uvSim).rgb;
     base = pow(base, vec3(CRT_GAMMA));
@@ -155,9 +169,9 @@ void main() {
     vec2 convOffset = normalize(dir + 1e-6) * (CONVERGENCE_BASE * fade);
 
     // Sample channels
-    float r = texture(tex, uvSim + convOffset).r;
+    float r = texture(tex, clamp(uvSim + convOffset, 0.0, 1.0)).r;
     float g = texture(tex, uvSim).g;
-    float b = texture(tex, uvSim - convOffset).b;
+    float b = texture(tex, clamp(uvSim - convOffset, 0.0, 1.0)).b;
 
     // Neutralize green bias slightly
     float convAvg = (r + g + b) / 3.0;
@@ -194,6 +208,9 @@ color.b += (color.b - avg) * (VIBRANCE_STRENGTH - 1.0);
 // --- Final: grille (ALWAYS straight, never curved) ---
     vec3 grille = apertureGrille(v_texcoord);
     color *= grille;
+
+    // --- Apply the smooth edge mask last so the curvature border fades cleanly ---
+    color *= mask;
 
     FragColor = vec4(color,1.0);
 }

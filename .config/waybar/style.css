@@ -15,7 +15,9 @@ tooltip label 	{ color: @fg;
 		  margin: 0.5em;
 		  font-size: 0.9em; font-weight: 700;
 		  text-shadow: 0em 0em 0.2em alpha(@fg, 0.5) }
-tooltip 	{ background-color: alpha(@bg, 0.9); border-radius: 0em 0em 0em 0em }
+tooltip 	{ background-color: alpha(@bg, 0.85);
+		  border-radius: 0em 0em 0em 0em;
+		  border: 2px solid @bg; }
 
 /* WORKSPACES */
 #workspaces {

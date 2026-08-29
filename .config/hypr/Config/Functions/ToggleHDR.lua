@@ -3,6 +3,13 @@
 --     ┻ ┗┛┗┛┗┛┗┛┗┛  ┛┗┻┛┛┗
 hdr_state  = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/.HDR-ON"
 hdr_active = io.open(hdr_state, "r") ~= nil
+
+local function is_crt_active()
+    local f = io.open(shader_state, "r")
+    if f then f:close(); return true end
+    return false
+end
+
 local hdr_prev = {}
 
 local function apply_hdr()
@@ -11,16 +18,18 @@ local function apply_hdr()
         bitdepth = hl.get_config("monitor.bitdepth"),
     }
     io.open(hdr_state, "w"):close()
-    hl.monitor({ output = "", cm = "hdr", bitdepth = 10 })
-    hl.config({ render = { use_shader_blur_blend = true } })
-    hl.notification.create({ text = "  [  HDR ENABLED  ]", timeout = 3000, icon = "hint", font_size = 16 })
+    hl.monitor({ output = "", cm = "hdr" })
+    hl.notification.create({ text = "  [  HDR ENABLED  ]", timeout = 3000, icon = "hint", font_size = 20 })
 end
 
 local function restore_hdr()
     os.remove(hdr_state)
-    hl.monitor({ output = "", cm = hdr_prev.cm or "auto", bitdepth = hdr_prev.bitdepth or 8 })
-    hl.config({ render = { use_shader_blur_blend = false } })
-    hl.notification.create({ text = "  [  HDR DISABLED  ]", timeout = 3000, icon = "ok", font_size = 16 })
+    if is_crt_active() then
+        hl.monitor({ output = "", cm = "hdr" })
+    else
+        hl.monitor({ output = "", cm = hdr_prev.cm or "auto" })
+    end
+    hl.notification.create({ text = "  [  HDR DISABLED  ]", timeout = 3000, icon = "ok", font_size = 20 })
 end
 
 function ToggleHDR()
@@ -28,4 +37,4 @@ function ToggleHDR()
     if hdr_active then apply_hdr() else restore_hdr() end
 end
 
-if hdr_active    then apply_hdr() end
+if hdr_active then apply_hdr() end

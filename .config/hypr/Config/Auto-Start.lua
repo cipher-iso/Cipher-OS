@@ -4,7 +4,8 @@
 hl.on("hyprland.start", function()
 
 -- [ HYPRLAND SPECIFIC ]
-ReloadSystem()		-- Restore System Functions
+--ToggleHDR()		-- Enable HDR
+ReloadSystem()		-- Restore Shell[s]
 hl.exec_cmd(XDPH)	-- Hyprland Portals
 hl.exec_cmd(Polkit)	-- Authentication Agent
 Screenshare_Restore()	-- Restore ScreenShare State

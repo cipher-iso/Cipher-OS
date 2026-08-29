@@ -4,9 +4,8 @@
 hl.monitor({
 --  [ GENERAL SETTINGS ]
     output      	= "",
-    bitdepth		= 10,
     position    	= "0x0",
-    cm          	= "hdredid",
+    cm          	= "auto",
     mode        	= "preferred",
     vrr         	= 3,
     scale		= 1,
@@ -16,8 +15,9 @@ hl.monitor({
     sdr_min_luminance   = 0,
     sdr_max_luminance   = 400,
     min_luminance	= 0,
-    max_luminance	= 650
-})
+    max_luminance	= 650,
+    sdrsaturation	= 1.2,
+    })
 
 --    ┏┓┏┓┳┳┳┓┏┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
 --    ┗┓┃┃┃┃┣┫┃ ┣ ┃┃  ┃ ┃┃┃┃┣ ┃┃┓
