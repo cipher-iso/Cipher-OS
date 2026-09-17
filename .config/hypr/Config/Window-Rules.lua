@@ -22,7 +22,9 @@ hl.window_rule({	-- [ HIDDEN WINDOWS ]
 hl.window_rule({	-- [ AUDIO MANAGEMENT ]
 	name 	= "MEDIA",
 	workspace = "special:media silent",
-	match 	= { class = "^(.*easyeffects)$" }
+	no_vrr	= true,
+	opaque	= true,
+	match 	= { class = "^(.*easyeffects|mpv)$" }
 })
 hl.window_rule({	--  [ GAMES & LAUNCHERS ]
 	name             = "GAMES",

@@ -48,11 +48,6 @@ hl.bind(MOD .. " + Q", hl.dsp.exec_cmd("[float; size 1400 800] " .. Terminal))	-
 hl.bind("CTRL + SHIFT + Escape",    hl.dsp.exec_cmd(Terminal .. " btop"))   	-- Task Manager
 hl.bind(MOD .. " + SHIFT + RETURN", hl.dsp.exec_cmd(Config))                    -- Open Config
 
--- [ CUSTOM PLUGINS ]
-hl.bind(MOD .. " + F13",	hl.plugin.hyprcapture.open)	-- Screenshot
-hl.bind(MOD .. "+ SHIFT + F13",	hl.plugin.hyprcapture.quick)
-hl.bind("ALT + TAB", 		hl.plugin.hyprexpo.expo)	-- Workspace Switcher
-
 -- [ CUSTOM FUNCTIONS ]
 hl.bind(MOD .. " + + Prior", 	function() ToggleCRT() end)	-- Toggle CRT Shader
 hl.bind(MOD .. " + + Next", 	function() ToggleHDR() end)	-- Toggle HDR
@@ -136,3 +131,8 @@ hl.bind(MOD .. " + minus",        hl.dsp.pass({ window = "class:obs" }))  -- END
 hl.bind(MOD .. " + bracketleft",  hl.dsp.pass({ window = "class:obs" }))  -- DISABLE PREVIEW
 hl.bind(MOD .. " + bracketright", hl.dsp.pass({ window = "class:obs" }))  -- ENABLE PREVIEW
 hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }))  -- REPLAY BUFFER
+
+-- [ CUSTOM PLUGINS ]
+hl.bind(MOD .. " + F13",	hl.plugin.hyprcapture.open)	-- Screenshot
+hl.bind(MOD .. "+ SHIFT + F13",	hl.plugin.hyprcapture.quick)
+hl.bind("ALT + TAB", 		hl.plugin.hyprexpo.expo)	-- Workspace Switcher

@@ -34,7 +34,7 @@ hl.config({
         dim_strength       = 0.5,
         dim_special        = 0.75,
         border_part_of_window = true,
-        --screen_shader      = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/Vibrance",
+        screen_shader      = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/Vibrance",
         blur = {
             enabled             = true,
             popups              = false,
@@ -61,7 +61,7 @@ hl.config({
 	    color_inactive = "rgba(00000000)",
 	},
 	motion_blur = {
-	    enabled = true,
+	    enabled = false,
 	    samples = 10,
 	},
     },

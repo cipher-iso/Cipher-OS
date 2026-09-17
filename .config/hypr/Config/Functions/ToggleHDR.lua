@@ -14,8 +14,7 @@ local hdr_prev = {}
 
 local function apply_hdr()
     hdr_prev = {
-        cm       = hl.get_config("monitor.cm"),
-        bitdepth = hl.get_config("monitor.bitdepth"),
+        cm       = hl.get_config("monitor.cm")
     }
     io.open(hdr_state, "w"):close()
     hl.monitor({ output = "", cm = "hdr" })

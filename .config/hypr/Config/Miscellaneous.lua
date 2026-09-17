@@ -15,8 +15,9 @@ hl.config({
     },
     debug = {
         -- disable_logs = false,        -- [ ALLOW DEBUGGING LOGS ]
-        -- vfr = false,                 -- [ VARIABLE FRAME-RATE ]
+	suppress_errors = true,		-- [ HIDE CONFIG ERRORS ]
         damage_tracking = 2,            -- [ 2 = DEFAULT | 0 = SHADERS ]
+        -- vfr = false,                 -- [ VARIABLE FRAME-RATE ]
     },
     render = {
     	--cm_sdr_eotf = "gamma22",
