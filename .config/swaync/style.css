@@ -39,7 +39,7 @@ scrolledwindow {
 /* [ MAIN SURFACES ] */
 .notification-background,
 .control-center {
-  background: alpha(@bg, 0.85);
+  background: alpha(@bg, 1);
 }
 
 .notification,
@@ -58,7 +58,7 @@ scrolledwindow {
 }
 
 .notification-background {
-  background: alpha(@bg, 0.85);
+  background: alpha(@bg, 1);
   box-shadow: none;
   border-radius: 0px;
   border: 2px solid @bg;

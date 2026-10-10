@@ -4,17 +4,13 @@
 window#osd {
   border-radius: 0px;
   border: 2px solid @bg;
-  background: alpha(@bg, 0.85);
-  padding: 0px;
+  background: alpha(@bg, 1);
+  padding: 10px;
 }
 
-window#osd #container {
+#container {
   margin: 3px;
   background: transparent;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
   border-radius: 0px;
 }
 

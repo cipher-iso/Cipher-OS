@@ -4,6 +4,7 @@
 function ReloadSystem()
 -- [ PROCESSES TO KILL ]
     local kill = {
+    	"solaar",
         "vicinae",
         "hypridle",
         "hyprsunset",
@@ -13,6 +14,7 @@ function ReloadSystem()
         "hypridle",
         "hyprsunset -i",
 	"Waybar Reload",
+	"solaar -w hide",
         "vicinae server",
     }
 -- [ LOCAL PROCESSES ]
@@ -25,5 +27,5 @@ function ReloadSystem()
     }
     for _, p in ipairs(spawn) do lines[#lines + 1] = p .. " &" end
     hl.dispatch(hl.dsp.exec_cmd('bash -c "' .. table.concat(lines, "\n") .. '"'))
-    hl.notification.create({ text = "  [ SYSTEM RELOADING ]", timeout = 3000, icon = "info", font_size = 16 })
+    hl.notification.create({ text = "    SYSTEM RELOADING", timeout = 3000, icon = "none", color = "#658fff", font_size = 24 })
 end

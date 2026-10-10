@@ -24,24 +24,24 @@ hl.window_rule({	-- [ AUDIO MANAGEMENT ]
 	workspace = "special:media silent",
 	no_vrr	= true,
 	opaque	= true,
-	match 	= { class = "^(.*easyeffects|mpv)$" }
+	match 	= { class = "^(.*easyeffects)$" }
 })
 hl.window_rule({	--  [ GAMES & LAUNCHERS ]
 	name             = "GAMES",
 	content          = "game",
 	workspace        = "9",
 	idle_inhibit     = "always",
+	center		 = true,
 	opaque           = true,
+	decorate         = false,
+	fullscreen  	 = true,
+	render_unfocused = true,
 	no_dim           = true,
 	no_anim          = true,
 	no_blur          = true,
-	decorate         = false,
 	no_shadow        = true,
-	fullscreen  	 = true,
-	render_unfocused = true,
-	center		 = true,
-	tag = "+hyprglass_disabled",
-	match = { initial_class = "^.*(steam_app_|cs2|RimWorldLinux|osu!|Sober|gamescope).*$" }
+	no_auto_hdr	 = true,
+	match = { initial_class = "^(steam_app_.*|cs2|RimWorldLinux|osu!|Sober|gamescope|.*exe)$" }
 })
 hl.window_rule({	-- [ FLOATS - NO FORCED SIZING ]
 	name    = "FLOAT ONLY",
@@ -122,7 +122,6 @@ hl.window_rule({ float = true, size = "900 450", pin = true, move = "(12) (978)"
 hl.window_rule({ float = true, opaque = true, size = "640 360", pin = true, move = "(1908) (1068)", no_dim = true, no_initial_focus = true, match = { title = "^(Picture in picture|Discord Popout)$" } })
 
 -- [ CUSTOM FLOATS ]
-hl.window_rule({ workspace = "9 silent", float = true, center = true, match = { class = ".*exe" } })
 hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 980", min_size = "780 980", match = { class = "waypaper" } })
 
 --    ┓ ┏┓┓┏┏┓┳┓  ┳┓┳┳┓ ┏┓┏┓
@@ -130,5 +129,5 @@ hl.window_rule({ float = true, center = true, size = "780 980", max_size = "780 
 --    ┗┛┛┗┗┛┗┛┛┗  ┛┗┗┛┗┛┗┛┗┛
 hl.layer_rule({ no_anim = true, match = { namespace = "selection" } })
 hl.window_rule({ stay_focused = true, match = { class = "vicinae" } })
-hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0.85, match = { namespace = "^(waybar|swayosd|vicinae)$" } })
-hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0, match = { namespace = "^(swaync-notification-window)$" } })
+hl.layer_rule({ no_blur = true, match = { namespace = "^(waybar|swayosd)$" } })
+hl.layer_rule({ blur = true, blur_popups = true, ignore_alpha = 0.85, match = { namespace = "^(vicinae)$" } })

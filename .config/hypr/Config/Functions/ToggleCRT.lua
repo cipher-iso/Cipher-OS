@@ -23,7 +23,7 @@ local function apply_crt()
     hl.config({ debug      = { damage_tracking = 0, vfr = false } })
     hl.config({ decoration = { screen_shader = os.getenv("HOME") .. "/.config/hypr/Config/Shaders/CRT" } })
     hl.monitor({ output = "", cm = "hdr" })
-    hl.notification.create({ text = "  [  CRT ENABLED  ]",  timeout = 3000, icon = "hint", font_size = 20 })
+    hl.notification.create({ text = " 󰌁   CRT ENABLED",  timeout = 3000, icon = "none", color = "#00ff40", font_size = 24 })
 end
 
 local function restore_crt()
@@ -35,7 +35,7 @@ local function restore_crt()
     else
         hl.monitor({ output = "", cm = crt_prev.cm or "auto" })
     end
-    hl.notification.create({ text = "  [  CRT DISABLED  ]", timeout = 3000, icon = "ok", font_size = 20 })
+    hl.notification.create({ text = " 󰹊   CRT DISABLED", timeout = 3000, icon = "none", color = "#FAF9F6", font_size = 24 })
 end
 
 function ToggleCRT()

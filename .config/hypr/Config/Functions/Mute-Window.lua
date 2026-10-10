@@ -103,7 +103,8 @@ function MuteActive()
     end
 
     if #matched == 0 then
-        hl.notification.create({ text = "  [  NO CLIENT FOUND - " .. win_title .. "  ]", timeout = 3000, icon = "error", font_size = 20 })
+        hl.notification.create({ text = " 󰗅   NO CLIENT FOUND",
+	timeout = 3000, icon = "none", color = "#ff4b33", font_size = 24 })
         return
     end
 
@@ -112,11 +113,12 @@ function MuteActive()
         os.execute("pactl set-sink-input-mute " .. s.index .. " " .. (target_mute and 1 or 0) .. " &")
     end
 
-    local verb = target_mute and "MUTED -" or "UNMUTED -"
+    local verb = target_mute and "   " or "   "
     hl.notification.create({
-        text = "  [  " .. verb .. " " .. win_title .. "  ]",
+        text = " " .. verb .. " " .. win_title .. "",
         timeout = 3000,
-        icon = "ok",
-        font_size = 20
+        icon = "none",
+	color = "#00ff40",
+        font_size = 24
     })
 end

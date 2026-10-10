@@ -3,7 +3,7 @@
 --    ┛ ┗┻┗┛┗┛┗┛┗┛┗┛┛┗┛┗┗┛┗┛┗┛┗┛
 hl.config({
     misc = {
-        -- enable_anr_dialog = false,          	-- [ APP 'NOT-RESPONDING' DIALOG ]
+        enable_anr_dialog = false,          	-- [ APP 'NOT-RESPONDING' DIALOG ]
         middle_click_paste = false,            	-- [ DISABLE MIDDLE-CLICK PASTE ]
         render_unfocused_fps = 240,            	-- [ UNFOCUSED WINDOW FPS ]
         force_default_wallpaper = 0,           	-- [ UN-FORCE WALLPAPERS ]

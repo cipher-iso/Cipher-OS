@@ -18,7 +18,7 @@ local function apply_hdr()
     }
     io.open(hdr_state, "w"):close()
     hl.monitor({ output = "", cm = "hdr" })
-    hl.notification.create({ text = "  [  HDR ENABLED  ]", timeout = 3000, icon = "hint", font_size = 20 })
+    hl.notification.create({ text = " 󰌁   HDR ENABLED", timeout = 3000, icon = "none", color = "#00ff40", font_size = 24 })
 end
 
 local function restore_hdr()
@@ -28,7 +28,7 @@ local function restore_hdr()
     else
         hl.monitor({ output = "", cm = hdr_prev.cm or "auto" })
     end
-    hl.notification.create({ text = "  [  HDR DISABLED  ]", timeout = 3000, icon = "ok", font_size = 20 })
+    hl.notification.create({ text = " 󰹊   HDR DISABLED", timeout = 3000, icon = "none", color = "#FAF9F6", font_size = 24 })
 end
 
 function ToggleHDR()

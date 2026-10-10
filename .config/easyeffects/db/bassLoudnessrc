@@ -1,4 +1,5 @@
 [soe][BassLoudness#0]
+bypass=true
 link=-9
 loudness=-3
 output=-4

@@ -6,12 +6,11 @@ hl.monitor({
     output      	= "",
     position    	= "0x0",
     cm          	= "auto",
-    mode        	= "preferred",
+    bitdepth		= 10,
+    mode        	= "",
     vrr         	= 3,
     scale		= 1,
 --  [ HDR SETTINGS ]
-    supports_hdr        = 1,
-    supports_wide_color = 1,
     sdr_min_luminance   = 0,
     sdr_max_luminance   = 400,
     min_luminance	= 0,
@@ -51,5 +50,4 @@ require("Config.Functions.WorkspaceClamping")	--	┗ CLAMP WORKSPACE 1-9
 --    ┃┃┃ ┃┃┃┓┃┃┃┗┓
 --    ┣┛┗┛┗┛┗┛┻┛┗┗┛
 require("Config.Plugins.Hyprexpo")
-require("Config.Plugins.Hyprglass")
 require("Config.Plugins.HyprCapture")

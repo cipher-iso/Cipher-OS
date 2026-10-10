@@ -134,5 +134,5 @@ hl.bind(MOD .. " + backslash",    hl.dsp.pass({ window = "class:obs" }))  -- REP
 
 -- [ CUSTOM PLUGINS ]
 hl.bind(MOD .. " + F13",	hl.plugin.hyprcapture.open)	-- Screenshot
-hl.bind(MOD .. "+ SHIFT + F13",	hl.plugin.hyprcapture.quick)
+hl.bind(MOD .. "+ SHIFT + F13",	hl.plugin.hyprcapture.quick)	-- Screenshot Window
 hl.bind("ALT + TAB", 		hl.plugin.hyprexpo.expo)	-- Workspace Switcher

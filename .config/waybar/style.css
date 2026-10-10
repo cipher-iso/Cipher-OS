@@ -15,7 +15,7 @@ tooltip label 	{ color: @fg;
 		  margin: 0.5em;
 		  font-size: 0.9em; font-weight: 700;
 		  text-shadow: 0em 0em 0.2em alpha(@fg, 0.5) }
-tooltip 	{ background-color: alpha(@bg, 0.85);
+tooltip 	{ background-color: alpha(@bg, 1);
 		  border-radius: 0em 0em 0em 0em;
 		  border: 2px solid @bg; }
 
@@ -24,7 +24,7 @@ tooltip 	{ background-color: alpha(@bg, 0.85);
 	margin: 0.5em;
 	margin-left: 1em;
 	margin-right: 1em;
-	border-radius: 1em;
+	border-radius: 0.2em;
 	background: linear-gradient(135deg, @grad2, @grad1, @grad2);
 	box-shadow: 0em 0em 0.25em -0.1em alpha(@fg, 0.75),
 		inset 0em 1em 1em -0.25em alpha(@grad1, 0.75),
@@ -35,7 +35,7 @@ tooltip 	{ background-color: alpha(@bg, 0.85);
     	color: @bg;
     	padding: 0.1em 0.5em;
 	margin: 0.2em;
-	border-radius: 0.75em;
+	border-radius: 0.15em;
 	transition:
         	color 0.2s ease,
         	box-shadow 0.2s ease,

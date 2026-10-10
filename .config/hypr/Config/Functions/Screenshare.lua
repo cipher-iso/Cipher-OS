@@ -20,10 +20,10 @@ function Screenshare()
     screenshare_active = not screenshare_active
     if screenshare_active then
         io.open(screenshare_state, "w"):close()
-        hl.notification.create({ text = "  [  SESSION EXPOSED  ]",   timeout = 3000, icon = "warning", font_size = 16 })
+        hl.notification.create({ text = " 󰞀   SESSION EXPOSED",   timeout = 3000, icon = "none", color = "#ff4b33", font_size = 24 })
     else
         os.remove(screenshare_state)
-        hl.notification.create({ text = "  [  SESSION INCOGNITO  ]", timeout = 3000, icon = "ok",      font_size = 16 })
+        hl.notification.create({ text = " 󰒘   SESSION INCOGNITO", timeout = 3000, icon = "none", color = "#00ff40", font_size = 24 })
     end
     apply_screenshare(screenshare_active)
 end

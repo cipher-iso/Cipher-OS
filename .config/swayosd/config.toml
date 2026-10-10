@@ -3,7 +3,7 @@
 # style = /etc/xdg/swayosd/style.css
 
 ## on which height to show the OSD
-top_margin = 0.075
+top_margin = 0.1
 max_volume = 100
 ## show percentage on the right of the OSD
 show_percentage = true

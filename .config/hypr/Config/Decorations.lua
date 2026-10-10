@@ -27,7 +27,7 @@ hl.config({
     decoration = {
         rounding           = 0,
         rounding_power     = 2,
-        active_opacity     = 0.9,
+        active_opacity     = 0.90,
         inactive_opacity   = 0.85,
         fullscreen_opacity = 1,
         dim_inactive       = false,
@@ -43,8 +43,8 @@ hl.config({
             vibrancy            = 0.75,
             vibrancy_darkness   = 0.15,
             contrast            = 10,
-            brightness          = 1.25,
-            popups_ignorealpha  = 0.6,
+            brightness          = 0.15,
+            popups_ignorealpha  = 0.80,
         },
         shadow = {
             enabled        = true,
@@ -55,14 +55,24 @@ hl.config({
         },
 	glow = {
 	    enabled 	   = true,
-	    range 	   = 25,
-	    render_power   = 2,
-	    color	   = "rgba(" .. PRIMARY .. "30)",
+	    range 	   = 40,
+	    render_power   = 4,
+	    color	   = "rgba(" .. PRIMARY .. "10)",
 	    color_inactive = "rgba(00000000)",
 	},
 	motion_blur = {
-	    enabled = false,
+	    enabled = true,
 	    samples = 10,
+	},
+	wobble	= {
+	    enabled 		= true,
+	    mesh    		= 12,
+	    stiffness		= 200,
+	    damping		= 12,
+	    mass		= 1,
+	    intensity		= 0.2,
+	    value_epsilon 	= 0.25,
+	    velocity_epsilon 	= 2,
 	},
     },
 })

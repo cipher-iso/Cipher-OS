@@ -70,11 +70,11 @@
 		"format": "[  {temperatureC}°C ]",
 		"tooltip": false,
 		"thermal-zone": 2,
-		"hwmon-path": ["/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input"]
+		"hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"]
         },
         "memory": {
 	    	"interval": 5,
-            	"format": "[  {used:1.0f}GiB ]",
+            	"format": "[  {used:1.0f} GiB ]",
 		"tooltip": false
         },
 /* WAYBAR LOCK */
@@ -110,6 +110,7 @@
 /* HYPRLAND WORKSPACES */
 	"hyprland/workspaces": {
 		"cursor": true,
+		"tooltip": false,
 		"show-special": true,
 		"special-visible-only": true,
 		"on-scroll-up": "hyprctl eval 'Workspace_Up()'",
@@ -166,12 +167,12 @@
 		"format": "[ {icon} ]",
 		"format-wifi": "[ {icon} ]",
 		"format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
-		"format-ethernet": "[  ]",
-		"format-disconuected": "[ 󰤭 ]",
+		"format-ethernet": "[  ]",
+		"format-disconnected": "[ 󰤭 ]",
 		"format-disabled": "[ 󰤭 ]",
 		"tooltip-format": "[ {ifname} ]",
 		"tooltip-format-wifi": "[ {essid} - {signalStrength}% ]",
-		"tooltip-format-ethernet": "[ {ifname}  ]",
+		"tooltip-format-ethernet": "[ ETHERNET LINKED ]",
 		"tooltip-format-disconnected": "[ OFFLINE ]",
 		"tooltip-format-disabled": "[ OFFLINE ]",
 		"max-length": 20

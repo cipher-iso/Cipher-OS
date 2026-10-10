@@ -1,4 +1,27 @@
 
+catch2
+smartmontools
+dconf
+cccl
+faad2
+iniparser
+mate-polkit
+xorgproto
+hyprpm
+pam
+cairo
+automake
+discord
+fribidi
+inotify-tools
+xwaylandvideo*
+gzip
+sof-firmware
+readline
+xxhash
+argon2
+gpm
+qhull
 cuda
 cava
 gcr-4
