@@ -91,13 +91,13 @@ tooltip 	{ background-color: alpha(@bg, 1);
 #custom-logout,
 #clock:hover,
 #cpu:hover,
-#memory:hover,
+#custom-memory:hover,
 #temperature:hover	{ color: @accent2 }
 
 /* LIGHT ACCENTS & MODULES */
 #clock,
 #cpu,
-#memory,
+#custom-memory,
 #temperature,
 #custom-updates,
 #network,

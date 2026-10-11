@@ -8,8 +8,9 @@ hl.window_rule({ workspace = "3 silent",  			  match = { class = "steam", title 
 hl.window_rule({ workspace = "4 silent", move = "(1988) (1171)",  match = { class = "Audacious", title = "negative:Audacious" }})
 hl.window_rule({ workspace = "4 silent", move = "(1988) (915)",   match = { class = "Audacious", title = "Playlist Manager" }})
 hl.window_rule({ workspace = "5 silent", render_unfocused = true, match = { class = "obs" }})
-hl.window_rule({ workspace = "6", opaque = true, 	  	  match = { class = "resolve" }})
-hl.window_rule({ workspace = "9", opaque = true, 	  	  match = { title = "^.*(Prism|Minecraft).*$" }})
+hl.window_rule({ workspace = "6",	match = { title = "PhotoCraft" }})
+hl.window_rule({ workspace = "7",	match = { class = "resolve" }})
+hl.window_rule({ workspace = "9",	match = { title = "^.*(Prism|Minecraft).*$" }})
 
 --    ┏┓┏┓┏┳┓┏┓┏┓┏┓┳┓┳┏┓┏┓
 --    ┃ ┣┫ ┃ ┣ ┃┓┃┃┣┫┃┣ ┗┓
@@ -69,7 +70,7 @@ hl.window_rule({	-- [ LARGE FLOATS ]
 	float  	= true,
 	center 	= true,
 	size   	= "monitor_w*0.5 monitor_h*0.58",
-	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects)$" }
+	match 	= { class = "^(.*dolphin.*|qimgv|mpv|timeshift-gtk|.*easyeffects|.*desktop.kde)$" }
 })
 
 --    ┓ ┏┏┓┳┓┓┏┓┏┓┏┓┏┓┏┓┏┓  ┳┓┳┳┓ ┏┓┏┓
@@ -105,7 +106,7 @@ hl.window_rule({ opaque = true, no_blur = true, match = { class = "steam", title
 hl.window_rule({ opacity = 0, no_focus = true, no_blur = true, match = { title = "^(.*AntiCheat.*)$" } })
 hl.window_rule({ center = true, match = { class = "steam", title = "negative:^()$|^(Steam Settings)$" } })
 hl.window_rule({ min_size = "1 1", pin = true, opaque = true, no_dim = true, match = { title = "^(.*notificationtoasts.*)$" } })
-hl.window_rule({ no_dim = true, focus_on_activate = true, float = true, match = { class = "steam", initial_title = "negative:Steam" } })
+hl.window_rule({ no_dim = true, min_size = "1 1", focus_on_activate = true, float = true, match = { class = "steam", initial_title = "negative:Steam" } })
 
 -- [ FIX STEAM 'BIG-PICTURE' MODE ]
 hl.on("window.active", function(w)

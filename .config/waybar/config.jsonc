@@ -10,7 +10,7 @@
 	"margin-right": 0,
 	"margin-top": 0,
 	"modules-left": [ "custom/autohide","group/expand","cpu",
-			"temperature","memory","custom/togglewaybar","custom/updates" ],
+			"temperature","custom/memory","custom/togglewaybar","custom/updates" ],
 	"modules-center": [ "wireplumber","hyprland/workspaces","pulseaudio#input" ],
 	"modules-right": [ "idle_inhibitor","custom/screenshare","bluetooth","network","clock","custom/lock" ],
 /* AUTOHIDE - STARTUP */
@@ -72,11 +72,12 @@
 		"thermal-zone": 2,
 		"hwmon-path": ["/sys/class/hwmon/hwmon2/temp1_input", "/sys/class/thermal/thermal_zone0/temp"]
         },
-        "memory": {
-	    	"interval": 5,
-            	"format": "[  {used:1.0f} GiB ]",
-		"tooltip": false
-        },
+	"custom/memory": {
+    		"exec": "~/.config/waybar/Modules/MemoryUsage",
+    		"return-type": "json",
+    		"interval": 5,
+    		"tooltip": true
+	},
 /* WAYBAR LOCK */
 	"custom/togglewaybar": {
    		"exec": "~/.config/waybar/Modules/Waybar Module",
